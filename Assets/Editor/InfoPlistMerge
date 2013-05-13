@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "Merging info.plist"
+/usr/libexec/PlistBuddy $1/Info.plist -c "Delete CFBundleIdentifier"
+/usr/libexec/PlistBuddy $1/Info.plist -c "Merge Assets/Applicasa/infoFix.plist"
