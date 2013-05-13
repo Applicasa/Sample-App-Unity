@@ -21,7 +21,10 @@ You need Xcode in order to build your project.
 5.	Copy the 3 folders from Assest/Plugins/iOS/ (ApplicasaFramework, ApplicasaSDK, ApplicasaUnity) to your Xcode project under classes folder (Make sure you drag/copy the files to Xcode and not in finder, then select “Copy files” option). 
 6.	Go to: Target -> Build Phases -> Link Binary with Libraries -> "+" -> Choose StoreKit.framework and libsqlite3.0.dylib.
 7.	Go to: Build settings -> search ”other linker flags” - > "+" -> Add -ObjC -all_load.
-  * Check the Xcode log to see that everything is ready. Good luck!
+  
+ ####Done! Run the project!  
+
+* Check the Xcode log to see that everything is ready. Good luck!
   
       LiLog 11:29:39.530: ENABLE_SANDBOX = YES: sandbox.applicasa.com
 
