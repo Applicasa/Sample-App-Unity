@@ -1,7 +1,13 @@
 //
 // VirtualCurrency.cs
 // Created by Applicasa 
-// 5/13/2013
+// 6/11/2013
+//
+
+//
+// VirtualCurrency.cs
+// Created by Applicasa 
+// 5/28/2013
 //
 
 using UnityEngine;
@@ -125,12 +131,12 @@ namespace Applicasa
 			get {return ApplicasaVirtualCurrencyGetVirtualCurrencyAndroidBundleMax(innerVirtualCurrency);}
 			set {ApplicasaVirtualCurrencySetVirtualCurrencyAndroidBundleMax(innerVirtualCurrency, value);}
 		}
-		public int VirtualCurrencyPos {
-			get {return ApplicasaVirtualCurrencyGetVirtualCurrencyPos(innerVirtualCurrency);}
-		}
 		public int VirtualCurrencyCredit {
 			get {return ApplicasaVirtualCurrencyGetVirtualCurrencyCredit(innerVirtualCurrency);}
 			set {ApplicasaVirtualCurrencySetVirtualCurrencyCredit(innerVirtualCurrency, value);}
+		}
+		public int VirtualCurrencyPos {
+			get {return ApplicasaVirtualCurrencyGetVirtualCurrencyPos(innerVirtualCurrency);}
 		}
 		public Currency VirtualCurrencyKind {
 			get {return ApplicasaVirtualCurrencyGetVirtualCurrencyKind(innerVirtualCurrency);}
@@ -166,7 +172,7 @@ namespace Applicasa
 	public SKProduct Product {
 		get {return ApplicasaVirtualCurrencyGetProduct(innerVirtualCurrency);}
 	}
-	public string ItunesPrice {
+	public string LocalPrice {
 		get {return ApplicasaVirtualCurrencyGetItunesPrice(innerVirtualCurrency);}
 	}
 
@@ -211,11 +217,11 @@ namespace Applicasa
 	[DllImport("__Internal")]
 	private static extern void ApplicasaVirtualCurrencySetVirtualCurrencyAndroidBundleMax(System.IntPtr virtualCurrency, float virtualCurrencyAndroidBundleMax);
 	[DllImport("__Internal")]
-	private static extern int ApplicasaVirtualCurrencyGetVirtualCurrencyPos(System.IntPtr virtualCurrency);
-	[DllImport("__Internal")]
 	private static extern int ApplicasaVirtualCurrencyGetVirtualCurrencyCredit(System.IntPtr virtualCurrency);
 	[DllImport("__Internal")]
 	private static extern void ApplicasaVirtualCurrencySetVirtualCurrencyCredit(System.IntPtr virtualCurrency, int virtualCurrencyCredit);
+	[DllImport("__Internal")]
+	private static extern int ApplicasaVirtualCurrencyGetVirtualCurrencyPos(System.IntPtr virtualCurrency);
 	[DllImport("__Internal")]
 	private static extern Currency ApplicasaVirtualCurrencyGetVirtualCurrencyKind(System.IntPtr virtualCurrency);
 	[DllImport("__Internal")]
@@ -292,12 +298,12 @@ namespace Applicasa
 			get {return javaUnityApplicasaVirtualCurrency.CallStatic<float>("ApplicasaVirtualCurrencyGetVirtualCurrencyAndroidBundleMax",innerVirtualCurrencyJavaObject);}
 			set {javaUnityApplicasaVirtualCurrency.CallStatic("ApplicasaVirtualCurrencySetVirtualCurrencyAndroidBundleMax",innerVirtualCurrencyJavaObject, value);}
 		}
-		public int VirtualCurrencyPos {
-			get {return javaUnityApplicasaVirtualCurrency.CallStatic<int>("ApplicasaVirtualCurrencyGetVirtualCurrencyPos",innerVirtualCurrencyJavaObject);}
-		}
 		public int VirtualCurrencyCredit {
 			get {return javaUnityApplicasaVirtualCurrency.CallStatic<int>("ApplicasaVirtualCurrencyGetVirtualCurrencyCredit",innerVirtualCurrencyJavaObject);}
 			set {javaUnityApplicasaVirtualCurrency.CallStatic("ApplicasaVirtualCurrencySetVirtualCurrencyCredit",innerVirtualCurrencyJavaObject, value);}
+		}
+		public int VirtualCurrencyPos {
+			get {return javaUnityApplicasaVirtualCurrency.CallStatic<int>("ApplicasaVirtualCurrencyGetVirtualCurrencyPos",innerVirtualCurrencyJavaObject);}
 		}
 		public Currency VirtualCurrencyKind {
 			get {return javaUnityApplicasaVirtualCurrency.CallStatic<Currency>("ApplicasaVirtualCurrencyGetVirtualCurrencyKind",innerVirtualCurrencyJavaObject);}
@@ -330,6 +336,20 @@ namespace Applicasa
 		public DateTime VirtualCurrencyLastUpdate {
 			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(javaUnityApplicasaVirtualCurrency.CallStatic<double>("ApplicasaVirtualCurrencyGetVirtualCurrencyLastUpdate",innerVirtualCurrencyJavaObject));}
 		}
+		public SKProduct Product {
+			get {
+			SKProduct item = new SKProduct();
+			item.LocalizedDescription = javaUnityApplicasaVirtualCurrency.CallStatic<string>("ApplicasaVirtualCurrencyGetProviderDescription",innerVirtualCurrencyJavaObject);
+			item.LocalizedTitle = javaUnityApplicasaVirtualCurrency.CallStatic<string>("ApplicasaVirtualCurrencyGetProviderTitle",innerVirtualCurrencyJavaObject);
+			item.Price = javaUnityApplicasaVirtualCurrency.CallStatic<string>("ApplicasaVirtualCurrencyGetProviderPrice",innerVirtualCurrencyJavaObject);
+			item.ProductIdentifier = javaUnityApplicasaVirtualCurrency.CallStatic<string>("ApplicasaVirtualCurrencyGetVirtualCurrencyGoogleIdentifier",innerVirtualCurrencyJavaObject);
+			
+			return item;}
+		}
+		public string LocalPrice {
+			get {return javaUnityApplicasaVirtualCurrency.CallStatic<string>("ApplicasaVirtualCurrencyGetProviderPrice",innerVirtualCurrencyJavaObject);}
+		}
+		
 
 #else
 
@@ -373,12 +393,12 @@ namespace Applicasa
 			get {return 0;}
 			set { }
 		}
-		public int VirtualCurrencyPos {
-			get {return 0;}
-		}
 		public int VirtualCurrencyCredit {
 			get {return 0;}
 			set { }
+		}
+		public int VirtualCurrencyPos {
+			get {return 0;}
 		}
 		public Currency VirtualCurrencyKind {
 			get {return new Currency();}
@@ -410,6 +430,13 @@ namespace Applicasa
 		}
 		public DateTime VirtualCurrencyLastUpdate {
 			get {return new DateTime();}
+		}
+		
+		public SKProduct Product {
+			get {return new SKProduct();}
+		}
+		public string LocalPrice {
+			get {return "";}
 		}
 #endif
 #endregion
@@ -497,4 +524,5 @@ namespace Applicasa
         #endregion
     }
 }
+
 

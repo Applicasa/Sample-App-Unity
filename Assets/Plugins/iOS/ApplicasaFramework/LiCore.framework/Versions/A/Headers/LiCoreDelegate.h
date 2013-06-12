@@ -9,6 +9,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 #include "sqlite3.h"
+#import <LiCore/LiUtilities.h>
 
 typedef enum {
     RegisterAppDevice = 1,
@@ -65,7 +66,9 @@ typedef enum {
     SendPush,
     
     //Analitycs
-    UpdateAnalytics
+    UpdateAnalytics,
+    
+    GetServerTime
     
 } Actions;
 
@@ -130,6 +133,7 @@ typedef enum QueryKind{
 @end
 
 @class User;
+
 @protocol LiCoreInitializeDelegate <NSObject>
 
 @optional
@@ -137,5 +141,7 @@ typedef enum QueryKind{
 - (void) finishedInitializeLiCoreFrameworkWithUser:(User *)user isFirstLoad:(BOOL)isFirst;
 - (void) liCoreHasNewUser:(User *)user;
 - (void) finishedIntializedLiKitIAPWithVirtualCurrencies:(NSArray *)virtualCurrencies VirtualGoods:(NSArray *)virtualGoods;
+
+- (void) finishedCachingFilesOfType:(LiMaterialCacher)cachedfiles;
 
 @end

@@ -1,7 +1,7 @@
 //
 // User.m
 // Created by Applicasa 
-// 5/13/2013
+// 6/11/2013
 //
 
 #import "User.h"
@@ -605,6 +605,10 @@ static LiBlockAction actionBlock = NULL;
 
 		case UserSecondaryCurrencyBalance:
 			fieldName = KEY_userSecondaryCurrencyBalance;
+			break;
+
+		case UserFacebookID:
+			fieldName = KEY_userFacebookID;
 			break;
 
 		default:

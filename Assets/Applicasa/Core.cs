@@ -29,49 +29,66 @@ namespace Applicasa {
 	/// <summary>
 	/// This is an internal class. Do not use it.
 	/// </summary>
-	public class Core {
-#if UNITY_ANDROID
-		[DllImport("Applicasa")]
-		public static extern void setActionCallback(Action callback, int uniqueActionID);
-		public static int currentCallbackID=1;
+ public class Core {
+#if UNITY_ANDROID&&!UNITY_EDITOR
+  [DllImport("Applicasa")]
+  public static extern void setActionCallback(Action callback, int uniqueActionID);
+  public static int currentCallbackID=1;  
 #endif
-#if UNITY_IPHONE
-		[DllImport("__Internal")]
-		private static extern bool ApplicasaIsDoneLoading();
-		public static bool isDoneLoading() {
-#if !UNITY_EDITOR
-			return Core.ApplicasaIsDoneLoading();
+   
+#if UNITY_IPHONE&&!UNITY_EDITOR
+  [DllImport("__Internal")]
+  private static extern bool ApplicasaIsDoneLoading();
+#endif
+  public static bool isDoneLoading() {
+#if UNITY_IPHONE&&!UNITY_EDITOR
+   return Core.ApplicasaIsDoneLoading();
 #else
-			return true;
+   return true;
 #endif
-		}
+  }
+  
+#if UNITY_IPHONE&&!UNITY_EDITOR
+  [DllImport("__Internal")]
+  private static extern Applicasa.IAP_STATUS ApplicasaIAPStatus();
 #endif
-
-#if UNITY_IPHONE
+  public static IAP_STATUS IAPStatus() { 
+#if UNITY_IPHONE&&!UNITY_EDITOR
+   return Core.ApplicasaIAPStatus();
+#else
+   return IAP_STATUS.SUCCESS;
+#endif
+  }
+  
+#if UNITY_IPHONE&&!UNITY_EDITOR
+  [DllImport("__Internal")]
+  private static extern Applicasa.IAP_STATUS ApplicasaReValidateStatus();
+#endif
+  public static IAP_STATUS ReValidateStatus() {
+#if UNITY_IPHONE&&!UNITY_EDITOR
+   return Core.ApplicasaReValidateStatus();
+#else
+   return IAP_STATUS.SUCCESS;
+#endif
+  }
+	
+		
+#if UNITY_IPHONE&&!UNITY_EDITOR
 	[DllImport("__Internal")]
-	private static extern Applicasa.IAP_STATUS ApplicasaIAPStatus();
-	public static IAP_STATUS IAPStatus() {
-
-#if !UNITY_EDITOR
-		return Core.ApplicasaIAPStatus();
+	private static extern long ApplicasaGetServerTime();
+#endif
+		
+    public static long GetServerTime() {
+#if UNITY_ANDROID &&!UNITY_EDITOR
+		using(AndroidJavaClass javaUnityApplicasaCore = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaCore"))
+		return javaUnityApplicasaCore.CallStatic<long>("ApplicasaGetServerTime");
+#elif UNITY_IPHONE && !UNITY_EDITOR
+		return ApplicasaGetServerTime();
 #else
-		return IAP_STATUS.SUCCESS;
+		return -1;
 #endif
-	}
-#endif
-
-#if UNITY_IPHONE
-	[DllImport("__Internal")]
-	private static extern Applicasa.IAP_STATUS ApplicasaReValidateStatus();
-	public static IAP_STATUS ReValidateStatus() {
-#if !UNITY_EDITOR
-		return Core.ApplicasaReValidateStatus();
-#else
-		return IAP_STATUS.SUCCESS;
-#endif
-	}
-#endif
-}
+   }
+}	
 		
 	public delegate void Action(bool success, Error error, string itemID, Actions action);
 	
@@ -163,6 +180,7 @@ namespace Applicasa {
 	None = 0,
 	//User
 	User_None,
+	UserTest,
 	UserID,
 	UserName,
 	UserFirstName,
@@ -192,8 +210,8 @@ namespace Applicasa {
 	VirtualCurrencyIOSBundleMax,
 	VirtualCurrencyAndroidBundleMin,
 	VirtualCurrencyAndroidBundleMax,
-	VirtualCurrencyPos,
 	VirtualCurrencyCredit,
+	VirtualCurrencyPos,
 	VirtualCurrencyKind,
 	VirtualCurrencyImageA,
 	VirtualCurrencyImageB,
@@ -212,31 +230,61 @@ namespace Applicasa {
 	VirtualGoodMainCurrency,
 	VirtualGoodSecondaryCurrency,
 	VirtualGoodRelatedVirtualGood,
-	VirtualGoodStoreItemPrice,
 	VirtualGoodIOSBundleMin,
 	VirtualGoodIOSBundleMax,
 	VirtualGoodAndroidBundleMin,
 	VirtualGoodAndroidBundleMax,
-	VirtualGoodPos,
+	VirtualGoodStoreItemPrice,
+	VirtualGoodQuantity,
 	VirtualGoodMaxForUser,
 	VirtualGoodUserInventory,
-	VirtualGoodQuantity,
+	VirtualGoodPos,
 	VirtualGoodImageA,
 	VirtualGoodImageB,
 	VirtualGoodImageC,
 	VirtualGoodMainCategory,
 	VirtualGoodIsDeal,
 	VirtualGoodConsumable,
-	VirtualGoodIsStoreItem,
 	VirtualGoodInAppleStore,
 	VirtualGoodInGoogleStore,
+	VirtualGoodIsStoreItem,
 	VirtualGoodLastUpdate,
 	//VirtualGoodCategory
 	VirtualGoodCategory_None,
 	VirtualGoodCategoryID,
 	VirtualGoodCategoryName,
 	VirtualGoodCategoryLastUpdate,
-	VirtualGoodCategoryPos
+	VirtualGoodCategoryPos,
+	//Test
+	Test_None,
+	TestID,
+	TestLastUpdate,
+	TestTest,
+	//Places
+	Places_None,
+	PlacesID,
+	PlacesLastUpdate,
+	PlacesLoc,
+	PlacesName,
+	//Nono
+	Nono_None,
+	NonoID,
+	NonoLastUpdate,
+	//Bbb
+	Bbb_None,
+	BbbID,
+	BbbLastUpdate,
+	//Dynamic
+	Dynamic_None,
+	DynamicID,
+	DynamicLastUpdate,
+	DynamicNumber,
+	DynamicReal,
+	DynamicDate,
+	DynamicBool,
+	DynamicHtml,
+	DynamicImage,
+	DynamicTest
 }
 
 	
@@ -335,8 +383,9 @@ namespace Applicasa {
     unlockedCharacter = 2500,
     unlockedItem,
     unlockedLevel,
-    unlockedSecret
-    
+    unlockedSecret,
+	
+	customEvent = 300
 }
 	
 	public enum SortType {
@@ -457,7 +506,4 @@ namespace Applicasa {
 	    LiSpendingProfileTaxPayer,
 	    LiSpendingProfileRockefeller
 	}
-	
-	
-
 }

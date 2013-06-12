@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *facebookID;
 @property (nonatomic, strong) NSString *facebookName;
 @property (nonatomic, strong) NSURL *facebookImage;
+@property (nonatomic) BOOL hasApplicasaUser;
 
 + (LiObjFBFriend *) friendWithDictionary:(NSDictionary *)dictionary;
 

@@ -1,7 +1,7 @@
 //
 // VirtualGood.h
 // Created by Applicasa 
-// 5/13/2013
+// 6/11/2013
 //
 
 #import <Foundation/Foundation.h>
@@ -71,6 +71,7 @@
  **********************************************************************************/
 
 + (void) getLocalArrayWithQuery:(LiQuery *)query andBlock:(GetVirtualGoodArrayFinished)block;
++ (void) getLocalArrayWithRawSQLQuery:(NSString *)rawQuery andBlock:(GetVirtualGoodArrayFinished)block;
 
 + (void) getVirtualGoodsOfType:(VirtualGoodType)type withBlock:(GetVirtualGoodArrayFinished)block;
 

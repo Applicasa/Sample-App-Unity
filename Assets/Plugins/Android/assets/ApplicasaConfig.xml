@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    
+	
+	<!-- Before uploading change value to true -->
+    <key>
+	<key_name>SANDBOX</key_name>
+	<key_value>true</key_value>
+	</key>
+	
+	<!-- To enable debug messages from applicasa -->
+	<key>
+	<key_name>ENABLE_APPLICASA_DEBUG</key_name>
+	<key_value>true</key_value>
+	</key>
+	
+	<!-- Enable IAP services, please make sure manifest is edited as well-->
+	<!-- Make sure to set the google key in the ApplicasaConfig file and in the Site Console under App Prefrences-->
+	<key>
+	<key_name>ENABLE_IAP</key_name>
+	<key_value>true</key_value>
+	</key>
+	
+	
+	<!-- place your google key instead of   &lt;GOOGLE_PLAY_PUBLIC_KEY&gt; -->
+	<key>
+	<key_name>GOOGLE_PLAY_PUBLIC_KEY</key_name>
+	<key_value>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApGDOBXSVthJnYxJ7xcMGV7ixZ97Xw9CWN4KGtgItEG4Ltth1P261HCxAdplyK83X0XCFNSd/JXin2yD37eX7eTyeEk7HFxvCu7Y0MqB8L8dOkCyUcit859a9WjTYJG5DrBjU23e2DZ0WrnlvghE/A0FWzMzBDrJg30gafK4Iy8gXHVSFLDn/qPfvQgKB0X0GwUjteImoNLZemaht8LE40v8BapkHHmeizs5QCj/Mz5lyY6W7XDjlCGdWN+D4PfwB7T3j3Jpp8cvUaOl7W1pM8QqWyDuOUxSo14dC+TLEcpmYUlazbAEs9FN0NL/rb6pjxNw85d/CNtEmv8XoIlAHrQIDAQAB</key_value>
+	</key>
+	
+	
+	
+	
+	
+		
+	<key>
+	<!-- To enable facebook, change to true, and set facebook application key -->
+	<key_name>ENABLE_FACEBOOK</key_name>
+	<key_value>true</key_value>
+	</key>
+	
+	<!-- place your facebook key instead of   &lt;FB_APPLICATION_KEY&gt; -->
+	<key>
+	<key_name>FB_APPLICATION_KEY</key_name>
+	<key_value>494708670563462</key_value>
+	</key>
+	
+	<!-- To enable facebook logs, change to true, and set facebook application key -->
+	<key>
+	<key_name>ENABLE_FACEBOOK_DEBUG</key_name>
+	<key_value>false</key_value>
+	</key>
+	
+	<!-- To enable Push messages, change to true, and set GOOGLE_GCM key -->
+	<key>
+	<key_name>ENABLE_PUSH</key_name>
+	<key_value>true</key_value>
+	</key>
+	
+	<key>
+	<key_name>NOTIFICATION_BAR_MESSAGE</key_name>
+	<key_value>ttest New message received</key_value>
+	</key>
+	
+	<!-- place your google key instead of   &lt;GOOGLE_KEY&gt; -->
+	<key>
+	<key_name>GOOGLE_GCM</key_name>
+	<key_value>423501440257</key_value>
+	</key>
+	
+		
+	<!-- Enable Location services, please make sure manifest is edited as well-->
+	<key>
+	<key_name>ENABLE_LOCATION_SERVICE</key_name>
+	<key_value>false</key_value>
+	</key>
+	
+	
+	<!-- To enable Chartboost ads, set value to true -->
+	<!-- If set to true, please add Chartboost framework. you can download from: https://help.chartboost.com/downloads/android -->
+	<key>
+	<key_name>ENABLE_CHARTBOOST</key_name>
+	<key_value>false</key_value>
+	</key>
+	
+	<!-- place your chartboost Id instead of   &lt;CHARTBOOST_ID&gt; -->
+	<key>
+	<key_name>CHARTBOOST_ID</key_name>
+	<key_value>4f7b433509b6025804000002</key_value>
+	</key>
+	
+	<!-- place your chartboost signature  instead of   &lt;CHARTBOOST_SIGNATURE&gt; -->
+	<key>
+	<key_name>CHARTBOOST_SIGNATURE</key_name>
+	<key_value>dd2d41b69ac01b80f443f5b6cf06096d457f82bd</key_value>
+	</key>
+	
+	
+	<!-- Before uploading change value to true -->
+    <key>
+	<key_name>SESSION_PAUSE_TIME</key_name>
+	<key_value>15</key_value>
+	</key>
+	
+	<!-- Allows your app to store action in offline mode until Internet connection is made, and then sync data-->
+	<key>
+	<key_name>SUPPORT_OFFLINE</key_name>
+	<key_value>true</key_value>
+	</key>
+		
+</configuration>

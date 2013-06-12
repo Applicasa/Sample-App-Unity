@@ -140,7 +140,9 @@ typedef enum {
     unlockedCharacter = 2500,
     unlockedItem,
     unlockedLevel,
-    unlockedSecret
+    unlockedSecret,
+    
+    custome = 3000
     
 } LiEventTypes;
 

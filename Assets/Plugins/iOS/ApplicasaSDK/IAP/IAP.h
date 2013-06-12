@@ -77,4 +77,11 @@
 + (NSInteger) getCurrentUserMainBalance;
 + (NSInteger) getCurrentUserSecondaryBalance;
 
+/**********************
+ Init Methods
+ **********************/
++(void) refreshStore;
++(void) refreshInventories;
++(void) reValidateVirtualCurrencies;
+
 @end

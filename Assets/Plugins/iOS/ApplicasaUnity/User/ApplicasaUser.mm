@@ -1,7 +1,7 @@
 //
 // User.mm
 // Created by Applicasa 
-// 5/13/2013
+// 6/11/2013
 //
 
 
@@ -210,7 +210,11 @@ struct FBFriend ApplicasaUserGetFacebookFriend(LiObjFBFriend * fbFriend) {
     fbFriendStruct.Id = NSStringToCharPointer(fbFriend.facebookID);
     fbFriendStruct.Name = NSStringToCharPointer(fbFriend.facebookName);
     fbFriendStruct.ImageURL = NSStringToCharPointer([fbFriend.facebookImage absoluteString]);
-    fbFriendStruct.UserPtr = fbFriend.user;
+	fbFriendStruct.hasApplicasaUser = true;
+	if (fbFriend.user)
+		fbFriendStruct.UserPtr = fbFriend.user;
+	else
+		fbFriendStruct.hasApplicasaUser = false;
     return fbFriendStruct;
 }
     

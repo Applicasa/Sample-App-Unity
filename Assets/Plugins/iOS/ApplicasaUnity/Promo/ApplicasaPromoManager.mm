@@ -24,5 +24,12 @@ void ApplicasaPromoRefreshPromotions() {
     [LiPromo refreshPromotions];
 }
 
+void ApplicasaPromoDismissAllPromotion() {
+    [LiPromo dismissAllPromotions];
+}
+    
+void ApplicasaRaiseCustomEvent( const char * value) {
+    [LiPromo raiseCustomEventByName:CharPointerToNSString(value)];
+}
 
 }

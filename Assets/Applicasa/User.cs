@@ -1,7 +1,7 @@
 //
 // User.cs
 // Created by Applicasa 
-// 5/13/2013
+// 6/11/2013
 //
 
 using UnityEngine;
@@ -14,7 +14,7 @@ namespace Applicasa {
 	
 	public class User {
 		
-#if UNITY_ANDROID
+#if UNITY_ANDROID 
 		private static AndroidJavaClass javaUnityApplicasaUser;
 		
         public AndroidJavaObject innerUserJavaObject;
@@ -30,13 +30,20 @@ namespace Applicasa {
 		
 #endif
 
-        public struct FBFriend {
-			public IntPtr UserPtr;
-			public int Id;
+		 public struct FBFriend {
+			public User UserObj;
+			public string Id;
 			public string Name;
 			public string ImageURL;
 		}
 		
+        public struct PrivateFBFriend {
+			public IntPtr UserPtr;
+			public string Id;
+			public string Name;
+			public string ImageURL;
+		}
+			
 		public delegate void GetUserFinished(bool success, Error error, IntPtr userPtr);
 		//TODO: Wrap user array in a disposable something
 		public delegate void GetUserArrayFinished(bool success, Error error, UserArray userArrayPtr);
@@ -45,7 +52,7 @@ namespace Applicasa {
 		
 		public User(IntPtr userPtr) {
 			innerUser = userPtr;
-#if UNITY_ANDROID
+#if UNITY_ANDROID 
 			if(javaUnityApplicasaUser==null)
 				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			if(innerUserJavaObject==null)
@@ -53,7 +60,7 @@ namespace Applicasa {
 #endif
 		}
 		
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
 		public User(IntPtr userPtr, AndroidJavaObject userJavaObject) {
 			innerUser = userPtr;
 			innerUserJavaObject = userJavaObject;
@@ -74,15 +81,15 @@ namespace Applicasa {
 
 		public static User[] GetUserArray(UserArray userArray) {
 			User[] users = new User[userArray.ArraySize];
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
 			AndroidJavaObject tempJavaObjectArray=new AndroidJavaObject(userArray.Array);
 #endif
 			for (int i=0; i < userArray.ArraySize; i++) {
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 				IntPtr newPtr = Marshal.ReadIntPtr (userArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
 				users[i] = new User(newPtr);
 #endif
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
 				AndroidJavaObject tempJavaObject = tempJavaObjectArray.Call<AndroidJavaObject>("get",i);
 				IntPtr newPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
 				users[i] = new User(newPtr,new AndroidJavaObject(newPtr));
@@ -91,37 +98,104 @@ namespace Applicasa {
 			return users;
 		}
 
-#if UNITY_IPHONE
+#if UNITY_IPHONE&&!UNITY_EDITOR
 		[DllImport("__Internal")]
-		private static extern FBFriend ApplicasaUserGetFacebookFriend(System.IntPtr fbFriend);
+		private static extern PrivateFBFriend ApplicasaUserGetFacebookFriend(System.IntPtr fbFriend);
 		public static FBFriend[] GetFacebookFriends(FBFriendArray fbFriendArray) {
+			PrivateFBFriend[] pfbFriends = new PrivateFBFriend[fbFriendArray.ArraySize];
 			FBFriend[] fbFriends = new FBFriend[fbFriendArray.ArraySize];
 			for (int i=0; i < fbFriendArray.ArraySize; i++) {
 				IntPtr newPtr = Marshal.ReadIntPtr (fbFriendArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
-				fbFriends[i] = ApplicasaUserGetFacebookFriend(newPtr);
+				pfbFriends[i] = ApplicasaUserGetFacebookFriend(newPtr);
+				fbFriends[i].Id = pfbFriends[i].Id;
+				fbFriends[i].Name = pfbFriends[i].Name;
+				fbFriends[i].ImageURL = pfbFriends[i].ImageURL;
+				fbFriends[i].UserObj = new User(pfbFriends[i].UserPtr);
 			}
 			return fbFriends;
 		}
+		
+		public static FBFriend[] FBFriends;
+		public static IEnumerator GetFacebookFriendsIEnumerator(FBFriendArray fbFriendArray) {
+		PrivateFBFriend[] pfbFriends = new PrivateFBFriend[fbFriendArray.ArraySize];
+			FBFriend[] fbFriends = new FBFriend[fbFriendArray.ArraySize];
+			for (int i=0; i < fbFriendArray.ArraySize; i++) {
+				IntPtr newPtr;
+				if(i%34==0)
+					{
+						yield return newPtr = Marshal.ReadIntPtr (fbFriendArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
+					}else{
+						newPtr = Marshal.ReadIntPtr (fbFriendArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
+					}				
+				pfbFriends[i] = ApplicasaUserGetFacebookFriend(newPtr);
+				fbFriends[i].Id = pfbFriends[i].Id;
+				fbFriends[i].Name = pfbFriends[i].Name;
+				fbFriends[i].ImageURL = pfbFriends[i].ImageURL;
+				fbFriends[i].UserObj = new User(pfbFriends[i].UserPtr);
+			}
+			FBFriends = fbFriends;
+		}
 #elif UNITY_ANDROID&&!UNITY_EDITOR
+		
+		
 		public static FBFriend[] GetFacebookFriends(FBFriendArray fbFriendArray) {
 			FBFriend[] fbFriends = new FBFriend[fbFriendArray.ArraySize];
 			AndroidJavaObject tempJavaObjectArray=new AndroidJavaObject(fbFriendArray.Array);
 			for (int i=0; i < fbFriendArray.ArraySize; i++) {
 				using(AndroidJavaObject tempJavaObject = tempJavaObjectArray.Call<AndroidJavaObject>("get",i))
 				{
-					fbFriends[i].Id = int.Parse(tempJavaObject.Get<string>("mFacebookID"));
+					fbFriends[i].Id = tempJavaObject.Get<string>("mFacebookID");
 					fbFriends[i].Name = tempJavaObject.Get<string>("mFacebookName");
 					fbFriends[i].ImageURL = tempJavaObject.Get<string>("mFacebookImage");
-					fbFriends[i].UserPtr = AndroidJNI.NewGlobalRef(tempJavaObject.Get<IntPtr>("user"));
+					if(tempJavaObject.Get<bool>("mHasApplicasaUser"))
+						fbFriends[i].UserObj = new User(AndroidJNI.NewGlobalRef(tempJavaObject.Get<IntPtr>("user")));
 				}
 			}
 			return fbFriends;
 		}
+		
+		
+		public static FBFriend[] FBFriends;
+		public static IEnumerator GetFacebookFriendsIEnumerator(FBFriendArray fbFriendArray) {
+			FBFriend[] fbFriends = new FBFriend[fbFriendArray.ArraySize];
+			AndroidJavaObject tempJavaObjectArray;
+			yield return tempJavaObjectArray=new AndroidJavaObject(fbFriendArray.Array);
+			for (int i=0; i < fbFriendArray.ArraySize; i++) {
+				using(AndroidJavaObject tempJavaObject = tempJavaObjectArray.Call<AndroidJavaObject>("get",i))
+				{
+					if(i%34==0)
+					{
+						yield return fbFriends[i].Id = tempJavaObject.Get<string>("mFacebookID");
+					}else{
+						fbFriends[i].Id = tempJavaObject.Get<string>("mFacebookID");
+					}
+					fbFriends[i].Name = tempJavaObject.Get<string>("mFacebookName");
+					fbFriends[i].ImageURL = tempJavaObject.Get<string>("mFacebookImage");
+					bool hasUser=false;
+					hasUser=tempJavaObject.Get<bool>("mHasApplicasaUser");
+					if(hasUser)
+					{						
+						AndroidJavaObject tempUserJavaObject = tempJavaObject.Get<AndroidJavaObject>("user");
+						System.IntPtr _UserPtr = AndroidJNI.NewGlobalRef(tempUserJavaObject.GetRawObject());
+						fbFriends[i].UserObj = new User(_UserPtr,new AndroidJavaObject(_UserPtr));
+					}
+				}
+			}
+			FBFriends = fbFriends;
+		}
+		
 #else
 		public static FBFriend[] GetFacebookFriends(FBFriendArray fbFriendArray) {
 			FBFriend[] fbFriends = new FBFriend[0];
 			return fbFriends;
 		}	
+		
+		public static FBFriend[] FBFriends;
+		public static IEnumerator GetFacebookFriendsIEnumerator(FBFriendArray fbFriendArray) {
+			yield return new WaitForSeconds(4f);
+			FBFriend[] fbFriends = new FBFriend[0];
+			FBFriends = fbFriends;
+		}
 #endif
 		
 #region Class Methods and Members
@@ -370,7 +444,7 @@ namespace Applicasa {
 #endregion
 
 
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern void ApplicasaRegisterUsername(System.IntPtr user, string username, string password, Action callback);
 		public void Register(string username, string password, Action action) {
@@ -452,7 +526,7 @@ namespace Applicasa {
 #endregion
 		
 #region Static Methods
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern void ApplicasaLoginWithUsername(string username, string password, Action callback);
 		public static void Login(string username, string password, Action action) {

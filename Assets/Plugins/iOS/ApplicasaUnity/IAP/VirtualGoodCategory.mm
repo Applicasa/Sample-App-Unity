@@ -1,7 +1,7 @@
 //
 // VirtualGoodCategory.mm
 // Created by Applicasa 
-// 5/13/2013
+// 6/11/2013
 //
 
 #import "ApplicasaCore.h"
@@ -32,6 +32,10 @@ const int ApplicasaVirtualGoodCategoryGetVirtualGoodCategoryPos(VirtualGoodCateg
 
 
 
+
+VirtualGoodCategory * ApplicasaVirtualGoodCategory() {
+    return [[VirtualGoodCategory alloc] init];
+}
 
 void ApplicasaVirtualGoodCategorySaveWithBlock(VirtualGoodCategory* virtualGoodCategory, ApplicasaAction callback) {
     [virtualGoodCategory saveWithBlock:ApplicasaActionToBlock(callback)];

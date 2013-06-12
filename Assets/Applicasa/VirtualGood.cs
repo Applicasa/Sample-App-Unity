@@ -1,26 +1,20 @@
 //
 // VirtualGood.cs
 // Created by Applicasa 
-// 5/13/2013
+// 6/11/2013
 //
 
 //
 // VirtualGood.cs
 // Created by Applicasa 
-// 5/8/2013
+// 5/28/2013
 //
 
 //
 // VirtualGood.cs
 // Created by Applicasa 
-// 5/6/2013
 //
 
-//
-// VirtualGood.cs
-// Created by Applicasa 
-// 4/11/2013
-//
 
 using UnityEngine;
 using System;
@@ -137,10 +131,6 @@ namespace Applicasa
 			get {return ApplicasaVirtualGoodGetVirtualGoodRelatedVirtualGood(innerVirtualGood);}
 			set {ApplicasaVirtualGoodSetVirtualGoodRelatedVirtualGood(innerVirtualGood, value);}
 		}
-		public float VirtualGoodStoreItemPrice {
-			get {return ApplicasaVirtualGoodGetVirtualGoodStoreItemPrice(innerVirtualGood);}
-			set {ApplicasaVirtualGoodSetVirtualGoodStoreItemPrice(innerVirtualGood, value);}
-		}
 		public float VirtualGoodIOSBundleMin {
 			get {return ApplicasaVirtualGoodGetVirtualGoodIOSBundleMin(innerVirtualGood);}
 			set {ApplicasaVirtualGoodSetVirtualGoodIOSBundleMin(innerVirtualGood, value);}
@@ -157,8 +147,13 @@ namespace Applicasa
 			get {return ApplicasaVirtualGoodGetVirtualGoodAndroidBundleMax(innerVirtualGood);}
 			set {ApplicasaVirtualGoodSetVirtualGoodAndroidBundleMax(innerVirtualGood, value);}
 		}
-		public int VirtualGoodPos {
-			get {return ApplicasaVirtualGoodGetVirtualGoodPos(innerVirtualGood);}
+		public float VirtualGoodStoreItemPrice {
+			get {return ApplicasaVirtualGoodGetVirtualGoodStoreItemPrice(innerVirtualGood);}
+			set {ApplicasaVirtualGoodSetVirtualGoodStoreItemPrice(innerVirtualGood, value);}
+		}
+		public int VirtualGoodQuantity {
+			get {return ApplicasaVirtualGoodGetVirtualGoodQuantity(innerVirtualGood);}
+			set {ApplicasaVirtualGoodSetVirtualGoodQuantity(innerVirtualGood, value);}
 		}
 		public int VirtualGoodMaxForUser {
 			get {return ApplicasaVirtualGoodGetVirtualGoodMaxForUser(innerVirtualGood);}
@@ -168,9 +163,8 @@ namespace Applicasa
 			get {return ApplicasaVirtualGoodGetVirtualGoodUserInventory(innerVirtualGood);}
 			set {ApplicasaVirtualGoodSetVirtualGoodUserInventory(innerVirtualGood, value);}
 		}
-		public int VirtualGoodQuantity {
-			get {return ApplicasaVirtualGoodGetVirtualGoodQuantity(innerVirtualGood);}
-			set {ApplicasaVirtualGoodSetVirtualGoodQuantity(innerVirtualGood, value);}
+		public int VirtualGoodPos {
+			get {return ApplicasaVirtualGoodGetVirtualGoodPos(innerVirtualGood);}
 		}
 		public string VirtualGoodImageA {
 			get {return ApplicasaVirtualGoodGetVirtualGoodImageA(innerVirtualGood);}
@@ -196,10 +190,6 @@ namespace Applicasa
 			get {return ApplicasaVirtualGoodGetVirtualGoodConsumable(innerVirtualGood);}
 			set {ApplicasaVirtualGoodSetVirtualGoodConsumable(innerVirtualGood, value);}
 		}
-		public bool VirtualGoodIsStoreItem {
-			get {return ApplicasaVirtualGoodGetVirtualGoodIsStoreItem(innerVirtualGood);}
-			set {ApplicasaVirtualGoodSetVirtualGoodIsStoreItem(innerVirtualGood, value);}
-		}
 		public bool VirtualGoodInAppleStore {
 			get {return ApplicasaVirtualGoodGetVirtualGoodInAppleStore(innerVirtualGood);}
 			set {ApplicasaVirtualGoodSetVirtualGoodInAppleStore(innerVirtualGood, value);}
@@ -208,13 +198,17 @@ namespace Applicasa
 			get {return ApplicasaVirtualGoodGetVirtualGoodInGoogleStore(innerVirtualGood);}
 			set {ApplicasaVirtualGoodSetVirtualGoodInGoogleStore(innerVirtualGood, value);}
 		}
+		public bool VirtualGoodIsStoreItem {
+			get {return ApplicasaVirtualGoodGetVirtualGoodIsStoreItem(innerVirtualGood);}
+			set {ApplicasaVirtualGoodSetVirtualGoodIsStoreItem(innerVirtualGood, value);}
+		}
 		public DateTime VirtualGoodLastUpdate {
 			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(ApplicasaVirtualGoodGetVirtualGoodLastUpdate(innerVirtualGood));}
 		}
 	public SKProduct Product {
 		get {return ApplicasaVirtualGoodGetProduct(innerVirtualGood);}
 	}
-	public string ItunesPrice {
+	public string LocalPrice {
 		get {return ApplicasaVirtualGoodGetItunesPrice(innerVirtualGood);}
 	}
 
@@ -251,10 +245,6 @@ namespace Applicasa
 	[DllImport("__Internal")]
 	private static extern void ApplicasaVirtualGoodSetVirtualGoodRelatedVirtualGood(System.IntPtr virtualGood, string virtualGoodRelatedVirtualGood);
 	[DllImport("__Internal")]
-	private static extern float ApplicasaVirtualGoodGetVirtualGoodStoreItemPrice(System.IntPtr virtualGood);
-	[DllImport("__Internal")]
-	private static extern void ApplicasaVirtualGoodSetVirtualGoodStoreItemPrice(System.IntPtr virtualGood, float virtualGoodStoreItemPrice);
-	[DllImport("__Internal")]
 	private static extern float ApplicasaVirtualGoodGetVirtualGoodIOSBundleMin(System.IntPtr virtualGood);
 	[DllImport("__Internal")]
 	private static extern void ApplicasaVirtualGoodSetVirtualGoodIOSBundleMin(System.IntPtr virtualGood, float virtualGoodIOSBundleMin);
@@ -271,7 +261,13 @@ namespace Applicasa
 	[DllImport("__Internal")]
 	private static extern void ApplicasaVirtualGoodSetVirtualGoodAndroidBundleMax(System.IntPtr virtualGood, float virtualGoodAndroidBundleMax);
 	[DllImport("__Internal")]
-	private static extern int ApplicasaVirtualGoodGetVirtualGoodPos(System.IntPtr virtualGood);
+	private static extern float ApplicasaVirtualGoodGetVirtualGoodStoreItemPrice(System.IntPtr virtualGood);
+	[DllImport("__Internal")]
+	private static extern void ApplicasaVirtualGoodSetVirtualGoodStoreItemPrice(System.IntPtr virtualGood, float virtualGoodStoreItemPrice);
+	[DllImport("__Internal")]
+	private static extern int ApplicasaVirtualGoodGetVirtualGoodQuantity(System.IntPtr virtualGood);
+	[DllImport("__Internal")]
+	private static extern void ApplicasaVirtualGoodSetVirtualGoodQuantity(System.IntPtr virtualGood, int virtualGoodQuantity);
 	[DllImport("__Internal")]
 	private static extern int ApplicasaVirtualGoodGetVirtualGoodMaxForUser(System.IntPtr virtualGood);
 	[DllImport("__Internal")]
@@ -281,9 +277,7 @@ namespace Applicasa
 	[DllImport("__Internal")]
 	private static extern void ApplicasaVirtualGoodSetVirtualGoodUserInventory(System.IntPtr virtualGood, int virtualGoodUserInventory);
 	[DllImport("__Internal")]
-	private static extern int ApplicasaVirtualGoodGetVirtualGoodQuantity(System.IntPtr virtualGood);
-	[DllImport("__Internal")]
-	private static extern void ApplicasaVirtualGoodSetVirtualGoodQuantity(System.IntPtr virtualGood, int virtualGoodQuantity);
+	private static extern int ApplicasaVirtualGoodGetVirtualGoodPos(System.IntPtr virtualGood);
 	[DllImport("__Internal")]
 	private static extern string ApplicasaVirtualGoodGetVirtualGoodImageA(System.IntPtr virtualGood);
 	[DllImport("__Internal")]
@@ -309,10 +303,6 @@ namespace Applicasa
 	[DllImport("__Internal")]
 	private static extern void ApplicasaVirtualGoodSetVirtualGoodConsumable(System.IntPtr virtualGood, bool virtualGoodConsumable);
 	[DllImport("__Internal")]
-	private static extern bool ApplicasaVirtualGoodGetVirtualGoodIsStoreItem(System.IntPtr virtualGood);
-	[DllImport("__Internal")]
-	private static extern void ApplicasaVirtualGoodSetVirtualGoodIsStoreItem(System.IntPtr virtualGood, bool virtualGoodIsStoreItem);
-	[DllImport("__Internal")]
 	private static extern bool ApplicasaVirtualGoodGetVirtualGoodInAppleStore(System.IntPtr virtualGood);
 	[DllImport("__Internal")]
 	private static extern void ApplicasaVirtualGoodSetVirtualGoodInAppleStore(System.IntPtr virtualGood, bool virtualGoodInAppleStore);
@@ -320,6 +310,10 @@ namespace Applicasa
 	private static extern bool ApplicasaVirtualGoodGetVirtualGoodInGoogleStore(System.IntPtr virtualGood);
 	[DllImport("__Internal")]
 	private static extern void ApplicasaVirtualGoodSetVirtualGoodInGoogleStore(System.IntPtr virtualGood, bool virtualGoodInGoogleStore);
+	[DllImport("__Internal")]
+	private static extern bool ApplicasaVirtualGoodGetVirtualGoodIsStoreItem(System.IntPtr virtualGood);
+	[DllImport("__Internal")]
+	private static extern void ApplicasaVirtualGoodSetVirtualGoodIsStoreItem(System.IntPtr virtualGood, bool virtualGoodIsStoreItem);
 	[DllImport("__Internal")]
 	private static extern double ApplicasaVirtualGoodGetVirtualGoodLastUpdate(System.IntPtr virtualGood);
 	[DllImport("__Internal")]
@@ -342,7 +336,6 @@ namespace Applicasa
 		}
 		public string VirtualGoodAppleIdentifier {
 			get {return javaUnityApplicasaVirtualGood.CallStatic<string>("ApplicasaVirtualGoodGetVirtualGoodAppleIdentifier", innerVirtualGoodJavaObject);}
-			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodAppleIdentifier", innerVirtualGoodJavaObject, value);}
 		}
 		public string VirtualGoodGoogleIdentifier {
 			get {return javaUnityApplicasaVirtualGood.CallStatic<string>("ApplicasaVirtualGoodGetVirtualGoodGoogleIdentifier", innerVirtualGoodJavaObject);}
@@ -360,10 +353,6 @@ namespace Applicasa
 			get {return javaUnityApplicasaVirtualGood.CallStatic<string>("ApplicasaVirtualGoodGetVirtualGoodRelatedVirtualGood", innerVirtualGoodJavaObject);}
 			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodRelatedVirtualGood", innerVirtualGoodJavaObject, value);}
 		}
-		public float VirtualGoodStoreItemPrice {
-			get {return javaUnityApplicasaVirtualGood.CallStatic<float>("ApplicasaVirtualGoodGetVirtualGoodStoreItemPrice",innerVirtualGoodJavaObject);}
-			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodStoreItemPrice",innerVirtualGoodJavaObject, value);}
-		}
 		public float VirtualGoodIOSBundleMin {
 			get {return javaUnityApplicasaVirtualGood.CallStatic<float>("ApplicasaVirtualGoodGetVirtualGoodIOSBundleMin",innerVirtualGoodJavaObject);}
 			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodIOSBundleMin",innerVirtualGoodJavaObject, value);}
@@ -380,8 +369,13 @@ namespace Applicasa
 			get {return javaUnityApplicasaVirtualGood.CallStatic<float>("ApplicasaVirtualGoodGetVirtualGoodAndroidBundleMax",innerVirtualGoodJavaObject);}
 			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodAndroidBundleMax",innerVirtualGoodJavaObject, value);}
 		}
-		public int VirtualGoodPos {
-			get {return javaUnityApplicasaVirtualGood.CallStatic<int>("ApplicasaVirtualGoodGetVirtualGoodPos",innerVirtualGoodJavaObject);}
+		public float VirtualGoodStoreItemPrice {
+			get {return javaUnityApplicasaVirtualGood.CallStatic<float>("ApplicasaVirtualGoodGetVirtualGoodStoreItemPrice",innerVirtualGoodJavaObject);}
+			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodStoreItemPrice",innerVirtualGoodJavaObject, value);}
+		}
+		public int VirtualGoodQuantity {
+			get {return javaUnityApplicasaVirtualGood.CallStatic<int>("ApplicasaVirtualGoodGetVirtualGoodQuantity",innerVirtualGoodJavaObject);}
+			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodQuantity",innerVirtualGoodJavaObject, value);}
 		}
 		public int VirtualGoodMaxForUser {
 			get {return javaUnityApplicasaVirtualGood.CallStatic<int>("ApplicasaVirtualGoodGetVirtualGoodMaxForUser",innerVirtualGoodJavaObject);}
@@ -391,9 +385,8 @@ namespace Applicasa
 			get {return javaUnityApplicasaVirtualGood.CallStatic<int>("ApplicasaVirtualGoodGetVirtualGoodUserInventory",innerVirtualGoodJavaObject);}
 			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodUserInventory",innerVirtualGoodJavaObject, value);}
 		}
-		public int VirtualGoodQuantity {
-			get {return javaUnityApplicasaVirtualGood.CallStatic<int>("ApplicasaVirtualGoodGetVirtualGoodQuantity",innerVirtualGoodJavaObject);}
-			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodQuantity",innerVirtualGoodJavaObject, value);}
+		public int VirtualGoodPos {
+			get {return javaUnityApplicasaVirtualGood.CallStatic<int>("ApplicasaVirtualGoodGetVirtualGoodPos",innerVirtualGoodJavaObject);}
 		}
 		public string VirtualGoodImageA {
 			get {return javaUnityApplicasaVirtualGood.CallStatic<string>("ApplicasaVirtualGoodGetVirtualGoodImageA",innerVirtualGoodJavaObject);}
@@ -419,10 +412,6 @@ namespace Applicasa
 			get {return javaUnityApplicasaVirtualGood.CallStatic<bool>("ApplicasaVirtualGoodGetVirtualGoodConsumable",innerVirtualGoodJavaObject);}
 			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodConsumable",innerVirtualGoodJavaObject, value);}
 		}
-		public bool VirtualGoodIsStoreItem {
-			get {return javaUnityApplicasaVirtualGood.CallStatic<bool>("ApplicasaVirtualGoodGetVirtualGoodIsStoreItem",innerVirtualGoodJavaObject);}
-			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodIsStoreItem",innerVirtualGoodJavaObject, value);}
-		}
 		public bool VirtualGoodInAppleStore {
 			get {return javaUnityApplicasaVirtualGood.CallStatic<bool>("ApplicasaVirtualGoodGetVirtualGoodInAppleStore",innerVirtualGoodJavaObject);}
 			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodInAppleStore",innerVirtualGoodJavaObject, value);}
@@ -431,8 +420,24 @@ namespace Applicasa
 			get {return javaUnityApplicasaVirtualGood.CallStatic<bool>("ApplicasaVirtualGoodGetVirtualGoodInGoogleStore",innerVirtualGoodJavaObject);}
 			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodInGoogleStore",innerVirtualGoodJavaObject, value);}
 		}
+		public bool VirtualGoodIsStoreItem {
+			get {return javaUnityApplicasaVirtualGood.CallStatic<bool>("ApplicasaVirtualGoodGetVirtualGoodIsStoreItem",innerVirtualGoodJavaObject);}
+			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodIsStoreItem",innerVirtualGoodJavaObject, value);}
+		}
 		public DateTime VirtualGoodLastUpdate {
 			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(javaUnityApplicasaVirtualGood.CallStatic<double>("ApplicasaVirtualGoodGetVirtualGoodLastUpdate",innerVirtualGoodJavaObject));}
+		}
+		public SKProduct Product {
+			get {
+			SKProduct item = new SKProduct();
+			item.LocalizedDescription = javaUnityApplicasaVirtualGood.CallStatic<string>("ApplicasaVirtualGoodGetStoreProviderDescription",innerVirtualGoodJavaObject);
+			item.LocalizedTitle = javaUnityApplicasaVirtualGood.CallStatic<string>("ApplicasaVirtualGoodGetStoreProviderTitle",innerVirtualGoodJavaObject);
+			item.Price = javaUnityApplicasaVirtualGood.CallStatic<string>("ApplicasaVirtualCurrencyGetVirtualGoodStoreProviderPrice",innerVirtualGoodJavaObject);
+			item.ProductIdentifier = javaUnityApplicasaVirtualGood.CallStatic<string>("ApplicasaVirtualGoodGetVirtualGoodAppleIdentifier",innerVirtualGoodJavaObject);
+			return item;}
+		}
+		public string LocalPrice {
+			get {return javaUnityApplicasaVirtualGood.CallStatic<string>("ApplicasaVirtualGoodGetStoreProviderPrice",innerVirtualGoodJavaObject);}
 		}
 
 #else
@@ -469,10 +474,6 @@ namespace Applicasa
 			get {return "";}
 			set { }
 		}
-		public float VirtualGoodStoreItemPrice {
-			get {return 0;}
-			set { }
-		}
 		public float VirtualGoodIOSBundleMin {
 			get {return 0;}
 			set { }
@@ -489,8 +490,13 @@ namespace Applicasa
 			get {return 0;}
 			set { }
 		}
-		public int VirtualGoodPos {
+		public float VirtualGoodStoreItemPrice {
 			get {return 0;}
+			set { }
+		}
+		public int VirtualGoodQuantity {
+			get {return 0;}
+			set { }
 		}
 		public int VirtualGoodMaxForUser {
 			get {return 0;}
@@ -500,9 +506,8 @@ namespace Applicasa
 			get {return 0;}
 			set { }
 		}
-		public int VirtualGoodQuantity {
+		public int VirtualGoodPos {
 			get {return 0;}
-			set { }
 		}
 		public string VirtualGoodImageA {
 			get {return "";}
@@ -528,10 +533,6 @@ namespace Applicasa
 			get {return false;}
 			set { }
 		}
-		public bool VirtualGoodIsStoreItem {
-			get {return false;}
-			set { }
-		}
 		public bool VirtualGoodInAppleStore {
 			get {return false;}
 			set { }
@@ -540,9 +541,22 @@ namespace Applicasa
 			get {return false;}
 			set { }
 		}
+		public bool VirtualGoodIsStoreItem {
+			get {return false;}
+			set { }
+		}
 		public DateTime VirtualGoodLastUpdate {
 			get {return new DateTime();}
 		}
+		
+		public SKProduct Product {
+		 get {return new SKProduct();}
+		}
+		public string LocalPrice {
+			get {return "";}
+		}
+		
+		
 #endif
 #endregion
 
@@ -702,6 +716,7 @@ namespace Applicasa
         #endregion
     }
 }
+
 
 
 

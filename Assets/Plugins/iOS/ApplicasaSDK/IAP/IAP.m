@@ -92,5 +92,17 @@
     return [LiKitIAP getCurrentUserSecondaryBalance];
 }
 
+/**********************
+ Init Methods
+ **********************/
++(void)refreshStore{
+    [LiKitIAP refreshStore];
+}
++(void) refreshInventories{
+    [LiKitIAP refreshInventories];
+}
++(void) reValidateVirtualCurrencies{
+    [LiKitIAP reValidateVirtualCurrencies];
+}
 
 @end

@@ -4,6 +4,10 @@
 //
 #include "ApplicasaCore.h"
 #import <LiCore/LiKitIAP.h>
+#import <LiCore/LiCore.h>
+
+void UnityPause(bool pause);
+
 
 extern "C" {
 
@@ -13,6 +17,21 @@ IAP_STATUS ApplicasaIAPStatus() {
 
 IAP_STATUS ApplicasaReValidateStatus() {
     return [LiKitIAP validateStatus];
+}
+    
+static int promotionCounter = 0;
+void IncreasePromoCounter(){
+    promotionCounter++;
+    UnityPause(true);
+}
+bool DecreasePromoCounter(){
+    promotionCounter--;
+    if (promotionCounter == 0)
+    {
+        UnityPause(false);
+        return true;
+    }
+        return false;
 }
 
 LiBlockAction ApplicasaActionToBlock(ApplicasaAction function) {
@@ -270,7 +289,11 @@ GetPromotionArrayFinished ApplicasaGetPromotionArrayFinishedToBlock(ApplicasaGet
 
 PromotionResultBlock ApplicasaPromotionResultToBlock(ApplicasaPromotionResult function) {
     return [[^(LiPromotionAction promoAction,LiPromotionResult result,id info) {
-     
+        
+    if (DecreasePromoCounter())
+        UnityPause(false);
+        
+
      struct PromotionResultInfo promoResult;
      promoResult.stringResult = NSStringToCharPointer(@"");
      promoResult.intResult = -1;
@@ -365,6 +388,11 @@ PromotionResultBlock ApplicasaPromotionResultToBlock(ApplicasaPromotionResult fu
             
             function(success, errorStruct, bytes);
         } copy] autorelease];
+    }
+    
+    long ApplicasaGetServerTime()
+    {
+        return [LiCore getServerTime];
     }
 
 }

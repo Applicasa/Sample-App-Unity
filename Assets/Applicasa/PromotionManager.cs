@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 namespace Applicasa {
 	public class PromotionManager {
 		
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern void ApplicasaPromoSetLiKitPromotionDelegate(Promotion.PromotionsAvailable eventCallback);
 		public static void SetLiKitPromotionDelegate(Promotion.PromotionsAvailable eventCallback) {
@@ -29,6 +29,19 @@ namespace Applicasa {
 		public static void RefreshPromotions() {
 			ApplicasaPromoRefreshPromotions();
 		}
+		
+		[DllImport("__Internal")]
+		private static extern void ApplicasaPromoDismissAllPromotion();
+		public static void DismissAllPromotion() {
+			ApplicasaPromoDismissAllPromotion();
+		}
+		
+		[DllImport("__Internal")]
+		private static extern void ApplicasaRaiseCustomEvent(string value);
+		public static void RaiseCustomEvent(string value) {
+			ApplicasaRaiseCustomEvent(value);
+		}
+		
 #elif UNITY_ANDROID&&!UNITY_EDITOR		
 		private static AndroidJavaClass javaUnityApplicasaPromotionManager;
 		
@@ -71,6 +84,18 @@ namespace Applicasa {
 				javaUnityApplicasaPromotionManager = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotionManager");
 			javaUnityApplicasaPromotionManager.CallStatic("ApplicasaPromoRefreshPromotions");
 		}
+		
+		public static void DismissAllPromotion() {
+			if(javaUnityApplicasaPromotionManager==null)
+				javaUnityApplicasaPromotionManager = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotionManager");
+			javaUnityApplicasaPromotionManager.CallStatic("ApplicasaPromoDismissAllPromotion");
+		}
+		
+		public static void RaiseCustomEvent(string value) {
+		if(javaUnityApplicasaPromotionManager==null)
+				javaUnityApplicasaPromotionManager = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotionManager");
+			javaUnityApplicasaPromotionManager.CallStatic("ApplicasaRaiseCustomEvent", value);
+		}
 #else
 		public static void SetLiKitPromotionDelegate(Promotion.PromotionsAvailable eventCallback) {
 			eventCallback(new Promotion.PromotionArray());		
@@ -84,7 +109,13 @@ namespace Applicasa {
 			callback(true, new Error(), new Promotion.PromotionArray());
 		}
 		
+		public static void DismissAllPromotion() {
+			
+		}
 		public static void RefreshPromotions() {
+		}
+		
+		public static void RaiseCustomEvent(string value) {
 		}
 #endif
 	}

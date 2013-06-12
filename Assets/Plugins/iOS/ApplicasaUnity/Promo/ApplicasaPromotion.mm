@@ -3,9 +3,9 @@
 #import "AppController.h"
 #import "LiCore/Promotion.h"
 #import "LiCore/LiKitPromotions.h"
-#import "MiniView.h"
 
 
+void UnityPause(bool pause);
 extern "C" {
     
     const char * ApplicasaPromotionGetID(Promotion* promotion) {
@@ -140,32 +140,10 @@ extern "C" {
     
     void ApplicasaPromotionShowWithBlock(Promotion* promotion, ApplicasaPromotionResult callback) {
         //    MiniView *promoView;
+        IncreasePromoCounter();
         UIView *view = [[UIApplication sharedApplication].keyWindow.subviews objectAtIndex:0];
         
         [promotion showOnView:view Block:ApplicasaPromotionResultToBlock(callback)];
-        
-        //    [promotion setPromotionBlock:ApplicasaPromotionResultToBlock(callback)];
-        //
-        //    // Set Frame according to orientation
-        //    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-        //
-        //
-        //    if(orientation == 0|| orientation == UIInterfaceOrientationPortrait)
-        //        //Do something if the orientation is in Portrait
-        //    {
-        //        NSLog(@"Portrait Promo");
-        //        promoView = [MiniView MiniViewWithPromotion:promotion andFrame:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
-        //    }
-        //    else 
-        //    {
-        //        NSLog(@"Landscape Promo");
-        //        promoView = [MiniView MiniViewWithPromotion:promotion andFrame:CGRectMake(0, 0, view.frame.size.height, view.frame.size.width)];
-        //    }
-        //
-        //    [view addSubview:promoView];
-        //
-        //    [LiKitPromotions promoHadViewed:promotion];
-        //
     }
     
     void ApplicasaPromotionGetLocalArrayWithRawSqlQuery(const char * rawQuery, ApplicasaGetPromotionArrayFinished callback) {

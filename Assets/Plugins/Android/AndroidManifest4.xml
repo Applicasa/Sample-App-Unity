@@ -56,7 +56,7 @@
 		
 		<!-- Start PushNotifications receiver and service -->
 		<!-- Only C2DM servers can send messages for the app. If permission is not set - any other app can generate it --> 
-		<receiver android:name="com.applicasa.ApplicasaManager.LiGCMReceiver"
+		<receiver android:name="com.applicasaunity.Unity.ApplicasaLiGCMReceiver"
 			android:permission="com.google.android.c2dm.permission.SEND">
 			<!-- Receive the actual message -->
 			<intent-filter>
@@ -89,7 +89,7 @@
 		
 		<!-- Required permissions to use in-app billing -->
 		<uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-		<uses-permission android:name="android.permiss.NETWORK_STATE"/>
+		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 		<uses-permission android:name="com.android.vending.BILLING" />
 		
 		<!-- Required permissions to use Location service -->

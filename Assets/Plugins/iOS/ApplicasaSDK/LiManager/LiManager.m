@@ -135,4 +135,8 @@
  return CHARTBOOST_SIGNATURE;
 }
 
++(int)getSessionPauseTime{
+    return SESSION_PAUSE_TIME;
+}
+
 @end

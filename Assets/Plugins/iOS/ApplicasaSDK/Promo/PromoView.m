@@ -216,12 +216,12 @@
     
     
     [[view.promotion promotionButton] getCachedImageWithBlock:^(NSError *error, UIImage *image) {
-        CGRect rect = actionButton.frame;
+       /* CGRect rect = actionButton.frame;
         rect.size.width = (image.size.width)/2;
         rect.size.height = (image.size.height)/2;
         rect.origin.x = (view.frame.size.width-rect.size.width)/2;
         
-        [actionButton setFrame:rect];
+        [actionButton setFrame:rect];*/
         [actionButton setImage:image forState:UIControlStateNormal];
     }];
     
@@ -265,7 +265,7 @@
 +(PromoView *)showChartboostWithPromoView:(PromoView *)view
 {
     #ifdef CHARTBOOST
-    [[LiChartboostManager sharedInstance] showChartboostWithPromotion:view.promotion];
+    [[LiChartboostManager sharedInstance] showChartboostWithPromotion:view];
     #else
     [view closeAction];
     [view removeFromSuperview];

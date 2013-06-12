@@ -63,8 +63,26 @@ public class ApplicasaMenu : MonoBehaviour {
 			UpdateVirtualCurrencyBalance ();
 			Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Got Promotion Result");
 		}
+		
+	#endregion
+	
+	#region Facebook
+	
+	
+		[MonoPInvokeCallback (typeof (Applicasa.Action))]
+		public static void FacebookLoginCallback (bool success, Applicasa.Error error, string itemID, Applicasa.Actions action)
+		{
+			if (success) {
+				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Applicasa Logged In");
+				UpdateUserDisplay();
+				UpdateVirtualCurrencyBalance();
+			} else {
+				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Applicasa didn't Log In");
+			}
+		}
 	
 	#endregion
+	
 	
 	#region StatusBar
 		//Update User virtual currency balance 
@@ -87,21 +105,6 @@ public class ApplicasaMenu : MonoBehaviour {
 	
 	#endregion	
 	
-	#region Facebook
-	
-		[MonoPInvokeCallback (typeof (Applicasa.Action))]
-		public static void FacebookLoginCallback (bool success, Applicasa.Error error, string itemID, Applicasa.Actions action)
-		{
-			if (success) {
-				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Applicasa Logged In");
-				UpdateUserDisplay();
-				UpdateVirtualCurrencyBalance();
-			} else {
-				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Applicasa didn't Log In");
-			}
-		}
-	
-	#endregion
 	
 	#region GUI
 		public Texture2D m_Background, m_Play, m_Facebook, m_Store,m_Coins;
@@ -130,6 +133,7 @@ public class ApplicasaMenu : MonoBehaviour {
 			//Store button
 			GUILayout.FlexibleSpace ();
 			if (MenuButton (m_Store)) {
+				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": go to store");
 				Application.LoadLevel("AppStore");
 			}
 			
@@ -138,6 +142,7 @@ public class ApplicasaMenu : MonoBehaviour {
 			if (MenuButton (m_Facebook)) {
 				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": FacebookUser=" + Applicasa.User.GetCurrentUser ().UserID.ToString() + "Is Reg?" + Applicasa.User.GetCurrentUser ().UserIsRegisteredFacebook);
 				Applicasa.User.FacebookLogin (FacebookLoginCallback);	
+		
 			}
 	
 			GUILayout.FlexibleSpace ();
@@ -147,9 +152,15 @@ public class ApplicasaMenu : MonoBehaviour {
 			//Show User virtual currency balace
 			
 			GUI.Label(new Rect(Screen.height*0.15f,Screen.height*0.05f,Screen.width,Screen.height*0.05f),"" + UserVirtualcurrencyBalance.ToString ());	
-			//Show User name
+				//Show User name
 			GUI.Label(new Rect(Screen.width*0.85f,Screen.height*0.05f,Screen.width,Screen.height*0.05f),"" + UserName);
 		}
+	
+		public void FbLogInButtonAction(){
+  			Debug.Log("Enter your LogIn code here");
+  			Applicasa.User.FacebookLogin(FacebookLoginCallback);
+		 }
+
 		
 		bool MenuButton (Texture2D icon)
 		{
@@ -179,4 +190,23 @@ public class ApplicasaMenu : MonoBehaviour {
 	
 	#endregion	
 	
+	#region push Android
+	void OnEnable()
+ 	{
+ 	 	Applicasa.PushNotification.ApplicasaPushNotificationEvent+=ApplicasaListenToPush;
+ 	}
+ 
+ 	void OnDisable()
+ 	{
+  		Applicasa.PushNotification.ApplicasaPushNotificationEvent-=ApplicasaListenToPush;
+ 	}
+ 
+ 	void ApplicasaListenToPush(Applicasa.PushNotification thePush)
+ 	{
+  		string message =  thePush.message;
+ 		Debug.Log ("LiLog_Unity push message " +message);
+ 	}
+	#endregion
+	
+
 }

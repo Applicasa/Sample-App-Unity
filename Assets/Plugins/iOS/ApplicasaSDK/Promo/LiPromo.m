@@ -29,6 +29,15 @@
     [LiKitPromotions refreshPromotions];
 }
 
++(void) dismissAllPromotions
+{
+    [LiKitPromotions dismissAllPromotions];
+}
++(void) raiseCustomEventByName:(NSString *)value
+{
+    [LiKitPromotions raiseCustomEventByName:value];
+}
+
 #pragma mark - Deprecated Methods
 /*********************************************************************************
  DEPRECATED METHODS:

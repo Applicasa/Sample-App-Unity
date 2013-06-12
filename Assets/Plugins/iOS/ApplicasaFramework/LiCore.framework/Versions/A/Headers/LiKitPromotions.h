@@ -45,6 +45,7 @@
 
 + (void) refreshPromotions;
 + (void) getAllAvailblePromosWithBlock:(GetPromotionArrayFinished)block;
++ (void) resetPromotionWaitingToBeViewed:(NSString *)promoId;
 
 + (void) promoHadViewed:(Promotion *)promotion;
 + (void) promo:(Promotion *)promotion ButtonClicked:(BOOL)button CancelButton:(BOOL)cancelButton;
@@ -53,4 +54,9 @@
 //+ (Promotion * )getPromotionForAds;
 
  +(void)dismiss:(Promotion *) promo;
+
++(void) dismissAllPromotions;
++(void) raiseCustomEventByName:(NSString *)value;
+
+
 @end

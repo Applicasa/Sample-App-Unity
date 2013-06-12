@@ -12,6 +12,9 @@
 #define NSStringToCharPointer( _x_ ) ( _x_ != NULL && [_x_ isKindOfClass:[NSString class]] ) ? strdup( [_x_ UTF8String] ) : NULL
 #define CharPointerToNSString( _x_ ) ( _x_ != NULL ) ? [NSString stringWithUTF8String:_x_] : [NSString stringWithUTF8String:""]
 
+void IncreasePromoCounter();
+bool DecreasePromoCounter();
+
 typedef enum {
   PromotionResultDataTypeString = 0,
   PromotionResultDataTypeInt,
@@ -29,6 +32,7 @@ struct PromotionResultInfo {
  struct FBFriend {
     User* UserPtr;
     char* Id;
+	bool hasApplicasaUser;
     char* Name;
     char* ImageURL;
 };
@@ -89,12 +93,12 @@ struct ApplicasaSKProduct {
 
 
 
-char* ApplicasaMakeStringCopy (const char* string) {
-    if (string == NULL) return NULL;
-    char * res = (char*)malloc(strlen(string) + 1);
-    strcpy(res, string);
-    return res;
-}
+//char* ApplicasaMakeStringCopy (const char* string) {
+//    if (string == NULL) return NULL;
+//    char * res = (char*)malloc(strlen(string) + 1);
+//    strcpy(res, string);
+//    return res;
+//}
 
 // ApplicasaError - NSError*, char * - NSString*, int-Actions
 
@@ -139,4 +143,5 @@ GetCachedDataFinished ApplicasaGetFileDataToDataBlock(ApplicasaGetFileData funct
 
 extern "C" {
 bool ApplicasaIsDoneLoading();
+long ApplicasaGetServerTime();
 }

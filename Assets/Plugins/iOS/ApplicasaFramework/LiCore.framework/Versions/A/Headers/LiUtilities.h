@@ -58,6 +58,15 @@ char *LiNewBase64Encode(
                       bool separateLines,
                       size_t *outputLength);
 
+
+
+typedef enum LiMaterialCacher {
+    VirtualGoodCached = 1,
+    VirtualCurrencyCached,
+    PromotionsCached
+}LiMaterialCacher;
+
+
 @interface NSData (Base64)
 
 + (NSData *)dataFromBase64String:(NSString *)aString;
@@ -110,6 +119,7 @@ char *LiNewBase64Encode(
 
 typedef void (^GetCachedImageFinished)(NSError *error, UIImage *image);
 typedef void (^GetCachedDataFinished)(NSError *error, NSData *data);
+typedef void (^FinishedCaching)(/*NSError *error*/);
 
 @interface NSURL (LiCache)
 

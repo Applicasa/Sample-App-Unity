@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{EC674D5B-43ED-ADF1-8B62-81F6F0ADE13B}</ProjectGuid>
+	<ProjectGuid>{6311E6C6-0A20-383B-320B-694068DE37A5}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_3_5_6;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_IOS;UNITY_IPHONE;ENABLE_GENERICS;ENABLE_TERRAIN;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_DUCK_TYPING</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_IPHONE;UNITY_IPHONE_API;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;UNITY_4_1_3;UNITY_4_1;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;ENABLE_DUCK_TYPING</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>/Applications/Unity35/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity35/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -48,29 +48,25 @@
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_picker_search_box.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_usersettingsfragment.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_placepickerfragment_list_row.xml" />
-     <None Include="Assets\Plugins\Android\ApplicasaPluginEclipse\proguard-project.txt" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_picker_title_bar_stub.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_loginbutton_blue.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_picker_list_selector.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_login_activity_layout.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_top_button.xml" />
-     <None Include="Assets\Plugins\Android\ApplicasaPluginEclipse\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\res\values-iw\strings.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_button_check.xml" />
      <None Include="Assets\Plugins\Android\AndroidManifest35.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_picker_top_button.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_picker_image.xml" />
-     <None Include="Assets\Plugins\Android\ApplicasaPluginEclipse\bin\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_picker_activity_circle_row.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_usersettingsfragment_background_gradient.xml" />
      <None Include="Assets\Plugins\Android\res\values\attrs.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_placepickerfragment.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_friendpickerfragment.xml" />
-     <None Include="Assets\Plugins\Android\ApplicasaPluginEclipse\res\values\styles.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_loginbutton_silver.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_picker_list_row.xml" />
      <None Include="Assets\Plugins\Android\res\values-he\strings.xml" />
-     <None Include="Assets\Plugins\Android\ApplicasaPluginEclipse\res\values\strings.xml" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_picker_checkbox.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_top_background.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_picker_item_background.xml" />
@@ -78,13 +74,17 @@
      <None Include="Assets\Plugins\Android\res\values\styles.xml" />
      <None Include="Assets\Plugins\Android\res\values\strings.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_picker_title_bar.xml" />
+     <None Include="Assets\Plugins\Android\assets\ApplicasaConfig.xml" />
      <None Include="Assets\Plugins\Android\AndroidManifest4.xml" />
      <None Include="Assets\Plugins\Android\res\layout\com_facebook_picker_list_section_header.xml" />
      <None Include="Assets\Plugins\Android\res\drawable\com_facebook_picker_list_selector_background_transition.xml" />
+ <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
+ <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-vs.csproj">
-      <Project>{EA79FCD2-B770-BA39-4F0D-F35A8A19BC33}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
+      <Project>{CD8C9303-404B-FB8D-6B9B-21988D5CAC0A}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

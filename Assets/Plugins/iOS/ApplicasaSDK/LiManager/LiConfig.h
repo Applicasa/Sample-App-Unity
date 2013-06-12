@@ -10,11 +10,14 @@
 #define ENABLE_OFFLINE YES
 #define ENABLE_SANDBOX YES
 
+// define the pause time require for session to be consider as a new session
+#define SESSION_PAUSE_TIME 15
+
 // Applicasa Keys (do not alter)
 #define SDK_VERSION 3.0
 #define FRAMEWORK_VERSION 3.0
 #define SCHEMA_VERISON @"3.0"
-#define SCHEMA_DATE 1368448003
+#define SCHEMA_DATE 1370939602
 
 // Chartboost Keys
 #define ENABLE_CHARTBOOST 0

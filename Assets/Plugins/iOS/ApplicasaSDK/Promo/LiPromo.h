@@ -31,4 +31,7 @@
 
 + (void) refreshPromotions;
 
++(void) dismissAllPromotions;
++(void) raiseCustomEventByName:(NSString *)value;
+
 @end

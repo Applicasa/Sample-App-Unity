@@ -1,8 +1,14 @@
 //
 // VirtualGoodCategory.cs
 // Created by Applicasa 
-// 5/13/2013
+// 6/11/2013
 //
+
+
+
+
+
+
 
 using UnityEngine;
 using System;
@@ -12,7 +18,7 @@ using System.Runtime.InteropServices;
 namespace Applicasa {
 	public class VirtualGoodCategory {
 		
-#if UNITY_ANDROID
+#if UNITY_ANDROID 
 		private static AndroidJavaClass javaUnityApplicasaVirtualGoodCategory;
 	
         public AndroidJavaObject innerVirtualGoodCategoryJavaObject;
@@ -30,7 +36,7 @@ namespace Applicasa {
 		
 		public VirtualGoodCategory(IntPtr virtualGoodCategoryPtr) {
 			innerVirtualGoodCategory = virtualGoodCategoryPtr;
-#if UNITY_ANDROID
+#if UNITY_ANDROID 
 			if(javaUnityApplicasaVirtualGoodCategory==null)
 				javaUnityApplicasaVirtualGoodCategory = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualGoodCategory");
 			if(innerVirtualGoodCategoryJavaObject==null)
@@ -38,7 +44,7 @@ namespace Applicasa {
 #endif
 		}
 		
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
 		public VirtualGoodCategory(IntPtr virtualGoodCategoryPtr, AndroidJavaObject virtualGoodCategoryJavaObject) {
 			innerVirtualGoodCategory = virtualGoodCategoryPtr;
 			innerVirtualGoodCategoryJavaObject = virtualGoodCategoryJavaObject;
@@ -46,6 +52,22 @@ namespace Applicasa {
 				javaUnityApplicasaVirtualGoodCategory = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualGoodCategory");
 		}
 #endif
+
+		#if UNITY_IPHONE && !UNITY_EDITOR
+		[DllImport("__Internal")]
+		private static extern IntPtr ApplicasaVirtualGoodCategory();
+		#endif
+		public VirtualGoodCategory() {
+		#if UNITY_ANDROID&&!UNITY_EDITOR
+		   if(javaUnityApplicasaVirtualGoodCategory==null)
+			javaUnityApplicasaVirtualGoodCategory = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualGoodCategory");
+		   innerVirtualGoodCategoryJavaObject = new AndroidJavaObject("com.applicasa.VirtualGoodCategory.VirtualGoodCategory");
+		   innerVirtualGoodCategory = innerVirtualGoodCategoryJavaObject.GetRawObject();
+		#elif UNITY_IPHONE && !UNITY_EDITOR
+			innerVirtualGoodCategory = ApplicasaVirtualGoodCategory();
+		#endif
+		  }
+
     	
 		public struct VirtualGoodCategoryArray {
 			public int ArraySize;
@@ -54,15 +76,15 @@ namespace Applicasa {
 	
 		public static VirtualGoodCategory[] GetVirtualGoodCategoryArray(VirtualGoodCategoryArray virtualGoodCategoryArray) {
 			VirtualGoodCategory[] virtualGoodCategory = new VirtualGoodCategory[virtualGoodCategoryArray.ArraySize];
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
 			AndroidJavaObject tempJavaObjectArray=new AndroidJavaObject(virtualGoodCategoryArray.Array);
 #endif
 			for (int i=0; i < virtualGoodCategoryArray.ArraySize; i++) {
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 				IntPtr newPtr = Marshal.ReadIntPtr (virtualGoodCategoryArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
 				virtualGoodCategory[i] = new VirtualGoodCategory(newPtr);
 #endif
-#if UNITY_ANDROID
+#if UNITY_ANDROID && !UNITY_EDITOR
 				AndroidJavaObject tempJavaObject = tempJavaObjectArray.Call<AndroidJavaObject>("get",i);
 				IntPtr newPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
 				virtualGoodCategory[i] = new VirtualGoodCategory(newPtr, new AndroidJavaObject(newPtr));
@@ -144,7 +166,7 @@ namespace Applicasa {
 #endregion
 
 		
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern void ApplicasaVirtualGoodCategorySaveWithBlock(System.IntPtr virtualGoodCategory, Action callback);
 		public void Save(Action action) {
@@ -234,7 +256,7 @@ namespace Applicasa {
 		
 		#region Static Methods
 		
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern void ApplicasaVirtualGoodCategoryGetById(string id, QueryKind queryKind, GetVirtualGoodCategoryFinished callback);
 		public static void GetById(string id, QueryKind queryKind, GetVirtualGoodCategoryFinished callback) {

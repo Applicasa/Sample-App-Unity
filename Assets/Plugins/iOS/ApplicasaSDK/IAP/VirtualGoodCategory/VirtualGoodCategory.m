@@ -1,7 +1,7 @@
 //
 // VirtualGoodCategory.m
 // Created by Applicasa 
-// 5/13/2013
+// 6/11/2013
 //
 
 #import "VirtualGoodCategory.h"

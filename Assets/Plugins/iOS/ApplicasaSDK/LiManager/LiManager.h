@@ -49,5 +49,6 @@
 + (NSString *) getChartboostId;
 + (NSString *) getChartboostSignature;
 
++(int)getSessionPauseTime;
 
 @end

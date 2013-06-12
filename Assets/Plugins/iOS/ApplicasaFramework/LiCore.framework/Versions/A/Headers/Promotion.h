@@ -8,7 +8,7 @@
 #import <LiCore/LiCore.h>
 #import "LiDataTypes.h"
 #import "LiKitPromotionsConstants.h"
-
+#import "PromoView.h"
 
 #define KEY_promotionID				@"PromotionID"
 #define KEY_promotionLastUpdate				@"PromotionLastUpdate"
