@@ -30,6 +30,16 @@ namespace Applicasa {
 	/// This is an internal class. Do not use it.
 	/// </summary>
  public class Core {
+
+#if UNITY_IPHONE&&!UNITY_EDITOR	
+  [DllImport("__Internal")]
+  public static extern void ApplicasaDeallocPointer(System.IntPtr item);
+  public static void DeallocPointer(System.IntPtr item)
+ {
+		ApplicasaDeallocPointer(item);
+ }
+#endif
+
 #if UNITY_ANDROID&&!UNITY_EDITOR
   [DllImport("Applicasa")]
   public static extern void setActionCallback(Action callback, int uniqueActionID);
@@ -176,11 +186,10 @@ namespace Applicasa {
 	    UpdateAnalytics
 	}
 
-    public enum Fields {
+   public enum Fields {
 	None = 0,
 	//User
 	User_None,
-	UserTest,
 	UserID,
 	UserName,
 	UserFirstName,
@@ -210,8 +219,8 @@ namespace Applicasa {
 	VirtualCurrencyIOSBundleMax,
 	VirtualCurrencyAndroidBundleMin,
 	VirtualCurrencyAndroidBundleMax,
-	VirtualCurrencyCredit,
 	VirtualCurrencyPos,
+	VirtualCurrencyCredit,
 	VirtualCurrencyKind,
 	VirtualCurrencyImageA,
 	VirtualCurrencyImageB,
@@ -230,62 +239,33 @@ namespace Applicasa {
 	VirtualGoodMainCurrency,
 	VirtualGoodSecondaryCurrency,
 	VirtualGoodRelatedVirtualGood,
+	VirtualGoodStoreItemPrice,
 	VirtualGoodIOSBundleMin,
 	VirtualGoodIOSBundleMax,
 	VirtualGoodAndroidBundleMin,
 	VirtualGoodAndroidBundleMax,
-	VirtualGoodStoreItemPrice,
-	VirtualGoodQuantity,
+	VirtualGoodPos,
 	VirtualGoodMaxForUser,
 	VirtualGoodUserInventory,
-	VirtualGoodPos,
+	VirtualGoodQuantity,
 	VirtualGoodImageA,
 	VirtualGoodImageB,
 	VirtualGoodImageC,
 	VirtualGoodMainCategory,
 	VirtualGoodIsDeal,
 	VirtualGoodConsumable,
+	VirtualGoodIsStoreItem,
 	VirtualGoodInAppleStore,
 	VirtualGoodInGoogleStore,
-	VirtualGoodIsStoreItem,
 	VirtualGoodLastUpdate,
 	//VirtualGoodCategory
 	VirtualGoodCategory_None,
 	VirtualGoodCategoryID,
 	VirtualGoodCategoryName,
 	VirtualGoodCategoryLastUpdate,
-	VirtualGoodCategoryPos,
-	//Test
-	Test_None,
-	TestID,
-	TestLastUpdate,
-	TestTest,
-	//Places
-	Places_None,
-	PlacesID,
-	PlacesLastUpdate,
-	PlacesLoc,
-	PlacesName,
-	//Nono
-	Nono_None,
-	NonoID,
-	NonoLastUpdate,
-	//Bbb
-	Bbb_None,
-	BbbID,
-	BbbLastUpdate,
-	//Dynamic
-	Dynamic_None,
-	DynamicID,
-	DynamicLastUpdate,
-	DynamicNumber,
-	DynamicReal,
-	DynamicDate,
-	DynamicBool,
-	DynamicHtml,
-	DynamicImage,
-	DynamicTest
+	VirtualGoodCategoryPos
 }
+
 
 	
 	

@@ -1,7 +1,7 @@
 //
 // VirtualGoodCategory.cs
 // Created by Applicasa 
-// 6/11/2013
+// 6/24/2013
 //
 
 
@@ -93,6 +93,13 @@ namespace Applicasa {
 			return virtualGoodCategory;
 		}
 
+#if UNITY_IPHONE&&!UNITY_EDITOR	
+    ~VirtualGoodCategory()
+		{
+			Debug.Log("Called Destractor");
+			Applicasa.Core.DeallocPointer(innerVirtualGoodCategory);
+		}
+#endif
 
 
 		#region Class Methods and Members
@@ -140,7 +147,7 @@ namespace Applicasa {
 			set {javaUnityApplicasaVirtualGoodCategory.CallStatic("ApplicasaVirtualGoodCategorySetVirtualGoodCategoryName", innerVirtualGoodCategoryJavaObject, value);}
 		}
 		public DateTime VirtualGoodCategoryLastUpdate {
-			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(javaUnityApplicasaVirtualGoodCategory.CallStatic<double>("ApplicasaVirtualGoodCategoryGetVirtualGoodCategoryLastUpdate",innerVirtualGoodCategoryJavaObject));}
+			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(javaUnityApplicasaVirtualGoodCategory.CallStatic<double>("ApplicasaVirtualGoodCategoryGetVirtualGoodCategoryLastUpdate",innerVirtualGoodCategoryJavaObject));}
 		}
 		public int VirtualGoodCategoryPos {
 			get {return javaUnityApplicasaVirtualGoodCategory.CallStatic<int>("ApplicasaVirtualGoodCategoryGetVirtualGoodCategoryPos",innerVirtualGoodCategoryJavaObject);}

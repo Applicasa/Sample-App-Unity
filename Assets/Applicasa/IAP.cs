@@ -14,19 +14,22 @@ namespace Applicasa {
 		[DllImport("__Internal")]
 		private static extern string ApplicasaIAPBuyVirtualCurrency(System.IntPtr virtualCurrency, Action action);
 		public static void BuyVirtualCurrency(VirtualCurrency virtualCurrency, Action action) {
-			ApplicasaIAPBuyVirtualCurrency(virtualCurrency.innerVirtualCurrency, action);
+			//ApplicasaIAPBuyVirtualCurrency(virtualCurrency.innerVirtualCurrency, action);
+			virtualCurrency.Buy(action);
 		}
 		
 		[DllImport("__Internal")]
 		private static extern string ApplicasaIAPBuyVirtualGood(System.IntPtr virtualGood, int quantity, Currency currencyKind, Action action);
 		public static void BuyVirtualGood(VirtualGood virtualGood, int quantity, Currency currencyKind, Action action) {
-			ApplicasaIAPBuyVirtualGood(virtualGood.innerVirtualGood, quantity, currencyKind, action);
+			//ApplicasaIAPBuyVirtualGood(virtualGood.innerVirtualGood, quantity, currencyKind, action);
+			virtualGood.Buy(quantity,currencyKind,action);
 		}
 	
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPBuyWithRealMoney(System.IntPtr virtualGood, Action action);
 		public static void BuyWithRealMoney(VirtualGood virtualGood, Action action) {
-			ApplicasaIAPBuyWithRealMoney(virtualGood.innerVirtualGood, action);
+			//ApplicasaIAPBuyWithRealMoney(virtualGood.innerVirtualGood, action);
+			virtualGood.BuyWithRealMoney(action);
 		}
   
 //		/**********************
@@ -36,13 +39,15 @@ namespace Applicasa {
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPGiveAmount(int amount, Currency currencyKind, Action callback);
 		public static void GiveCurrency(int amount, Currency currencyKind, Action action) {
-			ApplicasaIAPGiveAmount(amount, currencyKind, action);
+			//ApplicasaIAPGiveAmount(amount, currencyKind, action);
+			VirtualCurrency.GiveAmount(amount, currencyKind, action);
 		}
 		
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPGiveVirtualGood(System.IntPtr virtualGood, int quantity, Action callback);
 		public static void GiveVirtualGood(VirtualGood virtualGood, int quantity, Action action) {
-			ApplicasaIAPGiveVirtualGood(virtualGood.innerVirtualGood, quantity, action);
+			//ApplicasaIAPGiveVirtualGood(virtualGood.innerVirtualGood, quantity, action);
+			virtualGood.Give(quantity,action);
 		}
 		
 //		/**********************
@@ -52,13 +57,15 @@ namespace Applicasa {
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPUseAmount(int amount, Currency currencyKind, Action callback);
 		public static void UseCurrency(int amount, Currency currencyKind, Action action) {
-			ApplicasaIAPUseAmount(amount, currencyKind, action);
+			//ApplicasaIAPUseAmount(amount, currencyKind, action);
+			VirtualCurrency.UseAmount(amount, currencyKind, action);
 		}
 		
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPUseVirtualGood(System.IntPtr virtualGood, int quantity, Action callback);
 		public static void UseVirtualGood(VirtualGood virtualGood, int quantity, Action action) {
-			ApplicasaIAPUseVirtualGood(virtualGood.innerVirtualGood, quantity, action);
+			//ApplicasaIAPUseVirtualGood(virtualGood.innerVirtualGood, quantity, action);
+			virtualGood.Use(quantity,action);
 		}		
 
 //		/**********************

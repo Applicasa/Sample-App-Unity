@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System;
 
@@ -10,7 +11,11 @@ namespace Applicasa {
 		public string sound = "";
 		public int badge = 0;
 		public string tag = "";
-		
+
+#if UNITY_IPHONE
+		public IDictionary userInfo;
+#endif
+
 #if UNITY_ANDROID
 		private static AndroidJavaClass javaUnityApplicasaPushNotification;
 #endif
@@ -75,6 +80,7 @@ namespace Applicasa {
 		    push.message = NotificationServices.GetRemoteNotification(position).alertBody;
 		    push.sound = NotificationServices.GetRemoteNotification(position).soundName;
 		    push.tag = NotificationServices.GetRemoteNotification(position).userInfo.ToString();
+			push.userInfo = NotificationServices.GetRemoteNotification(position).userInfo;
 			return push;
 			//NotificationServices.GetRemoteNotification(position).alertBody;
 		}
@@ -82,6 +88,11 @@ namespace Applicasa {
 		public static int PendingNotificationCount()
 		{
 		    return NotificationServices.remoteNotificationCount;
+		}
+		
+		public static void ClearRemoteNotifications()
+		{
+		    NotificationServices.ClearRemoteNotifications();
 		}
 		
 #elif UNITY_ANDROID && !UNITY_EDITOR
@@ -120,8 +131,7 @@ namespace Applicasa {
 		    string sound =  javaUnityApplicasaPushNotification.CallStatic <string>("ApplicasaPushGetSound",position);
 		    string tag =  javaUnityApplicasaPushNotification.CallStatic <string>("ApplicasaPushGetTag",position);
 		    
-		    // remove from queue
-		    javaUnityApplicasaPushNotification.CallStatic("ApplicasaPushConsumeMessage",position);
+		    
 		 
 		    PushNotification push = new PushNotification(text, sound, badge, tag);
 		 
@@ -134,6 +144,17 @@ namespace Applicasa {
 				javaUnityApplicasaPushNotification = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPushNotification");
 				
 		    return javaUnityApplicasaPushNotification.CallStatic <int>("ApplicasaPushNotificationsCount");
+		}
+		
+		public static void ClearRemoteNotifications()
+		{
+			int count = PendingNotificationCount();
+			
+			for (int position = count; position > 0; position--)
+			{
+				// remove from queue
+		   	 	javaUnityApplicasaPushNotification.CallStatic("ApplicasaPushConsumeMessage",position-1);
+			}
 		}
 		
 #else
@@ -150,6 +171,12 @@ namespace Applicasa {
 		public static int PendingNotificationCount()
 		{
 		    return 0;
+		}
+		
+		public static void ClearRemoteNotifications()
+		{
+			// remove from queue
+		    
 		}
 #endif
 		

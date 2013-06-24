@@ -57,14 +57,21 @@ namespace Applicasa {
   
   public static void Stop() {
 #if UNITY_ANDROID && !UNITY_EDITOR
-			ApplicasaListener.ApplicasaNotificationEvent-=Applicasa.PushNotification.methodApplicasaPushNotification;
-   closeApplicasa();
+	 Applicasa.Session.SessionEndWithCallback(SessionEndCallback);	
+	 ApplicasaListener.ApplicasaNotificationEvent-=Applicasa.PushNotification.methodApplicasaPushNotification;
+    
 #endif
   }
 		
 		
 #if UNITY_ANDROID && !UNITY_EDITOR  
-
+	
+	public static void SessionEndCallback(bool success, Error error, System.IntPtr userPtr)
+	{
+		closeApplicasa();
+		Application.Quit();
+	}
+		
 	public static IEnumerator finishedSynchOfflineOperation(CallbackInitialize _callbackInitialize) {
    saveCallback(_callbackInitialize);  
    using(AndroidJavaClass javaUnityApplicasa = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaLiManager"))

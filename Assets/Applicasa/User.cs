@@ -1,7 +1,7 @@
 //
 // User.cs
 // Created by Applicasa 
-// 6/11/2013
+// 6/24/2013
 //
 
 using UnityEngine;
@@ -197,7 +197,13 @@ namespace Applicasa {
 			FBFriends = fbFriends;
 		}
 #endif
-		
+#if UNITY_IPHONE&&!UNITY_EDITOR	
+    ~User()
+		{
+			Debug.Log("Called Destractor");
+			Applicasa.Core.DeallocPointer(innerUser);
+		}
+#endif		
 #region Class Methods and Members
 		public System.IntPtr innerUser;
 
@@ -346,10 +352,10 @@ namespace Applicasa {
 			get {return javaUnityApplicasaUser.CallStatic<string>("ApplicasaUserGetUserPassword", innerUserJavaObject);}
 		}
 		public DateTime UserLastLogin {
-			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(javaUnityApplicasaUser.CallStatic<double>("ApplicasaUserGetUserLastLogin",innerUserJavaObject));}
+			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(javaUnityApplicasaUser.CallStatic<double>("ApplicasaUserGetUserLastLogin",innerUserJavaObject));}
 		}
 		public DateTime UserRegisterDate {
-			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(javaUnityApplicasaUser.CallStatic<double>("ApplicasaUserGetUserRegisterDate",innerUserJavaObject));}
+			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(javaUnityApplicasaUser.CallStatic<double>("ApplicasaUserGetUserRegisterDate",innerUserJavaObject));}
 		}
 		public Location UserLocation {
 			get {				Location _location=new Location();				_location.Latitude=javaUnityApplicasaUser.CallStatic<double>("ApplicasaUserGetUserLocationLatitude", innerUserJavaObject);				_location.Longitude=javaUnityApplicasaUser.CallStatic<double>("ApplicasaUserGetUserLocationLongitude",innerUserJavaObject);				return _location;			}			set {javaUnityApplicasaUser.CallStatic("ApplicasaUserSetUserLocation",  innerUserJavaObject, value.Latitude, value.Longitude);}		}
@@ -360,7 +366,7 @@ namespace Applicasa {
 			get {return javaUnityApplicasaUser.CallStatic<bool>("ApplicasaUserGetUserIsRegisteredFacebook",innerUserJavaObject);}
 		}
 		public DateTime UserLastUpdate {
-			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(javaUnityApplicasaUser.CallStatic<double>("ApplicasaUserGetUserLastUpdate",innerUserJavaObject));}
+			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(javaUnityApplicasaUser.CallStatic<double>("ApplicasaUserGetUserLastUpdate",innerUserJavaObject));}
 		}
 		public string UserImage {
 			get {return javaUnityApplicasaUser.CallStatic<string>("ApplicasaUserGetUserImage",innerUserJavaObject);}
@@ -609,6 +615,8 @@ namespace Applicasa {
 		}
 #elif UNITY_ANDROID&&!UNITY_EDITOR
 		public static void Login(string username, string password, Action action) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(action,uniqueActionID);			
@@ -616,6 +624,8 @@ namespace Applicasa {
 		}
 		
 		public static void UpdateUsername(string newUsername, string password, Action action) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(action,uniqueActionID);
@@ -623,6 +633,8 @@ namespace Applicasa {
 		}
 		
 		public static void UpdatePassword(string newPassword, string oldPassword, Action action) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(action,uniqueActionID);
@@ -630,6 +642,8 @@ namespace Applicasa {
 		}
 		
 		public static void Logout(Action action) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(action,uniqueActionID);
@@ -637,6 +651,8 @@ namespace Applicasa {
 		}
 		
 		public static void ForgotPassword(string username, Action action) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(action,uniqueActionID);
@@ -653,6 +669,8 @@ namespace Applicasa {
 		
 		
 		public static void GetById(string id, QueryKind queryKind, GetUserFinished callback) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueGetUserFinishedID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			setGetUserFinishedCallback(callback,uniqueGetUserFinishedID);
@@ -660,6 +678,8 @@ namespace Applicasa {
 		}
 		
 		public static void GetArrayWithQuery(Query query, QueryKind queryKind, GetUserArrayFinished callback) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueGetUserArrayFinishedID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			setGetUserArrayFinishedCallback(callback,uniqueGetUserArrayFinishedID);
@@ -667,6 +687,8 @@ namespace Applicasa {
 		}
 		
 		public static void GetLocalArrayWithRawSqlQuery(string rawQuery, GetUserArrayFinished callback) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueGetUserArrayFinishedID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			setGetUserArrayFinishedCallback(callback,uniqueGetUserArrayFinishedID);
@@ -694,6 +716,8 @@ namespace Applicasa {
 		
 		
 		public static void FacebookFindFriends(FBFriendsAction callback) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueFBFriendsActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			setFBFriendsActionCallback(callback,uniqueFBFriendsActionID);
@@ -701,6 +725,8 @@ namespace Applicasa {
 		}
 		
 		public static void FacebookLogin(Action action) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(action,uniqueActionID);
@@ -708,6 +734,8 @@ namespace Applicasa {
 		}
 		
 		public static void FacebookLogout(Action callback) {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(callback,uniqueActionID);

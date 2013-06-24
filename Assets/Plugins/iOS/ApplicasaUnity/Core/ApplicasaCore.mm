@@ -8,7 +8,7 @@
 
 void UnityPause(bool pause);
 
-
+NSMutableDictionary *holdinPointers = [[NSMutableDictionary alloc]init];
 extern "C" {
 
 IAP_STATUS ApplicasaIAPStatus() {
@@ -64,7 +64,7 @@ GetUserFinished ApplicasaGetUserFinishedToBlock(ApplicasaGetUserFinished functio
             errorStruct.Id = 1;
             errorStruct.Message = NSStringToCharPointer(@"");
         }
-        
+         [holdinPointers setObject:object forKey:[NSValue valueWithPointer:object]];
         function(success, errorStruct, object);
     } copy] autorelease];
 }
@@ -90,6 +90,7 @@ GetUserArrayFinished ApplicasaGetUserArrayFinishedToBlock(ApplicasaGetUserArrayF
         User* userArray[arraySize];
         for (int i = 0 ; i < arraySize; i++)
         {
+            [holdinPointers setObject:[array objectAtIndex:i] forKey:[NSValue valueWithPointer:[array objectAtIndex:i]]];
             userArray[i] = [array objectAtIndex:i];
         }
         
@@ -119,6 +120,8 @@ LiBlockFBFriendsAction ApplicasaFBFriendsActionToBlock(ApplicasaFBFriendsAction 
         
         LiObjFBFriend* friendArray[arraySize];
         for (int i = 0; i < arraySize; i++) {
+            [holdinPointers setObject:[friends objectAtIndex:i] forKey:[NSValue valueWithPointer:[friends objectAtIndex:i]]];
+            
             friendArray[i] = [friends objectAtIndex:i];
         }
         
@@ -149,6 +152,7 @@ GetVirtualCurrencyArrayFinished ApplicasaGetVirtualCurrencyArrayFinishedToBlock(
         
         VirtualCurrency* virtualCurrencyArray[arraySize];
         for (int i = 0; i < arraySize; i++) {
+             [holdinPointers setObject:[array objectAtIndex:i] forKey:[NSValue valueWithPointer:[array objectAtIndex:i]]];
             virtualCurrencyArray[i] = [array objectAtIndex:i];
         }
         
@@ -178,6 +182,7 @@ GetVirtualGoodArrayFinished ApplicasaGetVirtualGoodArrayFinishedToBlock(Applicas
         
         VirtualGood* virtualGoodArray[arraySize];
         for (int i = 0; i < arraySize; i++) {
+             [holdinPointers setObject:[array objectAtIndex:i] forKey:[NSValue valueWithPointer:[array objectAtIndex:i]]];
             virtualGoodArray[i] = [array objectAtIndex:i];
         }
         
@@ -202,7 +207,7 @@ GetVirtualGoodCategoryFinished ApplicasaGetVirtualGoodCategoryFinishedToBlock(Ap
             errorStruct.Id = 1;
             errorStruct.Message = NSStringToCharPointer(@"");
         }
-        
+         [holdinPointers setObject:object forKey:[NSValue valueWithPointer:object]];
         function(success, errorStruct, object);
     } copy] autorelease];
 }
@@ -225,6 +230,7 @@ GetVirtualGoodCategoryArrayFinished ApplicasaGetVirtualGoodCategoryArrayFinished
         
         VirtualGoodCategory* virtualGoodCategoryArray[arraySize];
         for (int i = 0; i < arraySize; i++) {
+             [holdinPointers setObject:[array objectAtIndex:i] forKey:[NSValue valueWithPointer:[array objectAtIndex:i]]];
             virtualGoodCategoryArray[i] = [array objectAtIndex:i];
         }
         
@@ -254,6 +260,7 @@ GetPromotionArrayFinished ApplicasaGetPromotionArrayFinishedToBlock(ApplicasaGet
         
         Promotion* promotionArray[arraySize];
         for (int i = 0; i < arraySize; i++) {
+             [holdinPointers setObject:[array objectAtIndex:i] forKey:[NSValue valueWithPointer:[array objectAtIndex:i]]];
             promotionArray[i] = [array objectAtIndex:i];
         }
         
@@ -393,6 +400,11 @@ PromotionResultBlock ApplicasaPromotionResultToBlock(ApplicasaPromotionResult fu
     long ApplicasaGetServerTime()
     {
         return [LiCore getServerTime];
+    }
+    
+    void ApplicasaDeallocPointer(id item)
+    {
+        [holdinPointers removeObjectForKey:[NSValue valueWithPointer:item]];
     }
 
 }

@@ -8,16 +8,6 @@ public class ApplicasaListener : MonoBehaviour {
 	
 	public static event delegateApplicasaNotification ApplicasaNotificationEvent;
 	
-	private static ApplicasaListener instance;
-	
-	public ApplicasaListener () {
-		if (instance != null)
-		{
-			Destroy(this);
-		}else{
-			instance = this;
-		}
-	}
 	
 	void Awake () {
 		DontDestroyOnLoad (gameObject);

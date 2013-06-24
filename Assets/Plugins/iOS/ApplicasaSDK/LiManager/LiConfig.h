@@ -17,7 +17,7 @@
 #define SDK_VERSION 3.0
 #define FRAMEWORK_VERSION 3.0
 #define SCHEMA_VERISON @"3.0"
-#define SCHEMA_DATE 1370939602
+#define SCHEMA_DATE 1372061503
 
 // Chartboost Keys
 #define ENABLE_CHARTBOOST 0
