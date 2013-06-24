@@ -6,6 +6,11 @@ Please follow step 4 - 7 in order to build the project.
 
 If you want test the Chartboost integration please refer to the Chartboost section in the end of this readme file.
 
+Setting AppSplashScreen Scene
+=============================
+ Open AppSplashScreen scene and choose ApplicasaStartObjectForSession
+Connect it to ApplicasaStart.cs script (File located under Assets/Applicasa)
+
 Using Applicasa - iOS Unity
 ===========================
 You need Xcode in order to build your project.
