@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SPAdvertiserManager.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SPAdvertiserManager</TokenIdentifier>
+			<Abstract type="html">Singleton for reporting offers to the SponsorPay server.</Abstract>
+			<DeclaredIn>SPAdvertiserManager.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+	</File>
+</Tokens>

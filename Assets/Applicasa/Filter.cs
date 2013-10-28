@@ -18,7 +18,12 @@ namespace Applicasa {
 #if UNITY_ANDROID
 			if(javaUnityApplicasaFilter==null)
 				javaUnityApplicasaFilter = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaFilter");
+	#if UNITY_4_2 
+			innerFilterJavaObject= new AndroidJavaObject("applicasa.LiCore.communication.LiFilters",innerFilter);
+	#else					
 			innerFilterJavaObject= new AndroidJavaObject(innerFilter);
+	#endif
+		
 #endif
 		}
 		
@@ -34,7 +39,7 @@ namespace Applicasa {
 #region Class Methods and Members
 		public System.IntPtr innerFilter;
 		
-#if UNITY_IPHONE
+#if UNITY_IPHONE&&!UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern System.IntPtr ApplicasaFilterNot(System.IntPtr filter);
 		public Filter NOT() {
@@ -42,12 +47,11 @@ namespace Applicasa {
 		}
 #elif UNITY_ANDROID&&!UNITY_EDITOR
 		public Filter NOT() {
-			AndroidJavaObject tempJavaObject=javaUnityApplicasaFilter.CallStatic<AndroidJavaObject>("ApplicasaFilterNOT", innerFilterJavaObject);
-			IntPtr tempIntPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-			Filter filter = new Filter(tempIntPtr, new AndroidJavaObject(tempIntPtr));
+			AndroidJavaObject tempJavaObject=javaUnityApplicasaFilter.CallStatic<AndroidJavaObject>("ApplicasaFilterNOT", innerFilterJavaObject);	
+			Filter filter = new Filter(tempJavaObject.GetRawObject(), tempJavaObject);
 			return filter;
 		}
-#else
+# else
 		public Filter NOT() {
 			return this;
 		}
@@ -112,9 +116,9 @@ namespace Applicasa {
 		public static Filter GetFilter(Fields field, OPERATORS op, int val) {
 			if(javaUnityApplicasaFilter==null)
 				javaUnityApplicasaFilter = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaFilter");
-			AndroidJavaObject tempJavaObject=javaUnityApplicasaFilter.CallStatic<AndroidJavaObject>("ApplicasaFilterGetFilterInt", (int)field, field.ToString(), (int)op, val);
-			IntPtr tempIntPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-			Filter filter = new Filter(tempIntPtr, new AndroidJavaObject(tempIntPtr));
+			AndroidJavaObject tempJavaObject=javaUnityApplicasaFilter.CallStatic<AndroidJavaObject>("ApplicasaFilterGetFilterInt", (int)field, field.ToString(), (int)op, val);			
+			Filter filter = new Filter(tempJavaObject.GetRawObject(), tempJavaObject);
+
 			return filter;
 		}
 		
@@ -122,8 +126,7 @@ namespace Applicasa {
 			if(javaUnityApplicasaFilter==null)
 				javaUnityApplicasaFilter = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaFilter");
 			AndroidJavaObject tempJavaObject=javaUnityApplicasaFilter.CallStatic<AndroidJavaObject>("ApplicasaFilterGetFilterFloat", (int)field, field.ToString(), (int)op, val);
-			IntPtr tempIntPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-			Filter filter = new Filter(tempIntPtr, new AndroidJavaObject(tempIntPtr));
+			Filter filter = new Filter(tempJavaObject.GetRawObject(), tempJavaObject);
 			return filter;
 		}
 		
@@ -131,8 +134,7 @@ namespace Applicasa {
 			if(javaUnityApplicasaFilter==null)
 				javaUnityApplicasaFilter = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaFilter");
 			AndroidJavaObject tempJavaObject=javaUnityApplicasaFilter.CallStatic<AndroidJavaObject>("ApplicasaFilterGetFilterBool", (int)field, field.ToString(), (int)op, val);
-			IntPtr tempIntPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-			Filter filter = new Filter(tempIntPtr, new AndroidJavaObject(tempIntPtr));
+			Filter filter = new Filter(tempJavaObject.GetRawObject(), tempJavaObject);
 			return filter;
 		}
 		
@@ -140,8 +142,7 @@ namespace Applicasa {
 			if(javaUnityApplicasaFilter==null)
 				javaUnityApplicasaFilter = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaFilter");
 			AndroidJavaObject tempJavaObject=javaUnityApplicasaFilter.CallStatic<AndroidJavaObject>("ApplicasaFilterGetFilterString", (int)field, field.ToString(), (int)op, val);
-			IntPtr tempIntPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-			Filter filter = new Filter(tempIntPtr, new AndroidJavaObject(tempIntPtr));
+			Filter filter = new Filter(tempJavaObject.GetRawObject(), tempJavaObject);
 			return filter;
 		}
 		
@@ -149,8 +150,7 @@ namespace Applicasa {
 			if(javaUnityApplicasaFilter==null)
 				javaUnityApplicasaFilter = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaFilter");
 			AndroidJavaObject tempJavaObject=javaUnityApplicasaFilter.CallStatic<AndroidJavaObject>("ApplicasaFilterGetFilterComplex", OperandA.innerFilterJavaObject, (int)op, OperandB.innerFilterJavaObject);
-			IntPtr tempIntPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-			Filter filter = new Filter(tempIntPtr, new AndroidJavaObject(tempIntPtr));
+			Filter filter = new Filter(tempJavaObject.GetRawObject(), tempJavaObject);
 			return filter;
 		}
 #else

@@ -60,7 +60,7 @@ typedef enum {
     GetProfileSettings,
     GetPromotions,
     UpdateProfileData,
-    GetTrialPayActions,
+    GetThirdPartyActions,
     
     //Social
     SendPush,
@@ -68,7 +68,9 @@ typedef enum {
     //Analitycs
     UpdateAnalytics,
     
-    GetServerTime
+    GetServerTime,
+    
+    CopyUserToLiveDatabase
     
 } Actions;
 

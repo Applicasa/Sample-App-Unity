@@ -42,6 +42,12 @@ namespace Applicasa {
 			ApplicasaRaiseCustomEvent(value);
 		}
 		
+		[DllImport("__Internal")]
+		private static extern void ApplicasaShowDemoCampaigns();
+		public static void ShowDemoCampaigns(){
+			ApplicasaShowDemoCampaigns();
+		}
+
 #elif UNITY_ANDROID&&!UNITY_EDITOR		
 		private static AndroidJavaClass javaUnityApplicasaPromotionManager;
 		
@@ -71,10 +77,14 @@ namespace Applicasa {
 				javaUnityApplicasaPromotionManager = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotionManager");
 			AndroidJavaObject promotionArrayJava=javaUnityApplicasaPromotionManager.CallStatic<AndroidJavaObject>("ApplicasaPromoGetAvailablePromosWithBlock");
 			
-			Promotion.PromotionArray promotionArray;
-			
-			promotionArray.ArraySize=promotionArrayJava.Call<int>("size");
+			Promotion.PromotionArray promotionArray = new Promotion.PromotionArray();
 			promotionArray.Array=promotionArrayJava.GetRawObject();
+			
+			AndroidJavaObject[] convertedArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(promotionArray.Array);
+			
+			
+			promotionArray.ArraySize=convertedArray.Length;
+			convertedArray = null;
 			
 			callback(true, new Error(), promotionArray);
 		}
@@ -96,7 +106,14 @@ namespace Applicasa {
 				javaUnityApplicasaPromotionManager = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotionManager");
 			javaUnityApplicasaPromotionManager.CallStatic("ApplicasaRaiseCustomEvent", value);
 		}
+		
+		public static void ShowDemoCampaigns(){
+			if(javaUnityApplicasaPromotionManager==null)
+				javaUnityApplicasaPromotionManager = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotionManager");
+			javaUnityApplicasaPromotionManager.CallStatic("ApplicasaShowDemoCampaigns");
+  }
 #else
+		
 		public static void SetLiKitPromotionDelegate(Promotion.PromotionsAvailable eventCallback) {
 			eventCallback(new Promotion.PromotionArray());		
 		}
@@ -116,6 +133,10 @@ namespace Applicasa {
 		}
 		
 		public static void RaiseCustomEvent(string value) {
+		}
+		
+		public static void ShowDemoCampaigns(){
+			
 		}
 #endif
 	}

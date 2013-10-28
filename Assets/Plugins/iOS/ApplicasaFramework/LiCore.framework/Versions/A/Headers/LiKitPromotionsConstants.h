@@ -37,7 +37,13 @@ typedef enum {
     LiPromotionResultGiveVirtualGood,
     LiPromotionResultDealVirtualCurrency,
     LiPromotionResultDealVirtualGood,
-    LiPromotionResultNothing
+    LiPromotionResultNothing,
+    LiPromotionResultTrialPay,
+    LiPromotionResultSupersonicAds,
+    LiPromotionResultSponsorPay,
+    LiPromotionResultAppnext,
+    LiPromotionResultMMedia,
+     LiPromotionResultChartboost
 } LiPromotionResult;
 
 typedef enum {
@@ -45,6 +51,12 @@ typedef enum {
     LiPromotionActionPressed,
     LiPromotionActionFailed
 }LiPromotionAction;
+
+typedef enum {
+    LiThirdPartyNone = 0,
+    LiThirdPartyRewardVirtualCurrency = 1,
+    LiThirdPartyRewardVirtualGood
+}LiThirdPartyReward;
 
 typedef enum {
     // App session events

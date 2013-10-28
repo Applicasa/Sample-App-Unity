@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocSetNodes version="1.0">
+    <TOC>
+        <Node type="folder">
+            <Name>SponsorPay iOS SDK</Name>
+            <Path>index.html</Path>
+			<Subnodes>
+                
+				
+				<Node type="folder">
+					<Name>Classes</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="1"/>
+						<NodeRef refid="2"/>
+						<NodeRef refid="3"/>
+						<NodeRef refid="4"/>
+						<NodeRef refid="5"/>
+						<NodeRef refid="6"/>
+						<NodeRef refid="7"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				
+				<Node type="folder">
+					<Name>Protocols</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="8"/>
+						<NodeRef refid="9"/>
+						<NodeRef refid="10"/>
+						
+					</Subnodes>
+				</Node>
+				
+			</Subnodes>
+        </Node>
+    </TOC>
+	<Library>
+		
+		<Node id="1">
+			<Name>FORCELOAD_</Name>
+			<Path>Classes/FORCELOAD_.html</Path>
+		</Node>
+		<Node id="2">
+			<Name>SPAdvertisementViewController</Name>
+			<Path>Classes/SPAdvertisementViewController.html</Path>
+		</Node>
+		<Node id="3">
+			<Name>SPAdvertiserManager</Name>
+			<Path>Classes/SPAdvertiserManager.html</Path>
+		</Node>
+		<Node id="4">
+			<Name>SPBrandEngageClient</Name>
+			<Path>Classes/SPBrandEngageClient.html</Path>
+		</Node>
+		<Node id="5">
+			<Name>SPOfferWallViewController</Name>
+			<Path>Classes/SPOfferWallViewController.html</Path>
+		</Node>
+		<Node id="6">
+			<Name>SPVirtualCurrencyServerConnector</Name>
+			<Path>Classes/SPVirtualCurrencyServerConnector.html</Path>
+		</Node>
+		<Node id="7">
+			<Name>SponsorPaySDK</Name>
+			<Path>Classes/SponsorPaySDK.html</Path>
+		</Node>
+		
+		
+		<Node id="8">
+			<Name>SPBrandEngageClientDelegate</Name>
+			<Path>Protocols/SPBrandEngageClientDelegate.html</Path>
+		</Node>
+		<Node id="9">
+			<Name>SPOfferWallViewControllerDelegate</Name>
+			<Path>Protocols/SPOfferWallViewControllerDelegate.html</Path>
+		</Node>
+		<Node id="10">
+			<Name>SPVirtualCurrencyConnectionDelegate</Name>
+			<Path>Protocols/SPVirtualCurrencyConnectionDelegate.html</Path>
+		</Node>
+		
+	</Library>
+</DocSetNodes>

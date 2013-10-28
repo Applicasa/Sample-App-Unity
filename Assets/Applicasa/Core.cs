@@ -131,6 +131,13 @@ namespace Applicasa {
 	    TEXT
 	}
 	
+	public enum TRIAL_PAY_KIND
+	{
+		NONE =0,
+		REWAR_VIRTUAL_CURRENCY,
+		REWAR_VIRTUAL_GOOD
+	}
+	
 	public enum Actions {
 	    RegisterAppDevice = 1,
 	    UpdateDevice,
@@ -207,6 +214,7 @@ namespace Applicasa {
 	UserMainCurrencyBalance,
 	UserSecondaryCurrencyBalance,
 	UserFacebookID,
+	UserTempDate,
 	//VirtualCurrency
 	VirtualCurrency_None,
 	VirtualCurrencyID,
@@ -239,31 +247,114 @@ namespace Applicasa {
 	VirtualGoodMainCurrency,
 	VirtualGoodSecondaryCurrency,
 	VirtualGoodRelatedVirtualGood,
-	VirtualGoodStoreItemPrice,
 	VirtualGoodIOSBundleMin,
 	VirtualGoodIOSBundleMax,
 	VirtualGoodAndroidBundleMin,
 	VirtualGoodAndroidBundleMax,
+	VirtualGoodStoreItemPrice,
 	VirtualGoodPos,
+	VirtualGoodQuantity,
 	VirtualGoodMaxForUser,
 	VirtualGoodUserInventory,
-	VirtualGoodQuantity,
 	VirtualGoodImageA,
 	VirtualGoodImageB,
 	VirtualGoodImageC,
+	VirtualGoodInAppleStore,
+	VirtualGoodInGoogleStore,
+	VirtualGoodIsStoreItem,
 	VirtualGoodMainCategory,
 	VirtualGoodIsDeal,
 	VirtualGoodConsumable,
-	VirtualGoodIsStoreItem,
-	VirtualGoodInAppleStore,
-	VirtualGoodInGoogleStore,
 	VirtualGoodLastUpdate,
 	//VirtualGoodCategory
 	VirtualGoodCategory_None,
 	VirtualGoodCategoryID,
 	VirtualGoodCategoryName,
 	VirtualGoodCategoryLastUpdate,
-	VirtualGoodCategoryPos
+	VirtualGoodCategoryPos,
+	//Dynamic
+	Dynamic_None,
+	DynamicID,
+	DynamicLastUpdate,
+	DynamicText,
+	DynamicNumber,
+	DynamicReal,
+	DynamicDate,
+	DynamicBool,
+	DynamicHtml,
+	DynamicImage,
+	//Chat
+	Chat_None,
+	ChatID,
+	ChatLastUpdate,
+	ChatIsSender,
+	ChatSender,
+	ChatText,
+	ChatReciepent,
+	ChatGhjgjgj,
+	//Achievments
+	Achievments_None,
+	AchievmentsID,
+	AchievmentsLastUpdate,
+	AchievmentsPoints,
+	AchievmentsDes,
+	//Foo
+	Foo_None,
+	FooID,
+	FooLastUpdate,
+	FooName,
+	FooDescription,
+	FooBoolean,
+	FooDate,
+	FooImage,
+	FooFile,
+	FooOwner,
+	FooLocation,
+	FooNumber,
+	FooAge,
+	//GameV
+	GameV_None,
+	GameVID,
+	GameVLastUpdate,
+	GameVValue,
+	GameVFunction,
+	//DataManager
+	DataManager_None,
+	DataManagerID,
+	DataManagerLastUpdate,
+	DataManagerAaa,
+	DataManagerName,
+	//DataManString
+	DataManString_None,
+	DataManStringID,
+	DataManStringLastUpdate,
+	DataManStringKey,
+	DataManStringValue,
+	//ScoreB
+	ScoreB_None,
+	ScoreBID,
+	ScoreBLastUpdate,
+	ScoreBScore,
+	ScoreBUser,
+	//Levels
+	Levels_None,
+	LevelsID,
+	LevelsLastUpdate,
+	LevelsGtgtg,
+	LevelsHTML,
+	LevelsTgtggtg,
+	//Colors
+	Colors_None,
+	ColorsID,
+	ColorsLastUpdate,
+	ColorsNumber,
+	ColorsColor,
+	//Languages
+	Languages_None,
+	LanguagesID,
+	LanguagesLastUpdate,
+	LanguagesText,
+	LanguagesLanguageName
 }
 
 
@@ -379,6 +470,24 @@ namespace Applicasa {
 #endif
 	}
 	
+#if UNITY_ANDROID
+	public enum OPERATORS{
+	     Equal      = 0          // =
+	    ,GreaterThan        // >
+	    ,LessThan             // <
+	    ,GreaterThanOrEqualTo // >=
+	    ,LessThanOrEqualTo    // <=
+	    ,Like                 // %foo%
+	    ,NotEqual
+	}
+	
+	public enum COMPLEX_OPERATORS{
+	    None =0
+	    ,AND
+	    ,OR 
+	    ,IN
+	}
+#else
 	public enum OPERATORS{
 	    GreaterThan = 0       // >
 	    ,LessThan             // <
@@ -393,6 +502,7 @@ namespace Applicasa {
 	    ,OR 
 	    ,NOT
 	}
+#endif
 	
 	public enum Currency {
     	MainCurrency = 1,
@@ -424,7 +534,11 @@ namespace Applicasa {
 		 OfferDealVC, // data = VC id & deal details
 		 OfferDealVG, // data = VG id & deal details
 		 Chartboost,
-		 TrialPay
+		 TrialPay,
+		 MMedia,
+		 SponsorPay,
+		 SupersonicAds,
+		 Appnext
 	 }
 	 
 	 public enum PromotionResult {
@@ -436,7 +550,15 @@ namespace Applicasa {
 		 GiveVirtualGood,
 		 DealVirtualCurrency,
 		 DealVirtualGood,
-		 Nothing
+		 Nothing,
+		 TrialPay,
+		 SupernonicAds,
+		 SponsorPay,
+		 Appnext,
+		 MMedia,
+		 Chartboost
+		 
+		 
 #else
 		 LinkOpened = 0,
 		 StringInfo,
@@ -445,7 +567,13 @@ namespace Applicasa {
 		 GiveVirtualGood,
 		 DealVirtualCurrency,
 		 DealVirtualGood,
-		 Nothing
+		 Nothing,
+		 TrialPay = 9,
+		 SupersonicAds,
+		 SponsorPay,
+		 Appnext,
+		 MMedia,
+		 Chartboost
 #endif
 	 }
 	  

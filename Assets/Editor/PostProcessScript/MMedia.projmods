@@ -1,0 +1,14 @@
+{
+    "group": "MMedia",
+    "libs": [],
+    "frameworks": ["AudioToolbox.framework","MediaPlayer.framework","MobileCoreServices.framework","PassKit.framework","CoreLocation.framework",
+	"CoreGraphics.framework","CFNetwork.framework","AVFoundation.framework"],
+    "headerpaths": [],
+	"librarysearchpaths": [],
+    "frameworksearchpaths": [],
+    "files":   ["/Plugins/iOS/ApplicasaFramework/AdNetworks/MMedia/LiMMedia.framework",
+				"/Plugins/iOS/ApplicasaFramework/AdNetworks/MMedia/SpeechKit.framework"],
+    "folders": ["/Plugins/iOS/ApplicasaFramework/AdNetworks/MMedia/MMediaSDK/"],
+    "excludes": ["^.*.meta$", "^.*.mdown$", "^.*.pdf$"],
+    "linker_flags": []
+}

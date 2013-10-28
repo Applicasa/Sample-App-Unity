@@ -1,0 +1,10 @@
+<!-- AddActivities -->
+
+<activity android:name="com.millennialmedia.android.MMActivity"
+   android:configChanges="keyboardHidden|orientation|keyboard"
+   android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+  
+<activity android:name="com.applicasa.MMedia.LiMMediaActivity"
+   android:configChanges="keyboardHidden|orientation|keyboard"
+   android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+   

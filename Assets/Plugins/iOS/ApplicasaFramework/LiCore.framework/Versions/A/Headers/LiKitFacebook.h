@@ -21,7 +21,9 @@
 
 + (void) loginWithFacebookWithUser:(User *)User Delegate:(id <LiKitFacebookDelegate>)delegate;
 + (void) findFacebookFriendsWithDelegate:(id <LiKitFacebookDelegate>)delegate;
-+ (void) setPermissions:(NSArray *)permissions AllowLoginUI:(BOOL)allowLoginUI;// Publish:(BOOL)publish;
++ (void) setPermissions:(NSArray *)permissions AllowLoginUI:(BOOL)allowLoginUI DEPRECATED_ATTRIBUTE;// Publish:(BOOL)publish;
+
++ (void) setPermissions:(NSArray *)permissions AllowLoginUI:(BOOL)allowLoginUI Publish:(BOOL)publish;
 
 
 + (void) logOut;

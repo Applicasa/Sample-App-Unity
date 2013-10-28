@@ -1,0 +1,1057 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>SPBrandEngageClient Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 858)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">SponsorPay iOS SDK </a></h1>
+				<a id="developerHome" href="../index.html">SponsorPay</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">SPBrandEngageClient Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/appId">&nbsp;&nbsp;&nbsp;&nbsp;appId</option>
+	
+	<option value="//api/name/currencyName">&nbsp;&nbsp;&nbsp;&nbsp;currencyName</option>
+	
+	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
+	
+	<option value="//api/name/shouldShowRewardNotificationOnEngagementCompleted">&nbsp;&nbsp;&nbsp;&nbsp;shouldShowRewardNotificationOnEngagementCompleted</option>
+	
+	<option value="//api/name/userId">&nbsp;&nbsp;&nbsp;&nbsp;userId</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/canChangePublisherParameters">&nbsp;&nbsp;&nbsp;&nbsp;- canChangePublisherParameters</option>
+	
+	<option value="//api/name/canRequestOffers">&nbsp;&nbsp;&nbsp;&nbsp;- canRequestOffers</option>
+	
+	<option value="//api/name/canStartOffers">&nbsp;&nbsp;&nbsp;&nbsp;- canStartOffers</option>
+	
+	<option value="//api/name/requestOffers">&nbsp;&nbsp;&nbsp;&nbsp;- requestOffers</option>
+	
+	<option value="//api/name/setCustomParamWithKey:value:">&nbsp;&nbsp;&nbsp;&nbsp;- setCustomParamWithKey:value:</option>
+	
+	<option value="//api/name/startWithParentViewController:">&nbsp;&nbsp;&nbsp;&nbsp;- startWithParentViewController:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Receiving asynchronous callbacks">Receiving asynchronous callbacks</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Controlling notifications to the user">Controlling notifications to the user</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Requesting offers">Requesting offers</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Running offers">Running offers</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Determining if it is safe to modify parameters">Determining if it is safe to modify parameters</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Setting arbitrary custom parameters">Setting arbitrary custom parameters</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/appId">appId</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/currencyName">currencyName</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/shouldShowRewardNotificationOnEngagementCompleted">shouldShowRewardNotificationOnEngagementCompleted</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/userId">userId</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/canChangePublisherParameters">canChangePublisherParameters</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/canRequestOffers">canRequestOffers</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/canStartOffers">canStartOffers</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestOffers">requestOffers</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setCustomParamWithKey:value:">setCustomParamWithKey:value:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startWithParentViewController:">startWithParentViewController:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="SPBrandEngageClient Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">SPBrandEngageClient Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">SPBrandEngageClient.h<br />SPBrandEngageClient.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Provides methods to request and show BrandEngage offers, notifies its <a href="#//api/name/delegate">delegate</a> of the availability of offers and of changes in the status of the engagement.</p>
+
+<p>Before requesting offers, make sure of having set your app ID, current user ID and currency name, as well as one of your objects as the <a href="#//api/name/delegate">delegate</a>. At this point you can determine if offers are available with <a href="#//api/name/requestOffers">requestOffers</a>. If your <a href="#//api/name/delegate">delegate</a> is notified that offers are available, run them by invoking <a href="#//api/name/startWithParentViewController:">startWithParentViewController:</a>, and your <a href="#//api/name/delegate">delegate</a> will be notified when the engagement has closed. When the engagement is over you must restart the process, querying if offers are available, before you run any engagement again.</p>
+
+<p>To check for new virtual coins earned by the user, given you&rsquo;ve set your VCS key, use <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a>.</p><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> Offer availability (<a href="#//api/name/requestOffers">requestOffers</a>) cannot be requested while an engagement is running. Call <a href="#//api/name/canRequestOffers">canRequestOffers</a> if you&rsquo;re not sure that this instance is in a state in which a request for offers is possible.</p></blockquote>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/appId">&nbsp;&nbsp;appId</a></code>
+		<span class="tooltip"><p>Your SponsorPay application ID.<br/>
+This is the app ID assigned to you by SponsorPay.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/userId">&nbsp;&nbsp;userId</a></code>
+		<span class="tooltip"><p>ID of the current user of your application.<br/>
+This string must uniquely identify the current user to the BrandEngage and virtual currency server systems.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/currencyName">&nbsp;&nbsp;currencyName</a></code>
+		<span class="tooltip"><p>Name of your virtual currency.<br/>
+This is a human readable, descriptive name of your virtual currency.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Receiving asynchronous callbacks" name="task_Receiving asynchronous callbacks"></a>
+						<h3 class="subsubtitle task-title">Receiving asynchronous callbacks</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>Instance of one of your classes implementing the <a href="../Protocols/SPBrandEngageClientDelegate.html">SPBrandEngageClientDelegate</a> protocol, which will be notified of offers availability and engagement status.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Controlling notifications to the user" name="task_Controlling notifications to the user"></a>
+						<h3 class="subsubtitle task-title">Controlling notifications to the user</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/shouldShowRewardNotificationOnEngagementCompleted">&nbsp;&nbsp;shouldShowRewardNotificationOnEngagementCompleted</a></code>
+		<span class="tooltip"><p>Whether the SDK should show a toast-like notification to the user when they come back to your application after completing an engagement.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Requesting offers" name="task_Requesting offers"></a>
+						<h3 class="subsubtitle task-title">Requesting offers</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/canRequestOffers">&ndash;&nbsp;canRequestOffers</a></code>
+		<span class="tooltip"><p>Returns whether this instance is in a state in which it&rsquo;s possible to query the server for offers availability.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestOffers">&ndash;&nbsp;requestOffers</a></code>
+		<span class="tooltip"><p>Queries the server for BrandEngage offers availability.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Running offers" name="task_Running offers"></a>
+						<h3 class="subsubtitle task-title">Running offers</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/canStartOffers">&ndash;&nbsp;canStartOffers</a></code>
+		<span class="tooltip"><p>Returns whether this instance is in a state in which it&rsquo;s possible to start running an engagement.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/startWithParentViewController:">&ndash;&nbsp;startWithParentViewController:</a></code>
+		<span class="tooltip"><p>Starts running an available engagement.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Determining if it is safe to modify parameters" name="task_Determining if it is safe to modify parameters"></a>
+						<h3 class="subsubtitle task-title">Determining if it is safe to modify parameters</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/canChangePublisherParameters">&ndash;&nbsp;canChangePublisherParameters</a></code>
+		<span class="tooltip"><p>Determines whether it is possible to add or modify, at the point of invocation, this instance&rsquo;s custom parameters specified with <a href="#//api/name/setCustomParamWithKey:value:">setCustomParamWithKey:value:</a></p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Setting arbitrary custom parameters" name="task_Setting arbitrary custom parameters"></a>
+						<h3 class="subsubtitle task-title">Setting arbitrary custom parameters</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setCustomParamWithKey:value:">&ndash;&nbsp;setCustomParamWithKey:value:</a></code>
+		<span class="tooltip"><p>Sets a custom key and value to be sent to the server on the next request for offers availability.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/appId" title="appId"></a>
+	<h3 class="subsubtitle method-title">appId</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Your SponsorPay application ID.<br/>
+This is the app ID assigned to you by SponsorPay.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly, retain, nonatomic) NSString *appId</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Your SponsorPay application ID.<br/>
+This is the app ID assigned to you by SponsorPay.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/SponsorPaySDK.html">SponsorPaySDK</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/currencyName" title="currencyName"></a>
+	<h3 class="subsubtitle method-title">currencyName</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Name of your virtual currency.<br/>
+This is a human readable, descriptive name of your virtual currency.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly, retain, nonatomic) NSString *currencyName</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Name of your virtual currency.<br/>
+This is a human readable, descriptive name of your virtual currency.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/SponsorPaySDK.html">SponsorPaySDK</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Instance of one of your classes implementing the <a href="../Protocols/SPBrandEngageClientDelegate.html">SPBrandEngageClientDelegate</a> protocol, which will be notified of offers availability and engagement status.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (assign) id&lt;SPBrandEngageClientDelegate&gt; delegate</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Instance of one of your classes implementing the <a href="../Protocols/SPBrandEngageClientDelegate.html">SPBrandEngageClientDelegate</a> protocol, which will be notified of offers availability and engagement status.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Protocols/SPBrandEngageClientDelegate.html">SPBrandEngageClientDelegate</a>.</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/shouldShowRewardNotificationOnEngagementCompleted" title="shouldShowRewardNotificationOnEngagementCompleted"></a>
+	<h3 class="subsubtitle method-title">shouldShowRewardNotificationOnEngagementCompleted</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether the SDK should show a toast-like notification to the user when they come back to your application after completing an engagement.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (assign) BOOL shouldShowRewardNotificationOnEngagementCompleted</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether the SDK should show a toast-like notification to the user when they come back to your application after completing an engagement.</p>
+
+<p>An example notification would be &ldquo;Thanks! Your reward will be payed out shortly&rdquo;.</p>
+
+<p>Default value is YES.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/userId" title="userId"></a>
+	<h3 class="subsubtitle method-title">userId</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>ID of the current user of your application.<br/>
+This string must uniquely identify the current user to the BrandEngage and virtual currency server systems.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly, retain, nonatomic) NSString *userId</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>ID of the current user of your application.<br/>
+This string must uniquely identify the current user to the BrandEngage and virtual currency server systems.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Classes/SponsorPaySDK.html">SponsorPaySDK</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/canChangePublisherParameters" title="canChangePublisherParameters"></a>
+	<h3 class="subsubtitle method-title">canChangePublisherParameters</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines whether it is possible to add or modify, at the point of invocation, this instance&rsquo;s custom parameters specified with <a href="#//api/name/setCustomParamWithKey:value:">setCustomParamWithKey:value:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)canChangePublisherParameters</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the properties can be modified at this point, NO otherwise.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines whether it is possible to add or modify, at the point of invocation, this instance&rsquo;s custom parameters specified with <a href="#//api/name/setCustomParamWithKey:value:">setCustomParamWithKey:value:</a></p>
+
+<p>These publisher parameters cannot be added or modified while the server is being queried or an engagement is running. In these cases a call to <a href="#//api/name/setCustomParamWithKey:value:">setCustomParamWithKey:value:</a> will have no effect.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/canRequestOffers" title="canRequestOffers"></a>
+	<h3 class="subsubtitle method-title">canRequestOffers</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns whether this instance is in a state in which it&rsquo;s possible to query the server for offers availability.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)canRequestOffers</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if a request for offers can be currently initiated, NO otherwise. If NO is returned, a call to <a href="#//api/name/requestOffers">requestOffers</a> will notify your <a href="#//api/name/delegate">delegate</a> of an error.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns whether this instance is in a state in which it&rsquo;s possible to query the server for offers availability.</p>
+
+<p>Offer availability cannot be requested while an engagement is running or the server is currently being queried. Call this method if you&rsquo;re not sure that if this instance is in a state in which a request for offers is possible.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/canStartOffers" title="canStartOffers"></a>
+	<h3 class="subsubtitle method-title">canStartOffers</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns whether this instance is in a state in which it&rsquo;s possible to start running an engagement.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)canStartOffers</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if an engagement can be initiated, NO otherwise.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns whether this instance is in a state in which it&rsquo;s possible to start running an engagement.</p>
+
+<p>Most of the time you won&rsquo;t have to call this method, but if you&rsquo;ve lost track of whether this instance can start showing an engagement, this will let you know.</p>
+
+<p>An engagement or offer cannot be started while another one is active, while the server is being queried, or after another engagement has closed if new offers have not been requested with <a href="#//api/name/requestOffers">requestOffers</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/startWithParentViewController:">- startWithParentViewController:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/requestOffers" title="requestOffers"></a>
+	<h3 class="subsubtitle method-title">requestOffers</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Queries the server for BrandEngage offers availability.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)requestOffers</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if a request for offers was initiated, NO if the request cannot be initiated. If NO is returned, this call had no effect and you need to invoke this method again when a request for offers is possible.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Queries the server for BrandEngage offers availability.</p>
+
+<p>Before you start running an engagement, you must call requestOffers and wait until your code is notified that offers are indeed available.</p>
+
+<p>The answer to the request will be delivered asynchronously to your code via the registered <a href="../Protocols/SPBrandEngageClientDelegate.html">SPBrandEngageClientDelegate</a>.</p>
+
+<p>Offer availability cannot be requested while an engagement is running or the server is currently being queried. Call <a href="#//api/name/canRequestOffers">canRequestOffers</a> if you&rsquo;re not sure that this instance is in a state in which a request for offers is possible.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/canRequestOffers">- canRequestOffers</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setCustomParamWithKey:value:" title="setCustomParamWithKey:value:"></a>
+	<h3 class="subsubtitle method-title">setCustomParamWithKey:value:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets a custom key and value to be sent to the server on the next request for offers availability.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)setCustomParamWithKey:(NSString *)<em>key</em> value:(NSString *)<em>value</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>key</em></dt>
+			<dd><p>Arbitrary key name for the custom param to set.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>value</em></dt>
+			<dd><p>Arbitrary value string for the custom param to set.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the parameter was set, NO otherwise.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Sets a custom key and value to be sent to the server on the next request for offers availability.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/canChangePublisherParameters">- canChangePublisherParameters</a>.</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/startWithParentViewController:" title="startWithParentViewController:"></a>
+	<h3 class="subsubtitle method-title">startWithParentViewController:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Starts running an available engagement.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)startWithParentViewController:(UIViewController *)<em>parentViewController</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>parentViewController</em></dt>
+			<dd><p>Your own view controller which will act as presenting or parent view controller for the engagement player.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the engagement will start, NO otherwise.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Starts running an available engagement.</p>
+
+<p>The engagement player will take over the screen while the engagement is running. Its view controller will be shown as a modal child of your own view controller.</p>
+
+<p>If the offer cannot be run (because <a href="#//api/name/requestOffers">requestOffers</a> wasn&rsquo;t previously called or it didn&rsquo;t report available offers) this call will return NO.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SPBrandEngageClient.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 SponsorPay. All rights reserved. (Last updated: 2013-08-01)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

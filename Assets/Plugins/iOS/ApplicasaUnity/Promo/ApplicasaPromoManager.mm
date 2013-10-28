@@ -2,6 +2,11 @@
 #import "ApplicasaPromotionDelegator.h"
 #import "LiPromo.h"
 
+#import "LiManager.h"
+#if(ENABLE_SUPERSONICADS)
+#import <LiSupersonicAds/LiSupersonicAdsManager.h>
+#endif
+
 extern "C" {
  
 
@@ -30,6 +35,13 @@ void ApplicasaPromoDismissAllPromotion() {
     
 void ApplicasaRaiseCustomEvent( const char * value) {
     [LiPromo raiseCustomEventByName:CharPointerToNSString(value)];
+}
+
+void ApplicasaShowDemoCampaigns()
+{
+    #if(ENABLE_SUPERSONICADS)
+    [[LiSupersonicAdsManager setShowDemoCampaign ];
+    #endif
 }
 
 }

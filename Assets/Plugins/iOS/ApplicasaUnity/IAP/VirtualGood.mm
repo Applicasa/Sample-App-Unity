@@ -1,7 +1,7 @@
 //
 // VirtualGood.mm
 // Created by Applicasa 
-// 6/24/2013
+// 10/24/2013
 //
 
 //
@@ -66,12 +66,6 @@ const char* ApplicasaVirtualGoodGetVirtualGoodRelatedVirtualGood(VirtualGood* vi
 void ApplicasaVirtualGoodSetVirtualGoodRelatedVirtualGood(VirtualGood* virtualGood, const char * virtualGoodRelatedVirtualGood) {
 	virtualGood.virtualGoodRelatedVirtualGood = CharPointerToNSString(virtualGoodRelatedVirtualGood);
 }
-const float ApplicasaVirtualGoodGetVirtualGoodStoreItemPrice(VirtualGood* virtualGood) {
-	return virtualGood.virtualGoodStoreItemPrice;
-}
-void ApplicasaVirtualGoodSetVirtualGoodStoreItemPrice(VirtualGood* virtualGood, float virtualGoodStoreItemPrice) {
-	virtualGood.virtualGoodStoreItemPrice = virtualGoodStoreItemPrice;
-}
 const float ApplicasaVirtualGoodGetVirtualGoodIOSBundleMin(VirtualGood* virtualGood) {
 	return virtualGood.virtualGoodIOSBundleMin;
 }
@@ -96,8 +90,20 @@ const float ApplicasaVirtualGoodGetVirtualGoodAndroidBundleMax(VirtualGood* virt
 void ApplicasaVirtualGoodSetVirtualGoodAndroidBundleMax(VirtualGood* virtualGood, float virtualGoodAndroidBundleMax) {
 	virtualGood.virtualGoodAndroidBundleMax = virtualGoodAndroidBundleMax;
 }
+const float ApplicasaVirtualGoodGetVirtualGoodStoreItemPrice(VirtualGood* virtualGood) {
+	return virtualGood.virtualGoodStoreItemPrice;
+}
+void ApplicasaVirtualGoodSetVirtualGoodStoreItemPrice(VirtualGood* virtualGood, float virtualGoodStoreItemPrice) {
+	virtualGood.virtualGoodStoreItemPrice = virtualGoodStoreItemPrice;
+}
 const int ApplicasaVirtualGoodGetVirtualGoodPos(VirtualGood* virtualGood) {
 	return virtualGood.virtualGoodPos;
+}
+const int ApplicasaVirtualGoodGetVirtualGoodQuantity(VirtualGood* virtualGood) {
+	return virtualGood.virtualGoodQuantity;
+}
+void ApplicasaVirtualGoodSetVirtualGoodQuantity(VirtualGood* virtualGood,int virtualGoodQuantity) {
+	virtualGood.virtualGoodQuantity = virtualGoodQuantity;
 }
 const int ApplicasaVirtualGoodGetVirtualGoodMaxForUser(VirtualGood* virtualGood) {
 	return virtualGood.virtualGoodMaxForUser;
@@ -111,29 +117,41 @@ const int ApplicasaVirtualGoodGetVirtualGoodUserInventory(VirtualGood* virtualGo
 void ApplicasaVirtualGoodSetVirtualGoodUserInventory(VirtualGood* virtualGood,int virtualGoodUserInventory) {
 	virtualGood.virtualGoodUserInventory = virtualGoodUserInventory;
 }
-const int ApplicasaVirtualGoodGetVirtualGoodQuantity(VirtualGood* virtualGood) {
-	return virtualGood.virtualGoodQuantity;
-}
-void ApplicasaVirtualGoodSetVirtualGoodQuantity(VirtualGood* virtualGood,int virtualGoodQuantity) {
-	virtualGood.virtualGoodQuantity = virtualGoodQuantity;
-}
 const char* ApplicasaVirtualGoodGetVirtualGoodImageA(VirtualGood* virtualGood) {
 	return NSStringToCharPointer([virtualGood.virtualGoodImageA absoluteString]);
 }
 void ApplicasaVirtualGoodSetVirtualGoodImageA(VirtualGood* virtualGood,const char* url) {
-	virtualGood.virtualGoodImageA = CharPointerToNSString(url);
+	virtualGood.virtualGoodImageA = [NSURL URLWithString:CharPointerToNSString(url)];
 }
 const char* ApplicasaVirtualGoodGetVirtualGoodImageB(VirtualGood* virtualGood) {
 	return NSStringToCharPointer([virtualGood.virtualGoodImageB absoluteString]);
 }
 void ApplicasaVirtualGoodSetVirtualGoodImageB(VirtualGood* virtualGood,const char* url) {
-	virtualGood.virtualGoodImageB = CharPointerToNSString(url);
+	virtualGood.virtualGoodImageB = [NSURL URLWithString:CharPointerToNSString(url)];
 }
 const char* ApplicasaVirtualGoodGetVirtualGoodImageC(VirtualGood* virtualGood) {
 	return NSStringToCharPointer([virtualGood.virtualGoodImageC absoluteString]);
 }
 void ApplicasaVirtualGoodSetVirtualGoodImageC(VirtualGood* virtualGood,const char* url) {
-	virtualGood.virtualGoodImageC = CharPointerToNSString(url);
+	virtualGood.virtualGoodImageC = [NSURL URLWithString:CharPointerToNSString(url)];
+}
+const bool ApplicasaVirtualGoodGetVirtualGoodInAppleStore(VirtualGood* virtualGood) {
+	return virtualGood.virtualGoodInAppleStore;
+}
+void ApplicasaVirtualGoodSetVirtualGoodInAppleStore(VirtualGood* virtualGood,bool virtualGoodInAppleStore) {
+	 virtualGood.virtualGoodInAppleStore=virtualGoodInAppleStore;
+}
+const bool ApplicasaVirtualGoodGetVirtualGoodInGoogleStore(VirtualGood* virtualGood) {
+	return virtualGood.virtualGoodInGoogleStore;
+}
+void ApplicasaVirtualGoodSetVirtualGoodInGoogleStore(VirtualGood* virtualGood,bool virtualGoodInGoogleStore) {
+	 virtualGood.virtualGoodInGoogleStore=virtualGoodInGoogleStore;
+}
+const bool ApplicasaVirtualGoodGetVirtualGoodIsStoreItem(VirtualGood* virtualGood) {
+	return virtualGood.virtualGoodIsStoreItem;
+}
+void ApplicasaVirtualGoodSetVirtualGoodIsStoreItem(VirtualGood* virtualGood,bool virtualGoodIsStoreItem) {
+	 virtualGood.virtualGoodIsStoreItem=virtualGoodIsStoreItem;
 }
 VirtualGoodCategory* ApplicasaVirtualGoodGetVirtualGoodMainCategory(VirtualGood* virtualGood) {
 	return virtualGood.virtualGoodMainCategory;
@@ -153,24 +171,6 @@ const bool ApplicasaVirtualGoodGetVirtualGoodConsumable(VirtualGood* virtualGood
 }
 void ApplicasaVirtualGoodSetVirtualGoodConsumable(VirtualGood* virtualGood,bool virtualGoodConsumable) {
 	 virtualGood.virtualGoodConsumable=virtualGoodConsumable;
-}
-const bool ApplicasaVirtualGoodGetVirtualGoodIsStoreItem(VirtualGood* virtualGood) {
-	return virtualGood.virtualGoodIsStoreItem;
-}
-void ApplicasaVirtualGoodSetVirtualGoodIsStoreItem(VirtualGood* virtualGood,bool virtualGoodIsStoreItem) {
-	 virtualGood.virtualGoodIsStoreItem=virtualGoodIsStoreItem;
-}
-const bool ApplicasaVirtualGoodGetVirtualGoodInAppleStore(VirtualGood* virtualGood) {
-	return virtualGood.virtualGoodInAppleStore;
-}
-void ApplicasaVirtualGoodSetVirtualGoodInAppleStore(VirtualGood* virtualGood,bool virtualGoodInAppleStore) {
-	 virtualGood.virtualGoodInAppleStore=virtualGoodInAppleStore;
-}
-const bool ApplicasaVirtualGoodGetVirtualGoodInGoogleStore(VirtualGood* virtualGood) {
-	return virtualGood.virtualGoodInGoogleStore;
-}
-void ApplicasaVirtualGoodSetVirtualGoodInGoogleStore(VirtualGood* virtualGood,bool virtualGoodInGoogleStore) {
-	 virtualGood.virtualGoodInGoogleStore=virtualGoodInGoogleStore;
 }
 const double ApplicasaVirtualGoodGetVirtualGoodLastUpdate(VirtualGood* virtualGood) {
 	return ((double)virtualGood.virtualGoodLastUpdate.timeIntervalSince1970);

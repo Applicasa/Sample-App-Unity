@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SPBrandEngageClient.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SPBrandEngageClient</TokenIdentifier>
+			<Abstract type="html">Provides methods to request and show BrandEngage offers, notifies its delegate of the availability of offers and of changes in the status of the engagement.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/setAppId:</TokenIdentifier>
+			<Abstract type="html">Your SponsorPay application ID.
+This is the app ID assigned to you by SponsorPay.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (readonly, retain, nonatomic) NSString *appId</Declaration>
+			
+			
+			<Anchor>//api/name/appId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/appId</TokenIdentifier>
+			<Abstract type="html">Your SponsorPay application ID.
+This is the app ID assigned to you by SponsorPay.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (readonly, retain, nonatomic) NSString *appId</Declaration>
+			
+			
+			<Anchor>//api/name/appId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPBrandEngageClient/appId</TokenIdentifier>
+			<Abstract type="html">Your SponsorPay application ID.
+This is the app ID assigned to you by SponsorPay.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (readonly, retain, nonatomic) NSString *appId</Declaration>
+			
+			
+			<Anchor>//api/name/appId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/setUserId:</TokenIdentifier>
+			<Abstract type="html">ID of the current user of your application.
+This string must uniquely identify the current user to the BrandEngage and virtual currency server systems.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (readonly, retain, nonatomic) NSString *userId</Declaration>
+			
+			
+			<Anchor>//api/name/userId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/userId</TokenIdentifier>
+			<Abstract type="html">ID of the current user of your application.
+This string must uniquely identify the current user to the BrandEngage and virtual currency server systems.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (readonly, retain, nonatomic) NSString *userId</Declaration>
+			
+			
+			<Anchor>//api/name/userId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPBrandEngageClient/userId</TokenIdentifier>
+			<Abstract type="html">ID of the current user of your application.
+This string must uniquely identify the current user to the BrandEngage and virtual currency server systems.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (readonly, retain, nonatomic) NSString *userId</Declaration>
+			
+			
+			<Anchor>//api/name/userId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/setCurrencyName:</TokenIdentifier>
+			<Abstract type="html">Name of your virtual currency.
+This is a human readable, descriptive name of your virtual currency.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (readonly, retain, nonatomic) NSString *currencyName</Declaration>
+			
+			
+			<Anchor>//api/name/currencyName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/currencyName</TokenIdentifier>
+			<Abstract type="html">Name of your virtual currency.
+This is a human readable, descriptive name of your virtual currency.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (readonly, retain, nonatomic) NSString *currencyName</Declaration>
+			
+			
+			<Anchor>//api/name/currencyName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPBrandEngageClient/currencyName</TokenIdentifier>
+			<Abstract type="html">Name of your virtual currency.
+This is a human readable, descriptive name of your virtual currency.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (readonly, retain, nonatomic) NSString *currencyName</Declaration>
+			
+			
+			<Anchor>//api/name/currencyName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/setDelegate:</TokenIdentifier>
+			<Abstract type="html">Instance of one of your classes implementing the SPBrandEngageClientDelegate protocol, which will be notified of offers availability and engagement status.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/SPBrandEngageClientDelegate</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (assign) id&lt;SPBrandEngageClientDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/delegate</TokenIdentifier>
+			<Abstract type="html">Instance of one of your classes implementing the SPBrandEngageClientDelegate protocol, which will be notified of offers availability and engagement status.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/SPBrandEngageClientDelegate</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (assign) id&lt;SPBrandEngageClientDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPBrandEngageClient/delegate</TokenIdentifier>
+			<Abstract type="html">Instance of one of your classes implementing the SPBrandEngageClientDelegate protocol, which will be notified of offers availability and engagement status.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/SPBrandEngageClientDelegate</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (assign) id&lt;SPBrandEngageClientDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/setShouldShowRewardNotificationOnEngagementCompleted:</TokenIdentifier>
+			<Abstract type="html">Whether the SDK should show a toast-like notification to the user when they come back to your application after completing an engagement.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+			<Declaration>@property (assign) BOOL shouldShowRewardNotificationOnEngagementCompleted</Declaration>
+			
+			
+			<Anchor>//api/name/shouldShowRewardNotificationOnEngagementCompleted</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/shouldShowRewardNotificationOnEngagementCompleted</TokenIdentifier>
+			<Abstract type="html">Whether the SDK should show a toast-like notification to the user when they come back to your application after completing an engagement.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+			<Declaration>@property (assign) BOOL shouldShowRewardNotificationOnEngagementCompleted</Declaration>
+			
+			
+			<Anchor>//api/name/shouldShowRewardNotificationOnEngagementCompleted</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPBrandEngageClient/shouldShowRewardNotificationOnEngagementCompleted</TokenIdentifier>
+			<Abstract type="html">Whether the SDK should show a toast-like notification to the user when they come back to your application after completing an engagement.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+			<Declaration>@property (assign) BOOL shouldShowRewardNotificationOnEngagementCompleted</Declaration>
+			
+			
+			<Anchor>//api/name/shouldShowRewardNotificationOnEngagementCompleted</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/canRequestOffers</TokenIdentifier>
+			<Abstract type="html">Returns whether this instance is in a state in which it&apos;s possible to query the server for offers availability.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)canRequestOffers</Declaration>
+			
+			<ReturnValue><Abstract type="html">YES if a request for offers can be currently initiated, NO otherwise. If NO is returned, a call to requestOffers will notify your delegate of an error.</Abstract></ReturnValue>
+			<Anchor>//api/name/canRequestOffers</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/requestOffers</TokenIdentifier>
+			<Abstract type="html">Queries the server for BrandEngage offers availability.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/canRequestOffers</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (BOOL)requestOffers</Declaration>
+			
+			<ReturnValue><Abstract type="html">YES if a request for offers was initiated, NO if the request cannot be initiated. If NO is returned, this call had no effect and you need to invoke this method again when a request for offers is possible.</Abstract></ReturnValue>
+			<Anchor>//api/name/requestOffers</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/canStartOffers</TokenIdentifier>
+			<Abstract type="html">Returns whether this instance is in a state in which it&apos;s possible to start running an engagement.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/startWithParentViewController:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (BOOL)canStartOffers</Declaration>
+			
+			<ReturnValue><Abstract type="html">YES if an engagement can be initiated, NO otherwise.</Abstract></ReturnValue>
+			<Anchor>//api/name/canStartOffers</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/startWithParentViewController:</TokenIdentifier>
+			<Abstract type="html">Starts running an available engagement.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)startWithParentViewController:(UIViewController *)parentViewController</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>parentViewController</Name>
+					<Abstract type="html">Your own view controller which will act as presenting or parent view controller for the engagement player.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">YES if the engagement will start, NO otherwise.</Abstract></ReturnValue>
+			<Anchor>//api/name/startWithParentViewController:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/canChangePublisherParameters</TokenIdentifier>
+			<Abstract type="html">Determines whether it is possible to add or modify, at the point of invocation, this instance&apos;s custom parameters specified with setCustomParamWithKey:value:</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)canChangePublisherParameters</Declaration>
+			
+			<ReturnValue><Abstract type="html">YES if the properties can be modified at this point, NO otherwise.</Abstract></ReturnValue>
+			<Anchor>//api/name/canChangePublisherParameters</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/setCustomParamWithKey:value:</TokenIdentifier>
+			<Abstract type="html">Sets a custom key and value to be sent to the server on the next request for offers availability.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/canChangePublisherParameters</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (BOOL)setCustomParamWithKey:(NSString *)key value:(NSString *)value</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>key</Name>
+					<Abstract type="html">Arbitrary key name for the custom param to set.</Abstract>
+				</Parameter><Parameter>
+					<Name>value</Name>
+					<Abstract type="html">Arbitrary value string for the custom param to set.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">YES if the parameter was set, NO otherwise.</Abstract></ReturnValue>
+			<Anchor>//api/name/setCustomParamWithKey:value:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

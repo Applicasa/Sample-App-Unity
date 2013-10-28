@@ -1,7 +1,7 @@
 //
 // VirtualCurrency.mm
 // Created by Applicasa 
-// 6/24/2013
+// 10/24/2013
 //
 
 #import "ApplicasaCore.h"
@@ -90,19 +90,19 @@ const char* ApplicasaVirtualCurrencyGetVirtualCurrencyImageA(VirtualCurrency* vi
 	return NSStringToCharPointer([virtualCurrency.virtualCurrencyImageA absoluteString]);
 }
 void ApplicasaVirtualCurrencySetVirtualCurrencyImageA(VirtualCurrency* virtualCurrency,const char* url) {
-	virtualCurrency.virtualCurrencyImageA = CharPointerToNSString(url);
+	virtualCurrency.virtualCurrencyImageA = [NSURL URLWithString:CharPointerToNSString(url)];
 }
 const char* ApplicasaVirtualCurrencyGetVirtualCurrencyImageB(VirtualCurrency* virtualCurrency) {
 	return NSStringToCharPointer([virtualCurrency.virtualCurrencyImageB absoluteString]);
 }
 void ApplicasaVirtualCurrencySetVirtualCurrencyImageB(VirtualCurrency* virtualCurrency,const char* url) {
-	virtualCurrency.virtualCurrencyImageB = CharPointerToNSString(url);
+	virtualCurrency.virtualCurrencyImageB = [NSURL URLWithString:CharPointerToNSString(url)];
 }
 const char* ApplicasaVirtualCurrencyGetVirtualCurrencyImageC(VirtualCurrency* virtualCurrency) {
 	return NSStringToCharPointer([virtualCurrency.virtualCurrencyImageC absoluteString]);
 }
 void ApplicasaVirtualCurrencySetVirtualCurrencyImageC(VirtualCurrency* virtualCurrency,const char* url) {
-	virtualCurrency.virtualCurrencyImageC = CharPointerToNSString(url);
+	virtualCurrency.virtualCurrencyImageC = [NSURL URLWithString:CharPointerToNSString(url)];
 }
 const bool ApplicasaVirtualCurrencyGetVirtualCurrencyIsDeal(VirtualCurrency* virtualCurrency) {
 	return virtualCurrency.virtualCurrencyIsDeal;

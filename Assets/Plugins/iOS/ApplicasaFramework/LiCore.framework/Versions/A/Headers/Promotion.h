@@ -62,6 +62,10 @@ typedef enum {
     LiPromotionTypeOfferDealVG, //7 data = VG id & deal details
     LiPromotionTypeChartboost,//8
     LiPromotionTypeTrialPay,//9
+    LiPromotionTypeMMedia,//10
+    LiPromotionTypeSponsorPay,//11
+    LiPromotionTypeSupersonicAds,//12
+    LiPromotionTypeAppnext//13
 } LiPromotionActionKind;
 
 typedef void (^PromotionResultBlock)(LiPromotionAction promoAction,LiPromotionResult result,id info);
@@ -116,6 +120,7 @@ typedef void (^PromotionResultBlock)(LiPromotionAction promoAction,LiPromotionRe
 - (void) showWithBlock:(PromotionResultBlock)block;
 - (void) setPromotionBlock:(PromotionResultBlock)block;
 - (PromotionResultBlock) block;
+-(BOOL)isBlockNull;
 
 - (void) dismiss;
 #pragma mark - End of Basic SDK

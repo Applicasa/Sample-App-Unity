@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SPVirtualCurrencyServerConnector.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SPVirtualCurrencyServerConnector</TokenIdentifier>
+			<Abstract type="html">The SPVirtualCurrencyServerConnector class provides functionality to query SponsorPay&apos;s Virtual Currency Servers to obtain the number of virtual coins the user has earned.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>
+			
+			<NodeRef refid="6"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/setSecretToken:</TokenIdentifier>
+			<Abstract type="html">The token to access your account on SponsorPay&apos;s virtual currency server.
+This token is used to sign requests to and verify responses from the SponsorPay currency server.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) NSString *secretToken</Declaration>
+			
+			
+			<Anchor>//api/name/secretToken</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/secretToken</TokenIdentifier>
+			<Abstract type="html">The token to access your account on SponsorPay&apos;s virtual currency server.
+This token is used to sign requests to and verify responses from the SponsorPay currency server.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) NSString *secretToken</Declaration>
+			
+			
+			<Anchor>//api/name/secretToken</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPVirtualCurrencyServerConnector/secretToken</TokenIdentifier>
+			<Abstract type="html">The token to access your account on SponsorPay&apos;s virtual currency server.
+This token is used to sign requests to and verify responses from the SponsorPay currency server.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) NSString *secretToken</Declaration>
+			
+			
+			<Anchor>//api/name/secretToken</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/setResponseSignature:</TokenIdentifier>
+			<Abstract type="html">Signature of the last response received from the server
+This is used in combination with secretToken to validate the authenticity of the response.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) NSString *responseSignature</Declaration>
+			
+			
+			<Anchor>//api/name/responseSignature</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/responseSignature</TokenIdentifier>
+			<Abstract type="html">Signature of the last response received from the server
+This is used in combination with secretToken to validate the authenticity of the response.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) NSString *responseSignature</Declaration>
+			
+			
+			<Anchor>//api/name/responseSignature</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPVirtualCurrencyServerConnector/responseSignature</TokenIdentifier>
+			<Abstract type="html">Signature of the last response received from the server
+This is used in combination with secretToken to validate the authenticity of the response.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (retain) NSString *responseSignature</Declaration>
+			
+			
+			<Anchor>//api/name/responseSignature</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/setLatestTransactionId:</TokenIdentifier>
+			<Abstract type="html">Latest transaction ID for your user and app IDs, as reported by the server.
+This is used to keep track of new transactions between invocations to fetchDeltaOfCoins.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (retain, nonatomic) NSString *latestTransactionId</Declaration>
+			
+			
+			<Anchor>//api/name/latestTransactionId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/latestTransactionId</TokenIdentifier>
+			<Abstract type="html">Latest transaction ID for your user and app IDs, as reported by the server.
+This is used to keep track of new transactions between invocations to fetchDeltaOfCoins.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (retain, nonatomic) NSString *latestTransactionId</Declaration>
+			
+			
+			<Anchor>//api/name/latestTransactionId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPVirtualCurrencyServerConnector/latestTransactionId</TokenIdentifier>
+			<Abstract type="html">Latest transaction ID for your user and app IDs, as reported by the server.
+This is used to keep track of new transactions between invocations to fetchDeltaOfCoins.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (retain, nonatomic) NSString *latestTransactionId</Declaration>
+			
+			
+			<Anchor>//api/name/latestTransactionId</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/setDelegate:</TokenIdentifier>
+			<Abstract type="html">Delegate to be notified of answers to requests and error conditions.
+Answers to the requests are asynchronously reported to your registered delegate through the selectors defined in the SPVirtualCurrencyConnectionDelegate protocol.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (unsafe_unretained) id&lt;SPVirtualCurrencyConnectionDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/delegate</TokenIdentifier>
+			<Abstract type="html">Delegate to be notified of answers to requests and error conditions.
+Answers to the requests are asynchronously reported to your registered delegate through the selectors defined in the SPVirtualCurrencyConnectionDelegate protocol.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (unsafe_unretained) id&lt;SPVirtualCurrencyConnectionDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPVirtualCurrencyServerConnector/delegate</TokenIdentifier>
+			<Abstract type="html">Delegate to be notified of answers to requests and error conditions.
+Answers to the requests are asynchronously reported to your registered delegate through the selectors defined in the SPVirtualCurrencyConnectionDelegate protocol.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>@property (unsafe_unretained) id&lt;SPVirtualCurrencyConnectionDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/addFetchDeltaOfCoinsCompletionBlock:</TokenIdentifier>
+			<Abstract type="html">Adds a completion handler that will be run when a successful answer to fetchDeltaOfCoins is received.
+  
+Though you could use this method to obtain the same functionality that registering a SPVirtualCurrencyConnectionDelegate offers for being notified of the amount of coins earned by the user, relying on the delegate is the recommended way of being notified of the results of the request, as it can handle error conditions.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>- (void)addFetchDeltaOfCoinsCompletionBlock:(SPVCSDeltaOfCoinsRequestCompletionBlock)completionBlock</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>completionBlock</Name>
+					<Abstract type="html">Block to be run when a successful answer to the delta of coins request is received.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/addFetchDeltaOfCoinsCompletionBlock:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/fetchDeltaOfCoins</TokenIdentifier>
+			<Abstract type="html">Fetches the amount of coins earned since the last time this method was invoked for the current user ID / app ID combination.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>- (void)fetchDeltaOfCoins</Declaration>
+			
+			
+			<Anchor>//api/name/fetchDeltaOfCoins</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

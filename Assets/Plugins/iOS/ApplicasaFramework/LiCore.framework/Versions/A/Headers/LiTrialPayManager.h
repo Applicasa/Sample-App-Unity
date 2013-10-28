@@ -11,6 +11,7 @@
 
 @interface LiTrialPayManager : NSObject
 
-+ (void) getTrialPayActions:(LiTrialPayResponse)block;
+#define LI_TRIALPAY_VERSION @"1.0.0"
 
++ (void) getTrialPayActions:(LiThirdPartyResponse)block;
 @end

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SPAdvertisementViewController.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SPAdvertisementViewController</TokenIdentifier>
+			<Abstract type="html">SPAdvertisementViewController is a subclass of UIViewController that provides common functionality to request and display advertisements from the SponsorPay platform. It&apos;s intended to be subclassed by concrete implementations of SponsorPay products, like the Mobile OfferWall.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/SPOfferWallViewController</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPAdvertisementViewController/setShouldFinishOnRedirect:</TokenIdentifier>
+			<Abstract type="html">If set to YES, this View Controller will be automatically dismissed when the user clicks on an offer and is redirected outside the app.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (readwrite) BOOL shouldFinishOnRedirect</Declaration>
+			
+			
+			<Anchor>//api/name/shouldFinishOnRedirect</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPAdvertisementViewController/shouldFinishOnRedirect</TokenIdentifier>
+			<Abstract type="html">If set to YES, this View Controller will be automatically dismissed when the user clicks on an offer and is redirected outside the app.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (readwrite) BOOL shouldFinishOnRedirect</Declaration>
+			
+			
+			<Anchor>//api/name/shouldFinishOnRedirect</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPAdvertisementViewController/shouldFinishOnRedirect</TokenIdentifier>
+			<Abstract type="html">If set to YES, this View Controller will be automatically dismissed when the user clicks on an offer and is redirected outside the app.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (readwrite) BOOL shouldFinishOnRedirect</Declaration>
+			
+			
+			<Anchor>//api/name/shouldFinishOnRedirect</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPAdvertisementViewController/setCurrencyName:</TokenIdentifier>
+			<Abstract type="html">Name of your virtual currency.
+This is a human readable, descriptive name of your virtual currency.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (readonly, retain, nonatomic) NSString *currencyName</Declaration>
+			
+			
+			<Anchor>//api/name/currencyName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPAdvertisementViewController/currencyName</TokenIdentifier>
+			<Abstract type="html">Name of your virtual currency.
+This is a human readable, descriptive name of your virtual currency.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (readonly, retain, nonatomic) NSString *currencyName</Declaration>
+			
+			
+			<Anchor>//api/name/currencyName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPAdvertisementViewController/currencyName</TokenIdentifier>
+			<Abstract type="html">Name of your virtual currency.
+This is a human readable, descriptive name of your virtual currency.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (readonly, retain, nonatomic) NSString *currencyName</Declaration>
+			
+			
+			<Anchor>//api/name/currencyName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPAdvertisementViewController/setCustomParameters:</TokenIdentifier>
+			<Abstract type="html">A dictionary of arbitrary key / value strings to be provided to the SponsorPay platform when requesting the advertisement.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (retain, nonatomic) NSDictionary *customParameters</Declaration>
+			
+			
+			<Anchor>//api/name/customParameters</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPAdvertisementViewController/customParameters</TokenIdentifier>
+			<Abstract type="html">A dictionary of arbitrary key / value strings to be provided to the SponsorPay platform when requesting the advertisement.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (retain, nonatomic) NSDictionary *customParameters</Declaration>
+			
+			
+			<Anchor>//api/name/customParameters</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SPAdvertisementViewController/customParameters</TokenIdentifier>
+			<Abstract type="html">A dictionary of arbitrary key / value strings to be provided to the SponsorPay platform when requesting the advertisement.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>@property (retain, nonatomic) NSDictionary *customParameters</Declaration>
+			
+			
+			<Anchor>//api/name/customParameters</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SPAdvertisementViewController/dismissAnimated:</TokenIdentifier>
+			<Abstract type="html">Dismisses the presented advertisement.</Abstract>
+			<DeclaredIn>SPAdvertisementViewController.h</DeclaredIn>			
+			
+			<Declaration>- (void)dismissAnimated:(BOOL)animated</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>animated</Name>
+					<Abstract type="html">Whether the dismissal should be animated.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/dismissAnimated:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

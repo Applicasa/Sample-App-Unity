@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Applicasa {
 	public class Promotion {
-		
+
 #if UNITY_ANDROID
 		[DllImport("Applicasa")]
 		private static extern void setGetPromotionArrayFinished(GetPromotionArrayFinished callback, int uniqueActionID);
@@ -15,14 +15,14 @@ namespace Applicasa {
 		
 		[DllImport("Applicasa")]
 		private static extern void setPromotionResultDelegate(PromotionResultDelegate callback, int uniqueActionID);
-		
+
 #endif
-		
+
 		public delegate void GetPromotionArrayFinished(bool success, Error error, PromotionArray promotionArrayPtr);
 		public delegate void PromotionsAvailable(PromotionArray promotionArrayPtr);
 		public delegate void PromotionResultDelegate(PromotionAction promoAction, Applicasa.PromotionResult result, Applicasa.PromotionResultInfo info);
 		//TODO: parse info
-		
+
 #if UNITY_IPHONE||UnityEditor		
 		public Promotion(IntPtr promotionPtr) {
 			innerPromotion = promotionPtr;
@@ -35,50 +35,70 @@ namespace Applicasa {
 				javaUnityApplicasaPromotion = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotion");
 		}
 #endif
-		
+
 		public struct PromotionArray {
 			public int ArraySize;
 			public IntPtr Array;
 		}
+		
+#if UNITY_ANDROID && !UNITY_EDITOR	
+			public static Promotion[] GetPromotionArray(PromotionArray promotionArray) {
+			
+			Promotion[] promotionInner = new Promotion[promotionArray.ArraySize];
+			AndroidJavaObject[] bigArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(promotionArray.Array);
+   
+			int count = 0;
+			for (int i = 0;i < bigArray.Length;i++)
+			{
+				AndroidJavaObject tempJavaObject = bigArray[i];
+				AndroidJavaObject[] InnerArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(tempJavaObject.GetRawObject());
 
+				for (int j = 0;j < InnerArray.Length;j++)
+				{
+					AndroidJavaObject tempObj = InnerArray[j];
+					promotionInner[count] = new Promotion(tempObj.GetRawObject(),tempObj);
+					count++;
+				}
+			}
+			return promotionInner;
+		}
+		
+#elif UNITY_IPHONE && !UNITY_EDITOR
 		public static Promotion[] GetPromotionArray(PromotionArray promotionArray) {
 			Promotion[] promotions = new Promotion[promotionArray.ArraySize];
-#if UNITY_ANDROID
-			AndroidJavaObject tempJavaObjectArray=new AndroidJavaObject(promotionArray.Array);
-#endif
+
 			for (int i=0; i < promotionArray.ArraySize; i++) {
-#if UNITY_IPHONE
+
 				IntPtr newPtr = Marshal.ReadIntPtr (promotionArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
 				promotions[i] = new Promotion(newPtr);
-#endif
-#if UNITY_ANDROID
-				AndroidJavaObject tempJavaObject = tempJavaObjectArray.Call<AndroidJavaObject>("get",i);
-				IntPtr newPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-				promotions[i] = new Promotion(newPtr, new AndroidJavaObject(newPtr));
-#endif
 			}
 			return promotions;
 		}
-		
+#else
+		public static Promotion[] GetPromotionArray(PromotionArray promotionArray) {
+			Promotion[] promotions = new Promotion[0];
+			return promotions;
+		}
+#endif
 		#region Class Methods and Members
-		
+
 #if UNITY_ANDROID
 		public Promotion(IntPtr promotionPtr) {
 
 			if(javaUnityApplicasaPromotion==null)
 				javaUnityApplicasaPromotion = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotion");
 			if(innerPromotionJavaObject==null)
-				innerPromotionJavaObject = new AndroidJavaObject(promotionPtr);
+				innerPromotionJavaObject= new AndroidJavaObject("com.applicasa.Promotion.Promotion",promotionPtr);	
 		}
-		
+
 		private static AndroidJavaClass javaUnityApplicasaPromotion;
-		
+
 		public AndroidJavaObject innerPromotionJavaObject;
 #endif
-		
+
 #if UNITY_IPHONE
-	
-		
+
+
 		private System.IntPtr innerPromotion;
 		[DllImport("__Internal")]
 		private static extern void ApplicasaPromotionShowWithBlock(System.IntPtr promotion, PromotionResultDelegate callback);
@@ -104,7 +124,7 @@ namespace Applicasa {
             setPromotionResultDelegate(callback, uniqueActionID);
             javaUnityApplicasaPromotion.CallStatic("ApplicasaPromotionShowWithBlock", innerPromotionJavaObject, uniqueActionID);
         }
-				
+
 		/*
 		// TODO: - (void) showOnView:(UIView *)view Block:(PromotionResultBlock)block - Can't work with UIViews yet;
 		*/
@@ -116,8 +136,8 @@ namespace Applicasa {
 		   callback(PromotionAction.Pressed,Applicasa.PromotionResult.Nothing,tempPromotionResultInfo);
 		}
 #endif
-		
-		
+
+
 		#region Class Members
 #if UNITY_IPHONE
 		public string ID { 
@@ -433,6 +453,14 @@ namespace Applicasa {
 				using(javaUnityApplicasaPromotion)
 					return javaUnityApplicasaPromotion.CallStatic<string>("ApplicasaPromotionGetIdentifier",innerPromotionJavaObject);}
 		}
+
+			public void dismiss() {
+			if (javaUnityApplicasaPromotion == null)
+			    javaUnityApplicasaPromotion = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotion");
+           
+            javaUnityApplicasaPromotion.CallStatic("ApplicasaPromotionDismiss", innerPromotionJavaObject);
+
+		}
 #else
 		public string ID { 
 			get {return "";}
@@ -527,27 +555,16 @@ namespace Applicasa {
 		public string Identifier { 
 			get {return "";}
 		}
+
+		public void dismiss() {
+		}
 #endif
 		#endregion
-		
+
 		#endregion
-		
+
 		#region Static Methods
-#if UNITY_IPHONE
-		[DllImport("__Internal")]
-		private static extern void ApplicasaPromotionGetLocalArrayWithRawSqlQuery(string rawQuery, GetPromotionArrayFinished callback);
-		public static void GetLocalArrayWithRawSqlQuery(string rawQuery, GetPromotionArrayFinished callback) {
-			ApplicasaPromotionGetLocalArrayWithRawSqlQuery(rawQuery, callback);
-		}
-#elif UNITY_ANDROID && !UNITY_EDITOR
-		public static void GetLocalArrayWithRawSqlQuery(string rawQuery, GetPromotionArrayFinished callback) {
-			//NO METHOD ON ANDROID
-		}
-#else
-		public static void GetLocalArrayWithRawSqlQuery(string rawQuery, GetPromotionArrayFinished callback) {
-			//NO METHOD
-		}
-#endif
+		
 		#endregion
 	}
 }

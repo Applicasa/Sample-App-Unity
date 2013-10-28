@@ -47,10 +47,11 @@ public class ApplicasaStart : MonoBehaviour {
 				// do what you want with the received push message
 			}
 			
-			// To clear all the messages use
-			Applicasa.PushNotification.ClearRemoteNotifications();
+			
 			
 			*/
+			// To clear all the messages use
+			Applicasa.PushNotification.ClearRemoteNotifications();
 		}
 		
 	}

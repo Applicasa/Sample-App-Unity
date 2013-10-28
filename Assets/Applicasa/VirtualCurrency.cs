@@ -4,12 +4,6 @@
 // 6/24/2013
 //
 
-//
-// VirtualCurrency.cs
-// Created by Applicasa 
-// 5/28/2013
-//
-
 using UnityEngine;
 using System;
 using System.Collections;
@@ -19,30 +13,28 @@ namespace Applicasa
 {
     public class VirtualCurrency
     {
-	
+
 #if UNITY_ANDROID
 		private static AndroidJavaClass javaUnityApplicasaVirtualCurrency;
-		
+
 		public AndroidJavaObject innerVirtualCurrencyJavaObject;
 		
 		
 		[DllImport("Applicasa")]
 		public static extern void setGetVirtualCurrencyArrayFinished(GetVirtualCurrencyArrayFinished callback, int uniqueActionID);
-		
+
 #endif
 
         public delegate void GetVirtualCurrencyArrayFinished(bool success, Error error, VirtualCurrencyArray virtualCurrencyArrayPtr);
-
+		
+		#if UNITY_IPHONE
         public VirtualCurrency(IntPtr virtualCurrencyPtr)
         {
             innerVirtualCurrency = virtualCurrencyPtr;
-#if UNITY_ANDROID
-			if(javaUnityApplicasaVirtualCurrency==null)
-				javaUnityApplicasaVirtualCurrency = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualCurrency");
-			if(innerVirtualCurrencyJavaObject==null)
-				innerVirtualCurrencyJavaObject = new AndroidJavaObject(innerVirtualCurrency);
-#endif
+
+
         }
+        #endif
 
 #if UNITY_ANDROID
 		public VirtualCurrency(IntPtr virtualCurrencyPtr, AndroidJavaObject virtualCurrencyJavaObject) {
@@ -63,26 +55,45 @@ namespace Applicasa
             public IntPtr Array;
         }
 
-        public static VirtualCurrency[] GetVirtualCurrencyArray(VirtualCurrencyArray virtualCurrencyArray)
-        {
-            VirtualCurrency[] virtualCurrencies = new VirtualCurrency[virtualCurrencyArray.ArraySize];
-#if UNITY_ANDROID			
-			AndroidJavaObject tempJavaObjectArray=new AndroidJavaObject(virtualCurrencyArray.Array);
-#endif
-            for (int i = 0; i < virtualCurrencyArray.ArraySize; i++)
-            {
-#if UNITY_IPHONE
+#if UNITY_ANDROID && !UNITY_EDITOR	
+			public static VirtualCurrency[] GetVirtualCurrencyArray(VirtualCurrencyArray virtualCurrencyArray) {
+			
+			VirtualCurrency[] virtualCurrencyInner = new VirtualCurrency[virtualCurrencyArray.ArraySize];
+			AndroidJavaObject[] bigArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(virtualCurrencyArray.Array);
+   
+			int count = 0;
+			for (int i = 0;i < bigArray.Length;i++)
+			{
+				AndroidJavaObject tempJavaObject = bigArray[i];
+				AndroidJavaObject[] InnerArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(tempJavaObject.GetRawObject());
+
+				for (int j = 0;j < InnerArray.Length;j++)
+				{
+					AndroidJavaObject tempObj = InnerArray[j];
+					virtualCurrencyInner[count] = new VirtualCurrency(tempObj.GetRawObject(),tempObj);
+					count++;
+				}
+			}
+			return virtualCurrencyInner;
+		}
+		
+#elif UNITY_IPHONE && !UNITY_EDITOR
+		public static VirtualCurrency[] GetVirtualCurrencyArray(VirtualCurrencyArray virtualCurrencyArray) {
+			VirtualCurrency[] virtualCurrencys = new VirtualCurrency[virtualCurrencyArray.ArraySize];
+
+			for (int i=0; i < virtualCurrencyArray.ArraySize; i++) {
+
 				IntPtr newPtr = Marshal.ReadIntPtr (virtualCurrencyArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
-				virtualCurrencies[i] = new VirtualCurrency(newPtr);
+				virtualCurrencys[i] = new VirtualCurrency(newPtr);
+			}
+			return virtualCurrencys;
+		}
+#else
+		public static VirtualCurrency[] GetVirtualCurrencyArray(VirtualCurrencyArray virtualCurrencyArray) {
+			VirtualCurrency[] virtualCurrencys = new VirtualCurrency[0];
+			return virtualCurrencys;
+		}
 #endif
-#if UNITY_ANDROID				
-				AndroidJavaObject tempJavaObject = tempJavaObjectArray.Call<AndroidJavaObject>("get",i);
-				IntPtr newPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());				
-				virtualCurrencies[i] = new VirtualCurrency(newPtr, new AndroidJavaObject(newPtr));
-#endif
-            }
-            return virtualCurrencies;
-        }
 
         #region Class Methods and Members
 
@@ -343,13 +354,13 @@ namespace Applicasa
 			item.LocalizedTitle = javaUnityApplicasaVirtualCurrency.CallStatic<string>("ApplicasaVirtualCurrencyGetProviderTitle",innerVirtualCurrencyJavaObject);
 			item.Price = javaUnityApplicasaVirtualCurrency.CallStatic<string>("ApplicasaVirtualCurrencyGetProviderPrice",innerVirtualCurrencyJavaObject);
 			item.ProductIdentifier = javaUnityApplicasaVirtualCurrency.CallStatic<string>("ApplicasaVirtualCurrencyGetVirtualCurrencyGoogleIdentifier",innerVirtualCurrencyJavaObject);
-			
+
 			return item;}
 		}
 		public string LocalPrice {
 			get {return javaUnityApplicasaVirtualCurrency.CallStatic<string>("ApplicasaVirtualCurrencyGetProviderPrice",innerVirtualCurrencyJavaObject);}
 		}
-		
+
 
 #else
 
@@ -431,7 +442,7 @@ namespace Applicasa
 		public DateTime VirtualCurrencyLastUpdate {
 			get {return new DateTime();}
 		}
-		
+
 		public SKProduct Product {
 			get {return new SKProduct();}
 		}
@@ -442,13 +453,13 @@ namespace Applicasa
 #endregion
 
 
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern void ApplicasaVirtualCurrencyBuyVirtualCurrencyWithBlock(System.IntPtr virtualCurrency, Action callback);
 		public void Buy(Action action) {
 			ApplicasaVirtualCurrencyBuyVirtualCurrencyWithBlock(innerVirtualCurrency, action);
 		}
-#elif UNITY_ANDROID&&!UNITY_EDITOR
+#elif UNITY_ANDROID && !UNITY_EDITOR
 		public void Buy(Action action) {
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
@@ -463,7 +474,7 @@ namespace Applicasa
 
         #endregion
         #region Static Methods
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern void ApplicasaVirtualCurrencyGetVirtualCurrenciesWithBlock(GetVirtualCurrencyArrayFinished callback);
 		public static void GetVirtualCurrencies(GetVirtualCurrencyArrayFinished callback) {
@@ -481,7 +492,7 @@ namespace Applicasa
 		public static void UseAmount(int amount, Currency currencyKind, Action action) {
 			ApplicasaVirtualCurrencyUseAmount(amount, currencyKind, action);
 		}
-#elif UNITY_ANDROID&&!UNITY_EDITOR
+#elif UNITY_ANDROID && !UNITY_EDITOR
 		public static void ApplicasaVirtualCurrencyGetVirtualCurrenciesWithBlock(GetVirtualCurrencyArrayFinished callback) {
 			if(javaUnityApplicasaVirtualCurrency==null)
 				javaUnityApplicasaVirtualCurrency = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualCurrency");
@@ -490,7 +501,7 @@ namespace Applicasa
 			setGetVirtualCurrencyArrayFinished(callback,uniqueActionID);
 			javaUnityApplicasaVirtualCurrency.CallStatic("ApplicasaVirtualCurrencyGetVirtualCurrencies", uniqueActionID);
 		}
-		
+
 		public static void ApplicasaVirtualCurrencyGiveAmount(int amount, Currency currencyKind , Action callback) {
 			if(javaUnityApplicasaVirtualCurrency==null)
 				javaUnityApplicasaVirtualCurrency = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualCurrency");
@@ -499,7 +510,7 @@ namespace Applicasa
 			Core.setActionCallback(callback,uniqueActionID);
 			javaUnityApplicasaVirtualCurrency.CallStatic("ApplicasaVirtualCurrencyGiveAmount", amount, (int)currencyKind, uniqueActionID);
 		}
-		
+
 		public static void ApplicasaVirtualCurrencyUseAmount(int amount, Currency currencyKind , Action callback) {
 			if(javaUnityApplicasaVirtualCurrency==null)
 				javaUnityApplicasaVirtualCurrency = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualCurrency");
@@ -508,21 +519,22 @@ namespace Applicasa
 			Core.setActionCallback(callback,uniqueActionID);
 			javaUnityApplicasaVirtualCurrency.CallStatic("ApplicasaVirtualCurrencyUseAmount", amount, (int)currencyKind, uniqueActionID);
 		}
+		
+
 #else
 		public static void ApplicasaVirtualCurrencyGetVirtualCurrenciesWithBlock(GetVirtualCurrencyArrayFinished callback) {
 			callback(true,new Error(),new VirtualCurrencyArray());
 		}
-		
+
 		public static void ApplicasaVirtualCurrencyGiveAmount(int amount, Currency currencyKind , Action callback) {
 			callback(true,new Error(),"",Actions.Update);
 		}
-		
+
 		public static void ApplicasaVirtualCurrencyUseAmount(int amount, Currency currencyKind , Action callback) {
 			callback(true,new Error(),"",Actions.Update);
 		}
+		
 #endif
         #endregion
     }
 }
-
-

@@ -2,7 +2,11 @@ fileFormatVersion: 2
 guid: e133be5d0a039460f9fa3434a9bc63fd
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_Background: {fileID: 2800000, guid: c8a6d63974ac243c4b1e121f0204e70f, type: 3}
+  - m_Back: {fileID: 2800000, guid: dc6975a2d64a94259bf9061ccf878230, type: 3}
+  - m_Coins: {fileID: 2800000, guid: 3db9473806ca247b1adafbe2eeacc40b, type: 3}
+  - m_ExampleItem: {fileID: 2800000, guid: adb4ff77d5a0d4a4f8503d8d94115448, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

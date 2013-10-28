@@ -1,0 +1,8 @@
+<!-- AddActivities -->
+
+<!-- SuperSonic Activity --> 
+<activity
+	android:name="com.supersonicads.sdk.android.WebViewActivity"
+	android:configChanges="orientation|screenSize"
+	android:hardwareAccelerated="true" >
+</activity>

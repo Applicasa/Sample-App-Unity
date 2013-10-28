@@ -4,18 +4,6 @@
 // 6/24/2013
 //
 
-//
-// VirtualGood.cs
-// Created by Applicasa 
-// 5/28/2013
-//
-
-//
-// VirtualGood.cs
-// Created by Applicasa 
-//
-
-
 using UnityEngine;
 using System;
 using System.Collections;
@@ -28,27 +16,23 @@ namespace Applicasa
 
 #if UNITY_ANDROID
 		private static AndroidJavaClass javaUnityApplicasaVirtualGood;
-		
+
 		public AndroidJavaObject innerVirtualGoodJavaObject;
 		
 		
 		[DllImport("Applicasa")]
 		public static extern void setGetVirtualGoodArrayFinished(GetVirtualGoodArrayFinished callback, int uniqueActionID);
-		
+
 #endif
 
         public delegate void GetVirtualGoodArrayFinished(bool success, Error error, VirtualGoodArray virtualGoodArrayPtr);
 
+#if UNITY_IPHONE
         public VirtualGood(IntPtr virtualGoodPtr)
         {
             innerVirtualGood = virtualGoodPtr;
-#if UNITY_ANDROID
-			if(javaUnityApplicasaVirtualGood==null)
-				javaUnityApplicasaVirtualGood = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualGood");
-			if(innerVirtualGoodJavaObject==null)
-				innerVirtualGoodJavaObject = new AndroidJavaObject(innerVirtualGood);
-#endif
         }
+#endif
 
 #if UNITY_ANDROID
 		public VirtualGood(IntPtr virtualGoodPtr, AndroidJavaObject virtualGoodJavaObject) {
@@ -70,27 +54,45 @@ namespace Applicasa
             public IntPtr Array;
         }
 
-        public static VirtualGood[] GetVirtualGoodArray(VirtualGoodArray virtualGoodArray)
-        {
-            VirtualGood[] virtualGoods = new VirtualGood[virtualGoodArray.ArraySize];
+#if UNITY_ANDROID && !UNITY_EDITOR	
+			public static VirtualGood[] GetVirtualGoodArray(VirtualGoodArray virtualGoodArray) {
+			
+			VirtualGood[] virtualGoodInner = new VirtualGood[virtualGoodArray.ArraySize];
+			AndroidJavaObject[] bigArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(virtualGoodArray.Array);
+   
+			int count = 0;
+			for (int i = 0;i < bigArray.Length;i++)
+			{
+				AndroidJavaObject tempJavaObject = bigArray[i];
+				AndroidJavaObject[] InnerArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(tempJavaObject.GetRawObject());
 
-#if UNITY_ANDROID
-			AndroidJavaObject tempJavaObjectArray=new AndroidJavaObject(virtualGoodArray.Array);
-#endif
-            for (int i = 0; i < virtualGoodArray.ArraySize; i++)
-            {
-#if UNITY_IPHONE
+				for (int j = 0;j < InnerArray.Length;j++)
+				{
+					AndroidJavaObject tempObj = InnerArray[j];
+					virtualGoodInner[count] = new VirtualGood(tempObj.GetRawObject(),tempObj);
+					count++;
+				}
+			}
+			return virtualGoodInner;
+		}
+		
+#elif UNITY_IPHONE && !UNITY_EDITOR
+		public static VirtualGood[] GetVirtualGoodArray(VirtualGoodArray virtualGoodArray) {
+			VirtualGood[] virtualGoods = new VirtualGood[virtualGoodArray.ArraySize];
+
+			for (int i=0; i < virtualGoodArray.ArraySize; i++) {
+
 				IntPtr newPtr = Marshal.ReadIntPtr (virtualGoodArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
 				virtualGoods[i] = new VirtualGood(newPtr);
+			}
+			return virtualGoods;
+		}
+#else
+		public static VirtualGood[] GetVirtualGoodArray(VirtualGoodArray virtualGoodArray) {
+			VirtualGood[] virtualGoods = new VirtualGood[0];
+			return virtualGoods;
+		}
 #endif
-#if UNITY_ANDROID
-				AndroidJavaObject tempJavaObject = tempJavaObjectArray.Call<AndroidJavaObject>("get",i);
-				IntPtr newPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-				virtualGoods[i] = new VirtualGood(newPtr,new AndroidJavaObject(newPtr));
-#endif
-            }
-            return virtualGoods;
-        }
 
         #region Class Methods and Members
 
@@ -548,22 +550,22 @@ namespace Applicasa
 		public DateTime VirtualGoodLastUpdate {
 			get {return new DateTime();}
 		}
-		
+
 		public SKProduct Product {
 		 get {return new SKProduct();}
 		}
 		public string LocalPrice {
 			get {return "";}
 		}
-		
-		
+
+
 #endif
 #endregion
 
 
 
 
-#if UNITY_IPHONE
+#if UNITY_IPHONE && !UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern void ApplicasaVirtualGoodBuyQuantity(System.IntPtr virtualGood, int quantity, Currency currencyKind, Action callback);
 		public void Buy(int quantity, Currency currencyKind, Action action) {
@@ -587,7 +589,7 @@ namespace Applicasa
 		public void Use(int quantity, Action action) {
 			ApplicasaVirtualGoodUseQuantity(innerVirtualGood, quantity, action);
 		}
-#elif UNITY_ANDROID &&!UNITY_EDITOR
+#elif UNITY_ANDROID && !UNITY_EDITOR
 		public void Buy(int quantity, Currency currencyKind, Action action) {
 			if (currencyKind == Currency.RealMoney)
 				BuyWithRealMoney(action);
@@ -598,7 +600,7 @@ namespace Applicasa
 		public void BuyWithRealMoney(Action action) {
    			javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodBuyWithRealMoney", innerVirtualGoodJavaObject, action);
   		}
-		
+
 		public void Give(int quantity, Action action) {
 			javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodGiveQuantity", innerVirtualGoodJavaObject, quantity, action);
 		}
@@ -690,7 +692,7 @@ namespace Applicasa
   			 setGetVirtualGoodArrayFinished(callback, uniqueActionID);
    			javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodsGetVirtualGoodsByCategoryPosition", (int)type, position , uniqueActionID);
   		}
-		
+
 #else
 
         public static void GetLocalArrayWithQuery(Query query, GetVirtualGoodArrayFinished callback)
@@ -716,8 +718,3 @@ namespace Applicasa
         #endregion
     }
 }
-
-
-
-
-

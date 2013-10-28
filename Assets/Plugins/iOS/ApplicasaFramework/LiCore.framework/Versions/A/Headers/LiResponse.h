@@ -22,7 +22,7 @@
 
 - (void) setStatement:(void *)stmt;
 - (void *) getStatement;
-
+-(int) rowCount;
 - (void) logResponseWithRequest:(NSString *)request;
 
 

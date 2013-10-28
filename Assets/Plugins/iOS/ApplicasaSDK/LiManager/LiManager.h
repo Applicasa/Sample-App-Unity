@@ -2,18 +2,6 @@
 
 @interface LiManager : NSObject
 
-/*********************************************************************************
- DEPRECATED METHODS WARNING:
- 
- Applicasa is cleaning up its SDK in preparation for upcoming 2.0 release.
- 
- Do not use methods marked with DEPRECATED_ATTRIBUTE.
- These methods are deprecated. They are included for backward-compatibility only.
- They will be removed in the final release. You should update your code immediately.
- 
- Corrected methods are listed first. Use these methods instead.
- **********************************************************************************/
-
 + (void) initDatabase;
 
 + (void) conflictFoundBetweenLocalItem:(NSDictionary *)localItem andServerItem:(NSDictionary *)serverItem OfClass:(NSString *)className;
@@ -45,10 +33,36 @@
 
 + (NSString *) getSchemaVersion;
 
++(int)getSessionPauseTime;
+
+// Prasing config
++(BOOL)shouldDecodeTags;
+
+
+// 3rd Party Ad Networks
+
+//Chartboost
 + (BOOL) isChartboostEnabled;
 + (NSString *) getChartboostId;
 + (NSString *) getChartboostSignature;
 
-+(int)getSessionPauseTime;
+//MMedia
++ (BOOL) isMMediaEnabled;
+
+//SponserPay
++ (BOOL) isSponsorPayEnabled;
++ (NSString *) getSponsorPayAppId;
++ (NSString *) getSponsorPaySecurityToken;
+
+//AppNext
++ (BOOL) isAppnextEnabled;
+
+
+//SuperSonic
++ (BOOL) isSupersonicAdsEnabled;
++ (NSString *) getSupersonicAdsId;
+
+
 
 @end
+

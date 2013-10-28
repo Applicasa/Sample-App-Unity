@@ -1,0 +1,14 @@
+{
+    "group": "AppNext",
+    "libs": [],
+    "frameworks": [],
+    "headerpaths": [],
+	"librarysearchpaths": [],
+    "frameworksearchpaths": [],
+    "files":   ["/Plugins/iOS/ApplicasaFramework/AdNetworks/AppNext/LiAppnext.framework",
+				"/Plugins/iOS/ApplicasaFramework/AdNetworks/AppNext/libAppnextLib.a",
+				"/Plugins/iOS/ApplicasaFramework/AdNetworks/AppNext/AppNextUIView.h"],
+    "folders": [],
+    "excludes": ["^.*.meta$", "^.*.mdown$", "^.*.pdf$"],
+    "linker_flags": []
+}

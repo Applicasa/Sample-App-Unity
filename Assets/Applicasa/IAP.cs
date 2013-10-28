@@ -14,21 +14,18 @@ namespace Applicasa {
 		[DllImport("__Internal")]
 		private static extern string ApplicasaIAPBuyVirtualCurrency(System.IntPtr virtualCurrency, Action action);
 		public static void BuyVirtualCurrency(VirtualCurrency virtualCurrency, Action action) {
-			//ApplicasaIAPBuyVirtualCurrency(virtualCurrency.innerVirtualCurrency, action);
 			virtualCurrency.Buy(action);
 		}
 		
 		[DllImport("__Internal")]
 		private static extern string ApplicasaIAPBuyVirtualGood(System.IntPtr virtualGood, int quantity, Currency currencyKind, Action action);
 		public static void BuyVirtualGood(VirtualGood virtualGood, int quantity, Currency currencyKind, Action action) {
-			//ApplicasaIAPBuyVirtualGood(virtualGood.innerVirtualGood, quantity, currencyKind, action);
 			virtualGood.Buy(quantity,currencyKind,action);
 		}
 	
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPBuyWithRealMoney(System.IntPtr virtualGood, Action action);
 		public static void BuyWithRealMoney(VirtualGood virtualGood, Action action) {
-			//ApplicasaIAPBuyWithRealMoney(virtualGood.innerVirtualGood, action);
 			virtualGood.BuyWithRealMoney(action);
 		}
   
@@ -39,14 +36,12 @@ namespace Applicasa {
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPGiveAmount(int amount, Currency currencyKind, Action callback);
 		public static void GiveCurrency(int amount, Currency currencyKind, Action action) {
-			//ApplicasaIAPGiveAmount(amount, currencyKind, action);
 			VirtualCurrency.GiveAmount(amount, currencyKind, action);
 		}
 		
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPGiveVirtualGood(System.IntPtr virtualGood, int quantity, Action callback);
 		public static void GiveVirtualGood(VirtualGood virtualGood, int quantity, Action action) {
-			//ApplicasaIAPGiveVirtualGood(virtualGood.innerVirtualGood, quantity, action);
 			virtualGood.Give(quantity,action);
 		}
 		
@@ -57,14 +52,12 @@ namespace Applicasa {
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPUseAmount(int amount, Currency currencyKind, Action callback);
 		public static void UseCurrency(int amount, Currency currencyKind, Action action) {
-			//ApplicasaIAPUseAmount(amount, currencyKind, action);
 			VirtualCurrency.UseAmount(amount, currencyKind, action);
 		}
 		
 		[DllImport("__Internal")]
 		private static extern void ApplicasaIAPUseVirtualGood(System.IntPtr virtualGood, int quantity, Action callback);
 		public static void UseVirtualGood(VirtualGood virtualGood, int quantity, Action action) {
-			//ApplicasaIAPUseVirtualGood(virtualGood.innerVirtualGood, quantity, action);
 			virtualGood.Use(quantity,action);
 		}		
 
@@ -253,12 +246,19 @@ namespace Applicasa {
 			error.Message="Success";
 			
 			AndroidJavaObject virtualCurrencyArrayJava = javaUnityApplicasaIAP.CallStatic<AndroidJavaObject>("ApplicasaIAPGetVirtualCurrenciesWithBlock");
+			VirtualCurrency.VirtualCurrencyArray virtualCurrencyArray = new VirtualCurrency.VirtualCurrencyArray();
 			
-			VirtualCurrency.VirtualCurrencyArray virtualCurrencyArray;
-			
-			virtualCurrencyArray.ArraySize=virtualCurrencyArrayJava.Call<int>("size");
 			virtualCurrencyArray.Array=virtualCurrencyArrayJava.GetRawObject();
-			
+			AndroidJavaObject[] convertedArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(virtualCurrencyArray.Array);
+			int count = 0;
+			for (int i=0; i <convertedArray.Length;i++)
+			{
+				AndroidJavaObject[] temp = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(convertedArray[i].GetRawObject());
+				count += temp.Length;
+			}
+			virtualCurrencyArray.ArraySize=count;
+			convertedArray = null;
+		
 			callback(true,error,virtualCurrencyArray);
 		}
 		
@@ -270,10 +270,19 @@ namespace Applicasa {
 			error.Message="Success";
 			
 			AndroidJavaObject virtualGoodArrayJava = javaUnityApplicasaIAP.CallStatic<AndroidJavaObject>("ApplicasaIAPGetVirtualGoodsOfType",(int)type);
+			VirtualGood.VirtualGoodArray virtualGoodArray = new VirtualGood.VirtualGoodArray();
 			
-			VirtualGood.VirtualGoodArray virtualGoodArray;
-			virtualGoodArray.ArraySize=virtualGoodArrayJava.Call<int>("size");
 			virtualGoodArray.Array=virtualGoodArrayJava.GetRawObject();
+			AndroidJavaObject[] convertedArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(virtualGoodArray.Array);
+			int count = 0;
+			for (int i=0; i <convertedArray.Length;i++)
+			{
+				AndroidJavaObject[] temp = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(convertedArray[i].GetRawObject());
+				count += temp.Length;
+			}
+			virtualGoodArray.ArraySize=count;
+			convertedArray = null;
+
 			
 			callback(true,error,virtualGoodArray);
 		}
@@ -286,11 +295,18 @@ namespace Applicasa {
 			error.Message="Success";
 			
 			AndroidJavaObject virtualGoodArrayJava = javaUnityApplicasaIAP.CallStatic<AndroidJavaObject>("ApplicasaIAPGetVirtualGoodsOfTypeAndCategory",(int)type, virtualGoodCategory.innerVirtualGoodCategoryJavaObject);
+			VirtualGood.VirtualGoodArray virtualGoodArray = new VirtualGood.VirtualGoodArray();
 			
-			VirtualGood.VirtualGoodArray virtualGoodArray;
-			
-			virtualGoodArray.ArraySize=virtualGoodArrayJava.Call<int>("size");
 			virtualGoodArray.Array=virtualGoodArrayJava.GetRawObject();
+			AndroidJavaObject[] convertedArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(virtualGoodArray.Array);
+			int count = 0;
+			for (int i=0; i <convertedArray.Length;i++)
+			{
+				AndroidJavaObject[] temp = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(convertedArray[i].GetRawObject());
+				count += temp.Length;
+			}
+			virtualGoodArray.ArraySize=count;
+			convertedArray = null;
 			
 			callback(true,error,virtualGoodArray);
 		}
@@ -303,11 +319,19 @@ namespace Applicasa {
 			error.Message="Success";
 			
 			AndroidJavaObject virtualGoodArrayJava = javaUnityApplicasaIAP.CallStatic<AndroidJavaObject>("ApplicasaIAPGetVirtualGoodsOfTypeByCategoryPosition", position, (int)type);
+			VirtualGood.VirtualGoodArray virtualGoodArray = new VirtualGood.VirtualGoodArray();
 			
-			VirtualGood.VirtualGoodArray virtualGoodArray;
-			
-			virtualGoodArray.ArraySize=virtualGoodArrayJava.Call<int>("size");
 			virtualGoodArray.Array=virtualGoodArrayJava.GetRawObject();
+			AndroidJavaObject[] convertedArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(virtualGoodArray.Array);
+			int count = 0;
+			for (int i=0; i <convertedArray.Length;i++)
+			{
+				AndroidJavaObject[] temp = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(convertedArray[i].GetRawObject());
+				count += temp.Length;
+			}
+			virtualGoodArray.ArraySize=count;
+			convertedArray = null;
+
 			
 			callback(true,error,virtualGoodArray);
 		}
@@ -320,11 +344,18 @@ namespace Applicasa {
 			error.Message="Success";
 			
 			AndroidJavaObject virtualGoodCategoryArrayJava = javaUnityApplicasaIAP.CallStatic<AndroidJavaObject>("ApplicasaIAPGetVirtualGoodCategoriesWithBlock");
+			VirtualGoodCategory.VirtualGoodCategoryArray virtualGoodCategoryArray = new VirtualGoodCategory.VirtualGoodCategoryArray();
 			
-			VirtualGoodCategory.VirtualGoodCategoryArray virtualGoodCategoryArray;
-			
-			virtualGoodCategoryArray.ArraySize=virtualGoodCategoryArrayJava.Call<int>("size");
 			virtualGoodCategoryArray.Array=virtualGoodCategoryArrayJava.GetRawObject();
+			AndroidJavaObject[] convertedArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(virtualGoodCategoryArray.Array);
+			int count = 0;
+			for (int i=0; i <convertedArray.Length;i++)
+			{
+				AndroidJavaObject[] temp = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(convertedArray[i].GetRawObject());
+				count += temp.Length;
+			}
+			virtualGoodCategoryArray.ArraySize=count;
+			convertedArray = null;
 			
 			callback(true,error,virtualGoodCategoryArray);
 		}		
@@ -417,8 +448,12 @@ namespace Applicasa {
 		
 		public static void GetVirtualGoodCategories(VirtualGoodCategory.GetVirtualGoodCategoryArrayFinished callback) {
 			callback(true,new Error(),new VirtualGoodCategory.VirtualGoodCategoryArray());
-		}		
+		}
 
+		public static void GetVirtualGoodsByCategoryPosition(VirtualGoodType type, int position, VirtualGood.GetVirtualGoodArrayFinished callback) {
+			callback(true,new Error(),new VirtualGood.VirtualGoodArray());
+		}
+  
 //		/**********************
 //		 Balance Methods
 //		 **********************/

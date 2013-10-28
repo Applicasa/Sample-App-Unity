@@ -10,7 +10,8 @@
 #import <LiCore/LiCore.h>
 
 typedef void (^LiBlockAction)(NSError *error, NSString *itemID,Actions action);
-typedef void (^LiTrialPayResponse)(NSError *error, NSArray *trialPayResponse);
+typedef void (^LiThirdPartyResponse)(NSError *error, NSArray *thirdpartyResponse);
+typedef void (^LiTrialPayActionsResponse)(NSError *error, NSArray *tpActionsResponse);
 
 
 @class LiQuery;

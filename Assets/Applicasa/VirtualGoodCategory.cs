@@ -1,14 +1,8 @@
 //
 // VirtualGoodCategory.cs
 // Created by Applicasa 
-// 6/24/2013
+// 10/24/2013
 //
-
-
-
-
-
-
 
 using UnityEngine;
 using System;
@@ -16,7 +10,8 @@ using System.Collections;
 using System.Runtime.InteropServices;
 
 namespace Applicasa {
-	public class VirtualGoodCategory {
+	public class VirtualGoodCategory {	
+		public static VirtualGoodCategory[] finalVirtualGoodCategory;
 		
 #if UNITY_ANDROID 
 		private static AndroidJavaClass javaUnityApplicasaVirtualGoodCategory;
@@ -31,7 +26,7 @@ namespace Applicasa {
 		
 #endif
 
-		public delegate void GetVirtualGoodCategoryFinished(bool success, Error error, IntPtr userPtr);
+		public delegate void GetVirtualGoodCategoryFinished(bool success, Error error, IntPtr virtualGoodCategoryPtr);
 		public delegate void GetVirtualGoodCategoryArrayFinished(bool success, Error error, VirtualGoodCategoryArray virtualGoodCategoryArrayPtr);
 		
 		public VirtualGoodCategory(IntPtr virtualGoodCategoryPtr) {
@@ -40,11 +35,11 @@ namespace Applicasa {
 			if(javaUnityApplicasaVirtualGoodCategory==null)
 				javaUnityApplicasaVirtualGoodCategory = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualGoodCategory");
 			if(innerVirtualGoodCategoryJavaObject==null)
-				innerVirtualGoodCategoryJavaObject = new AndroidJavaObject(innerVirtualGoodCategory);
+				innerVirtualGoodCategoryJavaObject = new AndroidJavaObject("com.applicasa.VirtualGoodCategory.VirtualGoodCategory",innerVirtualGoodCategory);
 #endif
 		}
 		
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID 
 		public VirtualGoodCategory(IntPtr virtualGoodCategoryPtr, AndroidJavaObject virtualGoodCategoryJavaObject) {
 			innerVirtualGoodCategory = virtualGoodCategoryPtr;
 			innerVirtualGoodCategoryJavaObject = virtualGoodCategoryJavaObject;
@@ -68,30 +63,49 @@ namespace Applicasa {
 		#endif
 		  }
 
-    	
 		public struct VirtualGoodCategoryArray {
 			public int ArraySize;
 			public IntPtr Array;
 		}
-	
-		public static VirtualGoodCategory[] GetVirtualGoodCategoryArray(VirtualGoodCategoryArray virtualGoodCategoryArray) {
-			VirtualGoodCategory[] virtualGoodCategory = new VirtualGoodCategory[virtualGoodCategoryArray.ArraySize];
-#if UNITY_ANDROID && !UNITY_EDITOR
-			AndroidJavaObject tempJavaObjectArray=new AndroidJavaObject(virtualGoodCategoryArray.Array);
-#endif
-			for (int i=0; i < virtualGoodCategoryArray.ArraySize; i++) {
-#if UNITY_IPHONE && !UNITY_EDITOR
-				IntPtr newPtr = Marshal.ReadIntPtr (virtualGoodCategoryArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
-				virtualGoodCategory[i] = new VirtualGoodCategory(newPtr);
-#endif
-#if UNITY_ANDROID && !UNITY_EDITOR
-				AndroidJavaObject tempJavaObject = tempJavaObjectArray.Call<AndroidJavaObject>("get",i);
-				IntPtr newPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-				virtualGoodCategory[i] = new VirtualGoodCategory(newPtr, new AndroidJavaObject(newPtr));
-#endif
+#if UNITY_ANDROID && !UNITY_EDITOR	
+			public static VirtualGoodCategory[] GetVirtualGoodCategoryArray(VirtualGoodCategoryArray virtualGoodCategoryArray) {
+			
+			VirtualGoodCategory[] virtualGoodCategoryInner = new VirtualGoodCategory[virtualGoodCategoryArray.ArraySize];
+			AndroidJavaObject[] bigArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(virtualGoodCategoryArray.Array);
+   
+			int count = 0;
+			for (int i = 0;i < bigArray.Length;i++)
+			{
+				AndroidJavaObject tempJavaObject = bigArray[i];
+				AndroidJavaObject[] InnerArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(tempJavaObject.GetRawObject());
+
+				for (int j = 0;j < InnerArray.Length;j++)
+				{
+					AndroidJavaObject tempObj = InnerArray[j];
+					virtualGoodCategoryInner[count] = new VirtualGoodCategory(tempObj.GetRawObject(),tempObj);
+					count++;
+				}
 			}
-			return virtualGoodCategory;
+			return virtualGoodCategoryInner;
 		}
+		
+#elif UNITY_IPHONE && !UNITY_EDITOR
+		public static VirtualGoodCategory[] GetVirtualGoodCategoryArray(VirtualGoodCategoryArray virtualGoodCategoryArray) {
+			VirtualGoodCategory[] virtualGoodCategorys = new VirtualGoodCategory[virtualGoodCategoryArray.ArraySize];
+
+			for (int i=0; i < virtualGoodCategoryArray.ArraySize; i++) {
+
+				IntPtr newPtr = Marshal.ReadIntPtr (virtualGoodCategoryArray.Array, i * Marshal.SizeOf(typeof(IntPtr)));
+				virtualGoodCategorys[i] = new VirtualGoodCategory(newPtr);
+			}
+			return virtualGoodCategorys;
+		}
+#else
+		public static VirtualGoodCategory[] GetVirtualGoodCategoryArray(VirtualGoodCategoryArray virtualGoodCategoryArray) {
+			VirtualGoodCategory[] virtualGoodCategorys = new VirtualGoodCategory[0];
+			return virtualGoodCategorys;
+		}
+#endif
 
 #if UNITY_IPHONE&&!UNITY_EDITOR	
     ~VirtualGoodCategory()
@@ -287,6 +301,26 @@ namespace Applicasa {
 		public static VirtualGoodCategory[] GetArrayWithQuerySync(Query query, QueryKind queryKind) {
 			return GetVirtualGoodCategoryArray(ApplicasaVirtualGoodCategoryGetArrayWithQuerySync((query != null ? query.innerQuery : IntPtr.Zero), queryKind));
 		}
+		
+		
+		public static IEnumerator GetArrayWithQuerySyncIEnumerator(Query query, QueryKind queryKind) {
+			VirtualGoodCategoryArray virtualGoodCategoryArray = ApplicasaVirtualGoodCategoryGetArrayWithQuerySync((query != null ? query.innerQuery : IntPtr.Zero), queryKind);
+			finalVirtualGoodCategory = GetVirtualGoodCategoryArray(virtualGoodCategoryArray);
+			yield return new WaitForSeconds(0.1f);
+		}
+		
+		public static  IEnumerator GetVirtualGoodCategoryArrayIEnumerator(VirtualGoodCategoryArray virtualGoodCategoryArray) {
+			finalVirtualGoodCategory = GetVirtualGoodCategoryArray(virtualGoodCategoryArray);
+			yield return new WaitForSeconds(0.1f);
+		}
+		
+		[DllImport("__Internal")]
+		private static extern int ApplicasaVirtualGoodCategoryUpdateLocalStorage(IntPtr query, QueryKind queryKind);
+		public static int UpdateLocalStorage(Query query, QueryKind queryKind)
+		{
+			return ApplicasaVirtualGoodCategoryUpdateLocalStorage((query != null ? query.innerQuery : IntPtr.Zero), queryKind);
+		}
+		
 #elif UNITY_ANDROID&&!UNITY_EDITOR
 		public static void GetById(string id, QueryKind queryKind, GetVirtualGoodCategoryFinished callback) {
 			if(javaUnityApplicasaVirtualGoodCategory==null)
@@ -314,26 +348,113 @@ namespace Applicasa {
 			setGetObjectArrayFinished(callback, uniqueActionID);
 			javaUnityApplicasaVirtualGoodCategory.CallStatic("ApplicasaVirtualGoodCategoryGetLocalArrayWithRawSqlQuery", rawQuery, uniqueActionID);
 		}
-		
+				
 		public static VirtualGoodCategory[] GetArrayWithQuerySync(Query query, QueryKind queryKind) {
 			if(javaUnityApplicasaVirtualGoodCategory==null)
 				javaUnityApplicasaVirtualGoodCategory = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualGoodCategory");
-			AndroidJavaObject tempJavaObjectArray = javaUnityApplicasaVirtualGoodCategory.CallStatic<AndroidJavaObject>("ApplicasaVirtualGoodCategoryGetArrayWithQuerySync", query.innerQueryJavaObject, (int)queryKind);
-			VirtualGoodCategory[] virtualGoodCategory;
-		    if(javaUnityApplicasaVirtualGoodCategory==null){
-				virtualGoodCategory = new VirtualGoodCategory[0];
-			}else{
-				int tempLength=tempJavaObjectArray.Call<int>("size");
-				virtualGoodCategory = new VirtualGoodCategory[tempLength];
-				for (int i=0; i < tempLength; i++) {
-					AndroidJavaObject tempJavaObject = tempJavaObjectArray.Call<AndroidJavaObject>("get",i);
-					IntPtr newPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-					virtualGoodCategory[i] = new VirtualGoodCategory(newPtr, new AndroidJavaObject(newPtr));
+				
+				AndroidJavaObject[] bigArray = javaUnityApplicasaVirtualGoodCategory.CallStatic<AndroidJavaObject[]>("ApplicasaVirtualGoodCategoryGetArrayWithQuerySync", query.innerQueryJavaObject, (int)queryKind);
+			
+			VirtualGoodCategory[] virtualGoodCategoryInner= null;
+			for (int i = 0;i < bigArray.Length;i++)
+			{
+				AndroidJavaObject tempJavaObject = bigArray[i];
+				
+				AndroidJavaObject[] InnerArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(tempJavaObject.GetRawObject());
+				VirtualGoodCategory[] virtualGoodCategorytemp = new VirtualGoodCategory[InnerArray.Length];
+				for (int j = 0;j < InnerArray.Length;j++)
+				{
+					AndroidJavaObject tempObj = InnerArray[j];
+					virtualGoodCategorytemp[j] = new VirtualGoodCategory(tempObj.GetRawObject(),tempObj);
 				}
+				if (virtualGoodCategoryInner == null)
+					virtualGoodCategoryInner = virtualGoodCategorytemp;
+				else{
+				   VirtualGoodCategory[] firstOne = virtualGoodCategoryInner;
+				    virtualGoodCategoryInner = new VirtualGoodCategory[firstOne.Length+virtualGoodCategorytemp.Length];
+					firstOne.CopyTo(virtualGoodCategoryInner,0);
+					virtualGoodCategorytemp.CopyTo(virtualGoodCategoryInner,firstOne.Length);
+				}
+				
 			}
-			return virtualGoodCategory;
+			return virtualGoodCategoryInner;
 		}
+		
+		public static int UpdateLocalStorage(Query query, QueryKind queryKind)
+		{
+			if(javaUnityApplicasaVirtualGoodCategory==null)
+				javaUnityApplicasaVirtualGoodCategory = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualGoodCategory");
+				
+				int count = javaUnityApplicasaVirtualGoodCategory.CallStatic<int>("ApplicasaVirtualGoodCategoryUpdateLocalStorage", query.innerQueryJavaObject, (int)queryKind);
+				
+				return count;
+		}
+		
+		public static IEnumerator GetArrayWithQuerySyncIEnumerator(Query query, QueryKind queryKind) {
+		
+			if(javaUnityApplicasaVirtualGoodCategory==null)
+				javaUnityApplicasaVirtualGoodCategory = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaVirtualGoodCategory");
+				
+				AndroidJavaObject[] bigArray = javaUnityApplicasaVirtualGoodCategory.CallStatic<AndroidJavaObject[]>("ApplicasaVirtualGoodCategoryGetArrayWithQuerySync", query.innerQueryJavaObject, (int)queryKind);
+			
+			VirtualGoodCategory[] virtualGoodCategoryInner= null;;
+			for (int i = 0;i < bigArray.Length;i++)
+			{
+				AndroidJavaObject tempJavaObject = bigArray[i];
+				
+				AndroidJavaObject[] InnerArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(tempJavaObject.GetRawObject());
+				VirtualGoodCategory[] virtualGoodCategorytemp = new VirtualGoodCategory[InnerArray.Length];
+				for (int j = 0;j < InnerArray.Length;j++)
+				{
+					AndroidJavaObject tempObj = InnerArray[j];
+					virtualGoodCategorytemp[j] = new VirtualGoodCategory(tempObj.GetRawObject(),tempObj);
+				}
+				if (virtualGoodCategoryInner == null)
+					virtualGoodCategoryInner = virtualGoodCategorytemp;
+				else{
+				   VirtualGoodCategory[] firstOne = virtualGoodCategoryInner;
+				    virtualGoodCategoryInner = new VirtualGoodCategory[firstOne.Length+virtualGoodCategorytemp.Length];
+					firstOne.CopyTo(virtualGoodCategoryInner,0);
+					virtualGoodCategorytemp.CopyTo(virtualGoodCategoryInner,firstOne.Length);
+				}
+				yield return new WaitForSeconds(0.2f);
+			}
+			finalVirtualGoodCategory = virtualGoodCategoryInner;
+		}
+		
+		public static  IEnumerator GetVirtualGoodCategoryArrayIEnumerator(VirtualGoodCategoryArray virtualGoodCategoryArray) {
+		
+			VirtualGoodCategory[] virtualGoodCategoryInner = new VirtualGoodCategory[virtualGoodCategoryArray.ArraySize];
+			AndroidJavaObject[] bigArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(virtualGoodCategoryArray.Array);
+   
+			int count = 0;
+			for (int i = 0;i < bigArray.Length;i++)
+			{
+				AndroidJavaObject tempJavaObject = bigArray[i];
+				AndroidJavaObject[] InnerArray = AndroidJNIHelper.ConvertFromJNIArray<AndroidJavaObject[]>(tempJavaObject.GetRawObject());
+
+				for (int j = 0;j < InnerArray.Length;j++)
+				{
+					AndroidJavaObject tempObj = InnerArray[j];
+					virtualGoodCategoryInner[count] = new VirtualGoodCategory(tempObj.GetRawObject(),tempObj);
+					count++;
+				}
+				yield return new WaitForSeconds(0.2f);
+			}
+			finalVirtualGoodCategory = virtualGoodCategoryInner;
+		}
+
 #else
+
+		public static int UpdateLocalStorage(Query query, QueryKind queryKind)
+		{
+			return -1;
+		}
+		public static IEnumerator GetArrayWithQuerySyncIEnumerator(Query query, QueryKind queryKind) {
+			yield return new WaitForSeconds(0.2f);
+				VirtualGoodCategory[]  virtualGoodCategoryInner = new VirtualGoodCategory[0];
+			    finalVirtualGoodCategory = virtualGoodCategoryInner;
+		}
 		public static void GetById(string id, QueryKind queryKind, GetVirtualGoodCategoryFinished callback) {
 			callback(true,new Error(),new IntPtr());
 		}
@@ -351,7 +472,13 @@ namespace Applicasa {
 			VirtualGoodCategory[] virtualGoodCategory = new VirtualGoodCategory[0];
 		    
 			return virtualGoodCategory;
-		}		
+		}	
+		
+		public static  IEnumerator GetVirtualGoodCategoryArrayIEnumerator(VirtualGoodCategoryArray virtualGoodCategoryArray) {
+			yield return new WaitForSeconds(0.2f);
+			VirtualGoodCategory[]  virtualGoodCategoryInner = new VirtualGoodCategory[0];
+			finalVirtualGoodCategory = virtualGoodCategoryInner;
+		}
 #endif
 		
 		#endregion

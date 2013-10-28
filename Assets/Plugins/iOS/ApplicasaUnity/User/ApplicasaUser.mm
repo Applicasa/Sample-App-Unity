@@ -1,16 +1,25 @@
 //
 // User.mm
 // Created by Applicasa 
-// 6/24/2013
+// 10/24/2013
 //
 
 
 #import "ApplicasaCore.h"
 #import "User.h"
 #import "LiDataTypes.h"
+
+#ifdef UNITY_4_2_0
+#import "UnityAppController.h"
+#else
 #import "AppController.h"
-    
+#endif
+
+#ifdef UNITY_4_2_0
+@implementation UnityAppController (liFacebook)
+#else
 @implementation AppController (liFacebook)
+#endif
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url{
     return [[LiKitFacebook getActiveSession] handleOpenURL:url];
@@ -92,7 +101,7 @@ const char* ApplicasaUserGetUserImage(User* user) {
 	return NSStringToCharPointer([user.userImage absoluteString]);
 }
 void ApplicasaUserSetUserImage(User* user,const char* url) {
-	user.userImage = CharPointerToNSString(url);
+	user.userImage = [NSURL URLWithString:CharPointerToNSString(url)];
 }
 const int ApplicasaUserGetUserMainCurrencyBalance(User* user) {
 	return user.userMainCurrencyBalance;
@@ -108,6 +117,12 @@ void ApplicasaUserSetUserSecondaryCurrencyBalance(User* user,int userSecondaryCu
 }
 const char* ApplicasaUserGetUserFacebookID(User* user) {
 	return NSStringToCharPointer(user.userFacebookID);
+}
+const double ApplicasaUserGetUserTempDate(User* user) {
+	return ((double)user.userTempDate.timeIntervalSince1970);
+}
+void ApplicasaUserSetUserTempDate(User* user, double userTempDate) {
+	user.userTempDate =  [NSDate dateWithTimeIntervalSince1970:userTempDate];
 }
 
 
@@ -187,6 +202,11 @@ void ApplicasaUserGetArrayWithQuery(LiQuery* query, QueryKind queryKind, Applica
 void ApplicasaUserGetLocalArrayWithRawSqlQuery(const char * rawQuery, ApplicasaGetUserArrayFinished callback) {
     [User getLocalArrayWithRawSQLQuery:CharPointerToNSString(rawQuery) andBlock:ApplicasaGetUserArrayFinishedToBlock(callback)];
 }
+    
+int ApplicasaUserUpdateLocalStorage(LiQuery* query, QueryKind queryKind)
+{
+    return [User updateLocalStorage:query queryKind:queryKind];
+}
 
 ApplicasaUserArray ApplicasaUserGetArrayWithQuerySync(LiQuery* query, QueryKind queryKind) {    
     NSArray *array = [User getArrayWithQuery:query queryKind:queryKind ];
@@ -210,11 +230,11 @@ struct FBFriend ApplicasaUserGetFacebookFriend(LiObjFBFriend * fbFriend) {
     fbFriendStruct.Id = NSStringToCharPointer(fbFriend.facebookID);
     fbFriendStruct.Name = NSStringToCharPointer(fbFriend.facebookName);
     fbFriendStruct.ImageURL = NSStringToCharPointer([fbFriend.facebookImage absoluteString]);
-	fbFriendStruct.hasApplicasaUser = true;
-	if (fbFriend.user)
-		fbFriendStruct.UserPtr = fbFriend.user;
-	else
-		fbFriendStruct.hasApplicasaUser = false;
+    if (fbFriend.user && fbFriend.user.userID)
+        fbFriendStruct.UserPtr = fbFriend.user;
+    else
+        fbFriendStruct.UserPtr = nil;
+
     return fbFriendStruct;
 }
     

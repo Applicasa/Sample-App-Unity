@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SponsorPaySDK.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SponsorPaySDK</TokenIdentifier>
+			<Abstract type="html">Provides convenience class methods to access the functionality of the SponsorPay SDK</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/startForAppId:userId:securityToken:</TokenIdentifier>
+			<Abstract type="html">Starts the SDK, registering your credentials for all subsequent usages of the SDK functionality.</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+			<Declaration>+ (NSString *)startForAppId:(NSString *)appId userId:(NSString *)userId securityToken:(NSString *)securityToken</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>appId</Name>
+					<Abstract type="html">Your SponsorPay application ID.</Abstract>
+				</Parameter><Parameter>
+					<Name>userId</Name>
+					<Abstract type="html">ID of the current user of your application, or nil to have the SDK autogenerate an user ID or use a previously generated user ID.</Abstract>
+				</Parameter><Parameter>
+					<Name>securityToken</Name>
+					<Abstract type="html">Security token assigned to your app ID to authenticate requests to some resources and validate their responses.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A string token that, if you keep several sets of appId - userId combinations, can be used to refer to each one.</Abstract></ReturnValue>
+			<Anchor>//api/name/startForAppId:userId:securityToken:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/offerWallViewController</TokenIdentifier>
+			<Abstract type="html">Returns an SPOfferWallViewController instance configured with the appId and userId passed in a previous invocation of startForAppId:userId:securityToken:</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/showOfferWallWithParentViewController:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>+ (SPOfferWallViewController *)offerWallViewController</Declaration>
+			
+			<ReturnValue><Abstract type="html">An instance of SPOfferWallViewController configured with the appId and userId provided previously to the SDK start method.</Abstract></ReturnValue>
+			<Anchor>//api/name/offerWallViewController</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/offerWallViewControllerForCredentials:</TokenIdentifier>
+			<Abstract type="html">Returns an SPOfferWallViewController instance configured with the appId and userId passed in a previous invocation of startForAppId:userId:securityToken:</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+			<Declaration>+ (SPOfferWallViewController *)offerWallViewControllerForCredentials:(NSString *)credentialsToken</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>credentialsToken</Name>
+					<Abstract type="html">The credentials string token returned by a previous invocation of startForAppId:userId:securityToken: whose appId and userId will be configured in the returned SPOfferWallViewController instance. If you pass an invalid credentials token, this method will throw an exception.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An instance of SPOfferWallViewController configured with the appId and userId corresponding to the provided credentials token.</Abstract></ReturnValue>
+			<Anchor>//api/name/offerWallViewControllerForCredentials:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/showOfferWallWithParentViewController:</TokenIdentifier>
+			<Abstract type="html">Presents the SponsorPay Mobile OfferWall as a child view controller of your own view controller.</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+			<Declaration>+ (SPOfferWallViewController *)showOfferWallWithParentViewController:(UIViewController&lt;SPOfferWallViewControllerDelegate&gt; *)parent</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>parent</Name>
+					<Abstract type="html">An instance of your own UIViewController subclass that will be used as the parent view controller of the presented OfferWall. It must conform to the SPOfferWallViewControllerDelegate protocol, and will be notified whenever the OfferWall is closed.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The instance of SPOfferWallViewController which is being presented.</Abstract></ReturnValue>
+			<Anchor>//api/name/showOfferWallWithParentViewController:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/brandEngageClient</TokenIdentifier>
+			<Abstract type="html">Returns an SPBrandEngageClient instance configured with the appId and userId passed in a previous invocation of startForAppId:userId:securityToken:</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/requestBrandEngageOffersNotifyingDelegate:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>+ (SPBrandEngageClient *)brandEngageClient</Declaration>
+			
+			<ReturnValue><Abstract type="html">An instance of SPBrandEngageClient configured with the appId and userId provided previously to the SDK start method.</Abstract></ReturnValue>
+			<Anchor>//api/name/brandEngageClient</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/brandEngageClientForCredentials:</TokenIdentifier>
+			<Abstract type="html">Returns an SPBrandEngageClient instance configured with the appId and userId passed in a previous invocation of startForAppId:userId:securityToken:</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+			<Declaration>+ (SPBrandEngageClient *)brandEngageClientForCredentials:(NSString *)credentialsToken</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>credentialsToken</Name>
+					<Abstract type="html">The credentials string token returned by a previous invocation of startForAppId:userId:securityToken: whose appId and userId will be configured in the returned SPBrandEngageClient instance. If you pass an invalid credentials token, this method will throw an exception.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An instance of SPBrandEngageClient configured with the appId and userId corresponding to the provided credentials token.</Abstract></ReturnValue>
+			<Anchor>//api/name/brandEngageClientForCredentials:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/requestBrandEngageOffersNotifyingDelegate:</TokenIdentifier>
+			<Abstract type="html">Returns an SPBrandEngageClient instance configured with the appId and userId passed in a previous invocation of startForAppId:userId:securityToken: and your own delegate, and starts requesting an available BrandEngage offer immediately.</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/SPBrandEngageClientDelegate</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SPBrandEngageClient/requestOffers</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/intf/SPBrandEngageClientDelegate</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>+ (SPBrandEngageClient *)requestBrandEngageOffersNotifyingDelegate:(id&lt;SPBrandEngageClientDelegate&gt;)delegate</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>delegate</Name>
+					<Abstract type="html">Instance of one of your classes implementing the SPBrandEngageClientDelegate protocol, which will be notified of offers availability and engagement status.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An instance of SPBrandEngageClient configured with your delegate object and the appId and userId provided previously to the SDK start method.</Abstract></ReturnValue>
+			<Anchor>//api/name/requestBrandEngageOffersNotifyingDelegate:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/setCurrencyName:</TokenIdentifier>
+			<Abstract type="html">Sets the name of your virtual currency.</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+			<Declaration>+ (void)setCurrencyName:(NSString *)name</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>name</Name>
+					<Abstract type="html">This is a human readable, descriptive name of your virtual currency.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setCurrencyName:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/setShowPayoffNotificationOnVirtualCoinsReceived:</TokenIdentifier>
+			<Abstract type="html">Whether the SDK should show a toast-like notification to the user the first time calling [SPVirtualCurrencyServerConnector fetchDeltaOfCoins] after completing an engagement returns a non-zero value.</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/setShowPayoffNotificationOnVirtualCoinsReceived:forCredentials:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/setCurrencyName:</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/instm/SPVirtualCurrencyServerConnector/fetchDeltaOfCoins</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>+ (void)setShowPayoffNotificationOnVirtualCoinsReceived:(BOOL)shouldShowNotification</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>shouldShowNotification</Name>
+					<Abstract type="html">Default value is YES.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setShowPayoffNotificationOnVirtualCoinsReceived:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/VCSConnector</TokenIdentifier>
+			<Abstract type="html">Returns an SPVirtualCurrencyServerConnector instance configured with the appId, userId and securityToken passed in a previous invocation of startForAppId:userId:securityToken:</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/requestDeltaOfCoinsNotifyingDelegate:</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>+ (SPVirtualCurrencyServerConnector *)VCSConnector</Declaration>
+			
+			<ReturnValue><Abstract type="html">An instance of SPVirtualCurrencyServerConnector configured with the appId, userId and securityToken provided previously to the SDK start method.</Abstract></ReturnValue>
+			<Anchor>//api/name/VCSConnector</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/VCSConnectorForCredentials:</TokenIdentifier>
+			<Abstract type="html">Returns an SPVirtualCurrencyServerConnector instance configured with the appId, userId and securityToken passed in a previous invocation of startForAppId:userId:securityToken:</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+			<Declaration>+ (SPVirtualCurrencyServerConnector *)VCSConnectorForCredentials:(NSString *)credentialsToken</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>credentialsToken</Name>
+					<Abstract type="html">The credentials string token returned by a previous invocation of startForAppId:userId:securityToken: whose appId, userId and securityToken will be configured in the returned SPVirtualCurrencyServerConnector instance. If you pass an invalid credentials token, this method will throw an exception.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">An instance of SPVirtualCurrencyServerConnector configured with the appId, userId and securityToken corresponding to the provided credentials token.</Abstract></ReturnValue>
+			<Anchor>//api/name/VCSConnectorForCredentials:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/requestDeltaOfCoinsNotifyingDelegate:</TokenIdentifier>
+			<Abstract type="html">Requests to SponsorPay&apos;s Virtual Currency Server the amount of coins earned by the user since the last check, notifying the provided delegate of the result.</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+			<Declaration>+ (SPVirtualCurrencyServerConnector *)requestDeltaOfCoinsNotifyingDelegate:(id&lt;SPVirtualCurrencyConnectionDelegate&gt;)delegate</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>delegate</Name>
+					<Abstract type="html">Any object conforming to the SPVirtualCurrencyConnectionDelegate, which will be notified of the result of the request.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The instance of SPVirtualCurrencyServerConnector that is being used to access SponsorPay&apos;s Virtual Currency Server for this request.</Abstract></ReturnValue>
+			<Anchor>//api/name/requestDeltaOfCoinsNotifyingDelegate:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/reportActionCompleted:</TokenIdentifier>
+			<Abstract type="html">Reports a Rewarded Action ID as completed to the SponsorPay servers.</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+			<Declaration>+ (void)reportActionCompleted:(NSString *)actionID</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>actionID</Name>
+					<Abstract type="html">The ID of the action to report as completed.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/reportActionCompleted:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SponsorPaySDK/reportActionCompleted:forCredentials:</TokenIdentifier>
+			<Abstract type="html">Reports a Rewarded Action ID as completed to the SponsorPay servers, using the appId corresponding to the passed credentials token.</Abstract>
+			<DeclaredIn>SponsorPaySDK.h</DeclaredIn>			
+			
+			<Declaration>+ (void)reportActionCompleted:(NSString *)actionID forCredentials:(NSString *)credentialsToken</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>actionID</Name>
+					<Abstract type="html">The ID of the action to report as completed.</Abstract>
+				</Parameter><Parameter>
+					<Name>credentialsToken</Name>
+					<Abstract type="html">The credentials string token returned by a previous invocation of startForAppId:userId:securityToken:. The corresponding appId will be used to perform this request. If you pass an invalid credentials token, this method will throw an exception.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/reportActionCompleted:forCredentials:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/SPOfferWallViewControllerDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/SPOfferWallViewControllerDelegate</TokenIdentifier>
+			<Abstract type="html">  The SPOfferWallViewControllerDelegate protocol is to be implemented by classes that wish to be notified when a presented SPOfferWallViewControllerDelegate is dismissed.</Abstract>
+			<DeclaredIn>SPOfferWallViewController.h</DeclaredIn>
+			
+			<NodeRef refid="9"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SPOfferWallViewControllerDelegate/offerWallViewController:isFinishedWithStatus:</TokenIdentifier>
+			<Abstract type="html">  Sent when the SPOfferWallViewController finished. It can have been explicitly dismissed by the user, closed itself when redirecting outside of the app to proceed with an offer, or closed due to an error.</Abstract>
+			<DeclaredIn>SPOfferWallViewController.h</DeclaredIn>			
+			
+			<Declaration>- (void)offerWallViewController:(SPOfferWallViewController *)offerWallVC isFinishedWithStatus:(int)status</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>offerWallVC</Name>
+					<Abstract type="html">the SPOfferWallViewController which is being closed.</Abstract>
+				</Parameter><Parameter>
+					<Name>status</Name>
+					<Abstract type="html">if there was a network error, this will have the value of SPONSORPAYERRNETWORK.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/offerWallViewController:isFinishedWithStatus:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,1288 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>SponsorPaySDK Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 858)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">SponsorPay iOS SDK </a></h1>
+				<a id="developerHome" href="../index.html">SponsorPay</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">SponsorPaySDK Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/VCSConnector">&nbsp;&nbsp;&nbsp;&nbsp;+ VCSConnector</option>
+	
+	<option value="//api/name/VCSConnectorForCredentials:">&nbsp;&nbsp;&nbsp;&nbsp;+ VCSConnectorForCredentials:</option>
+	
+	<option value="//api/name/brandEngageClient">&nbsp;&nbsp;&nbsp;&nbsp;+ brandEngageClient</option>
+	
+	<option value="//api/name/brandEngageClientForCredentials:">&nbsp;&nbsp;&nbsp;&nbsp;+ brandEngageClientForCredentials:</option>
+	
+	<option value="//api/name/offerWallViewController">&nbsp;&nbsp;&nbsp;&nbsp;+ offerWallViewController</option>
+	
+	<option value="//api/name/offerWallViewControllerForCredentials:">&nbsp;&nbsp;&nbsp;&nbsp;+ offerWallViewControllerForCredentials:</option>
+	
+	<option value="//api/name/reportActionCompleted:">&nbsp;&nbsp;&nbsp;&nbsp;+ reportActionCompleted:</option>
+	
+	<option value="//api/name/reportActionCompleted:forCredentials:">&nbsp;&nbsp;&nbsp;&nbsp;+ reportActionCompleted:forCredentials:</option>
+	
+	<option value="//api/name/requestBrandEngageOffersNotifyingDelegate:">&nbsp;&nbsp;&nbsp;&nbsp;+ requestBrandEngageOffersNotifyingDelegate:</option>
+	
+	<option value="//api/name/requestDeltaOfCoinsNotifyingDelegate:">&nbsp;&nbsp;&nbsp;&nbsp;+ requestDeltaOfCoinsNotifyingDelegate:</option>
+	
+	<option value="//api/name/setCurrencyName:">&nbsp;&nbsp;&nbsp;&nbsp;+ setCurrencyName:</option>
+	
+	<option value="//api/name/setShowPayoffNotificationOnVirtualCoinsReceived:">&nbsp;&nbsp;&nbsp;&nbsp;+ setShowPayoffNotificationOnVirtualCoinsReceived:</option>
+	
+	<option value="//api/name/showOfferWallWithParentViewController:">&nbsp;&nbsp;&nbsp;&nbsp;+ showOfferWallWithParentViewController:</option>
+	
+	<option value="//api/name/startForAppId:userId:securityToken:">&nbsp;&nbsp;&nbsp;&nbsp;+ startForAppId:userId:securityToken:</option>
+	
+	
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Starting the SDK">Starting the SDK</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Using the Mobile OfferWall">Using the Mobile OfferWall</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Requesting and showing Mobile Brand Engage offers">Requesting and showing Mobile Brand Engage offers</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Setting the currency name *">Setting the currency name *</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Determining if notifications should be shown to the user *">Determining if notifications should be shown to the user *</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Accessing the Virtual Currency Server">Accessing the Virtual Currency Server</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Reporting Rewarded Actions as completed">Reporting Rewarded Actions as completed</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/VCSConnector">VCSConnector</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/VCSConnectorForCredentials:">VCSConnectorForCredentials:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/brandEngageClient">brandEngageClient</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/brandEngageClientForCredentials:">brandEngageClientForCredentials:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/offerWallViewController">offerWallViewController</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/offerWallViewControllerForCredentials:">offerWallViewControllerForCredentials:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/reportActionCompleted:">reportActionCompleted:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/reportActionCompleted:forCredentials:">reportActionCompleted:forCredentials:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestBrandEngageOffersNotifyingDelegate:">requestBrandEngageOffersNotifyingDelegate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestDeltaOfCoinsNotifyingDelegate:">requestDeltaOfCoinsNotifyingDelegate:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setCurrencyName:">setCurrencyName:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setShowPayoffNotificationOnVirtualCoinsReceived:">setShowPayoffNotificationOnVirtualCoinsReceived:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/showOfferWallWithParentViewController:">showOfferWallWithParentViewController:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></span></li>
+	
+</ul></li>
+
+
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="SponsorPaySDK Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">SponsorPaySDK Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">SponsorPaySDK.h<br />SponsorPaySDK.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Provides convenience class methods to access the functionality of the SponsorPay SDK</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						<a title="Starting the SDK" name="task_Starting the SDK"></a>
+						<h3 class="subsubtitle task-title">Starting the SDK</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/startForAppId:userId:securityToken:">+&nbsp;startForAppId:userId:securityToken:</a></code>
+		<span class="tooltip"><p>Starts the SDK, registering your credentials for all subsequent usages of the SDK functionality.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Using the Mobile OfferWall" name="task_Using the Mobile OfferWall"></a>
+						<h3 class="subsubtitle task-title">Using the Mobile OfferWall</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/offerWallViewController">+&nbsp;offerWallViewController</a></code>
+		<span class="tooltip"><p>Returns an <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/offerWallViewControllerForCredentials:">+&nbsp;offerWallViewControllerForCredentials:</a></code>
+		<span class="tooltip"><p>Returns an <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/showOfferWallWithParentViewController:">+&nbsp;showOfferWallWithParentViewController:</a></code>
+		<span class="tooltip"><p>Presents the SponsorPay Mobile OfferWall as a child view controller of your own view controller.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Requesting and showing Mobile Brand Engage offers" name="task_Requesting and showing Mobile Brand Engage offers"></a>
+						<h3 class="subsubtitle task-title">Requesting and showing Mobile Brand Engage offers</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/brandEngageClient">+&nbsp;brandEngageClient</a></code>
+		<span class="tooltip"><p>Returns an <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/brandEngageClientForCredentials:">+&nbsp;brandEngageClientForCredentials:</a></code>
+		<span class="tooltip"><p>Returns an <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestBrandEngageOffersNotifyingDelegate:">+&nbsp;requestBrandEngageOffersNotifyingDelegate:</a></code>
+		<span class="tooltip"><p>Returns an <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> and your own delegate, and starts requesting an available BrandEngage offer immediately.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Setting the currency name *" name="task_Setting the currency name *"></a>
+						<h3 class="subsubtitle task-title">Setting the currency name *</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setCurrencyName:">+&nbsp;setCurrencyName:</a></code>
+		<span class="tooltip"><p>Sets the name of your virtual currency.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Determining if notifications should be shown to the user *" name="task_Determining if notifications should be shown to the user *"></a>
+						<h3 class="subsubtitle task-title">Determining if notifications should be shown to the user *</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setShowPayoffNotificationOnVirtualCoinsReceived:">+&nbsp;setShowPayoffNotificationOnVirtualCoinsReceived:</a></code>
+		<span class="tooltip"><p>Whether the SDK should show a toast-like notification to the user the first time calling <a href="../Classes/SPVirtualCurrencyServerConnector.html#//api/name/fetchDeltaOfCoins">[SPVirtualCurrencyServerConnector fetchDeltaOfCoins]</a> after completing an engagement returns a non-zero value.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Accessing the Virtual Currency Server" name="task_Accessing the Virtual Currency Server"></a>
+						<h3 class="subsubtitle task-title">Accessing the Virtual Currency Server</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/VCSConnector">+&nbsp;VCSConnector</a></code>
+		<span class="tooltip"><p>Returns an <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> <a href="#//api/name/instance">instance</a> configured with the appId, userId and securityToken passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/VCSConnectorForCredentials:">+&nbsp;VCSConnectorForCredentials:</a></code>
+		<span class="tooltip"><p>Returns an <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> <a href="#//api/name/instance">instance</a> configured with the appId, userId and securityToken passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/requestDeltaOfCoinsNotifyingDelegate:">+&nbsp;requestDeltaOfCoinsNotifyingDelegate:</a></code>
+		<span class="tooltip"><p>Requests to SponsorPay&rsquo;s Virtual Currency Server the amount of coins earned by the user since the last check, notifying the provided delegate of the result.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Reporting Rewarded Actions as completed" name="task_Reporting Rewarded Actions as completed"></a>
+						<h3 class="subsubtitle task-title">Reporting Rewarded Actions as completed</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/reportActionCompleted:">+&nbsp;reportActionCompleted:</a></code>
+		<span class="tooltip"><p>Reports a Rewarded Action ID as completed to the SponsorPay servers.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/reportActionCompleted:forCredentials:">+&nbsp;reportActionCompleted:forCredentials:</a></code>
+		<span class="tooltip"><p>Reports a Rewarded Action ID as completed to the SponsorPay servers, using the appId corresponding to the passed credentials token.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/VCSConnector" title="VCSConnector"></a>
+	<h3 class="subsubtitle method-title">VCSConnector</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> <a href="#//api/name/instance">instance</a> configured with the appId, userId and securityToken passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (SPVirtualCurrencyServerConnector *)VCSConnector</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An <a href="#//api/name/instance">instance</a> of <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> configured with the appId, userId and securityToken provided previously to the SDK start method.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> <a href="#//api/name/instance">instance</a> configured with the appId, userId and securityToken passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> This method expects that you&rsquo;ve started the SDK through <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> with a single appId - userId combination during the current session, or run, of your app. If you&rsquo;ve not started the SDK yet or you&rsquo;ve done it more than once with different appId - userId combinations, this method will throw an exception. If you need to use the Virtual Currency Server with more than one appId - userId combination, refer to <a href="#//api/name/VCSConnectorForCredentials:">VCSConnectorForCredentials:</a> instead.</p></blockquote>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/requestDeltaOfCoinsNotifyingDelegate:">+ requestDeltaOfCoinsNotifyingDelegate:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/VCSConnectorForCredentials:" title="VCSConnectorForCredentials:"></a>
+	<h3 class="subsubtitle method-title">VCSConnectorForCredentials:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> <a href="#//api/name/instance">instance</a> configured with the appId, userId and securityToken passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (SPVirtualCurrencyServerConnector *)VCSConnectorForCredentials:(NSString *)<em>credentialsToken</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>credentialsToken</em></dt>
+			<dd><p>The credentials string token returned by a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> whose appId, userId and securityToken will be configured in the returned <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> <a href="#//api/name/instance">instance</a>. If you pass an invalid credentials token, this method will throw an exception.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An <a href="#//api/name/instance">instance</a> of <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> configured with the appId, userId and securityToken corresponding to the provided credentials token.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> <a href="#//api/name/instance">instance</a> configured with the appId, userId and securityToken passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/brandEngageClient" title="brandEngageClient"></a>
+	<h3 class="subsubtitle method-title">brandEngageClient</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (SPBrandEngageClient *)brandEngageClient</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An <a href="#//api/name/instance">instance</a> of <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> configured with the appId and userId provided previously to the SDK start method.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> This method expects that you&rsquo;ve started the SDK through <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> with a single appId - userId combination during the current session, or run, of your app. If you&rsquo;ve not started the SDK yet or you&rsquo;ve done it more than once with different appId - userId combinations, this method will throw an exception. If you need to use Mobile BrandEngage with more than one appId - userId combination, refer to  <a href="#//api/name/brandEngageClientForCredentials:">brandEngageClientForCredentials:</a> instead.</p></blockquote>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/requestBrandEngageOffersNotifyingDelegate:">+ requestBrandEngageOffersNotifyingDelegate:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/brandEngageClientForCredentials:" title="brandEngageClientForCredentials:"></a>
+	<h3 class="subsubtitle method-title">brandEngageClientForCredentials:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (SPBrandEngageClient *)brandEngageClientForCredentials:(NSString *)<em>credentialsToken</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>credentialsToken</em></dt>
+			<dd><p>The credentials string token returned by a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> whose appId and userId will be configured in the returned <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a>. If you pass an invalid credentials token, this method will throw an exception.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An <a href="#//api/name/instance">instance</a> of <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> configured with the appId and userId corresponding to the provided credentials token.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/offerWallViewController" title="offerWallViewController"></a>
+	<h3 class="subsubtitle method-title">offerWallViewController</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (SPOfferWallViewController *)offerWallViewController</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An <a href="#//api/name/instance">instance</a> of <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> configured with the appId and userId provided previously to the SDK start method.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> This method expects that you&rsquo;ve started the SDK through <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> with a single appId - userId combination during the current session, or run, of your app. If you&rsquo;ve not started the SDK yet or you&rsquo;ve done it more than once with different appId - userId combinations, this method will throw an exception. If you need to use the OfferWall with more than one appId - userId combination, refer to  <a href="#//api/name/offerWallViewControllerForCredentials:">offerWallViewControllerForCredentials:</a> instead.</p></blockquote>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/showOfferWallWithParentViewController:">+ showOfferWallWithParentViewController:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/offerWallViewControllerForCredentials:" title="offerWallViewControllerForCredentials:"></a>
+	<h3 class="subsubtitle method-title">offerWallViewControllerForCredentials:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (SPOfferWallViewController *)offerWallViewControllerForCredentials:(NSString *)<em>credentialsToken</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>credentialsToken</em></dt>
+			<dd><p>The credentials string token returned by a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> whose appId and userId will be configured in the returned <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> <a href="#//api/name/instance">instance</a>. If you pass an invalid credentials token, this method will throw an exception.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An <a href="#//api/name/instance">instance</a> of <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> configured with the appId and userId corresponding to the provided credentials token.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/reportActionCompleted:" title="reportActionCompleted:"></a>
+	<h3 class="subsubtitle method-title">reportActionCompleted:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Reports a Rewarded Action ID as completed to the SponsorPay servers.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)reportActionCompleted:(NSString *)<em>actionID</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>actionID</em></dt>
+			<dd><p>The ID of the action to report as completed.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Reports a Rewarded Action ID as completed to the SponsorPay servers.</p><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> Action IDs can only contain capital letters, numbers, and the underscore (_) sign. If your action ID is not correctly formatted this method will throw an exception.</p></blockquote><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> This method expects that you&rsquo;ve started the SDK through <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> with a single appId - userId combination during the current session, or run, of your app. If you&rsquo;ve not started the SDK yet or you&rsquo;ve done it more than once with different appId - userId combinations, this method will throw an exception. If you need to use the SDK with ore than one appId - userId combination, refer to <a href="#//api/name/reportActionCompleted:forCredentials:">reportActionCompleted:forCredentials:</a> instead.</p></blockquote>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/reportActionCompleted:forCredentials:" title="reportActionCompleted:forCredentials:"></a>
+	<h3 class="subsubtitle method-title">reportActionCompleted:forCredentials:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Reports a Rewarded Action ID as completed to the SponsorPay servers, using the appId corresponding to the passed credentials token.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)reportActionCompleted:(NSString *)<em>actionID</em> forCredentials:(NSString *)<em>credentialsToken</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>actionID</em></dt>
+			<dd><p>The ID of the action to report as completed.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>credentialsToken</em></dt>
+			<dd><p>The credentials string token returned by a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a>. The corresponding appId will be used to perform this request. If you pass an invalid credentials token, this method will throw an exception.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Reports a Rewarded Action ID as completed to the SponsorPay servers, using the appId corresponding to the passed credentials token.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/requestBrandEngageOffersNotifyingDelegate:" title="requestBrandEngageOffersNotifyingDelegate:"></a>
+	<h3 class="subsubtitle method-title">requestBrandEngageOffersNotifyingDelegate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns an <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> and your own delegate, and starts requesting an available BrandEngage offer immediately.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (SPBrandEngageClient *)requestBrandEngageOffersNotifyingDelegate:(id&lt;SPBrandEngageClientDelegate&gt;)<em>delegate</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>Instance of one of your classes implementing the <a href="../Protocols/SPBrandEngageClientDelegate.html">SPBrandEngageClientDelegate</a> protocol, which will be notified of offers availability and engagement status.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An <a href="#//api/name/instance">instance</a> of <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> configured with your delegate object and the appId and userId provided previously to the SDK start method.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns an <a href="../Classes/SPBrandEngageClient.html">SPBrandEngageClient</a> <a href="#//api/name/instance">instance</a> configured with the appId and userId passed in a previous invocation of <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> and your own delegate, and starts requesting an available BrandEngage offer immediately.</p><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> This method expects that you&rsquo;ve started the SDK through <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> with a single appId - userId combination during the current session, or run, of your app. If you&rsquo;ve not started the SDK yet or you&rsquo;ve done it more than once with different appId - userId combinations, this method will throw an exception. If you need to use Mobile BrandEngage with more than one appId - userId combination, refer to  <a href="#//api/name/brandEngageClientForCredentials:">brandEngageClientForCredentials:</a> instead.</p></blockquote>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Protocols/SPBrandEngageClientDelegate.html">SPBrandEngageClientDelegate</a></p></code></li>
+			
+			<li><code><p><a href="../Classes/SPBrandEngageClient.html#//api/name/requestOffers">[SPBrandEngageClient requestOffers]</a></p></code></li>
+			
+			<li><code><p><a href="../Protocols/SPBrandEngageClientDelegate.html">SPBrandEngageClientDelegate</a>.</p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/requestDeltaOfCoinsNotifyingDelegate:" title="requestDeltaOfCoinsNotifyingDelegate:"></a>
+	<h3 class="subsubtitle method-title">requestDeltaOfCoinsNotifyingDelegate:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Requests to SponsorPay&rsquo;s Virtual Currency Server the amount of coins earned by the user since the last check, notifying the provided delegate of the result.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (SPVirtualCurrencyServerConnector *)requestDeltaOfCoinsNotifyingDelegate:(id&lt;SPVirtualCurrencyConnectionDelegate&gt;)<em>delegate</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>Any object conforming to the <a href="../Protocols/SPVirtualCurrencyConnectionDelegate.html">SPVirtualCurrencyConnectionDelegate</a>, which will be notified of the result of the request.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The <a href="#//api/name/instance">instance</a> of <a href="../Classes/SPVirtualCurrencyServerConnector.html">SPVirtualCurrencyServerConnector</a> that is being used to access SponsorPay&rsquo;s Virtual Currency Server for this request.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Requests to SponsorPay&rsquo;s Virtual Currency Server the amount of coins earned by the user since the last check, notifying the provided delegate of the result.</p><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> This method expects that you&rsquo;ve started the SDK through <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> with a single appId - userId combination during the current session, or run, of your app. If you&rsquo;ve not started the SDK yet or you&rsquo;ve done it more than once with different appId - userId combinations, this method will throw an exception. If you need to use the Virtual Currency Server with more than one appId - userId combination, refer to <a href="#//api/name/VCSConnectorForCredentials:">VCSConnectorForCredentials:</a> instead.</p></blockquote>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setCurrencyName:" title="setCurrencyName:"></a>
+	<h3 class="subsubtitle method-title">setCurrencyName:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets the name of your virtual currency.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)setCurrencyName:(NSString *)<em>name</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>This is a human readable, descriptive name of your virtual currency.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Sets the name of your virtual currency.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setShowPayoffNotificationOnVirtualCoinsReceived:" title="setShowPayoffNotificationOnVirtualCoinsReceived:"></a>
+	<h3 class="subsubtitle method-title">setShowPayoffNotificationOnVirtualCoinsReceived:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Whether the SDK should show a toast-like notification to the user the first time calling <a href="../Classes/SPVirtualCurrencyServerConnector.html#//api/name/fetchDeltaOfCoins">[SPVirtualCurrencyServerConnector fetchDeltaOfCoins]</a> after completing an engagement returns a non-zero value.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)setShowPayoffNotificationOnVirtualCoinsReceived:(BOOL)<em>shouldShowNotification</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>shouldShowNotification</em></dt>
+			<dd><p>Default value is YES.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Whether the SDK should show a toast-like notification to the user the first time calling <a href="../Classes/SPVirtualCurrencyServerConnector.html#//api/name/fetchDeltaOfCoins">[SPVirtualCurrencyServerConnector fetchDeltaOfCoins]</a> after completing an engagement returns a non-zero value.</p>
+
+<p>An example notification would be @&ldquo;Congratulations! You&rsquo;ve earned XXX coins!!&rdquo;, where &lsquo;coins&rsquo; would be your currency name.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/setShowPayoffNotificationOnVirtualCoinsReceived:forCredentials:">+ setShowPayoffNotificationOnVirtualCoinsReceived:forCredentials:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/setCurrencyName:">+ setCurrencyName:</a></p></code></li>
+			
+			<li><code><p><a href="../Classes/SPVirtualCurrencyServerConnector.html#//api/name/fetchDeltaOfCoins">[SPVirtualCurrencyServerConnector fetchDeltaOfCoins]</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/showOfferWallWithParentViewController:" title="showOfferWallWithParentViewController:"></a>
+	<h3 class="subsubtitle method-title">showOfferWallWithParentViewController:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Presents the SponsorPay Mobile OfferWall as a child view controller of your own view controller.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (SPOfferWallViewController *)showOfferWallWithParentViewController:(UIViewController&lt;SPOfferWallViewControllerDelegate&gt; *)<em>parent</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>parent</em></dt>
+			<dd><p>An <a href="#//api/name/instance">instance</a> of your own UIViewController subclass that will be used as the parent view controller of the presented OfferWall. It must conform to the <a href="../Protocols/SPOfferWallViewControllerDelegate.html">SPOfferWallViewControllerDelegate</a> protocol, and will be notified whenever the OfferWall is closed.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The <a href="#//api/name/instance">instance</a> of <a href="../Classes/SPOfferWallViewController.html">SPOfferWallViewController</a> which is being presented.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Presents the SponsorPay Mobile OfferWall as a child view controller of your own view controller.</p><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> This method expects that you&rsquo;ve started the SDK through <a href="#//api/name/startForAppId:userId:securityToken:">startForAppId:userId:securityToken:</a> with a single appId - userId combination during the current session, or run, of your app. If you&rsquo;ve not started the SDK yet or you&rsquo;ve done it more than once with different appId - userId combinations, this method will throw an exception. If you need to use the OfferWall with more than one appId - userId combination, refer to  <a href="#//api/name/offerWallViewControllerForCredentials:">offerWallViewControllerForCredentials:</a> instead.</p></blockquote>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/startForAppId:userId:securityToken:" title="startForAppId:userId:securityToken:"></a>
+	<h3 class="subsubtitle method-title">startForAppId:userId:securityToken:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Starts the SDK, registering your credentials for all subsequent usages of the SDK functionality.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (NSString *)startForAppId:(NSString *)<em>appId</em> userId:(NSString *)<em>userId</em> securityToken:(NSString *)<em>securityToken</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>appId</em></dt>
+			<dd><p>Your SponsorPay application ID.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>userId</em></dt>
+			<dd><p>ID of the current user of your application, or nil to have the SDK autogenerate an user ID or use a previously generated user ID.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>securityToken</em></dt>
+			<dd><p>Security token assigned to your app ID to authenticate requests to some resources and validate their responses.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A string token that, if you keep several sets of appId - userId combinations, can be used to refer to each one.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Starts the SDK, registering your credentials for all subsequent usages of the SDK functionality.</p><blockquote><p>%warning%<br/>
+<strong>Warning:</strong> It&rsquo;s necessary to call this method at least once every time your app runs in order to be able to use any other functionality of the SDK.<br/>
+If you provide nil as the userId parameter the SDK will use an autogenerated user ID, which will always be the same for this installation of your app.</p></blockquote>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SponsorPaySDK.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 SponsorPay. All rights reserved. (Last updated: 2013-08-01)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

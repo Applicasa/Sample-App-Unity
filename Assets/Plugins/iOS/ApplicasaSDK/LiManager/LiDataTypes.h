@@ -1,7 +1,7 @@
 //
 // LiDataTypes.h
 // Created by Applicasa 
-// 6/24/2013
+// 10/24/2013
 //
 
 
@@ -32,6 +32,7 @@ typedef enum {
 	UserMainCurrencyBalance,
 	UserSecondaryCurrencyBalance,
 	UserFacebookID,
+	UserTempDate,
 	//VirtualCurrency
 	VirtualCurrency_None,
 	VirtualCurrencyID,
@@ -64,23 +65,23 @@ typedef enum {
 	VirtualGoodMainCurrency,
 	VirtualGoodSecondaryCurrency,
 	VirtualGoodRelatedVirtualGood,
-	VirtualGoodStoreItemPrice,
 	VirtualGoodIOSBundleMin,
 	VirtualGoodIOSBundleMax,
 	VirtualGoodAndroidBundleMin,
 	VirtualGoodAndroidBundleMax,
+	VirtualGoodStoreItemPrice,
 	VirtualGoodPos,
+	VirtualGoodQuantity,
 	VirtualGoodMaxForUser,
 	VirtualGoodUserInventory,
-	VirtualGoodQuantity,
 	VirtualGoodImageA,
 	VirtualGoodImageB,
 	VirtualGoodImageC,
-	VirtualGoodIsDeal,
-	VirtualGoodConsumable,
-	VirtualGoodIsStoreItem,
 	VirtualGoodInAppleStore,
 	VirtualGoodInGoogleStore,
+	VirtualGoodIsStoreItem,
+	VirtualGoodIsDeal,
+	VirtualGoodConsumable,
 	VirtualGoodLastUpdate,
 	VirtualGoodMainCategory,
 	//VirtualGoodCategory
@@ -88,6 +89,89 @@ typedef enum {
 	VirtualGoodCategoryID,
 	VirtualGoodCategoryName,
 	VirtualGoodCategoryLastUpdate,
-	VirtualGoodCategoryPos
+	VirtualGoodCategoryPos,
+	//Dynamic
+	Dynamic_None,
+	DynamicID,
+	DynamicLastUpdate,
+	DynamicText,
+	DynamicNumber,
+	DynamicReal,
+	DynamicDate,
+	DynamicBool,
+	DynamicHtml,
+	DynamicImage,
+	//Chat
+	Chat_None,
+	ChatID,
+	ChatLastUpdate,
+	ChatIsSender,
+	ChatText,
+	ChatGhjgjgj,
+	ChatSender,
+	ChatReciepent,
+	//Achievments
+	Achievments_None,
+	AchievmentsID,
+	AchievmentsLastUpdate,
+	AchievmentsPoints,
+	AchievmentsDes,
+	//Foo
+	Foo_None,
+	FooID,
+	FooLastUpdate,
+	FooName,
+	FooDescription,
+	FooBoolean,
+	FooDate,
+	FooImage,
+	FooFile,
+	FooLocation,
+	FooNumber,
+	FooAge,
+	FooOwner,
+	//GameV
+	GameV_None,
+	GameVID,
+	GameVLastUpdate,
+	GameVValue,
+	GameVFunction,
+	//DataManager
+	DataManager_None,
+	DataManagerID,
+	DataManagerLastUpdate,
+	DataManagerAaa,
+	DataManagerName,
+	//DataManString
+	DataManString_None,
+	DataManStringID,
+	DataManStringLastUpdate,
+	DataManStringKey,
+	DataManStringValue,
+	//ScoreB
+	ScoreB_None,
+	ScoreBID,
+	ScoreBLastUpdate,
+	ScoreBScore,
+	ScoreBUser,
+	//Levels
+	Levels_None,
+	LevelsID,
+	LevelsLastUpdate,
+	LevelsGtgtg,
+	LevelsHTML,
+	LevelsTgtggtg,
+	//Colors
+	Colors_None,
+	ColorsID,
+	ColorsLastUpdate,
+	ColorsNumber,
+	ColorsColor,
+	//Languages
+	Languages_None,
+	LanguagesID,
+	LanguagesLastUpdate,
+	LanguagesText,
+	LanguagesLanguageName
 }LiFields;
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+using Applicasa;
 public class ApplicasaMenu : MonoBehaviour {
 	// Singleton
 	public static ApplicasaMenu instance;
@@ -9,8 +9,31 @@ public class ApplicasaMenu : MonoBehaviour {
 	public static int UserVirtualcurrencyBalance=0;
 		
 	//The current user name
-	public static string UserName="Anonymous";
+	public static string UserName = "Anonymous";
 	
+	        /**
+         Instruction to raise custom events.
+         The "Egg" sample app implemented custom events that will raise the different ad network possible (TrialPay, MMedia, SupersonicAds, SponsorPay Appnext and Chartboost)
+
+         To raise different AdNetwork just change the name of the variable "customEvent" below.
+         use the the following names to raise the different ad network:
+
+         1. TrialPay:
+                A. MainCurrency ------------------->OfferwallMainCurrency
+                 B. SecondaryCurrency -------------->OfferwallSecondaryCurrency
+         2. Millennial Media ------------------>@"MMedia"
+         3. SupersonicAds
+                 A. SupersonicAds BrandConnect ----->@"SuperSonicBrand"
+                 B. SupersonicAds offerwall -------->@"SuperSonic"
+         3. SponsorPay
+                 A. SponsorPay BrandEngage --------->@"SponsorPayBrand"
+                 B. SponsorPay offerwall ----------->@"SponsorPay"
+         4.Appnext ---------------------------->@"Appnext"
+         5.Chartboost ------------------------->@"Chartboost"
+         
+         **/
+	
+	private static string customEvent = "MMedia";
 	#region Promotions
 		void Start()
 		{
@@ -22,6 +45,7 @@ public class ApplicasaMenu : MonoBehaviour {
 			
 			// The second method is to register a delegate callback to be called when a new promotion is available.
 			// Option2: 
+			Applicasa.PromotionManager.ShowDemoCampaigns();
 			Applicasa.PromotionManager.SetLiKitPromotionDelegateAndCheckPromotions(PromotionsAvailable,true);
 		
 			//Update User virtual currency balace
@@ -29,9 +53,10 @@ public class ApplicasaMenu : MonoBehaviour {
 		
 			//Update User name
 			UpdateUserDisplay();
-		
+			
 		}
-		
+	
+			
 		[MonoPInvokeCallback (typeof (Applicasa.Promotion.GetPromotionArrayFinished))]
 		public static void PromotionCallback (bool success, Applicasa.Error error, Applicasa.Promotion.PromotionArray promotionArrayPtr)
 		{
@@ -55,13 +80,22 @@ public class ApplicasaMenu : MonoBehaviour {
 					promotions [0].Show (PromoResult);
 		}
 		
-		// We must provide a callback for the promotion result.
+		
+	    [MonoPInvokeCallback (typeof (Applicasa.ThirdPartyAction.GetThirdPartyActionArrayFinished))]
+		public static void GetThirdPartyActionArray(bool success, Applicasa.Error error, Applicasa.ThirdPartyAction[] result)
+		{
+			UpdateVirtualCurrencyBalance ();
+		     Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": GetTrialPayActionArray number of actions = "+(result==null?"0":result.Length.ToString()));
+		}
+	    // We must provide a callback for the promotion result.
 		[MonoPInvokeCallback (typeof (Applicasa.Promotion.PromotionResultDelegate))]
 		public static void PromoResult (Applicasa.PromotionAction promoAction, Applicasa.PromotionResult result,  Applicasa.PromotionResultInfo info)
 		{
 			//Update User virtual currency balace
+			Applicasa.ThirdPartyAction.GetThirdPartyActions(GetThirdPartyActionArray);
 			UpdateVirtualCurrencyBalance ();
 			Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Got Promotion Result");
+			Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": info is "+info.stringResult);
 		}
 		
 	#endregion
@@ -76,6 +110,7 @@ public class ApplicasaMenu : MonoBehaviour {
 				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Applicasa Logged In");
 				UpdateUserDisplay();
 				UpdateVirtualCurrencyBalance();
+				Application.LoadLevel("AppFacebookScene");
 			} else {
 				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Applicasa didn't Log In");
 			}
@@ -93,7 +128,7 @@ public class ApplicasaMenu : MonoBehaviour {
 			Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Balance = " + UserVirtualcurrencyBalance);	
 			return null;
 		}
-	//Update User name 
+	    //Update User name 
 		static IEnumerator UpdateUserDisplay ()
 		{
 			Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Get Current User name");
@@ -108,28 +143,37 @@ public class ApplicasaMenu : MonoBehaviour {
 	
 	#region GUI
 		public Texture2D m_Background, m_Play, m_Facebook, m_Store,m_Coins;
+	    public Texture2D m_RaisePromotion, m_Egg;
 
-		int buttonWidth = Mathf.FloorToInt(Screen.height/2f);
-		int buttonHeight = Mathf.FloorToInt(Screen.height/5f);
+		int buttonWidth = Mathf.FloorToInt(Screen.width/6f);
+		int buttonHeight = Mathf.FloorToInt(Screen.height/6f);
 	
 		void OnGUI ()
 		{	
 		
 			GUI.depth = 10;
-			Rect BackgroundRect = new Rect (
-				(Screen.width - Screen.width) * 0.5f,
-				(Screen.height - Screen.height) * 0.5f,
-				Screen.width,
+			Rect BackgroundRectLeft = new Rect (
+				0,
+				0,
+				Screen.width*0.3f,
 				Screen.height
 			);
-			GUI.DrawTexture (BackgroundRect, m_Background);
-			GUILayout.BeginArea (BackgroundRect);
-			GUILayout.FlexibleSpace ();
+		    Rect BackgroundRectMiddle = new Rect (
+				Screen.width*0.3f,
+				0,
+				Screen.width*0.40f,
+				Screen.height
+			);
+			Rect BackgroundRectRight = new Rect (
+				Screen.width*0.7f,
+				0,
+				Screen.width*0.3f,
+				Screen.height
+			);
+			GUI.DrawTexture (BackgroundRectLeft, m_Background);
+			GUILayout.BeginArea (BackgroundRectLeft);
+						
 			
-			//Play button
-			if (MenuButton (m_Play)) {
-				//Your game here :)
-			}
 			//Store button
 			GUILayout.FlexibleSpace ();
 			if (MenuButton (m_Store)) {
@@ -142,18 +186,54 @@ public class ApplicasaMenu : MonoBehaviour {
 			if (MenuButton (m_Facebook)) {
 				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": FacebookUser=" + Applicasa.User.GetCurrentUser ().UserID.ToString() + "Is Reg?" + Applicasa.User.GetCurrentUser ().UserIsRegisteredFacebook);
 				Applicasa.User.FacebookLogin (FacebookLoginCallback);	
+				
 		
 			}
 	
 			GUILayout.FlexibleSpace ();
 			GUILayout.EndArea ();
+		
+	
+		    GUI.DrawTexture (BackgroundRectMiddle, m_Background);
+			GUI.DrawTexture (BackgroundRectMiddle, m_Egg);
+			GUILayout.BeginArea (BackgroundRectMiddle);
 			
-			GUI.DrawTexture(new Rect(Screen.height*0.05f,Screen.height*0.05f,15,15),m_Coins);
+			GUILayout.FlexibleSpace ();
+			GUILayout.FlexibleSpace ();
+			//Play button
+			if (MenuButton (m_Play)) {
+				//Your game here :)
+
+			}
+			GUILayout.EndArea ();
+		
+		
+			GUI.DrawTexture (BackgroundRectRight, m_Background);
+			GUILayout.BeginArea (BackgroundRectRight);					
+		
+		   //Raise SponsorPayBrand
+			GUILayout.FlexibleSpace ();
+			if (MenuButton (m_RaisePromotion)) {
+				Applicasa.PromotionManager.RaiseCustomEvent(customEvent);
+			}
+	
+
+	
+			GUILayout.FlexibleSpace ();
+			GUILayout.EndArea ();
+		
+			//Show User name
+			GUI.Label(new Rect(Screen.width*0.05f,Screen.height*0.05f,Screen.width,Screen.height*0.05f),"" + UserName);
+		
+		
+			GUI.DrawTexture(new Rect(Screen.height*0.10f,Screen.height*0.1f,15,15),m_Coins);
 			//Show User virtual currency balace
 			
-			GUI.Label(new Rect(Screen.height*0.15f,Screen.height*0.05f,Screen.width,Screen.height*0.05f),"" + UserVirtualcurrencyBalance.ToString ());	
-				//Show User name
-			GUI.Label(new Rect(Screen.width*0.85f,Screen.height*0.05f,Screen.width,Screen.height*0.05f),"" + UserName);
+			GUI.Label(new Rect(Screen.height*0.15f,Screen.height*0.095f,Screen.width,Screen.height*0.05f),"" + UserVirtualcurrencyBalance.ToString ());	
+			
+		
+			
+
 		}
 	
 		public void FbLogInButtonAction(){

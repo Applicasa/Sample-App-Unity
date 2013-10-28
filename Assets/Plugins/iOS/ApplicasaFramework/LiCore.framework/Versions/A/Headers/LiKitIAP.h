@@ -26,7 +26,7 @@ typedef enum {
     FAIL = 0,
     SUCCESS = 1,
     RUNNING = 2,
-    SUCCESS_INIT_BUT_FAILED_VERIFY_VIRTUAL_CURRENCY = 3,
+    SUCCESS_INIT_BUT_FAILED_VERIFY_VIRTUAL_ITEMS = 3,
     SUCCESS_INIT_BUT_WITH_ZERO_ITEMS
 } IAP_STATUS;
 
@@ -45,7 +45,7 @@ typedef enum {
 + (NSArray *) virtualGoodsStoreItems;
 + (NSArray *) virtualGoodCategories;
 
-+ (void) getTrialPayActions:(LiTrialPayResponse)block;
++ (void) getThirdPartyActions:(LiThirdPartyResponse)block;
 
 + (NSArray *) virtualGoodDeals;
 + (NSArray *) virtualCurrencyDeals;

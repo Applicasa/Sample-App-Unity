@@ -1,0 +1,12 @@
+{
+    "group": "Applicasa",
+    "libs": ["libsqlite3.0.dylib"],
+    "frameworks": ["Security.framework","Social.framework","StoreKit.framework","CoreLocation.framework","AdSupport.framework","Accounts.framework"],
+    "headerpaths": [],
+	"librarysearchpaths": [],
+    "frameworksearchpaths": [],
+    "folders": ["/Plugins/iOS/ApplicasaSDK/","/Plugins/iOS/ApplicasaUnity"],
+	"files":   ["/Plugins/iOS/ApplicasaFramework/Li_AWSiOSSDK.framework","/Plugins/iOS/ApplicasaFramework/LiCore.framework"],   
+	"excludes": ["^.*.meta$", "^.*.mdown$", "^.*.pdf$"],
+    "linker_flags": ["-ObjC","-all_load"]
+}

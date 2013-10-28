@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.sponsorpay.SponsorPay-iOS-SDK</string>
+	<key>CFBundleName</key>
+	<string>SponsorPay iOS SDK Documentation</string>
+	<key>CFBundleShortVersionString</key>
+	<string>--no-repeat-first-par</string>
+	<key>CFBundleVersion</key>
+	<string>--no-repeat-first-par</string>
+	
+	
+	
+	
+	<key>DocSetFeedName</key>
+	<string>SponsorPay iOS SDK Documentation</string>
+	<key>DocSetFeedURL</key>
+	<string>http://developer.sponsorpay.com/docs/mobile/ios/docset/com.sponsorpay.SponsorPay-iOS-SDK.atom</string>
+	<key>DocSetMinimumXcodeVersion</key>
+	<string>3.0</string>
+	
+	<key>DashDocSetFamily</key>
+	<string>appledoc</string>
+	<key>DocSetPublisherIdentifier</key>
+	<string>com.sponsorpay.documentation</string>
+	<key>DocSetPublisherName</key>
+	<string>SponsorPay</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2013 SponsorPay. All rights reserved.</string>
+</dict>
+</plist>

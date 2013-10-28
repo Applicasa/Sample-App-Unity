@@ -1,7 +1,7 @@
 //
 // User.m
 // Created by Applicasa 
-// 6/24/2013
+// 10/24/2013
 //
 
 #import "User.h"
@@ -28,6 +28,7 @@
 #define KEY_userMainCurrencyBalance				@"UserMainCurrencyBalance"
 #define KEY_userSecondaryCurrencyBalance				@"UserSecondaryCurrencyBalance"
 #define KEY_userFacebookID				@"UserFacebookID"
+#define KEY_userTempDate				@"UserTempDate"
 
 @interface User (privateMethods)
 
@@ -55,6 +56,7 @@
 @synthesize userMainCurrencyBalance;
 @synthesize userSecondaryCurrencyBalance;
 @synthesize userFacebookID;
+@synthesize userTempDate;
 
 enum UserIndexes {
 	UserIDIndex = 0,
@@ -74,8 +76,9 @@ enum UserIndexes {
 	UserImageIndex,
 	UserMainCurrencyBalanceIndex,
 	UserSecondaryCurrencyBalanceIndex,
-	UserFacebookIDIndex,};
-#define NUM_OF_USER_FIELDS 18
+	UserFacebookIDIndex,
+	UserTempDateIndex,};
+#define NUM_OF_USER_FIELDS 19
 
 
 
@@ -187,7 +190,7 @@ enum UserIndexes {
     [request addIntValue:queryKind forKey:@"DbGetKind"];
     [request setDelegate:item];
     [request addValue:query forKey:@"query"];
-    request.shouldWorkOffline = YES;
+    request.shouldWorkOffline = (queryKind == LOCAL);
     
     [request startSync:YES];
     
@@ -202,6 +205,30 @@ enum UserIndexes {
         return [User getArrayFromStatement:stmt IDsList:idsList resultFromServer:request.resultFromServer];
     }
     return nil;
+}
+
++ (int) updateLocalStorage:(LiQuery *)query queryKind:(QueryKind)queryKind
+{
+    query = [self setFieldsNameToQuery:query];
+    LiObjRequest *request = [LiObjRequest requestWithAction:GetArray ClassName:kClassName];
+    [request addIntValue:queryKind forKey:@"DbGetKind"];
+    [request addValue:query forKey:@"query"];
+    request.shouldWorkOffline = (queryKind == LOCAL);
+    
+    [request startSync:YES];
+    
+    NSInteger responseType = request.response.responseType;
+    
+    if (responseType == 1)
+    {
+        sqlite3_stmt *stmt = (sqlite3_stmt *)[request.response getStatement];
+        int i =0;
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            i++;
+        }
+        return i;
+    }
+    return  -1;
 }
 
 + (void) getArrayWithFilter:(LiFilters *)filter withBlock:(UpdateObjectFinished)block
@@ -289,7 +316,9 @@ enum UserIndexes {
     [LiObjRequest handleError:&error ResponseType:responseType ResponseMessage:responseMessage];
 
     GetUserArrayFinished _block = (GetUserArrayFinished)block;
-    _block(error,array);
+    
+    if (_block)
+        _block(error,array);
 }
 
 + (User *) getCurrentUser{
@@ -373,6 +402,9 @@ static LiBlockAction actionBlock = NULL;
 	case UserSecondaryCurrencyBalance:
 		self.userSecondaryCurrencyBalance = [value intValue];
 		break;
+	case UserTempDate:
+		self.userTempDate = value;
+		break;
 	default:
 	break;
 	}
@@ -396,6 +428,7 @@ static LiBlockAction actionBlock = NULL;
 	[userLastUpdate release];
 	[userImage release];
 	[userFacebookID release];
+	[userTempDate release];
 
 
 	[super dealloc];
@@ -427,6 +460,7 @@ static LiBlockAction actionBlock = NULL;
 		self.userMainCurrencyBalance				= 0;
 		self.userSecondaryCurrencyBalance				= 0;
 		userFacebookID				= [@"" retain];
+		self.userTempDate				= [[[NSDate alloc] initWithTimeIntervalSince1970:0] autorelease];
 	}
 	return self;
 }
@@ -451,6 +485,7 @@ static LiBlockAction actionBlock = NULL;
 		self.userMainCurrencyBalance               = [[item objectForKey:KeyWithHeader(KEY_userMainCurrencyBalance, header)] integerValue];
 		self.userSecondaryCurrencyBalance               = [[item objectForKey:KeyWithHeader(KEY_userSecondaryCurrencyBalance, header)] integerValue];
 		userFacebookID               = [[item objectForKey:KeyWithHeader(KEY_userFacebookID, header)] retain];
+		self.userTempDate               = [item objectForKey:KeyWithHeader(KEY_userTempDate, header)];
 
 	}
 	return self;
@@ -479,6 +514,7 @@ static LiBlockAction actionBlock = NULL;
 		self.userMainCurrencyBalance               = object.userMainCurrencyBalance;
 		self.userSecondaryCurrencyBalance               = object.userSecondaryCurrencyBalance;
 		userFacebookID               = [object.userFacebookID retain];
+		self.userTempDate               = object.userTempDate;
 
 	}
 	return self;
@@ -503,6 +539,7 @@ static LiBlockAction actionBlock = NULL;
 	[dictionary addValue:userImage.absoluteString forKey:KEY_userImage];	[dictionary addIntValue:userMainCurrencyBalance forKey:KEY_userMainCurrencyBalance];
 	[dictionary addIntValue:userSecondaryCurrencyBalance forKey:KEY_userSecondaryCurrencyBalance];
 	[dictionary addValue:userFacebookID forKey:KEY_userFacebookID];
+	[dictionary addDateValue:userTempDate forKey:KEY_userTempDate];
 
 	return [dictionary autorelease];
 }
@@ -528,6 +565,7 @@ static LiBlockAction actionBlock = NULL;
 	[fieldsDic setValue:TypeAndDefaultValue(kINTEGER_TYPE,@"0") forKey:KEY_userMainCurrencyBalance];
 	[fieldsDic setValue:TypeAndDefaultValue(kINTEGER_TYPE,@"0") forKey:KEY_userSecondaryCurrencyBalance];
 	[fieldsDic setValue:TypeAndDefaultValue(kTEXT_TYPE,@"''") forKey:KEY_userFacebookID];
+	[fieldsDic setValue:TypeAndDefaultValue(kDATETIME_TYPE,@"'1970-01-01 00:00:00'") forKey:KEY_userTempDate];
 	
 	return [fieldsDic autorelease];
 }
@@ -611,6 +649,10 @@ static LiBlockAction actionBlock = NULL;
 			fieldName = KEY_userFacebookID;
 			break;
 
+		case UserTempDate:
+			fieldName = KEY_userTempDate;
+			break;
+
 		default:
 			NSLog(@"Wrong LiFields numerator for %@ Class",kClassName);
 			fieldName = nil;
@@ -651,6 +693,7 @@ static LiBlockAction actionBlock = NULL;
 	[*request addValue:userImage.absoluteString forKey:KEY_userImage];
 	[*request addIntValue:userMainCurrencyBalance forKey:KEY_userMainCurrencyBalance];
 	[*request addIntValue:userSecondaryCurrencyBalance forKey:KEY_userSecondaryCurrencyBalance];
+	[*request addDateValue:userTempDate forKey:KEY_userTempDate];
 }
 
 
@@ -674,6 +717,7 @@ static LiBlockAction actionBlock = NULL;
 			self.userMainCurrencyBalance = sqlite3_column_int(stmt, array[0][UserMainCurrencyBalanceIndex]);
 			self.userSecondaryCurrencyBalance = sqlite3_column_int(stmt, array[0][UserSecondaryCurrencyBalanceIndex]);
 			userFacebookID = [[NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, array[0][UserFacebookIDIndex])] retain];
+			self.userTempDate = [[LiCore liSqliteDateFormatter] dateFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(stmt, array[0][UserTempDateIndex])]];
 		
 		}
 	return self;
@@ -710,6 +754,7 @@ static LiBlockAction actionBlock = NULL;
 	indexes[0][UserMainCurrencyBalanceIndex] = [columnsArray indexOfObject:KEY_userMainCurrencyBalance];
 	indexes[0][UserSecondaryCurrencyBalanceIndex] = [columnsArray indexOfObject:KEY_userSecondaryCurrencyBalance];
 	indexes[0][UserFacebookIDIndex] = [columnsArray indexOfObject:KEY_userFacebookID];
+	indexes[0][UserTempDateIndex] = [columnsArray indexOfObject:KEY_userTempDate];
 
 	[columnsArray release];
 	NSMutableArray *blackList = [[NSMutableArray alloc] init];

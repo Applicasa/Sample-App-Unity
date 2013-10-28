@@ -62,16 +62,16 @@ namespace Applicasa {
     
 #endif
   }
-		
-		
+
+
 #if UNITY_ANDROID && !UNITY_EDITOR  
-	
+
 	public static void SessionEndCallback(bool success, Error error, System.IntPtr userPtr)
 	{
 		closeApplicasa();
 		Application.Quit();
 	}
-		
+
 	public static IEnumerator finishedSynchOfflineOperation(CallbackInitialize _callbackInitialize) {
    saveCallback(_callbackInitialize);  
    using(AndroidJavaClass javaUnityApplicasa = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaLiManager"))
@@ -106,7 +106,7 @@ namespace Applicasa {
  private static ApplicasaListener m_applicasaListenerGameObject;
   private static void initPushListener()
 	{
-	
+
 	}
 #else
   public static IEnumerator finishedSynchOfflineOperation(CallbackInitialize _callbackInitialize) {
@@ -117,9 +117,9 @@ namespace Applicasa {
  private static ApplicasaListener m_applicasaListenerGameObject;
 private static void initPushListener()
 {
-	
+
 }
-	
+
 #endif
   }
 }

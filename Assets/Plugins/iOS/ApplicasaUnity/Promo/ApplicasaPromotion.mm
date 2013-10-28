@@ -1,11 +1,16 @@
 #import "ApplicasaCore.h"
 //#import "iPhone_View.h"
+#ifdef UNITY_4_2_0
+#import "UnityAppController.h"
+#else
 #import "AppController.h"
+#endif
+
 #import "LiCore/Promotion.h"
 #import "LiCore/LiKitPromotions.h"
 
-
 void UnityPause(bool pause);
+
 extern "C" {
     
     const char * ApplicasaPromotionGetID(Promotion* promotion) {
@@ -137,18 +142,29 @@ extern "C" {
     {
         [LiKitPromotions dismiss:promotion];
     }
-    
-    void ApplicasaPromotionShowWithBlock(Promotion* promotion, ApplicasaPromotionResult callback) {
-        //    MiniView *promoView;
-        IncreasePromoCounter();
-        UIView *view = [[UIApplication sharedApplication].keyWindow.subviews objectAtIndex:0];
+	
+	void ApplicasaPromotionShowWithBlock(Promotion* promotion, ApplicasaPromotionResult callback) {
+        switch (promotion.promotionActionKind) {
+            case LiPromotionTypeAppnext:
+            case LiPromotionTypeChartboost://8
+            case LiPromotionTypeMMedia://10
+            case LiPromotionTypeSponsorPay://11
+            case LiPromotionTypeSupersonicAds://12
+              
+                break;
+                
+            default:
+                IncreasePromoCounter();
+                break;
+        }
         
+        
+        UIView *view = [[UIApplication sharedApplication].keyWindow.subviews objectAtIndex:0];
         [promotion showOnView:view Block:ApplicasaPromotionResultToBlock(callback)];
     }
+	
     
     void ApplicasaPromotionGetLocalArrayWithRawSqlQuery(const char * rawQuery, ApplicasaGetPromotionArrayFinished callback) {
         [Promotion getArrayLocallyWithRawSQLQuery:CharPointerToNSString(rawQuery) WithBlock:ApplicasaGetPromotionArrayFinishedToBlock(callback)];
     }
-    
-    
 }

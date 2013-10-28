@@ -15,6 +15,7 @@
 #import <LiCore/LiCore.h>
 #import "User.h"
 #import "LiConfig.h"
+#import "LiManager.h"
 
 #define kCancelButtonTag 1
 #define kActionButtonTag 2
@@ -24,8 +25,27 @@
 #define CHARTBOOST
 #import <LiChartboost/LiChartboostManager.h>
 #endif
+#if (ENABLE_MMEDIA)
+#define MMEDIA
+#import <LiMMedia/LiMMediaManager.h>
+#endif
 
-@interface PromoView()
+#if (ENABLE_SPONSORPAY)
+#define SPONSORPAY
+#import <LiSponsorPay/LiSponsorPayManager.h>
+#endif
+
+#if (ENABLE_APPNEXT)
+#define APPNEXT
+#import <LiAppnext/LiAppnextManager.h>
+#endif
+
+#if (ENABLE_SUPERSONICADS)
+#define SUPERSONIC
+#import <LiSupersonicAds/LiSupersonicAdsManager.h>
+#endif
+
+@interface PromoView()<UIWebViewDelegate>
 
 - (void) defaultAction;
 - (VirtualCurrency *) getVirtualCurrencyByID:(NSString *)ID;
@@ -33,14 +53,24 @@
 - (void) closeAction;
 - (IBAction) promoButtonPressed:(UIButton *)sender;
 
-+(PromoView *) showRegularPromotionWithPromoView:(PromoView *)view;
-+(PromoView *) showTrialPayWithPromoView:(PromoView *)view;
-+(PromoView *) showChartboostWithPromoView:(PromoView *)view;
+-(PromoView *) showRegularPromotionWithPromoView:(PromoView *)view;
+-(PromoView *) showTrialPayWithPromoView:(PromoView *)view;
+-(PromoView *) showChartboostWithPromoView:(PromoView *)view;
+-(PromoView *)showSponsorPayWithPromoView:(PromoView *)view;
+-(PromoView *)showAppnextWithPromoView:(PromoView *)view;
+-(PromoView *)showSupersonicAdsWithPromoView:(PromoView *)view;
+
+
+@property (assign,nonatomic) NSString *baseOfferwallUrl;
+@property (retain,nonatomic) UIWebView *offerwallWebview;
+@property (assign,nonatomic)  UIButton *backButton;
+-(void) backButtonPressed;
 @end
 
 @implementation PromoView
-@synthesize promotion;
+@synthesize promotion,baseOfferwallUrl,offerwallWebview,backButton;
 
+static BOOL isDuringTrialPay =FALSE;
 #pragma mark - UI Builder
 
 + (PromoView *) promoViewWithPromotion:(Promotion *)promotion andFrame:(CGRect)frame{
@@ -50,14 +80,27 @@
     
     switch(promotion.promotionActionKind)
     {
+        case LiPromotionTypeMMedia:
+            view = [view showMMediaWithPromoView:view];
+            break;
         case LiPromotionTypeChartboost:
-            view = [self showChartboostWithPromoView:view];
+            view = [view showChartboostWithPromoView:view];
             break;
         case LiPromotionTypeTrialPay:
-            view = [self showTrialPayWithPromoView:view];
+            if (!isDuringTrialPay)
+                view = [view showTrialPayWithPromoView:view];
+            break;
+        case LiPromotionTypeSponsorPay:
+            view = [view showSponsorPayWithPromoView:view];
+            break;
+        case LiPromotionTypeSupersonicAds:
+            view = [view showSupersonicAdsWithPromoView:view];
+            break;
+        case LiPromotionTypeAppnext:
+            view = [view showAppnextWithPromoView:view];
             break;
             default:
-            view = [self showRegularPromotionWithPromoView:view];
+            view = [view showRegularPromotionWithPromoView:view];
             break;
     }
     return view;
@@ -75,8 +118,18 @@
 #pragma mark - Close Button
 
 - (void) closeAction{
-    promotion.block(LiPromotionActionCancel,0,nil);
-    [LiKitPromotions promo:promotion ButtonClicked:NO CancelButton:YES];
+    if (promotion.promotionActionKind == LiPromotionTypeTrialPay)
+    {
+        isDuringTrialPay = FALSE;
+        promotion.block(LiPromotionActionPressed,LiPromotionResultTrialPay,nil);
+        [LiKitPromotions promo:promotion ButtonClicked:NO CancelButton:YES];
+    }
+    else
+    {
+        promotion.block(LiPromotionActionCancel,0,nil);
+    
+        [LiKitPromotions promo:promotion ButtonClicked:NO CancelButton:YES];
+    }
 }
 
 #pragma mark - Action Button
@@ -192,7 +245,7 @@
 
 #pragma mark - Showing methods
 
-+(PromoView *) showRegularPromotionWithPromoView:(PromoView *)view
+-(PromoView *) showRegularPromotionWithPromoView:(PromoView *)view
 {
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:view.frame];
     [bgImageView setUserInteractionEnabled:YES];
@@ -216,12 +269,6 @@
     
     
     [[view.promotion promotionButton] getCachedImageWithBlock:^(NSError *error, UIImage *image) {
-       /* CGRect rect = actionButton.frame;
-        rect.size.width = (image.size.width)/2;
-        rect.size.height = (image.size.height)/2;
-        rect.origin.x = (view.frame.size.width-rect.size.width)/2;
-        
-        [actionButton setFrame:rect];*/
         [actionButton setImage:image forState:UIControlStateNormal];
     }];
     
@@ -236,20 +283,24 @@
     return view;
 }
 
-+(PromoView *)showTrialPayWithPromoView:(PromoView *)view
+-(PromoView *)showTrialPayWithPromoView:(PromoView *)view
 {
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:view.frame];
+    isDuringTrialPay = TRUE;
+    offerwallWebview = [[UIWebView alloc] initWithFrame:view.frame];
     NSDictionary *dictionary = [view.promotion.promotionActionData liJSONValue];
     NSString *tempURL = [dictionary objectForKey:@"link"];
     NSString *userID = [[User getCurrentUser ] userID];
-    NSURL *url = [NSURL URLWithString:[tempURL stringByAppendingFormat:@"sid=%@&Promotion=%@",userID,view.promotion.promotionID]];
-    
+    NSString *isSandBox = [LiManager isSandboxEnabled]?@"true":@"false";
+    NSURL *url = [NSURL URLWithString:[tempURL stringByAppendingFormat:@"sid=%@&Promotion=%@&IsSandbox=%@%@",userID,view.promotion.promotionID,isSandBox,[LiKitPromotions getTrialPayDeviceInfo] ]];
+     baseOfferwallUrl = [url absoluteString];
     //URL Requst Object
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     
     //Load the request in the UIWebView.
-    [webView loadRequest:requestObj];
-    [view addSubview:webView];
+    [offerwallWebview loadRequest:requestObj];
+    [offerwallWebview setDelegate:self];
+    [view addSubview:offerwallWebview];
+
     
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(view.frame.size.width-35, 5, 30, 30)];
     [closeButton setImage:[UIImage imageNamed:@"Close"] forState:UIControlStateNormal];
@@ -262,10 +313,64 @@
     return view;
 }
 
-+(PromoView *)showChartboostWithPromoView:(PromoView *)view
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if ([request.URL.scheme hasPrefix:@"http"]) {
+        return YES;
+    }
+    
+    NSURL *url = request.URL;
+    if ([request.URL.scheme hasPrefix:@"tpbow"]) {
+        url = [NSURL URLWithString:[request.URL.absoluteString substringFromIndex:5]];
+    }
+    
+    [[UIApplication sharedApplication] openURL: url];
+    return NO;
+}
+
+// UIWebView: override webViewDidFinishLoad to display or hide back button
+// and store offer wall URL
+- (void)webViewDidFinishLoad:(UIWebView *)_webView
+{
+    if (_webView != offerwallWebview) {
+        return;
+    }
+    
+    // Back button: Hide if viewing offer wall, otherwise show.
+    if ([_webView.request.URL.absoluteString rangeOfString:@"tp_base_page=1"].location != NSNotFound) {
+        if (baseOfferwallUrl == nil) {
+            baseOfferwallUrl = _webView.request.URL.absoluteString;
+        }
+        
+        if (backButton)
+        {
+            [backButton removeFromSuperview];
+            backButton = nil;
+        }
+    } else {
+        // initialize button and button view
+        if(backButton == nil )
+        {
+            backButton = [UIButton buttonWithType:101];
+            [backButton setFrame: CGRectMake(10, 10, 40, 40)];
+            [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+            [backButton setTitle:@"Back" forState:UIControlStateNormal];
+            [self addSubview:backButton];
+        }
+        
+    }
+}
+// Back button: navigate back through UIWebView history stack
+- (void)backButtonPressed {
+    if (self.offerwallWebview.canGoBack) {
+        [self.offerwallWebview goBack];
+    }
+}
+#pragma mark - Chartboost Builder
+-(PromoView *)showChartboostWithPromoView:(PromoView *)view
 {
     #ifdef CHARTBOOST
-    [[LiChartboostManager sharedInstance] showChartboostWithPromotion:view];
+    [[LiChartboostManager sharedInstance] showChartboostWithPromoView:view];
     #else
     [view closeAction];
     [view removeFromSuperview];
@@ -273,6 +378,63 @@
     #endif
     
     return  view;
+}
+#pragma mark - MMEDIA Builder
+-(PromoView *)showMMediaWithPromoView:(PromoView *)view
+{
+#ifdef MMEDIA
+    [[LiMMediaManager sharedInstance] showMMediaWithPromoView:view];
+#else
+    [view closeAction];
+    [view removeFromSuperview];
+    NSLog(@"To display MMedia please enable MMedia in LiConfig.h");
+#endif
+    
+    return  view;
+}
+#pragma mark - SponserPay Builder
+-(PromoView *)showSponsorPayWithPromoView:(PromoView *)view
+{
+#ifdef SPONSORPAY
+    [[LiSponsorPayManager sharedInstance] showSponsorPayWithPromoView:view];
+#else
+    [view closeAction];
+    [view removeFromSuperview];
+    NSLog(@"To display SPONSERPAY please enable SPONSERPAY in LiConfig.h");
+#endif
+    
+    return  view;
+}
+
+#pragma mark - Appnext Builder
+-(PromoView *)showAppnextWithPromoView:(PromoView *)view
+{
+#ifdef APPNEXT
+    [[LiAppnextManager sharedInstance] showAppnextWithPromoView:view];
+#else
+    [view closeAction];
+    [view removeFromSuperview];
+    NSLog(@"To display Appnext please enable Appnext in LiConfig.h");
+#endif
+    
+    return  view;
+}
+
+#pragma mark - SupersonicAds Builder
+-(PromoView *)showSupersonicAdsWithPromoView:(PromoView *)view
+{
+#ifdef SUPERSONIC
+    [[LiSupersonicAdsManager sharedInstance] showSupersonicAdsWithPromoView:view];
+#else
+    [view closeAction];
+    [view removeFromSuperview];
+    NSLog(@"To display SupersonicAds please enable SupersonicAds in LiConfig.h");
+#endif
+    
+    return  view;
+}
++(BOOL) getIsDuringTrialPay{
+    return isDuringTrialPay;
 }
 
 @end

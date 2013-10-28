@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/SPBrandEngageClientDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/SPBrandEngageClientDelegate</TokenIdentifier>
+			<Abstract type="html">Defines selectors that a delegate of SPBrandEngageClient can implement for being notified of offers availability and engagement status.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>
+			
+			<NodeRef refid="8"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SPBrandEngageClientDelegate/brandEngageClient:didReceiveOffers:</TokenIdentifier>
+			<Abstract type="html">Sent when BrandEngage receives an answer about offers availability.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)brandEngageClient:(SPBrandEngageClient *)brandEngageClient didReceiveOffers:(BOOL)areOffersAvailable</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>brandEngageClient</Name>
+					<Abstract type="html">The instance of SPBrandEngageClient that sent this message.</Abstract>
+				</Parameter><Parameter>
+					<Name>areOffersAvailable</Name>
+					<Abstract type="html">A boolean value indicating whether offers are available. If this value is YES, you can start the engagement.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/brandEngageClient:didReceiveOffers:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SPBrandEngageClientDelegate/brandEngageClient:didChangeStatus:</TokenIdentifier>
+			<Abstract type="html">Sent when a running engagement changes state.</Abstract>
+			<DeclaredIn>SPBrandEngageClient.h</DeclaredIn>			
+			
+			<Declaration>- (void)brandEngageClient:(SPBrandEngageClient *)brandEngageClient didChangeStatus:(SPBrandEngageClientStatus)newStatus</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>brandEngageClient</Name>
+					<Abstract type="html">The instance of SPBrandEngageClient that sent this message.</Abstract>
+				</Parameter><Parameter>
+					<Name>newStatus</Name>
+					<Abstract type="html">A constant value of the SPBrandEngageClientStatus type indicating the new status of the engagement.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/brandEngageClient:didChangeStatus:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

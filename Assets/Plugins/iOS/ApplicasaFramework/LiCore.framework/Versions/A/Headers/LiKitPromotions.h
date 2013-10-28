@@ -46,6 +46,7 @@
 + (void) refreshPromotions;
 + (void) getAllAvailblePromosWithBlock:(GetPromotionArrayFinished)block;
 + (void) resetPromotionWaitingToBeViewed:(NSString *)promoId;
++ (void) increasePromotionUsedStatus:(Promotion *)promotion;
 
 + (void) promoHadViewed:(Promotion *)promotion;
 + (void) promo:(Promotion *)promotion ButtonClicked:(BOOL)button CancelButton:(BOOL)cancelButton;
@@ -57,6 +58,15 @@
 
 +(void) dismissAllPromotions;
 +(void) raiseCustomEventByName:(NSString *)value;
+
++(NSString *)getUserProfileDataCountry;
++(int)getUserProfileDataAge;
++(int)getUserProfileDataGender;
++(double )getUserProfileDataTimeZone;
+
++(NSString *)getTrialPayDeviceInfo;
+
++ (void) getThirdPartyActions:(LiThirdPartyResponse)block;
 
 
 @end

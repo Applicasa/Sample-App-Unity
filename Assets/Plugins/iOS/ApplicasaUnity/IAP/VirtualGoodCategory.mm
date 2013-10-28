@@ -1,7 +1,7 @@
 //
 // VirtualGoodCategory.mm
 // Created by Applicasa 
-// 6/24/2013
+// 10/24/2013
 //
 
 #import "ApplicasaCore.h"
@@ -70,6 +70,11 @@ void ApplicasaVirtualGoodCategoryGetArrayWithQuery(LiQuery* query, QueryKind que
 
 void ApplicasaVirtualGoodCategoryGetLocalArrayWithRawSqlQuery(const char * rawQuery, ApplicasaGetVirtualGoodCategoryArrayFinished callback) {
     [VirtualGoodCategory getLocalArrayWithRawSQLQuery:CharPointerToNSString(rawQuery) andBlock:ApplicasaGetVirtualGoodCategoryArrayFinishedToBlock(callback)];
+}
+    
+int ApplicasaVirtualGoodCategoryUpdateLocalStorage(LiQuery* query, QueryKind queryKind)
+{
+    return [VirtualGoodCategory updateLocalStorage:query queryKind:queryKind];
 }
 
 ApplicasaVirtualGoodCategoryArray ApplicasaVirtualGoodCategoryGetArrayWithQuerySync(LiQuery* query, QueryKind queryKind) {    

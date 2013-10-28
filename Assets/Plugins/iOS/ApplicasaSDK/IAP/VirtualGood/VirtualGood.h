@@ -1,7 +1,7 @@
 //
 // VirtualGood.h
 // Created by Applicasa 
-// 6/24/2013
+// 10/24/2013
 //
 
 #import <Foundation/Foundation.h>
@@ -34,23 +34,23 @@
 @property (nonatomic, assign) int virtualGoodMainCurrency;
 @property (nonatomic, assign) int virtualGoodSecondaryCurrency;
 @property (nonatomic, retain) NSString *virtualGoodRelatedVirtualGood;
-@property (nonatomic, assign) float virtualGoodStoreItemPrice;
 @property (nonatomic, assign) float virtualGoodIOSBundleMin;
 @property (nonatomic, assign) float virtualGoodIOSBundleMax;
 @property (nonatomic, assign) float virtualGoodAndroidBundleMin;
 @property (nonatomic, assign) float virtualGoodAndroidBundleMax;
+@property (nonatomic, assign) float virtualGoodStoreItemPrice;
 @property (nonatomic, assign, readonly) int virtualGoodPos;
+@property (nonatomic, assign) int virtualGoodQuantity;
 @property (nonatomic, assign) int virtualGoodMaxForUser;
 @property (nonatomic, assign) int virtualGoodUserInventory;
-@property (nonatomic, assign) int virtualGoodQuantity;
 @property (nonatomic, retain) NSURL *virtualGoodImageA;
 @property (nonatomic, retain) NSURL *virtualGoodImageB;
 @property (nonatomic, retain) NSURL *virtualGoodImageC;
-@property (nonatomic, assign) BOOL virtualGoodIsDeal;
-@property (nonatomic, assign) BOOL virtualGoodConsumable;
-@property (nonatomic, assign) BOOL virtualGoodIsStoreItem;
 @property (nonatomic, assign) BOOL virtualGoodInAppleStore;
 @property (nonatomic, assign) BOOL virtualGoodInGoogleStore;
+@property (nonatomic, assign) BOOL virtualGoodIsStoreItem;
+@property (nonatomic, assign) BOOL virtualGoodIsDeal;
+@property (nonatomic, assign) BOOL virtualGoodConsumable;
 @property (nonatomic, retain, readonly) NSDate *virtualGoodLastUpdate;
 @property (nonatomic, retain) VirtualGoodCategory *virtualGoodMainCategory;
 @property (nonatomic, retain) SKProduct *product;

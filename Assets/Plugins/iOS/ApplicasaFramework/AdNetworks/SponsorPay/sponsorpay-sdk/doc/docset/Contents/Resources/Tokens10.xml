@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/SPVirtualCurrencyConnectionDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/SPVirtualCurrencyConnectionDelegate</TokenIdentifier>
+			<Abstract type="html">Defines selectors that a delegate of SPVirtualCurrencyServerConnector can implement for being notified of answers to requests and triggered errors.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>
+			
+			<NodeRef refid="10"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SPVirtualCurrencyConnectionDelegate/virtualCurrencyConnector:didReceiveDeltaOfCoinsResponse:latestTransactionId:</TokenIdentifier>
+			<Abstract type="html">Sent when SPVirtualCurrencyServerConnector receives an answer from the server for the amount of coins newly earned by the user.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>- (void)virtualCurrencyConnector:(SPVirtualCurrencyServerConnector *)connector didReceiveDeltaOfCoinsResponse:(double)deltaOfCoins latestTransactionId:(NSString *)transactionId</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>connector</Name>
+					<Abstract type="html">SPVirtualCurrencyServerConnector instance of SPVirtualCurrencyServerConnector that sent this message.</Abstract>
+				</Parameter><Parameter>
+					<Name>deltaOfCoins</Name>
+					<Abstract type="html">Amount of coins earned by the user.</Abstract>
+				</Parameter><Parameter>
+					<Name>transactionId</Name>
+					<Abstract type="html">Transaction ID of the last known operation involving your virtual currency for this user.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/virtualCurrencyConnector:didReceiveDeltaOfCoinsResponse:latestTransactionId:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SPVirtualCurrencyConnectionDelegate/virtualCurrencyConnector:failedWithError:errorCode:errorMessage:</TokenIdentifier>
+			<Abstract type="html">Sent when SPVirtualCurrencyServerConnector detects an error condition.</Abstract>
+			<DeclaredIn>SPVirtualCurrencyServerConnector.h</DeclaredIn>			
+			
+			<Declaration>- (void)virtualCurrencyConnector:(SPVirtualCurrencyServerConnector *)connector failedWithError:(SPVirtualCurrencyRequestErrorType)error errorCode:(NSString *)errorCode errorMessage:(NSString *)errorMessage</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>connector</Name>
+					<Abstract type="html">SPVirtualCurrencyServerConnector instance of SPVirtualCurrencyServerConnector that sent this message.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract type="html">Type of the triggered error. @see SPVirtualCurrencyRequestErrorType</Abstract>
+				</Parameter><Parameter>
+					<Name>errorCode</Name>
+					<Abstract type="html">if this is an error received from the back-end, error code as reported by the server.</Abstract>
+				</Parameter><Parameter>
+					<Name>errorMessage</Name>
+					<Abstract type="html">if this is an error received from the back-end, error message as reported by the server.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/virtualCurrencyConnector:failedWithError:errorCode:errorMessage:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

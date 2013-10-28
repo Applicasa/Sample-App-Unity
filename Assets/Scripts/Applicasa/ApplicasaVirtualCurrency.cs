@@ -16,6 +16,8 @@ public class ApplicasaVirtualCurrency : MonoBehaviour {
 	//List of virtual goods buttons
 	public List<ButtonVC> m_VirtualCurrencyItems;
 	
+	private int itemsCount = 0;
+	
 	//Virtual good button 
 	public class ButtonVC{
 		public Rect rect;
@@ -31,19 +33,23 @@ public class ApplicasaVirtualCurrency : MonoBehaviour {
 		void Awake ()
 		{
 			instance = this;
-	
+	    }
+		void Start () {
+		    Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Start");
 			instance.m_VirtualCurrencyItems=new List<ButtonVC>();
 			#if UNITY_EDITOR
 				DisplayExampleItems();
 			#else
-				//Load virtual Currencies from Applicasa
-				Applicasa.IAP.GetVirtualCurrencies(HandleGetVirtualCurrencies);
-				
 				//Update User virtual currency balance 
 				UpdateVirtualCurrencyBalance ();
 		
 				//Update User name
 				UpdateUserDisplay();
+		
+				//Load virtual Currencies from Applicasa
+				Applicasa.IAP.GetVirtualCurrencies(HandleGetVirtualCurrencies);
+				
+			
 			#endif
 		}
 		
@@ -68,12 +74,11 @@ public class ApplicasaVirtualCurrency : MonoBehaviour {
 			
 			Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Loading " + virtualCurrencies.Length + " virtual currencies");
 			m_VirtualCurrencyItems.Clear();
-			int count = 0;
 			foreach (Applicasa.VirtualCurrency virtualCurrency in virtualCurrencies) {
 				
 				ButtonVC tempButtonVC = new ButtonVC();
 				
-				tempButtonVC.price=virtualCurrency.VirtualCurrencyPrice.ToString();
+				tempButtonVC.price=virtualCurrency.LocalPrice;
 				tempButtonVC.virtualCurrency=virtualCurrency;
 				
 				Applicasa.FileCache.GetCachedImage(virtualCurrency.VirtualCurrencyImageA, HandleImageData);
@@ -82,14 +87,13 @@ public class ApplicasaVirtualCurrency : MonoBehaviour {
 				tempButtonVC.texture = new Texture2D(100,100);
 				tempButtonVC.texture.LoadImage(imageData);
 				
-				tempButtonVC.rect=new Rect((itemWidth*count)+(Screen.width*0.02f*(count+1)),Screen.height*0.25f,itemWidth,itemHeight);	
+				tempButtonVC.rect=new Rect((itemWidth*itemsCount)+(Screen.width*0.02f*(itemsCount+1)),Screen.height*0.25f,itemWidth,itemHeight);	
 				m_VirtualCurrencyItems.Add(tempButtonVC);
-				
 				imageData = null;
-				count++;
+				itemsCount++;
 			}
 			
-			Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Loaded " + count + " vitrual Currencies");
+			Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": Loaded " + itemsCount.ToString() + " vitrual Currencies and m_VirtualCurrencyItems.Count= "+m_VirtualCurrencyItems.Count.ToString());
 			yield return null;
 		}
 	
@@ -142,8 +146,10 @@ public class ApplicasaVirtualCurrency : MonoBehaviour {
 	
 	#region GUI		
 		public Texture2D m_Background,m_Back,m_Coins;
-		int itemWidth = Mathf.FloorToInt(Screen.height*0.3f);
-		int itemHeight = Mathf.FloorToInt(Screen.height*0.3f);
+		int itemWidth = Mathf.FloorToInt(Screen.width/7f);
+		int itemHeight = Mathf.FloorToInt(Screen.height/6f);
+	     public Vector2 scrollPosition = new Vector2(0,1000);
+	
 		//For EDITOR Only
 		public Texture2D m_ExampleItem;
 		
@@ -151,44 +157,66 @@ public class ApplicasaVirtualCurrency : MonoBehaviour {
 		
 			GUI.depth = 10;
 			Rect BackgroundRect = new Rect (
-				(Screen.width - Screen.width) * 0.5f,
-				(Screen.height - Screen.height) * 0.5f,
+				0,
+				0,
 				Screen.width,
 				Screen.height
 			);
+		   
 			GUI.DrawTexture (BackgroundRect, m_Background);
 			GUILayout.BeginArea (BackgroundRect);
 			GUILayout.FlexibleSpace ();
+		   
+			if (itemsCount > m_VirtualCurrencyItems.Count/3){
+				float length = m_VirtualCurrencyItems.Count*itemWidth ;
+		    	scrollPosition = GUI.BeginScrollView (new Rect (Screen.width*0.02f,Screen.height*0.3f,Screen.width*0.98f,itemHeight*2), 
+		 		scrollPosition, new Rect (10, Screen.height*0.3f-itemHeight, length, 50),true,false);
 		
-			foreach(ButtonVC _buttonVC in m_VirtualCurrencyItems) {
-				if(GUIButtonTexture2D(_buttonVC.rect,_buttonVC.texture)){
+				foreach(ButtonVC _buttonVC in m_VirtualCurrencyItems) {
+					GUI.Label(new Rect (_buttonVC.rect.x+itemWidth/2-15, _buttonVC.rect.y+itemHeight, 100, 50), _buttonVC.price );
+
+					if(GUIButtonTexture2D(_buttonVC.rect,_buttonVC.texture)){
 					//BuyVirtualGood when click on item
-					Applicasa.IAP.BuyVirtualCurrency(_buttonVC.virtualCurrency, HandleVirtualCurrencyPurchase);
+						Applicasa.IAP.BuyVirtualCurrency(_buttonVC.virtualCurrency, HandleVirtualCurrencyPurchase);
+					}
 				}
+		    	GUI.EndScrollView ();
+				GUILayout.EndArea ();
 			}
-			GUILayout.EndArea ();
+			else{
+				Debug.Log ("LiLog_Unity itemsCount =" + itemsCount.ToString() + "!=  m_VirtualGoodItems.Count "+m_VirtualCurrencyItems.Count.ToString());
+			}
+		
+		// End the scroll view that we began above.
+		
+		
+		
 			//Back button
 			if(GUIButtonTexture2D(new Rect(Screen.height*0.05f,Screen.height*0.85f,Screen.height*0.2f,Screen.height*0.1f),m_Back)){
 				Application.LoadLevel("AppStore");
 			}
 			
-			GUI.DrawTexture(new Rect(Screen.height*0.05f,Screen.height*0.05f,15,15),m_Coins);
-			//Show User virtual currency balace
-			GUI.Label(new Rect(Screen.height*0.15f,Screen.height*0.05f,Screen.width,Screen.height*0.05f),"" + UserVirtualcurrencyBalance.ToString ());	
 			//Show User name
-			GUI.Label(new Rect(Screen.width*0.85f,Screen.height*0.05f,Screen.width,Screen.height*0.05f),"" + UserName);
+			GUI.Label(new Rect(Screen.width*0.05f,Screen.height*0.05f,Screen.width,Screen.height*0.05f),"" + UserName);
+		
+		
+			GUI.DrawTexture(new Rect(Screen.height*0.10f,Screen.height*0.1f,15,15),m_Coins);
+			//Show User virtual currency balace
+			
+			GUI.Label(new Rect(Screen.height*0.15f,Screen.height*0.095f,Screen.width,Screen.height*0.05f),"" + UserVirtualcurrencyBalance.ToString ());	
 		
 		}
 	
 		//For EDITOR Only
 		void DisplayExampleItems()
 		{		
-			for(int count=0;count<3;count++) {
+			for(int count=0;count<10;count++) {
 				ButtonVC tempButtonVC = new ButtonVC();
 				tempButtonVC.price="0.99";				
 				tempButtonVC.texture=m_ExampleItem;
 				tempButtonVC.rect=new Rect((itemWidth*count)+(Screen.width*0.02f*(count+1)),Screen.height*0.25f,itemWidth,itemHeight);
-				m_VirtualCurrencyItems.Add(tempButtonVC);							
+				m_VirtualCurrencyItems.Add(tempButtonVC);
+				itemsCount++;
 			}
 		}
 		

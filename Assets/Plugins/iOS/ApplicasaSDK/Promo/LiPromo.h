@@ -34,4 +34,5 @@
 +(void) dismissAllPromotions;
 +(void) raiseCustomEventByName:(NSString *)value;
 
++(void) showDemoCampaign;
 @end

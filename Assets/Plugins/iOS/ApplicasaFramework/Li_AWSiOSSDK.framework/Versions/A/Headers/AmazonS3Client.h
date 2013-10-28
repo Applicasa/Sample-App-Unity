@@ -124,6 +124,9 @@
 #import "S3DeleteBucketTaggingRequest.h"
 #import "S3DeleteBucketTaggingResponse.h"
 
+//
+    //AWS Test
+//
 /** \defgroup S3 Amazon S3 */
 
 /** AmazonS3Client is an implementation of AmazonS3.

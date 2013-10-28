@@ -3,7 +3,7 @@
 extern "C" {
 
     void ApplicasaGetCachedData(const char * url, ApplicasaGetFileData eventCallback) {
-        NSURL* fileurl = CharPointerToNSString(url);
+        NSURL* fileurl = [NSURL URLWithString:[CharPointerToNSString(url) stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [fileurl getCachedDataWithBlock:ApplicasaGetFileDataToDataBlock(eventCallback)];
     }
 

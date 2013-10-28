@@ -11,6 +11,8 @@ namespace Applicasa {
 		public string sound = "";
 		public int badge = 0;
 		public string tag = "";
+		public bool timed = false;
+		public int dispatch_time = 0;
 
 #if UNITY_IPHONE
 		public IDictionary userInfo;
@@ -33,23 +35,44 @@ namespace Applicasa {
 #if UNITY_IPHONE && !UNITY_EDITOR
 		//TODO: Tag shouldn't be string
 		[DllImport("__Internal")]
-		private static extern IntPtr ApplicasaPushGet(string message, string sound, int badge, string tag);
-		public PushNotification(string message, string sound, int badge, string tag) {
-			innerPush = ApplicasaPushGet(message, sound, badge, tag);
+		private static extern IntPtr ApplicasaPushGet(string message, string sound, int badge);
+		public PushNotification(string message, string sound, int badge) {
+			innerPush = ApplicasaPushGet(message, sound, badge);
+		}
+		
+		[DllImport("__Internal")]
+		private static extern IntPtr ApplicasaPushGetWithDispatchTime(string message, string sound, int badge, int dispatchInMin);
+		public PushNotification(string message, string sound, int badge,int dispatchInMin) {
+			innerPush = ApplicasaPushGetWithDispatchTime(message, sound, badge, dispatchInMin);
 		}
 #else
-		//TODO: Tag shouldn't be string
-		public PushNotification(string intputNessage, string intputSound, int intputBadge, string intputTag) {
-			if (intputNessage != null)
-				message = intputNessage;
+		
+		public PushNotification(string intputMessage, string intputSound, int intputBadge) {
+			if (intputMessage != null)
+				message = intputMessage;
 			if (intputSound != null)
 				sound = intputSound;
-			if (intputTag != null)
-				tag = intputTag;
+			tag = "";
 			
 			badge = intputBadge;
 			
 		}
+		
+			
+		public PushNotification(string intputMessage, string intputSound, int intputBadge,int dispatchInMinutes) {
+			if (intputMessage != null)
+				message = intputMessage;
+			if (intputSound != null)
+				sound = intputSound;
+			tag = "";
+			
+			badge = intputBadge;
+			
+			timed = true;
+			dispatch_time = dispatchInMinutes;
+			
+		}
+		
 #endif
 		
 		#region Class Methods and Members
@@ -90,9 +113,29 @@ namespace Applicasa {
 		    return NotificationServices.remoteNotificationCount;
 		}
 		
+		[DllImport("__Internal")]
+		private static extern void ApplicasaClearAllPushMessages();
 		public static void ClearRemoteNotifications()
 		{
 		    NotificationServices.ClearRemoteNotifications();
+			ApplicasaClearAllPushMessages();
+		}
+		
+
+		[DllImport("__Internal")]
+		private static extern void addTags(IntPtr innerPush, string key,string param);
+		public void addTag(string key,string param) {
+			addTags(innerPush, key, param);
+		}
+		
+		public static void registerForPushNotification()
+		{
+			NotificationServices.RegisterForRemoteNotificationTypes(RemoteNotificationType.Alert|RemoteNotificationType.Badge|RemoteNotificationType.Sound);
+		}
+		
+		public static void unRegisterForPushNotification()
+		{
+			NotificationServices.UnregisterForRemoteNotifications();
 		}
 		
 #elif UNITY_ANDROID && !UNITY_EDITOR
@@ -111,9 +154,11 @@ namespace Applicasa {
 			
 			javaUnityApplicasaPushNotification.CallStatic("setBadge", badge);
 			javaUnityApplicasaPushNotification.CallStatic("setSound", sound);
-			javaUnityApplicasaPushNotification.CallStatic("setTag", tag);
+			javaUnityApplicasaPushNotification.CallStatic("setTag", "{"+tag+"}");
 			javaUnityApplicasaPushNotification.CallStatic("setMessage", message);
 			
+			javaUnityApplicasaPushNotification.CallStatic("setDispatchInMinutes",dispatch_time);
+						
 			// Send the Notification
 			javaUnityApplicasaPushNotification.CallStatic("sendPush");
 			
@@ -133,7 +178,8 @@ namespace Applicasa {
 		    
 		    
 		 
-		    PushNotification push = new PushNotification(text, sound, badge, tag);
+		    PushNotification push = new PushNotification(text, sound, badge);
+			push.tag = tag;
 		 
 			return push;
 		}
@@ -157,6 +203,30 @@ namespace Applicasa {
 			}
 		}
 		
+		
+		public void addTag(string key,string param) {
+			if (tag.Length == 0)
+				tag+="\""+key+"\":\""+param+"\"";
+			else
+				tag+=",\""+key+"\":\""+param+"\"";
+		}
+		
+		public static void registerForPushNotification()
+		{
+			if(javaUnityApplicasaPushNotification==null)
+				javaUnityApplicasaPushNotification = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPushNotification");
+				
+			javaUnityApplicasaPushNotification.CallStatic("ApplicasaRegisterToGCM");
+		}
+		
+		public static void unRegisterForPushNotification()
+		{
+			if(javaUnityApplicasaPushNotification==null)
+				javaUnityApplicasaPushNotification = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPushNotification");
+				
+			javaUnityApplicasaPushNotification.CallStatic("ApplicasaUnRegisterFromGCM");
+		}
+		
 #else
 		public void Send(User[] users, int arrayCount, SendPushFinished sendPushFinished) 
 		{
@@ -177,6 +247,15 @@ namespace Applicasa {
 		{
 			// remove from queue
 		    
+		}
+		
+		public void addTag(string key,string param) {
+			
+		}
+		
+		public static void registerForPushNotification()
+		{
+		
 		}
 #endif
 		

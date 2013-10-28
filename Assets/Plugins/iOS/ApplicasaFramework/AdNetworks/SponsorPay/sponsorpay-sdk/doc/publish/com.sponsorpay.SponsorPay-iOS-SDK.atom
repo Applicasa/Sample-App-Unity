@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:docset="http://developer.apple.com/rss/docset_extensions" xml:lang="en">
+    <id>http://developer.sponsorpay.com/docs/mobile/ios/docset/com.sponsorpay.SponsorPay-iOS-SDK.atom/20130801123055</id>
+    <title type="text">SponsorPay iOS SDK Documentation</title>
+    <rights>Copyright © 2013 SponsorPay. All rights reserved.</rights>
+    <link rel="self" href="http://developer.sponsorpay.com/docs/mobile/ios/docset/com.sponsorpay.SponsorPay-iOS-SDK.atom"></link>
+    <docset:publisherName>SponsorPay</docset:publisherName>
+    <docset:publisherID>com.sponsorpay.documentation</docset:publisherID>
+    <updated>2013-08-01T12:30:55+02:00</updated>
+    <entry>
+        <id>tag:developer.sponsorpay.com,2013-08-01:com.sponsorpay.SponsorPay-iOS-SDK/0.0.0</id>
+        <title type="text">SponsorPay iOS SDK Documentation</title>
+        <updated>2013-08-01T12:30:55+02:00</updated>
+        <content type="text">SponsorPay iOS SDK Documentation (v0.0.0)</content>
+        <link rel="enclosure" type="application/octet-stream" href="http:/developer.sponsorpay.com/docs/mobile/ios/docset/com.sponsorpay.SponsorPay-iOS-SDK---no-repeat-first-par.xar" length="98416"></link>
+        <docset:identifier>com.sponsorpay.SponsorPay-iOS-SDK</docset:identifier>
+        <docset:version>0.0.0</docset:version>
+        <docset:minimumXcodeVersion>3.0.0</docset:minimumXcodeVersion>
+    </entry>
+</feed>

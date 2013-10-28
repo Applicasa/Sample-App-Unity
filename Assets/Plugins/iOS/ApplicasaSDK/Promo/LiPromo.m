@@ -8,6 +8,12 @@
 
 #import "LiPromo.h"
 
+#import "LiConfig.h"
+#if (ENABLE_SUPERSONICADS)
+#define SUPERSONICADS
+#import <LiSupersonicAds/LiSupersonicAdsManager.h>
+#endif
+
 @implementation LiPromo
 
 
@@ -36,6 +42,13 @@
 +(void) raiseCustomEventByName:(NSString *)value
 {
     [LiKitPromotions raiseCustomEventByName:value];
+}
+
++(void) showDemoCampaign
+{
+#ifdef SUPERSONICADS
+    [LiSupersonicAdsManager setShowDemoCampaign];
+#endif
 }
 
 #pragma mark - Deprecated Methods

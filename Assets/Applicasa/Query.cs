@@ -17,14 +17,8 @@ namespace Applicasa {
 #if UNITY_IPHONE
 		[DllImport("__Internal")]
 		private static extern System.IntPtr ApplicasaQueryCreate();
-#elif UNITY_ANDROID&&!UNITY_EDITOR
-		private static System.IntPtr ApplicasaQueryCreate() {
-			IntPtr query = AndroidJNI.NewGlobalRef(javaUnityApplicasaQuery.CallStatic<AndroidJavaObject>("ApplicasaQueryCreate").GetRawObject());
-			return query;
-		}
-#else
-		private static System.IntPtr ApplicasaQueryCreate() {
-			return new System.IntPtr(0);
+		private static System.IntPtr QueryCreate() {
+			return ApplicasaQueryCreate();
 		}
 #endif
 		
@@ -32,22 +26,22 @@ namespace Applicasa {
 #if UNITY_ANDROID
 			if(javaUnityApplicasaQuery==null)
 				javaUnityApplicasaQuery = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaQuery");
-#endif
-			innerQuery = ApplicasaQueryCreate();
 			
-#if UNITY_ANDROID
-			innerQueryJavaObject= new AndroidJavaObject(innerQuery);
-#endif
+			innerQueryJavaObject= javaUnityApplicasaQuery.CallStatic<AndroidJavaObject>("ApplicasaQueryCreate");
+#elif UNITY_IPHONE
+			innerQuery = QueryCreate();
+			
+#endif		
+}
 
-		}
 		
-		public Query(IntPtr queryPtr) {
+	/*	public Query(IntPtr queryPtr) {
 			innerQuery = queryPtr;
 #if UNITY_ANDROID
 			innerQuery = AndroidJNI.NewGlobalRef(queryPtr);
 			innerQueryJavaObject= new AndroidJavaObject(innerQuery);
 #endif
-		}
+		}*/
 		
 #if UNITY_ANDROID
 		public Query(IntPtr queryPtr, AndroidJavaObject queryJavaObject) {
@@ -76,10 +70,9 @@ namespace Applicasa {
 		public Filter filter {
 			get {
 				AndroidJavaObject tempJavaObject=javaUnityApplicasaQuery.CallStatic<AndroidJavaObject>("ApplicasaQueryGetFilter", innerQueryJavaObject);
-				IntPtr tempIntPtr = AndroidJNI.NewGlobalRef(tempJavaObject.GetRawObject());
-				Filter filter = new Filter(tempIntPtr, new AndroidJavaObject(tempIntPtr));
+				Filter filter = new Filter(tempJavaObject.GetRawObject(), tempJavaObject);			
 				return filter;}
-			set {javaUnityApplicasaQuery.CallStatic("ApplicasaQuerySetFilter", innerQueryJavaObject, value);}
+			set {javaUnityApplicasaQuery.CallStatic("ApplicasaQuerySetFilter", innerQueryJavaObject, value.innerFilterJavaObject);}
 		}
 #else
 		public Filter filter {
