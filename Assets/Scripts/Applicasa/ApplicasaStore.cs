@@ -174,16 +174,12 @@ public class ApplicasaStore : MonoBehaviour {
 			GUILayout.FlexibleSpace ();
 			if (itemsCount > m_VirtualGoodItems.Count/3)
 			{
-				float length = m_VirtualGoodItems.Count*itemWidth ;
+				float length = m_VirtualGoodItems.Count*itemWidth;
 		 		scrollPosition = GUI.BeginScrollView (new Rect (Screen.width*0.02f,Screen.height*0.3f,Screen.width*0.98f,itemHeight*2), 
 				scrollPosition, new Rect (10, Screen.height*0.3f-itemHeight, length, 50),true,false);
-	
-//				scrollPosition = GUI.BeginScrollView (new Rect (Screen.width*0.02f,Screen.height*0.3f,Screen.width*0.98f,itemHeight*2), 
-				//	scrollPosition, new Rect (10, Screen.height*0.3f-itemHeight, Screen.width, itemHeight),true,false);
 
-		
 				foreach(ButtonVG _buttonVG in m_VirtualGoodItems) {
-				if (_buttonVG.virtualGood.VirtualGoodIsStoreItem)
+				if (_buttonVG.virtualGood.VirtualGoodIsStoreItem == true)
 					GUI.Label(new Rect (_buttonVG.rect.x+itemWidth/2-15, _buttonVG.rect.y+itemHeight, 150, 50), _buttonVG.price);
 				else
 				{

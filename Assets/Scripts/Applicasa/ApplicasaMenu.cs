@@ -45,8 +45,10 @@ public class ApplicasaMenu : MonoBehaviour {
 			
 			// The second method is to register a delegate callback to be called when a new promotion is available.
 			// Option2: 
-			Applicasa.PromotionManager.ShowDemoCampaigns();
 			Applicasa.PromotionManager.SetLiKitPromotionDelegateAndCheckPromotions(PromotionsAvailable,true);
+		
+			// To request supersonic to display demo campaings.
+			Applicasa.PromotionManager.ShowDemoCampaigns();
 		
 			//Update User virtual currency balace
 			UpdateVirtualCurrencyBalance ();
@@ -155,25 +157,40 @@ public class ApplicasaMenu : MonoBehaviour {
 			Rect BackgroundRectLeft = new Rect (
 				0,
 				0,
-				Screen.width*0.3f,
+				Screen.width*0.2f,
 				Screen.height
 			);
 		    Rect BackgroundRectMiddle = new Rect (
-				Screen.width*0.3f,
+				Screen.width*0.2f,
 				0,
 				Screen.width*0.40f,
 				Screen.height
 			);
 			Rect BackgroundRectRight = new Rect (
-				Screen.width*0.7f,
+				Screen.width*0.6f,
 				0,
-				Screen.width*0.3f,
+				Screen.width*0.4f,
 				Screen.height
 			);
 			GUI.DrawTexture (BackgroundRectLeft, m_Background);
-			GUILayout.BeginArea (BackgroundRectLeft);
-						
 			
+					
+	
+		    GUI.DrawTexture (BackgroundRectMiddle, m_Background);
+			GUI.DrawTexture (BackgroundRectMiddle, m_Egg);
+		
+			GUILayout.BeginArea (BackgroundRectMiddle);
+			
+			GUILayout.FlexibleSpace ();
+			GUILayout.FlexibleSpace ();
+			
+			GUILayout.EndArea ();
+		
+		
+			GUI.DrawTexture (BackgroundRectRight, m_Background);
+			GUILayout.BeginArea (BackgroundRectRight);					
+		
+			GUILayout.FlexibleSpace ();
 			//Store button
 			GUILayout.FlexibleSpace ();
 			if (MenuButton (m_Store)) {
@@ -186,37 +203,19 @@ public class ApplicasaMenu : MonoBehaviour {
 			if (MenuButton (m_Facebook)) {
 				Debug.Log ("LiLog_Unity " + System.DateTime.Now.ToShortTimeString() + ": FacebookUser=" + Applicasa.User.GetCurrentUser ().UserID.ToString() + "Is Reg?" + Applicasa.User.GetCurrentUser ().UserIsRegisteredFacebook);
 				Applicasa.User.FacebookLogin (FacebookLoginCallback);	
-				
-		
 			}
-	
-			GUILayout.FlexibleSpace ();
-			GUILayout.EndArea ();
-		
-	
-		    GUI.DrawTexture (BackgroundRectMiddle, m_Background);
-			GUI.DrawTexture (BackgroundRectMiddle, m_Egg);
-			GUILayout.BeginArea (BackgroundRectMiddle);
-			
-			GUILayout.FlexibleSpace ();
-			GUILayout.FlexibleSpace ();
-			//Play button
-			if (MenuButton (m_Play)) {
-				//Your game here :)
-
-			}
-			GUILayout.EndArea ();
-		
-		
-			GUI.DrawTexture (BackgroundRectRight, m_Background);
-			GUILayout.BeginArea (BackgroundRectRight);					
 		
 		   //Raise SponsorPayBrand
 			GUILayout.FlexibleSpace ();
 			if (MenuButton (m_RaisePromotion)) {
 				Applicasa.PromotionManager.RaiseCustomEvent(customEvent);
 			}
-	
+			GUILayout.FlexibleSpace ();
+		//Play button
+			if (MenuButton (m_Play)) {
+				//Your game here :)
+
+			}
 
 	
 			GUILayout.FlexibleSpace ();

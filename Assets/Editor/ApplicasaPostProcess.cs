@@ -34,7 +34,7 @@ public class ApplicasaPostProcess {
 		if (target == BuildTarget.iPhone) 
 		{
 			buildiOS(pathToBuildProject);
-			//PlistMod.FixPlist(pathToBuildProject);
+			PlistMod.FixPlist(pathToBuildProject);
 			//PlistMod.UpdatePlist(pathToBuildProject, FacebookAppID);
 		}
 		

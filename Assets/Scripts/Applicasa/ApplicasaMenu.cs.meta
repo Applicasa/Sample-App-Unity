@@ -8,7 +8,7 @@ MonoImporter:
   - m_Facebook: {fileID: 2800000, guid: b557b958e21dc4a64ae9ec76c5373327, type: 3}
   - m_Store: {fileID: 2800000, guid: e73943f14e4d240a997205455162a8ee, type: 3}
   - m_Coins: {fileID: 2800000, guid: 3db9473806ca247b1adafbe2eeacc40b, type: 3}
-  - m_RaisePromotion: {fileID: 2800000, guid: afc818a3e66d1429ba8bfd6056105af3, type: 3}
+  - m_RaisePromotion: {fileID: 2800000, guid: 588cf018e24cf4ff4952833c176e326d, type: 3}
   - m_Egg: {fileID: 2800000, guid: 4e734cdca5b994ef8ad403fef2bbd4ba, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
