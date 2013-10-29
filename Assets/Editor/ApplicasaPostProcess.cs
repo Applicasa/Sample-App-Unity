@@ -9,19 +9,19 @@ using UnityEditor.LiXCodeEditor;
 public class ApplicasaPostProcess {
 	
 	// Set your facebbok AppID
-const string FacebookAppID = "[FACEBOOKID]";
+	const string FacebookAppID = "494708670563462";
 	
 
 	const bool IsMMediaEnabledAndroid = false;
 	const bool IsSponsorPayEnabledAndroid = false;
 	const bool IsSupersonicAdsEnabledAndroid = false;
 	
-	const bool IsFacebookEnablediOS = false;
-	const bool IsSponsorPayEnablediOS = false;
-	const bool IsSupersonicAdsEnablediOS = false;
-	const bool IsMMediaEnablediOS = false;
-	const bool IsAppnextEnablediOS = false;
-	const bool IsChartboostEnablediOS = false;
+	const bool IsFacebookEnablediOS = true;
+	const bool IsSponsorPayEnablediOS = true;
+	const bool IsSupersonicAdsEnablediOS = true;
+	const bool IsMMediaEnablediOS = true;
+	const bool IsAppnextEnablediOS = true;
+	const bool IsChartboostEnablediOS = true;
 	
 
 	const string Permissions = "<!-- AddPermissions -->";

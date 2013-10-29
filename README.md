@@ -47,7 +47,7 @@ The sample app is ready for use but you need to build as an iOS or Android proje
      **/
 	
 	private static string customEvent = "MMedia";
-
+```
 
 Using Applicasa - Unity
 ===========================
@@ -57,8 +57,11 @@ Using Applicasa - Unity
 For iOS:
 1. You need Xcode in order to build your project.
 (Download Xcode from the app store https://developer.apple.com/xcode/).
-2. Click “Build & Run” in unity and then cancel when it reaches Xcode.
-3. Open the Xcode project go to -> Build settings -> search ”Enable Objective-C Exceptions” and set to YES.
+2. Open the 'Facebook' toolbar menu then 'Edit settings' and verify there's a valid Facebook Id, if not set this 494708670563462
+3. Open 'Applicasa' toolbar menu then 'iOS settings' and verify there's a valid Facebook Id, if not set this 494708670563462
+
+4. Click “Build & Run” in unity and then cancel when it reaches Xcode.
+5. Open the Xcode project go to -> Build settings -> search ”Enable Objective-C Exceptions” and set to YES.
 
 For Android:
 1. open the "Build setting" ->player settings -> publishing setting -> select browse keystore -> select the keystore "unitySample.keystore".
@@ -78,7 +81,7 @@ Because this is a sandboxed app, you must use a test account to make IAP purchas
 
 We have created a test item that can be purchased with the app as-is. 
 
- ####Done! Run the project!  
+####Done! Run the project!  
 
 
 
