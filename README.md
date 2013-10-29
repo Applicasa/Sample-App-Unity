@@ -20,17 +20,23 @@ Using Applicasa - Unity
 2. Build to Project for your desired OS (iOS or Android)
 
 For iOS:
-1. You need Xcode in order to build your project.
-(Download Xcode from the app store https://developer.apple.com/xcode/).
+===========================
+
+1. You need Xcode in order to build your project. (Download Xcode from the app store https://developer.apple.com/xcode/).
+
 2. Open the 'Facebook' toolbar menu then 'Edit settings' and verify there's a valid Facebook Id, if not set this 494708670563462
+
 3. Open 'Applicasa' toolbar menu then 'iOS settings' and verify there's a valid Facebook Id, if not set this 494708670563462
 
 4. Click “Build & Run” in unity and then cancel when it reaches Xcode.
+
 5. Open the Xcode project go to -> Build settings -> search ”Enable Objective-C Exceptions” and set to YES.
 
 For Android:
-1. open the "Build setting" ->player settings -> publishing setting -> select browse keystore -> select the keystore "unitySample.keystore".
- Keystore password 123456, key Password 123456.
+===========================
+
+1. open the "Build setting" ->player settings -> publishing setting -> select browse keystore -> select the keystore "unitySample.keystore". 
+(Keystore password 123456, key Password 123456)
 
 
 
