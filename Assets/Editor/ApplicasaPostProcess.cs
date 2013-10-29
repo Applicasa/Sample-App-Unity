@@ -12,9 +12,9 @@ public class ApplicasaPostProcess {
 	const string FacebookAppID = "494708670563462";
 	
 
-	const bool IsMMediaEnabledAndroid = false;
-	const bool IsSponsorPayEnabledAndroid = false;
-	const bool IsSupersonicAdsEnabledAndroid = false;
+    const bool IsMMediaEnabledAndroid = true;
+    const bool IsSponsorPayEnabledAndroid = true;
+    const bool IsSupersonicAdsEnabledAndroid = false;
 	
 	const bool IsFacebookEnablediOS = true;
 	const bool IsSponsorPayEnablediOS = true;

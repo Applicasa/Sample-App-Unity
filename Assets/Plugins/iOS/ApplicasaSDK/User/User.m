@@ -77,7 +77,8 @@ enum UserIndexes {
 	UserMainCurrencyBalanceIndex,
 	UserSecondaryCurrencyBalanceIndex,
 	UserFacebookIDIndex,
-	UserTempDateIndex,};
+	UserTempDateIndex,
+};
 #define NUM_OF_USER_FIELDS 19
 
 
@@ -329,17 +330,22 @@ enum UserIndexes {
 
 static LiBlockFBFriendsAction fbFriendsAction = NULL;
 static LiBlockAction actionBlock = NULL;
+static BOOL hasFbFriendsAction = FALSE;
+static BOOL hasActionBlock = FALSE;
 
 - (void) setFbFriendsAction:(LiBlockFBFriendsAction)block{
     fbFriendsAction = Block_copy(block);
+    hasFbFriendsAction = TRUE;
 }
 
 - (void) setActionBlock:(LiBlockAction)block{
     actionBlock = Block_copy(block);
+  
 }
 
 - (void) facebookLoginWithBlock:(LiBlockAction)block{
     [self setActionBlock:block];
+      hasActionBlock = TRUE;
     [LiKitFacebook loginWithFacebookWithUser:self Delegate:self];
 }
 
@@ -359,15 +365,24 @@ static LiBlockAction actionBlock = NULL;
 - (void) FBdidLoginUser:(User *)user ResponseType:(int)responseType ResponseMessage:(NSString *)responseMessage{
     NSError *error = nil;
     [LiObjRequest handleError:&error ResponseType:responseType ResponseMessage:responseMessage];
-    actionBlock(error,user.userID,LoginWithFacebook);
-    Block_release(actionBlock);
+    if(hasActionBlock)
+    {
+        actionBlock(error,(user!=nil)?user.userID:@"",LoginWithFacebook);
+        Block_release(actionBlock);
+        hasActionBlock = FALSE;
+    }
 }
 
 - (void) FBdidFindFacebookFriends:(NSArray *)friends ResponseType:(int)responseType ResponseMessage:(NSString *)responseMessage{
     NSError *error = nil;
     [LiObjRequest handleError:&error ResponseType:responseType ResponseMessage:responseMessage];
-    fbFriendsAction(error,friends,FacebookFriends);
-    Block_release(fbFriendsAction);
+    
+    if(hasFbFriendsAction)
+    {
+        fbFriendsAction(error,friends,FacebookFriends);
+        hasFbFriendsAction = FALSE;
+        Block_release(fbFriendsAction);
+    }
 }
 
 #pragma mark - End of Facebook Methods

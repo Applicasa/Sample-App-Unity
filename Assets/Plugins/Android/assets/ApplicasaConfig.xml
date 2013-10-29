@@ -65,7 +65,7 @@
 	<!--Set The notification status bar message -->
 	<key>
 	<key_name>NOTIFICATION_BAR_MESSAGE</key_name>
-	<key_value>New message received</key_value>
+    <key_value>New Message</key_value>
 	</key>
 	
 	<!--Set the ringtone for push message, place the file under the assets folder, replace "default" with the file name -->
