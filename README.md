@@ -1,5 +1,7 @@
-Sample-App-Unity for unity Version 4.2+
+Sample-App-Unity  
 =======================================
+for unity Version 4.2+
+
 
 The sample app is ready for use but you need to build as an iOS or Android project to test it.
 
@@ -9,6 +11,28 @@ The sample app is ready for use but you need to build as an iOS or Android proje
 3. More Ad networks to the monetization section.
 4. Send delayed push messages
 5. Bug Fix
+
+
+
+Using Applicasa - Unity
+===========================
+1. Open the project in Unity
+2. Build to Project for your desired OS (iOS or Android)
+
+For iOS:
+1. You need Xcode in order to build your project.
+(Download Xcode from the app store https://developer.apple.com/xcode/).
+2. Open the 'Facebook' toolbar menu then 'Edit settings' and verify there's a valid Facebook Id, if not set this 494708670563462
+3. Open 'Applicasa' toolbar menu then 'iOS settings' and verify there's a valid Facebook Id, if not set this 494708670563462
+
+4. Click “Build & Run” in unity and then cancel when it reaches Xcode.
+5. Open the Xcode project go to -> Build settings -> search ”Enable Objective-C Exceptions” and set to YES.
+
+For Android:
+1. open the "Build setting" ->player settings -> publishing setting -> select browse keystore -> select the keystore "unitySample.keystore".
+ Keystore password 123456, key Password 123456.
+
+
 
 ## Raise Custom events
 
@@ -48,24 +72,6 @@ The sample app is ready for use but you need to build as an iOS or Android proje
 	
 	private static string customEvent = "MMedia";
 ```
-
-Using Applicasa - Unity
-===========================
-1. Open the project in Unity
-2. Build to Project for your desired OS (iOS or Android)
-
-For iOS:
-1. You need Xcode in order to build your project.
-(Download Xcode from the app store https://developer.apple.com/xcode/).
-2. Open the 'Facebook' toolbar menu then 'Edit settings' and verify there's a valid Facebook Id, if not set this 494708670563462
-3. Open 'Applicasa' toolbar menu then 'iOS settings' and verify there's a valid Facebook Id, if not set this 494708670563462
-
-4. Click “Build & Run” in unity and then cancel when it reaches Xcode.
-5. Open the Xcode project go to -> Build settings -> search ”Enable Objective-C Exceptions” and set to YES.
-
-For Android:
-1. open the "Build setting" ->player settings -> publishing setting -> select browse keystore -> select the keystore "unitySample.keystore".
- Keystore password 123456, key Password 123456.
 
 
   
