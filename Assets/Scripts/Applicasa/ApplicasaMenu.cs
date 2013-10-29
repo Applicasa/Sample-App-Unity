@@ -11,7 +11,7 @@ public class ApplicasaMenu : MonoBehaviour {
 	//The current user name
 	public static string UserName = "Anonymous";
 	
-	        /**
+	 /**
          Instruction to raise custom events.
          The "Egg" sample app implemented custom events that will raise the different ad network possible (TrialPay, MMedia, SupersonicAds, SponsorPay Appnext and Chartboost)
 
@@ -31,7 +31,7 @@ public class ApplicasaMenu : MonoBehaviour {
          4.Appnext ---------------------------->@"Appnext"
          5.Chartboost ------------------------->@"Chartboost"
          
-         **/
+     **/
 	
 	private static string customEvent = "MMedia";
 	#region Promotions

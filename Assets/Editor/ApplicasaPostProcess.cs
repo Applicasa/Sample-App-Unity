@@ -9,18 +9,19 @@ using UnityEditor.LiXCodeEditor;
 public class ApplicasaPostProcess {
 	
 	// Set your facebbok AppID
-	const string FacebookAppID = "494708670563462";
+const string FacebookAppID = "[FACEBOOKID]";
 	
 
-    const bool IsMMediaEnabledAndroid = true;
-    const bool IsSponsorPayEnabledAndroid = true;
-    const bool IsSupersonicAdsEnabledAndroid = false;
+	const bool IsMMediaEnabledAndroid = false;
+	const bool IsSponsorPayEnabledAndroid = false;
+	const bool IsSupersonicAdsEnabledAndroid = false;
 	
-	const bool IsSponsorPayEnablediOS = true;
-	const bool IsSupersonicAdsEnablediOS = true;
-	const bool IsMMediaEnablediOS = true;
-	const bool IsAppnextEnablediOS = true;
-	const bool IsChartboostEnablediOS = true;
+	const bool IsFacebookEnablediOS = false;
+	const bool IsSponsorPayEnablediOS = false;
+	const bool IsSupersonicAdsEnablediOS = false;
+	const bool IsMMediaEnablediOS = false;
+	const bool IsAppnextEnablediOS = false;
+	const bool IsChartboostEnablediOS = false;
 	
 
 	const string Permissions = "<!-- AddPermissions -->";
@@ -98,7 +99,10 @@ public class ApplicasaPostProcess {
 			
 			project.ApplyMod( Application.dataPath+"/Editor/PostProcessScript/main.projmods" );
 			
-			
+		if (!IsFacebookEnablediOS)
+		{
+			project.ApplyMod( Application.dataPath+"/Editor/PostProcessScript/facebook.projmods" );
+		}
 		if (IsMMediaEnablediOS)
 		{
 			project.ApplyMod( Application.dataPath+"/Editor/PostProcessScript/MMedia.projmods" );

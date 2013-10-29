@@ -138,6 +138,9 @@
  <Reference Include="Assets\Editor\ApplicasaBuild">
  <HintPath>Assets\Editor\ApplicasaBuild.dll</HintPath>
  </Reference>
+ <Reference Include="Assets\Facebook\Scripts\IFacebook">
+ <HintPath>Assets\Facebook\Scripts\IFacebook.dll</HintPath>
+ </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
  <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -149,9 +152,6 @@
  </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions">
  <HintPath>\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="Assets\Facebook\Scripts\IFacebook">
- <HintPath>Assets\Facebook\Scripts\IFacebook.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
