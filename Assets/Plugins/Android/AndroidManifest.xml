@@ -50,25 +50,6 @@
 		<!-- End facebook login activity -->
 		
 		<!-- AddActivities -->
-
-  <!-- SponsorPay Activity -->   
-	<activity android:name="com.sponsorpay.sdk.android.publisher.OfferWallActivity" android:configChanges="orientation" />
-	 <activity android:name="com.sponsorpay.sdk.android.publisher.mbe.SPBrandEngageActivity" android:configChanges="orientation" />
-   <activity
-	android:name="com.applicasa.SponsorPay.LiSponsorPayActivity"
-	android:configChanges="keyboardHidden|orientation|keyboard"
-	android:theme="@android:style/Theme.Translucent.NoTitleBar"
-	/> 
-   
-
-<activity android:name="com.millennialmedia.android.MMActivity"
-   android:configChanges="keyboardHidden|orientation|keyboard"
-   android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-  
-<activity android:name="com.applicasa.MMedia.LiMMediaActivity"
-   android:configChanges="keyboardHidden|orientation|keyboard"
-   android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-   
 		
 		
 		<!-- Start IAP activity -->
@@ -122,14 +103,6 @@
     </application>
 	
 		<!-- AddPermissions -->
-	
-<!-- MMedia Permissions -->
-<uses-permission android:name="android.permission.RECORD_AUDIO" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-<uses-feature android:name="android.hardware.microphone" android:required="false" />
-<!-- End MMedia Permissions -->
-	
 		<!-- Required permission for Applicasa -->
 	    <uses-permission android:name="android.permission.INTERNET"/>
 		
