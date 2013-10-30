@@ -2,22 +2,17 @@ using Facebook;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public sealed class FB : ScriptableObject
 {
-    public static InitDelegate OnInitComplete;
-    public static HideUnityDelegate OnHideUnity;
+    public static Facebook.InitDelegate OnInitComplete;
+    public static Facebook.HideUnityDelegate OnHideUnity;
 
     private static IFacebook facebook;
     private static string authResponse;
     private static bool isInitCalled = false;
-    private static string appId;
-    private static bool cookie;
-    private static bool logging;
-    private static bool status;
-    private static bool xfbml;
-    private static bool frictionlessRequests;
 
     static IFacebook FacebookImpl
     {
@@ -51,59 +46,22 @@ public sealed class FB : ScriptableObject
     {
         get
         {
-            return (facebook != null) && facebook.IsLoggedIn;
+            return (facebook != null) ? facebook.IsLoggedIn : false;
         }
     }
 
     #region Init
     /**
-     * This is the preferred way to call FB.Init().  It will take the facebook app id specified in your
-     * "Facebook" => "Edit Settings" menu when it is called.
-     * 
      * onInitComplete - Delegate is called when FB.Init() finished initializing everything.
      *                  By passing in a delegate you can find out when you can safely call the other methods.
      */
-    public static void Init(InitDelegate onInitComplete, HideUnityDelegate onHideUnity = null, string authResponse = null)
+    public static void Init(Facebook.InitDelegate onInitComplete, Facebook.HideUnityDelegate onHideUnity = null, string authResponse = null)
     {
-        Init(
-            onInitComplete,
-            FBSettings.AppId,
-            FBSettings.Cookie,
-            FBSettings.Logging,
-            FBSettings.Status,
-            FBSettings.Xfbml,
-            FBSettings.FrictionlessRequests,
-            onHideUnity,
-            authResponse);
-    }
-
-    /**
-     * If you need a more programmatic way to set the facebook app id and other setting call this function.
-     * Useful for a build pipeline that requires no human input.
-     */
-    public static void Init(
-        InitDelegate onInitComplete, 
-        string appId,
-        bool cookie = true,
-        bool logging = true,
-        bool status = true,
-        bool xfbml = false,
-        bool frictionlessRequests = true,
-        HideUnityDelegate onHideUnity = null, 
-        string authResponse = null)
-    {
-        FB.appId = appId;
-        FB.cookie = cookie;
-        FB.logging = logging;
-        FB.status = status;
-        FB.xfbml = xfbml;
-        FB.frictionlessRequests = frictionlessRequests;
-        FB.authResponse = authResponse;
-        FB.OnInitComplete = onInitComplete;
-        FB.OnHideUnity = onHideUnity;
-
         if (!isInitCalled)
         {
+            FB.authResponse = authResponse;
+            FB.OnInitComplete = onInitComplete;
+            FB.OnHideUnity = onHideUnity;
 
             FbDebug.Info(String.Format("Using SDK {0}, Build {1}", FBBuildVersionAttribute.SDKVersion, FBBuildVersionAttribute.GetBuildVersionOfType(typeof(IFacebook))));
 
@@ -118,17 +76,16 @@ public sealed class FB : ScriptableObject
 #else
             throw new NotImplementedException("Facebook API does not yet support this platform");
 #endif
-            isInitCalled = true;
+            FB.isInitCalled = true;
             return;
         }
 
         FbDebug.Warn("FB.Init() has already been called.  You only need to call this once and only once.");
-
-        // Init again if possible just in case something bad actually happened.
-        if (FacebookImpl != null)
-        {
-            OnDllLoaded();
-        }
+		
+		// Init again if possible just in case something bad actually happened.
+		if (FacebookImpl != null) {
+			OnDllLoaded();
+		}
     }
 
     private static void OnDllLoaded()
@@ -136,14 +93,14 @@ public sealed class FB : ScriptableObject
         FbDebug.Log("Finished loading Facebook dll. Build " + FBBuildVersionAttribute.GetBuildVersionOfType(FacebookImpl.GetType()));
         FacebookImpl.Init(
             OnInitComplete,
-            appId,
-            cookie,
-            logging,
-            status,
-            xfbml,
+            FBSettings.AppId,
+            FBSettings.Cookie,
+            FBSettings.Logging,
+            FBSettings.Status,
+            FBSettings.Xfbml,
             FBSettings.ChannelUrl,
             authResponse,
-            frictionlessRequests,
+            FBSettings.FrictionlessRequests,
             OnHideUnity
         );
     }
@@ -197,6 +154,11 @@ public sealed class FB : ScriptableObject
     public static void API(string query, HttpMethod method, FacebookDelegate callback, WWWForm formData)
     {
         FacebookImpl.API(query, method, formData, callback);
+    }
+
+    public static void GetAuthResponse(FacebookDelegate callback = null)
+    {
+        FacebookImpl.GetAuthResponse(callback);
     }
 
     public static void PublishInstall(FacebookDelegate callback = null)
@@ -265,16 +227,6 @@ public sealed class FB : ScriptableObject
         {
             FacebookImpl.Pay(product, action, quantity, quantityMin, quantityMax, requestId, pricepointId, testCurrency, callback);
         }
-
-        public static void SetResolution(int width, int height, bool fullscreen, int preferredRefreshRate = 0)
-        {
-            FBScreen.SetResolution(width, height, fullscreen, preferredRefreshRate);
-        }
-
-        public static void SetAspectRatio(int width, int height)
-        {
-            FBScreen.SetAspectRatio(width, height);
-        }
     }
     #endregion
 
@@ -325,11 +277,10 @@ public sealed class FB : ScriptableObject
             }
 
             // load the Facebook component into the gameobject
-            // using the "as" cast so it'll null if it fails to cast, instead of exception
-            var fb = typeof(FBComponentFactory)
-                    .GetMethod("GetComponent")
-                    .MakeGenericMethod(facebookClass)
-                    .Invoke(null, new object[] { IfNotExist.AddNew }) as IFacebook;
+            var fb = (IFacebook)typeof(FBComponentFactory)
+                                            .GetMethod("GetComponent")
+                                            .MakeGenericMethod(facebookClass)
+                                            .Invoke(null, new object[1] { IfNotExist.AddNew });
 
             if (fb == null)
             {
@@ -347,7 +298,7 @@ public sealed class FB : ScriptableObject
         IEnumerator Start()
         {
             var loader = LoadFacebookClass(className, OnDllLoaded);
-            while (loader.MoveNext())
+            while (loader != null && loader.MoveNext())
             {
                 yield return loader.Current;
             }

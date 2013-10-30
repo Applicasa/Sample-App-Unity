@@ -1,7 +1,7 @@
 //
 // User.m
 // Created by Applicasa 
-// 10/24/2013
+// 10/30/2013
 //
 
 #import "User.h"
@@ -77,8 +77,7 @@ enum UserIndexes {
 	UserMainCurrencyBalanceIndex,
 	UserSecondaryCurrencyBalanceIndex,
 	UserFacebookIDIndex,
-	UserTempDateIndex,
-};
+	UserTempDateIndex,};
 #define NUM_OF_USER_FIELDS 19
 
 
@@ -335,17 +334,16 @@ static BOOL hasActionBlock = FALSE;
 
 - (void) setFbFriendsAction:(LiBlockFBFriendsAction)block{
     fbFriendsAction = Block_copy(block);
-    hasFbFriendsAction = TRUE;
+     hasFbFriendsAction = TRUE;
 }
 
 - (void) setActionBlock:(LiBlockAction)block{
     actionBlock = Block_copy(block);
-  
 }
 
 - (void) facebookLoginWithBlock:(LiBlockAction)block{
     [self setActionBlock:block];
-      hasActionBlock = TRUE;
+    hasActionBlock = TRUE;
     [LiKitFacebook loginWithFacebookWithUser:self Delegate:self];
 }
 
@@ -376,7 +374,6 @@ static BOOL hasActionBlock = FALSE;
 - (void) FBdidFindFacebookFriends:(NSArray *)friends ResponseType:(int)responseType ResponseMessage:(NSString *)responseMessage{
     NSError *error = nil;
     [LiObjRequest handleError:&error ResponseType:responseType ResponseMessage:responseMessage];
-    
     if(hasFbFriendsAction)
     {
         fbFriendsAction(error,friends,FacebookFriends);

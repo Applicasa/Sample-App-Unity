@@ -19,6 +19,7 @@ public sealed class InteractiveConsole : MonoBehaviour
     {
         Debug.Log("FB.Init completed: Is user logged in? " + FB.IsLoggedIn);
         isInit = true;
+        CallGetAuthResponse();
     }
 
     private void OnHideUnity(bool isGameShown)
@@ -33,6 +34,15 @@ public sealed class InteractiveConsole : MonoBehaviour
     private void CallFBLogin()
     {
         FB.Login("email,publish_actions", Callback);
+    }
+
+    #endregion
+
+    #region FB.GetAuthResponse() example
+
+    private void CallGetAuthResponse()
+    {
+        FB.GetAuthResponse(Callback);
     }
 
     #endregion
@@ -209,8 +219,8 @@ public sealed class InteractiveConsole : MonoBehaviour
     private Vector2 scrollPosition = Vector2.zero;
 #if UNITY_IOS || UNITY_ANDROID
     int buttonHeight = 60;
-    int mainWindowWidth = Screen.width - 30;
-    int mainWindowFullWidth = Screen.width;
+    int mainWindowWidth = 610;
+    int mainWindowFullWidth = 640;
 #else
     int buttonHeight = 24;
     int mainWindowWidth = 500;
@@ -249,7 +259,6 @@ public sealed class InteractiveConsole : MonoBehaviour
             GUILayout.BeginHorizontal();
             GUILayout.BeginVertical();
         }
-        GUILayout.Space(5);
         GUILayout.Box("Status: " + status, GUILayout.MinWidth(mainWindowWidth));
 
 #if UNITY_IOS || UNITY_ANDROID
@@ -454,18 +463,14 @@ public sealed class InteractiveConsole : MonoBehaviour
 
     private bool Button(string label)
     {
-        return GUILayout.Button(
-          label, 
-          GUILayout.MinHeight(buttonHeight), 
-          GUILayout.MaxWidth(mainWindowWidth)
-        );
+        return GUILayout.Button(label, GUILayout.MinHeight(buttonHeight));
     }
 
     private void LabelAndTextField(string label, ref string text)
     {
         GUILayout.BeginHorizontal();
-        GUILayout.Label(label, GUILayout.MaxWidth(150));
-        text = GUILayout.TextField(text);
+        GUILayout.Label(label, GUILayout.Width(150));
+        text = GUILayout.TextField(text, GUILayout.MinWidth(300));
         GUILayout.EndHorizontal();
     }
 

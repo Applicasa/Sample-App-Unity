@@ -9,7 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <LiCore/LiObjFBFriend.h>
 #import <LiCore/LiKitFacebookDelegate.h>
+
+#import "LiManager.h"
+
+#ifdef UNITY_VERSION
 #import <FacebookSDK/FacebookSDK.h>
+#else
+#import "FacebookSDK.h"
+#endif
 
 /*
  Implement the application .plist file as described in

@@ -17,6 +17,6 @@
 package com.facebook;
 
 final class FacebookSdkVersion {
-    public static final String BUILD = "3.5.0/Unity.4.3.4";
+    public static final String BUILD = "3.5.0/Unity.4.3.3";
     public static final String MIGRATION_BUNDLE = "fbsdk:20130708";
 }

@@ -9,7 +9,7 @@ using UnityEditor.LiXCodeEditor;
 public class ApplicasaPostProcess {
 	
 	// Set your facebbok AppID
-	const string FacebookAppID = "494708670563462";
+	const string FacebookAppID = "	494708670563462";
 	
 
     const bool IsMMediaEnabledAndroid = true;
@@ -72,20 +72,24 @@ public class ApplicasaPostProcess {
 		if (IsMMediaEnabledAndroid)
 		{
 			permissions = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/MMedia/MMpermissions.txt"));
-			activities = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/MMedia/MMactivities.txt"));
+			//activities = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/MMedia/MMactivities.txt"));
 			
 			AndroidManifestString = AndroidManifestString.Replace(Permissions, permissions);
-			AndroidManifestString = AndroidManifestString.Replace(Activities, activities);
+			
+			// Activities are harcoded 
+			//AndroidManifestString = AndroidManifestString.Replace(Activities, activities);
 		}
 		if(IsSponsorPayEnabledAndroid)
 		{
-			activities = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/SponsorPay/SPactivities.txt"));
-			AndroidManifestString = AndroidManifestString.Replace(Activities, activities);
+			// Activities are harcoded 
+			//activities = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/SponsorPay/SPactivities.txt"));
+			//AndroidManifestString = AndroidManifestString.Replace(Activities, activities);
 		}
 		if(IsSupersonicAdsEnabledAndroid)
 		{
-			activities = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/SupersonicAds/SSAactivities.txt"));
-			AndroidManifestString = AndroidManifestString.Replace(Activities, activities);
+			// Activities are harcoded 
+			//activities = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/SupersonicAds/SSAactivities.txt"));
+			//AndroidManifestString = AndroidManifestString.Replace(Activities, activities);
 		}
 		
 		File.WriteAllText(outPutPath, AndroidManifestString);

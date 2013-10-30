@@ -19,7 +19,7 @@
 #import <LiCore/LiQuery.h>
 #import <LiCore/LiFilters.h>
 
-#define LI_VERSION @"3.4.0.3"
+#define LI_VERSION @"3.4.0.4"
 #define FRAMEWORK_SCHEMA_VERSION @"1.2" 
 
 
