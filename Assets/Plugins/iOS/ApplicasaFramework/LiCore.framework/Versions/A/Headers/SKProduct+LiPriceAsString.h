@@ -7,6 +7,7 @@
 //
 
 #import <StoreKit/StoreKit.h>
+void loadCategorySKProduct();
 
 @interface SKProduct (LiPriceAsString)
 

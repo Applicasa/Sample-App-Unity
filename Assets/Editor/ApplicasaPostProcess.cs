@@ -9,18 +9,20 @@ using UnityEditor.LiXCodeEditor;
 public class ApplicasaPostProcess {
 	
 	// Set your facebbok AppID
-	const string FacebookAppID = "	494708670563462";
+	const string FacebookAppID = "			494708670563462";
 	
 
     const bool IsMMediaEnabledAndroid = true;
     const bool IsSponsorPayEnabledAndroid = true;
     const bool IsSupersonicAdsEnabledAndroid = false;
+    const bool IsAarkiEnabledAndroid = false;
 	
-	const bool IsFacebookEnablediOS = true;
-	const bool IsSponsorPayEnablediOS = true;
+	const bool IsFacebookEnablediOS = false;
+	const bool IsSponsorPayEnablediOS = false;
 	const bool IsSupersonicAdsEnablediOS = true;
 	const bool IsMMediaEnablediOS = true;
 	const bool IsAppnextEnablediOS = true;
+	const bool IsAarkiEnablediOS = false;
 	const bool IsChartboostEnablediOS = true;
 	
 
@@ -91,6 +93,17 @@ public class ApplicasaPostProcess {
 			//activities = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/SupersonicAds/SSAactivities.txt"));
 			//AndroidManifestString = AndroidManifestString.Replace(Activities, activities);
 		}
+
+		if(IsAarkiEnabledAndroid)
+		{
+			permissions = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/Aarki/Aarkipermissions.txt"));
+			AndroidManifestString = AndroidManifestString.Replace(Permissions, permissions);
+			
+			// Activities are harcoded 
+			//activities = File.ReadAllText(Path.Combine( Application.dataPath, "Editor/Aarki/Aarkiactivities.txt"));
+			//AndroidManifestString = AndroidManifestString.Replace(Activities, activities);
+		}	
+		
 		
 		File.WriteAllText(outPutPath, AndroidManifestString);
 	}
@@ -98,10 +111,10 @@ public class ApplicasaPostProcess {
 
 	private static void buildiOS(string buildPath)
 	{
-		   	// Create a new project object from build target
-		    XCProject project = new XCProject( buildPath );
+		// Create a new project object from build target
+		XCProject project = new XCProject( buildPath );
 			
-			project.ApplyMod( Application.dataPath+"/Editor/PostProcessScript/main.projmods" );
+		project.ApplyMod( Application.dataPath+"/Editor/PostProcessScript/main.projmods" );
 			
 		if (!IsFacebookEnablediOS)
 		{
@@ -127,6 +140,12 @@ public class ApplicasaPostProcess {
 		{
 			project.ApplyMod( Application.dataPath+"/Editor/PostProcessScript/Chartboost.projmods" );
 		}
+		if(IsAarkiEnablediOS)
+		{
+			project.ApplyMod( Application.dataPath+"/Editor/PostProcessScript/Aarki.projmods" );
+		}
+		
+		
 			
 		project.Save();
     }

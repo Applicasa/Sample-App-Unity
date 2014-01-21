@@ -52,7 +52,7 @@
 	<!-- To enable Push messages, change to true, and set GOOGLE_GCM key -->
 	<key>
 	<key_name>ENABLE_PUSH</key_name>
-    <key_value>True</key_value>
+    <key_value>False</key_value>
 	</key>
 	
 	<!-- place your google key instead of   &lt;GOOGLE_KEY&gt; -->
@@ -138,6 +138,19 @@
 	<key>
 	<key_name>SUPERSONIC_ID</key_name>
     <key_value>2d8de069</key_value>
+	</key>
+
+	<!-- To enable Aarki , set value to true -->
+	<!-- If set to true, please add Aarki framework. you can download from: http://www.Aarki.com/ -->
+	<key>
+	<key_name>ENABLE_AARKI</key_name>
+    <key_value>False</key_value>
+	</key>
+	
+	<!-- place your AARKI Client Security key instead of   &lt;AARKI_CLIENT_SECURITY_KEY&gt; -->
+	<key>
+	<key_name>AARKI_CLIENT_SECURITY_KEY</key_name>
+    <key_value>	&lt;AARKI_CLIENT_SECURITY_KEY&gt;</key_value>
 	</key>
 	
 	

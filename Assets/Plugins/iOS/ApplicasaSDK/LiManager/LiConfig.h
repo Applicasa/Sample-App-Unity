@@ -18,10 +18,10 @@
 
 
 // Applicasa Keys (do not alter)
-#define SDK_VERSION 3.1
+#define SDK_VERSION 3.2
 #define FRAMEWORK_VERSION 3.1
 #define SCHEMA_VERISON @"3.0"
-#define SCHEMA_DATE 1383132503
+#define SCHEMA_DATE 1390307481
 
 // Parsing config
 #define SHOULD_DECODE_HTML_XML_TAGS NO 
@@ -34,12 +34,16 @@
 #define SUPERSONIC_APPID @"2d8da6e1"
 
 // SponsorPay Keys
-#define ENABLE_SPONSORPAY 1
+#define ENABLE_SPONSORPAY 0
 #define SPONSORPAY_APPID @"17284"
 #define SPONSORPAY_SECURITY_TOKEN @"baa01b60eb8c3996289874198342cf8d"
 
 // AppNext Keys
 #define ENABLE_APPNEXT 1
+
+// Aarki keys
+#define ENABLE_AARKI 0
+#define AARKI_CLIENT_SECURITY_KEY @""
 
 // Chartboost Keys
 #define ENABLE_CHARTBOOST 1

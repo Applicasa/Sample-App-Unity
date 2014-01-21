@@ -12,6 +12,10 @@ namespace Facebook
         private const string AndroidJavaFacebookClass = "com.facebook.unity.FB";
         private const string CallbackIdKey = "callback_id";
 
+        // key Hash used for Android SDK
+        private string keyHash;
+        public string KeyHash { get { return keyHash; } }
+
         #region IFacebook
         public override int DialogMode { get { return BrowserDialogMode; } set { } }
         public override bool LimitEventUsage
@@ -66,6 +70,7 @@ namespace Facebook
 
         protected override void OnAwake()
         {
+            keyHash = "";
 #if DEBUG
             AndroidJNIHelper.debug = true;
 #endif
@@ -94,7 +99,7 @@ namespace Facebook
             {
                 throw new ArgumentException("appId cannot be null or empty!");
             }
-            
+
             var parameters = new Dictionary<string, object>();
 
             parameters.Add("appId", appId);
@@ -161,6 +166,11 @@ namespace Facebook
                 isLoggedIn = true;
                 userId = (string)parameters["user_id"];
                 accessToken = (string)parameters["access_token"];
+            }
+
+            if (parameters.ContainsKey("key_hash"))
+            {
+                keyHash = (string)parameters["key_hash"];
             }
 
             OnAuthResponse(new FBResult(message));

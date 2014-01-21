@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+void loadCategory();
+
 @interface NSDate (SQLiteDate)
 
 + (NSDate *) dateWithMongoDictionary:(NSDictionary *)dictionary;
@@ -20,6 +22,8 @@
 - (NSString *) sqlLiteDateRepresentation;
 - (NSTimeInterval) unixTime;
 - (NSTimeInterval) julianDay;
+
+
 
 
 @end

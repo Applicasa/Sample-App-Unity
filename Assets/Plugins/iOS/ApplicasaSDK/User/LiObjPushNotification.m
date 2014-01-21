@@ -18,6 +18,7 @@
 @synthesize tag;
 @synthesize timed;
 @synthesize dispatch_time;
+@synthesize contentAvailable;
 
 -(void)dealloc{
     [message release];
@@ -33,6 +34,18 @@
 }
 
 -(id)initWithMessage:(NSString *)theMessage sound:(NSString *)theSound badge:(NSInteger)theBadge andTag:(NSMutableDictionary *)theTag{
+    return  [LiObjPushNotification pushWithMessage:theMessage sound:theSound badge:theBadge andTag:theTag andContentAvailable:0];
+}
+
+
+//autorelease instance to send the push
++ (LiObjPushNotification *) pushWithMessage:(NSString *)theMessage sound:(NSString *)theSound badge:(NSInteger)theBadge andTag:(NSMutableDictionary *)theTag andContentAvailable:(int)theContentAvailable{
+    return [[LiObjPushNotification alloc]initWithMessage:theMessage sound:theSound badge:theBadge andTag:theTag andContentAvailable:theContentAvailable];
+}
+
+//init instance to send the push
+- (id) initWithMessage:(NSString *)theMessage sound:(NSString *)theSound badge:(NSInteger)theBadge  andTag:(NSMutableDictionary *)theTag andContentAvailable:(int)theContentAvailable
+{
     if (self=[super init]){
         if (theMessage){
             self.message = theMessage;
@@ -43,7 +56,8 @@
         self.sound = theSound;
         self.tag = theTag;
         
-         self.timed = FALSE;
+        self.contentAvailable = (theContentAvailable == 0 || theContentAvailable == 1)?theContentAvailable:0;
+        self.timed = FALSE;
     }
     return self;
 }
@@ -78,7 +92,11 @@
     NSDictionary *apsDic = [mutableDic objectForKey:@"aps"];
     [mutableDic removeObjectForKey:@"aps"];
     
-    return [self initWithMessage:[apsDic objectForKey:@"alert"] sound:[apsDic objectForKey:@"sound"] badge:[[apsDic objectForKey:@"badge"] intValue] andTag:mutableDic];
+    LiObjPushNotification * item =[self initWithMessage:[apsDic objectForKey:@"alert"] sound:[apsDic objectForKey:@"sound"] badge:[[apsDic objectForKey:@"badge"] intValue] andTag:mutableDic];
+    if ([apsDic objectForKey:@"content-available"])
+        [item setContentAvailable:[[apsDic objectForKey:@"content-available"] intValue]];
+    
+    return item;
 }
 
 + (LiObjPushNotification *) pushWithDictionary:(NSDictionary *)dictionary{

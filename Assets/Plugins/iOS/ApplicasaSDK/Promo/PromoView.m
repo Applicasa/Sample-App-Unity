@@ -45,6 +45,11 @@
 #import <LiSupersonicAds/LiSupersonicAdsManager.h>
 #endif
 
+#if (ENABLE_AARKI)
+#define AARKI
+#import <LiAarki/LiAarkiManager.h>
+#endif
+
 @interface PromoView()<UIWebViewDelegate>
 
 - (void) defaultAction;
@@ -59,6 +64,7 @@
 -(PromoView *)showSponsorPayWithPromoView:(PromoView *)view;
 -(PromoView *)showAppnextWithPromoView:(PromoView *)view;
 -(PromoView *)showSupersonicAdsWithPromoView:(PromoView *)view;
+-(PromoView *)showAarkiWithPromoView:(PromoView *)view;
 
 
 @property (assign,nonatomic) NSString *baseOfferwallUrl;
@@ -95,6 +101,9 @@ static BOOL isDuringTrialPay =FALSE;
             break;
         case LiPromotionTypeSupersonicAds:
             view = [view showSupersonicAdsWithPromoView:view];
+            break;
+        case LiPromotionTypeAarki:
+            view = [view showAarkiWithPromoView:view];
             break;
         case LiPromotionTypeAppnext:
             view = [view showAppnextWithPromoView:view];
@@ -366,16 +375,18 @@ static BOOL isDuringTrialPay =FALSE;
         [self.offerwallWebview goBack];
     }
 }
+
+
 #pragma mark - Chartboost Builder
 -(PromoView *)showChartboostWithPromoView:(PromoView *)view
 {
-    #ifdef CHARTBOOST
+#ifdef CHARTBOOST
     [[LiChartboostManager sharedInstance] showChartboostWithPromoView:view];
-    #else
+#else
     [view closeAction];
     [view removeFromSuperview];
     NSLog(@"To display Chartboost please enable chartboost in LiConfig.h");
-    #endif
+#endif
     
     return  view;
 }
@@ -406,6 +417,7 @@ static BOOL isDuringTrialPay =FALSE;
     return  view;
 }
 
+
 #pragma mark - Appnext Builder
 -(PromoView *)showAppnextWithPromoView:(PromoView *)view
 {
@@ -430,9 +442,23 @@ static BOOL isDuringTrialPay =FALSE;
     [view removeFromSuperview];
     NSLog(@"To display SupersonicAds please enable SupersonicAds in LiConfig.h");
 #endif
+    return  view;
+}
+
+#pragma mark - Aarki Builder
+-(PromoView *)showAarkiWithPromoView:(PromoView *)view
+{
+#ifdef AARKI
+    [[LiAarkiManager sharedInstance] showAarkiWithPromoView:view];
+#else
+    [view closeAction];
+    [view removeFromSuperview];
+    NSLog(@"To display Aarki please enable Aarki in LiConfig.h");
+#endif
     
     return  view;
 }
+
 +(BOOL) getIsDuringTrialPay{
     return isDuringTrialPay;
 }

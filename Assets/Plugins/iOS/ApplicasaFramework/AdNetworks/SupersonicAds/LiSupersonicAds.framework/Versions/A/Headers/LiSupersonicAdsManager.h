@@ -15,7 +15,7 @@
 
 
 @interface LiSupersonicAdsManager : NSObject
-#define LI_SUPER_SONIC_ADS_VERSION @"1.0.1"
+#define LI_SUPER_SONIC_ADS_VERSION @"1.0.3"
 
 @property (nonatomic, strong) Promotion *promo;
 @property (nonatomic, strong) PromoView *view;

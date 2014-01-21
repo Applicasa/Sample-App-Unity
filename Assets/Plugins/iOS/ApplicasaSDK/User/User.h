@@ -1,7 +1,7 @@
 //
 // User.h
 // Created by Applicasa 
-// 10/30/2013
+// 1/21/2014
 //
 
 #import <Foundation/Foundation.h>
@@ -80,6 +80,7 @@
 
 
 + (User *) getCurrentUser;
++ (void) reloadUserWithBlock:(LiBlockAction)block;
 
 #pragma mark - Facebook Methods
 

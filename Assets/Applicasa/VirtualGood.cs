@@ -403,7 +403,10 @@ namespace Applicasa
 			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodImageC",innerVirtualGoodJavaObject, value);}
 		}
 		public VirtualGoodCategory VirtualGoodMainCategory {
-			get {return new VirtualGoodCategory(AndroidJNI.NewGlobalRef(javaUnityApplicasaVirtualGood.CallStatic<AndroidJavaObject>("ApplicasaVirtualGoodGetVirtualGoodMainCategory",innerVirtualGoodJavaObject).GetRawObject()));}
+			get {
+				AndroidJavaObject temp = javaUnityApplicasaVirtualGood.CallStatic<AndroidJavaObject>("ApplicasaVirtualGoodGetVirtualGoodMainCategory",innerVirtualGoodJavaObject);
+				return new VirtualGoodCategory(temp.GetRawObject(),temp);
+			}
 			set {javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodSetVirtualGoodMainCategory",innerVirtualGoodJavaObject, value.innerVirtualGoodCategoryJavaObject);}
 		}
 		public bool VirtualGoodIsDeal {
@@ -593,20 +596,33 @@ namespace Applicasa
 		public void Buy(int quantity, Currency currencyKind, Action action) {
 			if (currencyKind == Currency.RealMoney)
 				BuyWithRealMoney(action);
-			else
-				javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodBuyQuantity", innerVirtualGoodJavaObject, quantity, currencyKind, action);
+			else{
+				int uniqueActionID=Core.currentCallbackID;
+				Core.currentCallbackID++;
+				Core.setActionCallback(action,uniqueActionID);
+				javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodBuyQuantity", innerVirtualGoodJavaObject, quantity, (int)currencyKind, uniqueActionID);
+			}
 		}
 
 		public void BuyWithRealMoney(Action action) {
-   			javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodBuyWithRealMoney", innerVirtualGoodJavaObject, action);
+			int uniqueActionID=Core.currentCallbackID;
+			Core.currentCallbackID++;
+			Core.setActionCallback(action,uniqueActionID);
+   			javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodBuyWithRealMoney", innerVirtualGoodJavaObject, uniqueActionID);
   		}
 
 		public void Give(int quantity, Action action) {
-			javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodGiveQuantity", innerVirtualGoodJavaObject, quantity, action);
+			int uniqueActionID=Core.currentCallbackID;
+			Core.currentCallbackID++;
+			Core.setActionCallback(action,uniqueActionID);
+			javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodGiveQuantity", innerVirtualGoodJavaObject, quantity, uniqueActionID);
 		}
 
 		public void Use(int quantity, Action action) {
-			javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodUseQuantity", innerVirtualGoodJavaObject, quantity, action);
+			int uniqueActionID=Core.currentCallbackID;
+			Core.currentCallbackID++;
+			Core.setActionCallback(action,uniqueActionID);
+			javaUnityApplicasaVirtualGood.CallStatic("ApplicasaVirtualGoodUseQuantity", innerVirtualGoodJavaObject, quantity, uniqueActionID);
 		}
 #else
         public void Buy(int quantity, Currency currencyKind, Action action)

@@ -1,0 +1,12 @@
+{
+    "group": "Applicasa",
+    "libs": [],
+    "frameworks": ["StoreKit.framework"],
+    "headerpaths": [],
+	"librarysearchpaths": [],
+    "frameworksearchpaths": [],
+    "folders": ["/Plugins/iOS/Applicasa/"],
+	"files":   [],   
+	"excludes": ["^.*.meta$", "^.*.mdown$", "^.*.pdf$"],
+    "linker_flags": []
+}

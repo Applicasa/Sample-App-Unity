@@ -1,14 +1,14 @@
 {
     "group": "SupersonicsAds",
-    "libs": [],
-    "frameworks": ["CoreTelephony.framework"],
+    "libs": ["libz.dylib","libz.1.2.5.dylib"],
+    "frameworks": ["CoreTelephony.framework","MobileCoreServices.framework"],
     "headerpaths": [],
 	"librarysearchpaths": [],
     "frameworksearchpaths": [],
     "files":   ["/Plugins/iOS/ApplicasaFramework/AdNetworks/SupersonicAds/LiSupersonicAds.framework",
-				"/Plugins/iOS/ApplicasaFramework/AdNetworks/SupersonicAds/SSASDK/libs/SSANoArcUniversal.a"],
+				"/Plugins/iOS/ApplicasaFramework/AdNetworks/SupersonicAds/SSASDK/lib/SSASDK.a"],
     "folders": ["/Plugins/iOS/ApplicasaFramework/AdNetworks/SupersonicAds/SSASDK/assets/",
-				"/Plugins/iOS/ApplicasaFramework/AdNetworks/SupersonicAds/SSASDK/include/"],
+				"/Plugins/iOS/ApplicasaFramework/AdNetworks/SupersonicAds/SSASDK/headers/"],
     "excludes": ["^.*.meta$", "^.*.mdown$", "^.*.pdf$"],
     "linker_flags": []
 }

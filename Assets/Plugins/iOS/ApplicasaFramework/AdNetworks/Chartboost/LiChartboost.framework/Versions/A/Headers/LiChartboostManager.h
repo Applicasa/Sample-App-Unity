@@ -15,7 +15,7 @@
 
 
 @interface LiChartboostManager : NSObject
-#define LI_CHARTBOOST_VERSION @"1.0.0"
+#define LI_CHARTBOOST_VERSION @"1.0.1"
 
 
 @property (nonatomic, strong) Promotion *promo;

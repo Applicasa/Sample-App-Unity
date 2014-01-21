@@ -354,7 +354,15 @@ namespace Applicasa {
 	LanguagesID,
 	LanguagesLastUpdate,
 	LanguagesText,
-	LanguagesLanguageName
+	LanguagesLanguageName,
+	//Cards
+	Cards_None,
+	CardsID,
+	CardsLastUpdate,
+	CardsName,
+	CardsPres,
+	CardsImg,
+	CardsAaaaa
 }
 
 
@@ -538,7 +546,8 @@ namespace Applicasa {
 		 MMedia,
 		 SponsorPay,
 		 SupersonicAds,
-		 Appnext
+		 Appnext,
+		 Aarki
 	 }
 	 
 	 public enum PromotionResult {
@@ -556,7 +565,8 @@ namespace Applicasa {
 		 SponsorPay,
 		 Appnext,
 		 MMedia,
-		 Chartboost
+		 Chartboost,
+		 Aarki
 		 
 		 
 #else
@@ -573,7 +583,8 @@ namespace Applicasa {
 		 SponsorPay,
 		 Appnext,
 		 MMedia,
-		 Chartboost
+		 Chartboost,
+		 Aarki
 #endif
 	 }
 	  

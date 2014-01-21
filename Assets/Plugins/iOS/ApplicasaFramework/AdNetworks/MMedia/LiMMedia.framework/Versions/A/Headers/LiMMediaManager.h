@@ -13,7 +13,7 @@
 
 @interface LiMMediaManager : NSObject
 
-#define LI_MMEDIA_VERSION @"1.0.0"
+#define LI_MMEDIA_VERSION @"1.0.3"
 
 @property (nonatomic, strong) PromoView *promoView;
 

@@ -1,7 +1,7 @@
 //
 // Dynamic.cs
 // Created by Applicasa 
-// 10/30/2013
+// 1/21/2014
 //
 
 using UnityEngine;
@@ -144,7 +144,7 @@ namespace Applicasa {
 		}
 		public DateTime DynamicDate {
 			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(ApplicasaDynamicGetDynamicDate(innerDynamic));}
-			set {ApplicasaDynamicSetDynamicDate(innerDynamic, value.Ticks);}
+			set {ApplicasaDynamicSetDynamicDate(innerDynamic,  value.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds);}
 		}
 		public bool DynamicBool {
 			get {return ApplicasaDynamicGetDynamicBool(innerDynamic);}

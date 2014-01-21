@@ -1,7 +1,7 @@
 //
 // User.cs
 // Created by Applicasa 
-// 10/30/2013
+// 1/21/2014
 //
 
 using UnityEngine;
@@ -15,6 +15,7 @@ namespace Applicasa {
 	public class User {
 		public static User[] finalUser;
 #if UNITY_ANDROID 
+		static User tempCurrentUser = null;
 		private static AndroidJavaClass javaUnityApplicasaUser;
 		
         public AndroidJavaObject innerUserJavaObject;
@@ -117,6 +118,9 @@ namespace Applicasa {
 #if UNITY_IPHONE&&!UNITY_EDITOR
 		[DllImport("__Internal")]
 		private static extern PrivateFBFriend ApplicasaUserGetFacebookFriend(System.IntPtr fbFriend);
+		[DllImport("__Internal")]
+		private static extern PrivateFBFriend ApplicasaUserGetFacebookFriendByIndex(int i);
+  
 		public static FBFriend[] GetFacebookFriends(FBFriendArray fbFriendArray) {
 			PrivateFBFriend[] pfbFriends = new PrivateFBFriend[fbFriendArray.ArraySize];
 			FBFriend[] fbFriends = new FBFriend[fbFriendArray.ArraySize];
@@ -134,8 +138,19 @@ namespace Applicasa {
 		
 		public static FBFriend[] FBFriends;
 		public static IEnumerator GetFacebookFriendsIEnumerator(FBFriendArray fbFriendArray) {
-			FBFriends = GetFacebookFriends(fbFriendArray);
-			yield return new WaitForSeconds(0.2f);	
+			yield return new WaitForSeconds(0.2f); 
+
+			PrivateFBFriend[] pfbFriends = new PrivateFBFriend[fbFriendArray.ArraySize];
+			FBFriend[] fbFriends = new FBFriend[fbFriendArray.ArraySize];
+			for (int i=0; i < fbFriendArray.ArraySize; i++) {
+				pfbFriends[i] = ApplicasaUserGetFacebookFriendByIndex(i);
+				fbFriends[i].Id = pfbFriends[i].Id;
+				fbFriends[i].Name = pfbFriends[i].Name;
+				fbFriends[i].ImageURL = pfbFriends[i].ImageURL;
+				if (pfbFriends[i].UserPtr.ToInt32() != 0)
+					fbFriends[i].UserObj = new User(pfbFriends[i].UserPtr);
+			}
+			FBFriends = fbFriends;
 		}
 #elif UNITY_ANDROID&&!UNITY_EDITOR
 		
@@ -162,7 +177,7 @@ namespace Applicasa {
 						if(hasUser)
 						{						
 							AndroidJavaObject tempUserJavaObject = tempObj.Get<AndroidJavaObject>("user");
-							fbFriends[count].UserObj = new User(tempObj.GetRawObject(), tempObj);			
+							fbFriends[count].UserObj = new User(tempObj.GetRawObject(), tempUserJavaObject);			
 						}
 						count++;
 					}
@@ -197,7 +212,7 @@ namespace Applicasa {
 						if(hasUser)
 						{						
 							AndroidJavaObject tempUserJavaObject = tempObj.Get<AndroidJavaObject>("user");
-							fbFriends[count].UserObj = new User(tempObj.GetRawObject(), tempObj);			
+							fbFriends[count].UserObj = new User(tempObj.GetRawObject(), tempUserJavaObject);			
 						}
 						count++;
 					}
@@ -295,7 +310,7 @@ namespace Applicasa {
 		}
 		public DateTime UserTempDate {
 			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(ApplicasaUserGetUserTempDate(innerUser));}
-			set {ApplicasaUserSetUserTempDate(innerUser, value.Ticks);}
+			set {ApplicasaUserSetUserTempDate(innerUser,  value.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds);}
 		}
 
 	[DllImport("__Internal")]
@@ -669,11 +684,29 @@ namespace Applicasa {
 			ApplicasaUserFacebookLogoutWithBlock(callback);
 		}
 		
+		// Usage Profile 
+		[DllImport("__Internal")]
+		private static extern UsageProfile ApplicasaUserGetCurrentUsageProfile();
+		public static UsageProfile UserUsageProfile{
+			get {return ApplicasaUserGetCurrentUsageProfile();} 
+		}
+		// Spenfing Profile 
+		[DllImport("__Internal")]
+		private static extern SpendingProfile ApplicasaUserGetCurrentSpendingProfile();
+		public static SpendingProfile UserSpendingProfile{
+			get {return ApplicasaUserGetCurrentSpendingProfile();} 
+		}
+ 
+  
+ 
+		
 		
 #elif UNITY_ANDROID&&!UNITY_EDITOR
 		public static void Login(string username, string password, Action action) {
 			if(javaUnityApplicasaUser==null)
 				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
+			// nil current user	
+			tempCurrentUser = null;
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(action,uniqueActionID);			
@@ -701,6 +734,10 @@ namespace Applicasa {
 		public static void Logout(Action action) {
 			if(javaUnityApplicasaUser==null)
 				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
+				
+			// nil current user	
+			tempCurrentUser = null;
+			
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(action,uniqueActionID);
@@ -716,17 +753,18 @@ namespace Applicasa {
 			javaUnityApplicasaUser.CallStatic("ApplicasaForgotPasswordForUsername",username, uniqueActionID);
 		}
 		
+		
         public static User GetCurrentUser() {
             if(javaUnityApplicasaUser==null)
                 javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
-           // User user = new User(AndroidJNI.NewGlobalRef(javaUnityApplicasaUser.CallStatic<AndroidJavaObject>("getCurrentUser").GetRawObject()));
-			
-			AndroidJavaObject currentUser= javaUnityApplicasaUser.CallStatic<AndroidJavaObject>("getCurrentUser");
-            User user = new User(currentUser.GetRawObject(),currentUser);
-			
-            return user;
-        }
 
+			if (tempCurrentUser == null)
+			{
+				AndroidJavaObject currentUser= javaUnityApplicasaUser.CallStatic<AndroidJavaObject>("getCurrentUser");
+				tempCurrentUser = new User(currentUser.GetRawObject(),currentUser);
+			}
+			return tempCurrentUser;
+        }
 		
 		
 		public static void GetById(string id, QueryKind queryKind, GetUserFinished callback) {
@@ -863,6 +901,9 @@ namespace Applicasa {
 		public static void FacebookLogin(Action action) {
 			if(javaUnityApplicasaUser==null)
 				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
+			
+			// nil current user	
+			tempCurrentUser = null;
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(action,uniqueActionID);
@@ -872,10 +913,29 @@ namespace Applicasa {
 		public static void FacebookLogout(Action callback) {
 			if(javaUnityApplicasaUser==null)
 				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
+				
+			// nil current user	
+			tempCurrentUser = null;
+			
 			int uniqueActionID=Core.currentCallbackID;
 			Core.currentCallbackID++;
 			Core.setActionCallback(callback,uniqueActionID);
 			javaUnityApplicasaUser.CallStatic("ApplicasaUserFacebookLogoutWithBlock", uniqueActionID);
+		}
+		
+		public static UsageProfile UserUsageProfile{
+			
+			get {if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
+				return (UsageProfile)javaUnityApplicasaUser.CallStatic<int>("ApplicasaUserGetUsageProfile");} 
+		}
+  
+		public static SpendingProfile UserSpendingProfile{
+			
+			get {
+			if(javaUnityApplicasaUser==null)
+				javaUnityApplicasaUser = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaUser");
+				return (SpendingProfile)javaUnityApplicasaUser.CallStatic<int>("ApplicasaUserGetSpendingProfile");} 
 		}
 #else
 
@@ -950,6 +1010,15 @@ namespace Applicasa {
 				User[]  userInner = new User[0];
 			    finalUser = userInner;
 		}
+		
+		public static UsageProfile UserUsageProfile{
+			get {return UsageProfile.LiUsageProfileNone;} 
+		}
+  
+		public static SpendingProfile UserSpendingProfile{
+  			get {return SpendingProfile.LiSpendingProfileNone;} 
+ 		}
+		
 #endif		
 #endregion
 

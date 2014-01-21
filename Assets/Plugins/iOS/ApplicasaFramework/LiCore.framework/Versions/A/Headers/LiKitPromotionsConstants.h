@@ -6,6 +6,15 @@
 //  Copyright (c) 2012 LiCore All rights reserved.
 //
 
+
+@protocol LiKitPromotionsDelegate <NSObject>
+
+//called to notify that you have promotions availble to be display to the user
+- (void) liKitPromotionsAvailable:(NSArray *)promotions;
+
+@end
+
+
 typedef enum {
     LEVEL_RESULT_WIN = 1,
     LEVEL_RESULT_LOSE,
@@ -43,7 +52,8 @@ typedef enum {
     LiPromotionResultSponsorPay,
     LiPromotionResultAppnext,
     LiPromotionResultMMedia,
-     LiPromotionResultChartboost
+    LiPromotionResultChartboost,
+    LiPromotionResultAarki
 } LiPromotionResult;
 
 typedef enum {
@@ -154,7 +164,7 @@ typedef enum {
     unlockedLevel,
     unlockedSecret,
     
-    custome = 3000
+    custom = 3000
     
 } LiEventTypes;
 
@@ -166,8 +176,4 @@ typedef enum {
     LiAnalyticsKindUpdateAnalytic = 3
 } LiAnalyticsKind;
 
-@protocol LiKitPromotionsDelegate <NSObject>
 
-- (void) liKitPromotionsAvailable:(NSArray *)promotions;
-
-@end

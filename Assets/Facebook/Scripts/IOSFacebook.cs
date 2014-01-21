@@ -10,7 +10,7 @@ namespace Facebook
     class IOSFacebook : AbstractFacebook, IFacebook
     {
 #if UNITY_IOS
-        [DllImport ("__Internal")] private static extern void iosInit(bool cookie, bool logging, bool status, bool frictionlessRequests);
+        [DllImport ("__Internal")] private static extern void iosInit(bool cookie, bool logging, bool status, bool frictionlessRequests, string urlSuffix);
         [DllImport ("__Internal")] private static extern void iosLogin(string scope);
         [DllImport ("__Internal")] private static extern void iosLogout();
 
@@ -45,15 +45,6 @@ namespace Facebook
             string title = "");
         
         [DllImport ("__Internal")] 
-        private static extern void iosCallFbApi(
-            int requestId,
-            string query,
-            string method,
-            string[] formDataKeys = null,
-            string[] formDataVals = null,
-            int formDataLen = 0);
-        
-        [DllImport ("__Internal")] 
         private static extern void iosFBSettingsPublishInstall(int requestId, string appId);
         
         [DllImport ("__Internal")] 
@@ -78,7 +69,7 @@ namespace Facebook
         [DllImport ("__Internal")] 
         private static extern void iosGetDeepLink();
 #else
-        void iosInit(bool cookie, bool logging, bool status, bool frictionlessRequests) { }
+        void iosInit(bool cookie, bool logging, bool status, bool frictionlessRequests, string urlSuffix) { }
         void iosLogin(string scope) { }
         void iosLogout() { }
 
@@ -109,14 +100,6 @@ namespace Facebook
             int maxRecipients = 0,
             string data = "",
             string title = "") { }
-
-        void iosCallFbApi(
-            int requestId,
-            string query,
-            string method,
-            string[] formDataKeys = null,
-            string[] formDataVals = null,
-            int formDataLen = 0) { }
 
         void iosFBSettingsPublishInstall(int requestId, string appId) { }
 
@@ -201,7 +184,7 @@ namespace Facebook
             bool frictionlessRequests = false,
             Facebook.HideUnityDelegate hideUnityDelegate = null)
         {
-            iosInit(cookie, logging, status, frictionlessRequests);
+            iosInit(cookie, logging, status, frictionlessRequests, FBSettings.IosURLSuffix);
             externalInitDelegate = onInitComplete;
         }
         #endregion
@@ -261,30 +244,6 @@ namespace Facebook
             FacebookDelegate callback = null)
         {
             throw new PlatformNotSupportedException("There is no Facebook Pay Dialog on iOS");
-        }
-
-        public override void API(
-            string query,
-            HttpMethod method,
-            Dictionary<string, string> formData = null,
-            FacebookDelegate callback = null)
-        {
-            string[] dictKeys = null;
-            string[] dictVals = null;
-
-            if (formData != null && formData.Count > 0)
-            {
-                dictKeys = new string[formData.Count];
-                dictVals = new string[formData.Count];
-                int idx = 0;
-                foreach (KeyValuePair<string, string> kvp in formData)
-                {
-                    dictKeys[idx] = kvp.Key;
-                    dictVals[idx] = System.String.Copy(kvp.Value);
-                    idx++;
-                }
-            }
-            iosCallFbApi(System.Convert.ToInt32(AddFacebookDelegate(callback)), query, method!=null?method.ToString():null, dictKeys, dictVals, formData!=null?formData.Count:0);
         }
 
         public override void GetDeepLink(FacebookDelegate callback)

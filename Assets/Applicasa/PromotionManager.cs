@@ -43,6 +43,12 @@ namespace Applicasa {
 		}
 		
 		[DllImport("__Internal")]
+		private static extern void ApplicasaRaiseCustomEventAndShowWithBlock(string value, Promotion.PromotionResultDelegate callback);
+		public static void RaiseCustomEventAndShow(string value, Promotion.PromotionResultDelegate callback) {
+			ApplicasaRaiseCustomEventAndShowWithBlock(value, callback);
+		}
+		
+		[DllImport("__Internal")]
 		private static extern void ApplicasaShowDemoCampaigns();
 		public static void ShowDemoCampaigns(){
 			ApplicasaShowDemoCampaigns();
@@ -54,6 +60,9 @@ namespace Applicasa {
 		[DllImport("Applicasa")]
 		private static extern void setPromotionsAvailable(Promotion.PromotionsAvailable callback, int uniqueActionID);
 		
+		[DllImport("Applicasa")]
+		private static extern void setPromotionResultDelegate(Promotion.PromotionResultDelegate callback, int uniqueActionID);
+  
 		public static void SetLiKitPromotionDelegate(Promotion.PromotionsAvailable eventCallback) {
 			if(javaUnityApplicasaPromotionManager==null)
 				javaUnityApplicasaPromotionManager = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotionManager");
@@ -107,6 +116,18 @@ namespace Applicasa {
 			javaUnityApplicasaPromotionManager.CallStatic("ApplicasaRaiseCustomEvent", value);
 		}
 		
+		public static void RaiseCustomEventAndShow(string value,Promotion.PromotionResultDelegate callback) {
+  
+			int uniqueActionID=Core.currentCallbackID;
+            Core.currentCallbackID++;
+            setPromotionResultDelegate(callback, uniqueActionID);
+   
+			if(javaUnityApplicasaPromotionManager==null)
+				javaUnityApplicasaPromotionManager = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotionManager");
+    
+			javaUnityApplicasaPromotionManager.CallStatic("ApplicasaRaiseCustomEvent", value,uniqueActionID);
+		}		
+		
 		public static void ShowDemoCampaigns(){
 			if(javaUnityApplicasaPromotionManager==null)
 				javaUnityApplicasaPromotionManager = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaPromotionManager");
@@ -137,6 +158,9 @@ namespace Applicasa {
 		
 		public static void ShowDemoCampaigns(){
 			
+		}
+		
+		public static void RaiseCustomEventAndShow(string value, Promotion.PromotionResultDelegate callback) {
 		}
 #endif
 	}

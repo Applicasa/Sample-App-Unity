@@ -1,7 +1,7 @@
 //
 // LiBlocks.h
 // Created by Applicasa 
-// 10/30/2013
+// 1/21/2014
 //
 
 
@@ -83,5 +83,10 @@ typedef void (^GetColorsArrayFinished)(NSError *error, NSArray *array);
 
 typedef void (^GetLanguagesFinished)(NSError *error, Languages *object);
 typedef void (^GetLanguagesArrayFinished)(NSError *error, NSArray *array);
+
+@class Cards;
+
+typedef void (^GetCardsFinished)(NSError *error, Cards *object);
+typedef void (^GetCardsArrayFinished)(NSError *error, NSArray *array);
 
 

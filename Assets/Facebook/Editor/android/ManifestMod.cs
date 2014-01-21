@@ -103,7 +103,9 @@ namespace UnityEditor.FacebookEditor
             //<activity android:name="com.facebook.unity.FBUnityPlayerActivity" android:launchMode="singleTask" android:label="@string/app_name" android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen" android:screenOrientation="portrait">
             XmlElement mainActivity = FindMainActivityNode(dict);
             var mainActivityName = mainActivity.GetAttribute("name", ns);
-            if (mainActivityName != "com.unity3d.player.UnityPlayerProxyActivity" && mainActivityName != ActivityName)
+            if (mainActivityName != "com.unity3d.player.UnityPlayerProxyActivity" && 
+                mainActivityName != "com.unity3d.player.UnityPlayerNativeActivity" && 
+                mainActivityName != ActivityName)
             {
                 FbDebug.Warn("FBUnityPlayerActivity was not detected as the main activity in the AndroidManifest.xml!  Be sure to have your activity extend " + ActivityName + " for the Facebook SDK to work");
             }

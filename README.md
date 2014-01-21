@@ -28,9 +28,18 @@ For iOS:
 
 3. Open 'Applicasa' toolbar menu then 'iOS settings' and verify there's a valid Facebook Id, if not set this 494708670563462
 
-4. Click “Build & Run” in unity and then cancel when it reaches Xcode.
+4. Click “Build & Run” in unity.
 
-5. Open the Xcode project go to -> Build settings -> search ”Enable Objective-C Exceptions” and set to YES.
+Note,
+Sponsorpay is currently disabled for this app, To enable it you should:
+
+1. Open 'Applicasa' toolbar menu then 'iOS settings' and Enable SponsorPay and save.
+
+2. Build the project.
+
+3. Open the Xcode project go to -> Build Phases -> Compile sources and mark all SponsorPay implementations files With prefix “SP” NSString+SPUTLEncoding and add the compile flag: -fno-objc-arc. 
+
+4. Open the Xcode project go to -> Build settings -> search ”Enable Objective-C Exceptions” and set to YES.
 
 For Android:
 ===========================

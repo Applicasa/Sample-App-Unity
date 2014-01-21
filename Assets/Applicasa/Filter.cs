@@ -18,11 +18,8 @@ namespace Applicasa {
 #if UNITY_ANDROID
 			if(javaUnityApplicasaFilter==null)
 				javaUnityApplicasaFilter = new AndroidJavaClass("com.applicasaunity.Unity.ApplicasaFilter");
-	#if UNITY_4_2 
+
 			innerFilterJavaObject= new AndroidJavaObject("applicasa.LiCore.communication.LiFilters",innerFilter);
-	#else					
-			innerFilterJavaObject= new AndroidJavaObject(innerFilter);
-	#endif
 		
 #endif
 		}

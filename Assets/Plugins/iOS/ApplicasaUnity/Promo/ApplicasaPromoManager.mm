@@ -7,6 +7,8 @@
 #import <LiSupersonicAds/LiSupersonicAdsManager.h>
 #endif
 
+#include "ApplicasaPromotion.h"
+
 extern "C" {
  
 
@@ -35,6 +37,20 @@ void ApplicasaPromoDismissAllPromotion() {
     
 void ApplicasaRaiseCustomEvent( const char * value) {
     [LiPromo raiseCustomEventByName:CharPointerToNSString(value)];
+}
+
+void ApplicasaRaiseCustomEventAndShowWithBlock( const char * value, ApplicasaPromotionResult callback) {
+    Promotion * promotion = [LiPromo raiseCustomEventByNameAndReturnPromotion:CharPointerToNSString(value)];
+	if (promotion)
+		ApplicasaPromotionShowWithBlock(promotion,callback);
+	else
+	{
+		struct PromotionResultInfo promoResult;
+		promoResult.stringResult = NSStringToCharPointer(@"No Promotions for this custom event");
+		promoResult.intResult = -1;
+		promoResult.type = PromotionResultDataTypeString;
+		callback(LiPromotionActionCancel, LiPromotionResultNothing, promoResult);
+	}
 }
 
 void ApplicasaShowDemoCampaigns()

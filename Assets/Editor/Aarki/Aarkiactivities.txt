@@ -1,0 +1,2 @@
+<!-- AddActivities -->
+<activity android:name="com.aarki.AarkiActivity" android:configChanges="keyboard|keyboardHidden|orientation" />

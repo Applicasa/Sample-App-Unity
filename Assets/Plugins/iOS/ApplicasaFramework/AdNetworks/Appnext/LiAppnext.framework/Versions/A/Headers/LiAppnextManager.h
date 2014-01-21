@@ -15,7 +15,7 @@
 
 @interface LiAppnextManager : NSObject
 
-#define LI_APP_NEXT_VERSION @"1.0.0"
+#define LI_APP_NEXT_VERSION @"1.0.1"
 @property (nonatomic, strong) Promotion *promo;
 @property (nonatomic, strong) PromoView *view;
 + (LiAppnextManager *) sharedInstance;

@@ -57,6 +57,9 @@
 //AppNext
 + (BOOL) isAppnextEnabled;
 
+//Aarki
++ (BOOL) isAarkiEnabled;
++ (NSString *) getAarkiClientSecurityKey;
 
 //SuperSonic
 + (BOOL) isSupersonicAdsEnabled;

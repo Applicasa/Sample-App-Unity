@@ -1,7 +1,7 @@
 //
 // LiDataTypes.h
 // Created by Applicasa 
-// 10/30/2013
+// 1/21/2014
 //
 
 
@@ -172,6 +172,14 @@ typedef enum {
 	LanguagesID,
 	LanguagesLastUpdate,
 	LanguagesText,
-	LanguagesLanguageName
+	LanguagesLanguageName,
+	//Cards
+	Cards_None,
+	CardsID,
+	CardsLastUpdate,
+	CardsName,
+	CardsPres,
+	CardsImg,
+	CardsAaaaa
 }LiFields;
 

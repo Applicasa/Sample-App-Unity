@@ -14,6 +14,8 @@
 typedef enum {
     RegisterAppDevice = 1,
     UpdateDevice,
+    InitApplicasa,
+
     
     AUD_Action,
     Fetch_Action,
@@ -118,6 +120,31 @@ typedef enum QueryKind{
 
 @end
 
+
+
+@class User;
+
+@protocol LiCoreInitializeDelegate <NSObject>
+
+@optional
+
+// Called once Applicasa finish Framework Initialize, and receive a user from server.
+- (void) finishedInitializeLiCoreFrameworkWithUser:(User *)user isFirstLoad:(BOOL)isFirst;
+
+// Called once Applicasa completes Virtual Store init. After this delegate is called your store is set up and your IAP items are verified with apple.
+- (void) finishedIntializedLiKitIAPWithVirtualCurrencies:(NSArray *)virtualCurrencies VirtualGoods:(NSArray *)virtualGoods;
+
+// called to notify that the init wasn't completetd, Might be due to missing internet connection.
+- (void) failedInitializeLiCoreWithReason:(NSString *)message;
+
+// called every time a user changes, (user will change after logout or login actions).
+- (void) liCoreHasNewUser:(User *)user;
+
+// Called once Applicasa completes Caching Store Materials (Virtual Currency Image A , VirtualGood Image A, and Promotions material).
+- (void) finishedCachingFilesOfType:(LiMaterialCacher)cachedfiles;
+
+@end
+
 @protocol LiCoreLocationDelegate <NSObject>
 @required
 
@@ -134,16 +161,3 @@ typedef enum QueryKind{
 
 @end
 
-@class User;
-
-@protocol LiCoreInitializeDelegate <NSObject>
-
-@optional
-
-- (void) finishedInitializeLiCoreFrameworkWithUser:(User *)user isFirstLoad:(BOOL)isFirst;
-- (void) liCoreHasNewUser:(User *)user;
-- (void) finishedIntializedLiKitIAPWithVirtualCurrencies:(NSArray *)virtualCurrencies VirtualGoods:(NSArray *)virtualGoods;
-
-- (void) finishedCachingFilesOfType:(LiMaterialCacher)cachedfiles;
-
-@end

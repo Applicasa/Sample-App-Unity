@@ -10,9 +10,23 @@
 void UnityPause(bool pause);
 
 NSMutableDictionary *holdinPointers = [[NSMutableDictionary alloc]init];
+NSArray * fbFriendArrayTemp;
 
 extern "C" {
     
+	void ReleaseFriendsArray()
+    {
+        fbFriendArrayTemp = NULL;
+    }
+    LiObjFBFriend* GetfbFriend(int i)
+    {
+        return [fbFriendArrayTemp objectAtIndex:i];
+    }
+    int GetfbFriendArraySize()
+    {
+        return [fbFriendArrayTemp count];
+    }
+	
     IAP_STATUS ApplicasaIAPStatus() {
         return [LiKitIAP liKitIAPStatus];
     }
@@ -136,19 +150,19 @@ LiBlockFBFriendsAction ApplicasaFBFriendsActionToBlock(ApplicasaFBFriendsAction 
             errorStruct.Message = NSStringToCharPointer(@"");
         }
         
+        fbFriendArrayTemp = [friends copy];
         int arraySize = [friends count];
         
         LiObjFBFriend* friendArray[arraySize];
         for (int i = 0; i < arraySize; i++) {
-            [holdinPointers setObject:[friends objectAtIndex:i] forKey:[NSValue valueWithPointer:[friends objectAtIndex:i]]];
-            
-            friendArray[i] = [friends objectAtIndex:i];
+            friendArray[i] = [fbFriendArrayTemp objectAtIndex:i];
+            [holdinPointers setObject: friendArray[i] forKey:[NSValue valueWithPointer: friendArray[i]]];
         }
         
         struct ApplicasaFBFriendArray fbFriendArray;
         fbFriendArray.Array = friendArray;
         fbFriendArray.ArraySize = arraySize;
-        
+
         function(success, errorStruct, fbFriendArray , action);
     } copy] autorelease];
 }
@@ -863,6 +877,55 @@ GetLanguagesArrayFinished ApplicasaGetLanguagesArrayFinishedToBlock(ApplicasaGet
 }
 
 
+GetCardsFinished ApplicasaGetCardsFinishedToBlock(ApplicasaGetCardsFinished function) {
+	return [[^(NSError *error, Cards *object) {
+		struct ApplicasaError errorStruct;
+		bool success;		if (error) {
+			success = false;
+			errorStruct.Id = error.code;
+			errorStruct.Message = NSStringToCharPointer(error.localizedDescription);
+		} else {
+			success = true;
+			errorStruct.Id = 1;
+			errorStruct.Message = NSStringToCharPointer(@"");
+		}
+
+		[holdinPointers setObject:object forKey:[NSValue valueWithPointer:object]];
+		function(success, errorStruct, object);
+		} copy] autorelease];
+}
+
+GetCardsArrayFinished ApplicasaGetCardsArrayFinishedToBlock(ApplicasaGetCardsArrayFinished function) {
+	return [[^(NSError *error, NSArray *array) {
+		struct ApplicasaError errorStruct;
+		bool success;
+		if (error) {
+			success = false;
+			errorStruct.Id = error.code;
+			errorStruct.Message = NSStringToCharPointer(error.localizedDescription);
+		} else {
+			success = true;
+			errorStruct.Id = 1;
+			errorStruct.Message = NSStringToCharPointer(@"");
+		}
+
+		int arraySize = [array count];
+
+		Cards* cardsArray[arraySize];
+		for (int i = 0; i < arraySize; i++) {
+			[holdinPointers setObject:[array objectAtIndex:i] forKey:[NSValue valueWithPointer:[array objectAtIndex:i]]];
+			cardsArray[i] = [array objectAtIndex:i];
+		}
+
+		struct ApplicasaCardsArray cardsStruct;
+		cardsStruct.Array = cardsArray;
+		cardsStruct.ArraySize = arraySize;
+
+		function(success, errorStruct, cardsStruct);
+	} copy] autorelease];
+}
+
+
 
 
 	
@@ -889,7 +952,7 @@ PromotionResultBlock ApplicasaPromotionResultToBlock(ApplicasaPromotionResult fu
 	
 	switch (result) {
             case LiPromotionResultChartboost:
-            case LiPromotionResultAppnext:
+            //case LiPromotionResultAppnext:
             case LiPromotionResultMMedia:
             case LiPromotionResultSponsorPay:
             case LiPromotionResultSupersonicAds:

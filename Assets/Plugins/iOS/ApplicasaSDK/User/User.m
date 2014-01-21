@@ -1,7 +1,7 @@
 //
 // User.m
 // Created by Applicasa 
-// 10/30/2013
+// 1/21/2014
 //
 
 #import "User.h"
@@ -323,6 +323,11 @@ enum UserIndexes {
 
 + (User *) getCurrentUser{
     return [LiCore getCurrentUser];
+}
+
++ (void) reloadUserWithBlock:(LiBlockAction)block
+{
+    [LiCore reloadUserWithBlock:block];
 }
 
 #pragma mark - Facebook Methods

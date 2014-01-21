@@ -18,7 +18,7 @@ namespace UnityEditor.FacebookEditor
                 Debug.LogWarning("You didn't specify a Facebook app ID.  Please add one using the Facebook menu in the main Unity editor.");
             }
 
-            bool needsNewClassnames = IsVersion42OrLater();
+
 
             if (target == BuildTarget.iPhone)
             {
@@ -37,8 +37,7 @@ namespace UnityEditor.FacebookEditor
                 PlistMod.UpdatePlist(path, FBSettings.AppId);
                 FixupFiles.FixSimulator(path);
 
-                if (needsNewClassnames)
-                    FixupFiles.AddVersionDefine(path);
+                FixupFiles.AddVersionDefine(path);
             }
 
             if (target == BuildTarget.Android)
@@ -48,30 +47,11 @@ namespace UnityEditor.FacebookEditor
                 {
                     Debug.LogError("The default Unity Bundle Identifier (com.Company.ProductName) will not work correctly.");
                 }
+                if (!FacebookAndroidUtil.IsSetupProperly())
+                {
+                    Debug.LogError("Your Android setup is not correct. See Settings in Facebook menu.");
+                }
             }
-        }
-
-        private static bool IsVersion42OrLater()
-        {
-            string version = Application.unityVersion;
-            string[] versionComponents = version.Split('.');
-
-            int majorVersion = 0;
-            int minorVersion = 0;
-
-            try
-            {
-                if (versionComponents != null && versionComponents.Length > 0 && versionComponents[0] != null)
-                    majorVersion = Convert.ToInt32(versionComponents[0]);
-                if (versionComponents != null && versionComponents.Length > 1 && versionComponents[1] != null)
-                    minorVersion = Convert.ToInt32(versionComponents[1]);
-            }
-            catch (System.Exception e)
-            {
-                FbDebug.Error("Error parsing Unity version number: " + e);
-            }
-
-            return (majorVersion > 4 || (majorVersion == 4 && minorVersion >= 2));
         }
     }
 }

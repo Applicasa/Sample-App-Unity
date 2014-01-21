@@ -44,6 +44,25 @@
     [LiKitPromotions raiseCustomEventByName:value];
 }
 
++(void) raiseCustomEventByName:(NSString *)value AndShowWithBlock:(PromotionResultBlock) block;
+{
+    [LiKitPromotions raiseCustomEventByName:value AndShowWithView:nil WithBlock:block];
+}
++(void) raiseCustomEventByName:(NSString *)value AndShowWithView:(UIView *)view WithBlock:(PromotionResultBlock) block;
+{
+    [LiKitPromotions raiseCustomEventByName:value AndShowWithView:view WithBlock:block];
+}
+
++(Promotion *) raiseCustomEventByNameAndReturnPromotion:(NSString *)value
+{
+    return [LiKitPromotions raiseCustomEventByNameAndReturn:value];
+}
+
++ (void) getThirdPartyActions:(LiThirdPartyResponse)block
+{
+    [LiKitPromotions getThirdPartyActions:block];
+}
+
 +(void) showDemoCampaign
 {
 #ifdef SUPERSONICADS
@@ -52,15 +71,6 @@
 }
 
 #pragma mark - Deprecated Methods
-/*********************************************************************************
- DEPRECATED METHODS:
- 
- These methods are deprecated. They are included for backward-compatibility only.
- They will be removed in the next release. You should update your code immediately.
- **********************************************************************************/
 
-+(void)getAllAvailblePromosWithBlock:(GetPromotionArrayFinished)block {
-    [self getAvailablePromosWithBlock:block];
-}
 
 @end

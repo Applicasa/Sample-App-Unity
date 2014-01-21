@@ -8,5 +8,5 @@
     "folders": ["/Plugins/iOS/ApplicasaSDK/","/Plugins/iOS/ApplicasaUnity"],
 	"files":   ["/Plugins/iOS/ApplicasaFramework/Li_AWSiOSSDK.framework","/Plugins/iOS/ApplicasaFramework/LiCore.framework"],   
 	"excludes": ["^.*.meta$", "^.*.mdown$", "^.*.pdf$"],
-    "linker_flags": ["-ObjC","-all_load"]
+    "linker_flags": []
 }

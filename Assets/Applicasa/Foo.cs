@@ -1,7 +1,7 @@
 //
 // Foo.cs
 // Created by Applicasa 
-// 10/30/2013
+// 1/21/2014
 //
 
 using UnityEngine;
@@ -144,7 +144,7 @@ namespace Applicasa {
 		}
 		public DateTime FooDate {
 			get {return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(ApplicasaFooGetFooDate(innerFoo));}
-			set {ApplicasaFooSetFooDate(innerFoo, value.Ticks);}
+			set {ApplicasaFooSetFooDate(innerFoo,  value.Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds);}
 		}
 		public string FooImage {
 			get {return ApplicasaFooGetFooImage(innerFoo);}

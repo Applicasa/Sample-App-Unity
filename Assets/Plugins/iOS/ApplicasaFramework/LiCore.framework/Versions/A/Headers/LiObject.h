@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <LiCore/LiCore.h>
 
-typedef void (^LiBlockAction)(NSError *error, NSString *itemID,Actions action);
+
 typedef void (^LiThirdPartyResponse)(NSError *error, NSArray *thirdpartyResponse);
 typedef void (^LiTrialPayActionsResponse)(NSError *error, NSArray *tpActionsResponse);
 

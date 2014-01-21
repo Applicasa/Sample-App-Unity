@@ -53,10 +53,10 @@
 
 /*!
  @header
- 
+
  @abstract  Library header, import this to import all of the public types
             in the Facebook SDK
- 
+
  @discussion
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,7 +68,7 @@
  * Patterned after best of breed iOS frameworks (e.g. naming, pattern-use, etc.)
  * Common integration experience is simple & easy to describe
  * Factored to enable a growing list of scenarios over time
- 
+
  Notes on approaches:
  1. We use a key scenario to drive prioritization of work for a given update
  2. We are building-atop and refactoring, rather than replacing, existing iOS SDK releases
@@ -78,20 +78,20 @@
          on a feature by feature basis
  4. Some light but critical infrastructure is needed to support both the goals
     and the execution of this change (e.g. a build/package/deploy process)
- 
+
  Design points:
  We will move to a more object-oriented approach, in order to facilitate the
  addition of a different class of objects, such as controls and visual helpers
- (e.g. FBLikeView, FBPersonView), as well as sub-frameworks to enable scenarios 
+ (e.g. FBLikeView, FBPersonView), as well as sub-frameworks to enable scenarios
  such (e.g. FBOpenGraphEntity, FBLocalEntityCache, etc.)
- 
+
  As we add features, it will no longer be appropriate to host all functionality
  in the Facebook class, though it will be maintained for some time for migration
  purposes. Instead functionality lives in related collections of classes.
 
  <pre>
  @textblock
- 
+
                *------------* *----------*  *----------------* *---*
   Scenario --> |FBPersonView| |FBLikeView|  | FBPlacePicker  | | F |
                *------------* *----------*  *----------------* | a |
@@ -107,13 +107,13 @@
 
  The figure above describes three layers of functionality, with the existing
  Facebook on the side as a helper proxy to a subset of the overall SDK. The
- layers loosely organize the SDK into *Core Objects* necessary to interface 
+ layers loosely organize the SDK into *Core Objects* necessary to interface
  with Facebook, higher-level *Framework Components* that feel like natural
  extensions to existing frameworks such as UIKit and Foundation, but which
  surface behavior broadly applicable to Facebook, and finally the
- *Scenario Objects*, which provide deeper turn-key capibilities for useful 
+ *Scenario Objects*, which provide deeper turn-key capibilities for useful
  mobile scenarios.
- 
+
  Use example (low barrier use case):
 
  <pre>
@@ -121,13 +121,13 @@
 
 // log on to Facebook
 [FBSession sessionOpenWithPermissions:nil
-                    completionHandler:^(FBSession *session, 
-                                        FBSessionState status, 
+                    completionHandler:^(FBSession *session,
+                                        FBSessionState status,
                                         NSError *error) {
                         if (session.isOpen) {
                             // request basic information for the user
                             [FBRequestConnection startWithGraphPath:@"me"
-                                                  completionHandler:^void(FBRequestConnection *request, 
+                                                  completionHandler:^void(FBRequestConnection *request,
                                                                           id result,
                                                                           NSError *error) {
                                                       if (!error) {
@@ -138,8 +138,9 @@
                     }];
  @/textblock
  </pre>
- 
+
  */
 
-#define FB_IOS_SDK_VERSION_STRING @"3.8.0"
+#define FB_IOS_SDK_VERSION_STRING @"3.8.0/Unity.4.3.6"
+
 

@@ -44,12 +44,44 @@ namespace UnityEditor.FacebookEditor
 
         public static void AddVersionDefine(string path)
         {
+            int versionNumber = GetUnityVersionNumber ();
+
             string fullPath = Path.Combine(path, Path.Combine("Libraries", "RegisterMonoModules.h"));
             string data = Load(fullPath);
 
-            data += "\n#define USE_NEW_APP_CLASS_NAME 1\n";
+            if (versionNumber >= 430)
+            {
+                data += "\n#define HAS_UNITY_VERSION_DEF 1\n";
+            } else {
+                data += "\n#define UNITY_VERSION ";
+                data += versionNumber;
+                data += "\n";
+            }
 
             Save(fullPath, data);
+        }
+
+        private static int GetUnityVersionNumber()
+        {
+            string version = Application.unityVersion;
+            string[] versionComponents = version.Split('.');
+
+            int majorVersion = 0;
+            int minorVersion = 0;
+
+            try
+            {
+                if (versionComponents != null && versionComponents.Length > 0 && versionComponents[0] != null)
+                    majorVersion = Convert.ToInt32(versionComponents[0]);
+                if (versionComponents != null && versionComponents.Length > 1 && versionComponents[1] != null)
+                    minorVersion = Convert.ToInt32(versionComponents[1]);
+            }
+            catch (System.Exception e)
+            {
+                FbDebug.Error("Error parsing Unity version number: " + e);
+            }
+
+            return ((majorVersion * 100) + (minorVersion * 10));
         }
     }
 }

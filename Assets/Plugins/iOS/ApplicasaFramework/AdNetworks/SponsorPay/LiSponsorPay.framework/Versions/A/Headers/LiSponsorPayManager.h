@@ -9,8 +9,8 @@
 #import "PromoView.h"
 #import "User.h"
 #import "SponsorPaySDK.h"
-#define LI_SPONSORPAY_VERSION @"1.0.2"
-@interface LiSponsorPayManager : NSObject <LiCoreInitializeDelegate, SPOfferWallViewControllerDelegate>
+#define LI_SPONSORPAY_VERSION @"1.0.4"
+@interface LiSponsorPayManager : NSObject <SPOfferWallViewControllerDelegate>
 
 
 @property (nonatomic, strong) PromoView *promoView;

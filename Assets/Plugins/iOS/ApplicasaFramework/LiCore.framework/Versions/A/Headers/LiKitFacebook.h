@@ -13,7 +13,8 @@
 #import "LiManager.h"
 
 #ifdef UNITY_VERSION
-#import <FacebookSDK/FacebookSDK.h>
+@class FBSession;
+//#import <FacebookSDK/FacebookSDK.h>
 #else
 #import "FacebookSDK.h"
 #endif
@@ -32,6 +33,7 @@
 
 + (void) setPermissions:(NSArray *)permissions AllowLoginUI:(BOOL)allowLoginUI Publish:(BOOL)publish;
 
++(BOOL)handleOpenURL:(NSURL *)url;
 
 + (void) logOut;
 

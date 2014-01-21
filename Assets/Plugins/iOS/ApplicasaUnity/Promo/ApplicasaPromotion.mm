@@ -1,5 +1,7 @@
 #import "ApplicasaCore.h"
 //#import "iPhone_View.h"
+
+
 #ifdef UNITY_4_2_0
 #import "UnityAppController.h"
 #else
@@ -9,6 +11,7 @@
 #import "LiCore/Promotion.h"
 #import "LiCore/LiKitPromotions.h"
 
+#include "ApplicasaPromotion.h"
 void UnityPause(bool pause);
 
 extern "C" {
@@ -145,11 +148,12 @@ extern "C" {
 	
 	void ApplicasaPromotionShowWithBlock(Promotion* promotion, ApplicasaPromotionResult callback) {
         switch (promotion.promotionActionKind) {
-            case LiPromotionTypeAppnext:
+            //case LiPromotionTypeAppnext:
             case LiPromotionTypeChartboost://8
             case LiPromotionTypeMMedia://10
             case LiPromotionTypeSponsorPay://11
             case LiPromotionTypeSupersonicAds://12
+			 case LiPromotionTypeAarki://12
               
                 break;
                 

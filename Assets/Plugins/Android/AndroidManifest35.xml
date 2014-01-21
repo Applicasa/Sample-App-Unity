@@ -80,14 +80,16 @@
 			android:theme="@android:style/Theme.Translucent.NoTitleBar" />
    
    
-	  <!-- SponsorPay Activity -->   
-		<activity android:name="com.sponsorpay.sdk.android.publisher.OfferWallActivity" android:configChanges="orientation" />
-		<activity android:name="com.sponsorpay.sdk.android.publisher.mbe.SPBrandEngageActivity" android:configChanges="orientation" />
-		<activity
-			android:name="com.applicasa.SponsorPay.LiSponsorPayActivity"
-			android:configChanges="keyboardHidden|orientation|keyboard"
-			android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			/> 
+	  	<!-- SponsorPay Activity -->   
+	<activity android:name="com.sponsorpay.sdk.android.publisher.ofw.OfferWallActivity"
+		android:configChanges="screenSize|orientation"
+		android:hardwareAccelerated="true"/>
+	 <activity android:name="com.sponsorpay.sdk.android.publisher.mbe.SPBrandEngageActivity" 	
+		android:configChanges="screenSize|orientation" 
+		android:hardwareAccelerated="true"/>
+    <activity android:name="com.applicasa.SponsorPay.LiSponsorPayActivity"
+		android:configChanges="keyboardHidden|orientation|keyboard"
+		android:theme="@android:style/Theme.Translucent.NoTitleBar" /> 
 			
 			<!-- SuperSonic Activity --> 
 			<activity
@@ -95,7 +97,10 @@
 			android:configChanges="orientation|screenSize"
 			android:hardwareAccelerated="true" >
 		</activity>
-
+		
+		<!-- Aarki Activity --> 
+		<activity android:name="com.aarki.AarkiActivity" android:configChanges="keyboard|keyboardHidden|orientation" 
+		android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 		
 		<!-- Start PushNotifications receiver and service -->
 		<!-- Only C2DM servers can send messages for the app. If permission is not set - any other app can generate it --> 
@@ -131,6 +136,7 @@
 		
 		<!-- Required permission for Applicasa -->
 	    <uses-permission android:name="android.permission.INTERNET"/>
+		<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 		
 		<!-- Required permissions to use in-app billing -->
 		<uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
@@ -156,5 +162,7 @@
 		<!-- Keeps the processor from sleeping when a message is received. -->
 		<uses-permission android:name="android.permission.WAKE_LOCK" />
 		<uses-permission android:name="android.permission.VIBRATE" />
+		
+		
 		
 </manifest>

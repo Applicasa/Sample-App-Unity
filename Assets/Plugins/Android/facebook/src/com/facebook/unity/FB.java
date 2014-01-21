@@ -3,6 +3,8 @@ package com.facebook.unity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +15,9 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Base64;
+import android.content.pm.*;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 import com.facebook.*;
 import com.facebook.Session.Builder;
@@ -30,7 +35,7 @@ public class FB {
 	private static Session session;
     private static Intent intent;
     private static AppEventsLogger appEventsLogger;
-	
+
 	// if we have a session it has been opened.
 	private static void setSession(Session session) {
 		FB.session = session;
@@ -42,7 +47,7 @@ public class FB {
         }
         return appEventsLogger;
     }
-	
+
 	public static class UnityMessage {
 		private String methodName;
 		private Map<String, Serializable> params = new HashMap<String, Serializable>();
@@ -50,31 +55,31 @@ public class FB {
 		public UnityMessage(String methodName) {
 			this.methodName = methodName;
 		}
-		
+
 		public UnityMessage put(String name, Serializable value) {
 			params.put(name, value);
 			return this;
 		}
-		
+
 		public UnityMessage putCancelled() {
 			put("cancelled", true);
 			return this;
 		}
-		
+
 		public UnityMessage putID(String id) {
 			put("id", id);
 			return this;
 		}
-	
+
 		public void sendNotLoggedInError() {
 			sendError("not logged in");
 		}
-		
+
 		public void sendError(String errorMsg) {
 			this.put("error", errorMsg);
 			send();
 		}
-		
+
 		public void send() {
 			assert methodName != null : "no method specified";
 			String message = new JSONObject(this.params).toString();
@@ -82,19 +87,23 @@ public class FB {
 			UnityPlayer.UnitySendMessage(FB_UNITY_OBJECT, this.methodName, message);
 		}
 	}
-		
+
 	private static boolean isLoggedIn() {
 		return Session.getActiveSession() != null && Session.getActiveSession().isOpened();
 	}
-	
+
 	private static Activity getActivity() {
 		return UnityPlayer.currentActivity;
 	}
-	
+
 	private static void initAndLogin(String params, final boolean show_login_dialog) {
 
         Session session = (FB.isLoggedIn()) ? Session.getActiveSession() : new Builder(getActivity()).build();
         final UnityMessage unityMessage = new UnityMessage((show_login_dialog) ? "OnLoginComplete" : "OnInitComplete");
+
+        // add the key hash to the JSON dictionary
+        // unityMessage.put("key_hash", "test_key_and");
+        unityMessage.put("key_hash", getKeyHash());
 
         // if we have a session and are init-ing, we can just return here.
         if (!SessionState.CREATED_TOKEN_LOADED.equals(session.getState()) && !show_login_dialog) {
@@ -107,6 +116,7 @@ public class FB {
         final JSONObject unity_params;
         try {
             unity_params = new JSONObject(params);
+
             if (!unity_params.isNull("scope") && !unity_params.getString("scope").equals("")) {
                 parts = unity_params.getString("scope").split(",");
             }
@@ -256,19 +266,19 @@ public class FB {
         req.setDefaultAudience(SessionDefaultAudience.FRIENDS);
         return req;
     }
-	
+
 	@UnityCallable
 	public static void Init(String params) {
         FB.intent = getActivity().getIntent();
 		// tries to log the user in if they've already TOS'd the app
 		initAndLogin(params, /*show_login_dialog=*/false);
 	}
-	
+
 	@UnityCallable
 	public static void Login(String params) {
-		initAndLogin(params, /*show_login_dialog=*/true);		
+		initAndLogin(params, /*show_login_dialog=*/true);
 	}
-	
+
 	@UnityCallable
 	public static void Logout(String params) {
 		Session.getActiveSession().closeAndClearTokenInformation();
@@ -358,24 +368,24 @@ public class FB {
             }
         });
     }
-	
+
 	@UnityCallable
 	public static void FeedRequest(String params_str) {
 		Log.v(TAG, "FeedRequest(" + params_str + ")");
 		final UnityMessage response = new UnityMessage("OnFeedRequestComplete");
-		final JSONObject unity_params; 
+		final JSONObject unity_params;
 		try {
 			unity_params = new JSONObject(params_str);
 		} catch (JSONException e) {
 			response.sendError("couldn't parse params: "+params_str);
 			return;
 		}
-		
+
 		if (!isLoggedIn()) {
 			response.sendNotLoggedInError();
 			return;
-		}		
-		
+		}
+
 		getActivity().runOnUiThread(new Runnable() {
 
             @Override
@@ -430,11 +440,11 @@ public class FB {
             }
         });
 	}
-	
+
 	@UnityCallable
 	public static void PublishInstall(String params_str) {
 		final UnityMessage unityMessage = new UnityMessage("OnPublishInstallComplete");
-		final JSONObject unity_params; 
+		final JSONObject unity_params;
 		try {
 			unity_params = new JSONObject(params_str);
 			if (!unity_params.isNull("callback_id")) {
@@ -516,5 +526,26 @@ public class FB {
             return;
         }
 
+    }
+
+    /**
+     * Provides the key hash to solve the openSSL issue with Amazon
+     * @return key hash
+     */
+    private static String getKeyHash() {
+        try {
+            PackageInfo info = getActivity().getPackageManager().getPackageInfo(
+                getActivity().getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures){
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String keyHash = Base64.encodeToString(md.digest(), Base64.DEFAULT);
+                Log.d(TAG, "KeyHash: " + keyHash);
+                return keyHash;
+            }
+        } catch (NameNotFoundException e) {
+        } catch (NoSuchAlgorithmException e) {
+        }
+        return "";
     }
 }

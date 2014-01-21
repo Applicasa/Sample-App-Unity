@@ -26,6 +26,7 @@
 #import "Levels.h"
 #import "Colors.h"
 #import "Languages.h"
+#import "Cards.h"
 #import "VirtualGood.h"
 #import <LiCore/LiKitIAP.h>
 
@@ -54,6 +55,7 @@
 	[array addObject:[NSDictionary dictionaryWithObject:[Levels getFields] forKey:[Levels getClassName]]];
 	[array addObject:[NSDictionary dictionaryWithObject:[Colors getFields] forKey:[Colors getClassName]]];
 	[array addObject:[NSDictionary dictionaryWithObject:[Languages getFields] forKey:[Languages getClassName]]];
+	[array addObject:[NSDictionary dictionaryWithObject:[Cards getFields] forKey:[Cards getClassName]]];
 	[array addObject:[NSDictionary dictionaryWithObject:[VirtualGood getFields] forKey:[VirtualGood getClassName]]];
 
 	[array addObject:[LiKitPromotions getAnalyticsFieldsDictionary]];
@@ -89,6 +91,7 @@
 	[dic setObject:[Levels getForeignKeys] forKey:[Levels getClassName]];
 	[dic setObject:[Colors getForeignKeys] forKey:[Colors getClassName]];
 	[dic setObject:[Languages getForeignKeys] forKey:[Languages getClassName]];
+	[dic setObject:[Cards getForeignKeys] forKey:[Cards getClassName]];
 	[dic setObject:[VirtualGood getForeignKeys] forKey:[VirtualGood getClassName]];
 
 
@@ -196,6 +199,16 @@
 + (BOOL) isAppnextEnabled
 {
     return ENABLE_APPNEXT;
+}
+
+//Aarki
++ (BOOL) isAarkiEnabled
+{
+    return ENABLE_AARKI;
+}
++ (NSString *) getAarkiClientSecurityKey
+{
+    return AARKI_CLIENT_SECURITY_KEY;
 }
 
 

@@ -19,9 +19,12 @@
 #import <LiCore/LiQuery.h>
 #import <LiCore/LiFilters.h>
 
-#define LI_VERSION @"3.4.0.4"
+#define LI_VERSION @"3.4.1.9"
+
+
 #define FRAMEWORK_SCHEMA_VERSION @"1.2" 
 
+typedef void (^LiBlockAction)(NSError *error, NSString *itemID,Actions action);
 
 
 @class User;
@@ -29,7 +32,7 @@
 
 // for adobe Air initCall
 +(void) initLiCoreManager;
-
++ (void)initApplicasa;
 
 // Push Notification
 
@@ -57,6 +60,8 @@
 + (BOOL) clearContentOfObject:(NSString *)object WithFilter:(LiFilters *)filter Error:(NSError **)error;
 
 + (User *) getCurrentUser;
++ (void) reloadUserWithBlock:(LiBlockAction)block;
+
 + (NSDateFormatter *) liSqliteDateFormatter;
 
 + (void) initObjectsDictionary:(NSArray *)array;

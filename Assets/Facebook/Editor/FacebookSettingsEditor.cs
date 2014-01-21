@@ -11,9 +11,12 @@ public class FacebookSettingsEditor : Editor
 {
     bool showFacebookInitSettings = false;
     bool showAndroidUtils = (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android);
+    bool showIOSSettings = (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iPhone);
 
     GUIContent appNameLabel = new GUIContent("App Name [?]:", "For your own use and organization.\n(ex. 'dev', 'qa', 'prod')");
     GUIContent appIdLabel = new GUIContent("App Id [?]:", "Facebook App Ids can be found at https://developers.facebook.com/apps");
+
+    GUIContent urlSuffixLabel = new GUIContent ("URL Scheme Suffix [?]", "Use this to share Facebook APP ID's across multiple iOS apps.  https://developers.facebook.com/docs/ios/share-appid-across-multiple-apps-ios-sdk/");
     
     GUIContent cookieLabel = new GUIContent("Cookie [?]", "Sets a cookie which your server-side code can use to validate a user's Facebook session");
     GUIContent loggingLabel = new GUIContent("Logging [?]", "(Web Player only) If true, outputs a verbose log to the Javascript console to facilitate debugging.");
@@ -37,6 +40,7 @@ public class FacebookSettingsEditor : Editor
         AppIdGUI();
         FBParamsInitGUI();
         AndroidUtilGUI();
+        IOSUtilGUI();
         AboutGUI();
     }
 
@@ -117,14 +121,45 @@ public class FacebookSettingsEditor : Editor
         EditorGUILayout.Space();
     }
 
+    private void IOSUtilGUI()
+    {
+        showIOSSettings = EditorGUILayout.Foldout(showIOSSettings, "iOS Build Settings");
+        if (showIOSSettings)
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(urlSuffixLabel, GUILayout.Width(135), GUILayout.Height(16));
+            FBSettings.IosURLSuffix = EditorGUILayout.TextField(FBSettings.IosURLSuffix);
+            EditorGUILayout.EndHorizontal();
+        }
+        EditorGUILayout.Space();
+    }
+
     private void AndroidUtilGUI()
     {
         showAndroidUtils = EditorGUILayout.Foldout(showAndroidUtils, "Android Build Facebook Settings");
         if (showAndroidUtils)
         {
-            if (!FacebookAndroidUtil.HasAndroidSDK())
+            if (!FacebookAndroidUtil.IsSetupProperly())
             {
-                var msg = "You don't have the Android SDK setup!  Go to "+(Application.platform == RuntimePlatform.OSXEditor?"Unity":"Edit")+"->Preferences... and set your Android SDK Location under External Tools";
+                var msg = "Your Android setup is not right. Check the documentation.";
+                switch (FacebookAndroidUtil.SetupError)
+                {
+                    case FacebookAndroidUtil.ERROR_NO_SDK:
+                        msg = "You don't have the Android SDK setup!  Go to " + (Application.platform == RuntimePlatform.OSXEditor ? "Unity" : "Edit") + "->Preferences... and set your Android SDK Location under External Tools";
+                        break;
+                    case FacebookAndroidUtil.ERROR_NO_KEYSTORE:
+                        msg = "Your android debug keystore file is missing! You can create new one by creating and building empty Android project in Ecplise.";
+                        break;
+                    case FacebookAndroidUtil.ERROR_NO_KEYTOOL:
+                        msg = "Keytool not found. Make sure that Java is installed, and that Java tools are in your path.";
+                        break;
+                    case FacebookAndroidUtil.ERROR_NO_OPENSSL:
+                        msg = "OpenSSL not found. Make sure that OpenSSL is installed, and that it is in your path.";
+                        break;
+                    case FacebookAndroidUtil.ERROR_KEYTOOL_ERROR:
+                        msg = "Unkown error while getting Debug Android Key Hash.";
+                        break;
+                }
                 EditorGUILayout.HelpBox(msg, MessageType.Warning);
             }
             EditorGUILayout.HelpBox("Copy and Paste these into your \"Native Android App\" Settings on developers.facebook.com/apps", MessageType.None);

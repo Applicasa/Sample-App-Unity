@@ -1,11 +1,12 @@
 <!-- AddActivities -->
 
-  <!-- SponsorPay Activity -->   
-	<activity android:name="com.sponsorpay.sdk.android.publisher.OfferWallActivity" android:configChanges="orientation" />
-	 <activity android:name="com.sponsorpay.sdk.android.publisher.mbe.SPBrandEngageActivity" android:configChanges="orientation" />
-   <activity
-	android:name="com.applicasa.SponsorPay.LiSponsorPayActivity"
-	android:configChanges="keyboardHidden|orientation|keyboard"
-	android:theme="@android:style/Theme.Translucent.NoTitleBar"
-	/> 
-   
+	<!-- SponsorPay Activity -->   
+	<activity android:name="com.sponsorpay.sdk.android.publisher.ofw.OfferWallActivity"
+		android:configChanges="screenSize|orientation"
+		android:hardwareAccelerated="true"/>
+	 <activity android:name="com.sponsorpay.sdk.android.publisher.mbe.SPBrandEngageActivity" 	
+		android:configChanges="screenSize|orientation" 
+		android:hardwareAccelerated="true"/>
+    <activity android:name="com.applicasa.SponsorPay.LiSponsorPayActivity"
+		android:configChanges="keyboardHidden|orientation|keyboard"
+		android:theme="@android:style/Theme.Translucent.NoTitleBar" /> 

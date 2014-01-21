@@ -99,6 +99,8 @@ public class FBSettings : ScriptableObject
     private bool xfbml = false;
     [SerializeField]
     private bool frictionlessRequests = true;
+    [SerializeField]
+    private string iosURLSuffix = "";
 
     public void SetAppIndex(int index)
     {
@@ -224,6 +226,19 @@ public class FBSettings : ScriptableObject
             {
                 Instance.xfbml = value;
                 DirtyEditor();
+            }
+        }
+    }
+
+    public static string IosURLSuffix
+    {
+        get { return Instance.iosURLSuffix; }
+        set 
+        {
+            if (Instance.iosURLSuffix != value)
+            {
+                Instance.iosURLSuffix = value;
+                DirtyEditor ();
             }
         }
     }

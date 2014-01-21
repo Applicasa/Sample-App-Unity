@@ -1,0 +1,6 @@
+<!-- AddPermissions -->
+	
+<!-- Aarki Permissions -->
+ <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<!-- End Aarki Permissions -->
+	

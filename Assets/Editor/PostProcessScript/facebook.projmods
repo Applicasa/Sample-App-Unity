@@ -1,12 +1,12 @@
 {
-    "group": "Facebook",
+    "group": "",
     "libs": [],
     "frameworks": [],
     "headerpaths": [],
 	"librarysearchpaths": [],
     "frameworksearchpaths": [],
-    "folders": ["/Plugins/iOS/ApplicasaFramework/FacebookSDK"],
+    "folders": ["/Plugins/iOS/ApplicasaFramework/FacebookSDK/"],
 	"files":   [],   
 	"excludes": ["^.*.meta$", "^.*.mdown$", "^.*.pdf$"],
-    "linker_flags": ["-ObjC","-all_load"]
+    "linker_flags": []
 }

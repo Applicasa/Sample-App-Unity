@@ -24,6 +24,9 @@
 @property (nonatomic) BOOL timed;
 @property (nonatomic,retain) NSDate *dispatch_time;
 
+@property (nonatomic) int contentAvailable;
+
+
 //An async method to send the push message to array of User instances
 - (void) sendPushToUsers:(NSArray *)users withBlock:(SendPushFinished)block;
 
@@ -33,7 +36,14 @@
 + (LiObjPushNotification *) pushWithMessage:(NSString *)theMessage sound:(NSString *)theSound badge:(NSInteger)theBadge andTag:(NSMutableDictionary *)theTag;
 
 //init instance to send the push
-- (id) initWithMessage:(NSString *)theMessage sound:(NSString *)theBadge badge:(NSInteger)theSound andTag:(NSDictionary *)theTag;
+- (id) initWithMessage:(NSString *)theMessage sound:(NSString *)theSound badge:(NSInteger)theBadge andTag:(NSMutableDictionary *)theTag;
+
+
+//autorelease instance to send the push
++ (LiObjPushNotification *) pushWithMessage:(NSString *)theMessage sound:(NSString *)theSound badge:(NSInteger)theBadge andTag:(NSMutableDictionary *)theTag andContentAvailable:(int)theContentAvailable;
+
+//init instance to send the push
+- (id) initWithMessage:(NSString *)theMessage sound:(NSString *)theSound badge:(NSInteger)theBadge andTag:(NSMutableDictionary *)theTag andContentAvailable:(int)theContentAvailable;
 
 
 //methods for timed messages

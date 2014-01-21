@@ -149,6 +149,11 @@ int ArraySize;
 Languages** Array;
 };
 
+struct ApplicasaCardsArray {
+int ArraySize;
+Cards** Array;
+};
+
 
 
 
@@ -213,6 +218,9 @@ typedef void (*ApplicasaGetColorsArrayFinished)(bool success, struct ApplicasaEr
 typedef void (*ApplicasaGetLanguagesFinished)(bool success, struct ApplicasaError error, Languages *object);
 typedef void (*ApplicasaGetLanguagesArrayFinished)(bool success, struct ApplicasaError error, struct ApplicasaLanguagesArray array);
 
+typedef void (*ApplicasaGetCardsFinished)(bool success, struct ApplicasaError error, Cards *object);
+typedef void (*ApplicasaGetCardsArrayFinished)(bool success, struct ApplicasaError error, struct ApplicasaCardsArray array);
+
 
 
 typedef void (*ApplicasaSendPushFinished)(bool success, struct ApplicasaError error, char *message,LiObjPushNotification *pushObject);
@@ -265,6 +273,9 @@ GetColorsArrayFinished ApplicasaGetColorsArrayFinishedToBlock(ApplicasaGetColors
 GetLanguagesFinished ApplicasaGetLanguagesFinishedToBlock(ApplicasaGetLanguagesFinished function);
 GetLanguagesArrayFinished ApplicasaGetLanguagesArrayFinishedToBlock(ApplicasaGetLanguagesArrayFinished function);
 
+GetCardsFinished ApplicasaGetCardsFinishedToBlock(ApplicasaGetCardsFinished function);
+GetCardsArrayFinished ApplicasaGetCardsArrayFinishedToBlock(ApplicasaGetCardsArrayFinished function);
+
 
 
 
@@ -276,4 +287,7 @@ GetCachedDataFinished ApplicasaGetFileDataToDataBlock(ApplicasaGetFileData funct
 extern "C" {
 bool ApplicasaIsDoneLoading();
 long ApplicasaGetServerTime();
+LiObjFBFriend* GetfbFriend(int i);
+int GetfbFriendArraySize();
+void ReleaseFriendsArray();
 }

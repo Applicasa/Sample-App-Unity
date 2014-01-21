@@ -5,12 +5,12 @@
 //  Created by Applicasa
 //  Copyright (c) 2012 Applicasa All rights reserved.
 //
-
 #import <UIKit/UIKit.h>
 #import <LiCore/LiCoreDelegate.h>
 
 @class LiFilters;
 @class LiResponse;
+
 @interface LiObjRequest : NSObject <LiCoreRequestDelegate>{
     BOOL shouldReturnToDelegate;
     NSMutableData *_data;
@@ -26,6 +26,9 @@
 @property (nonatomic,strong) LiResponse                 *response;
 @property (nonatomic,assign) BOOL shouldWorkOffline;
 @property (nonatomic,assign) BOOL resultFromServer;
+@property (nonatomic, assign) NSString *sendingTime;
+
+
 
 + (LiObjRequest *)requestWithAction:(Actions)action ClassName:(NSString *)className;
 
@@ -58,5 +61,8 @@
 - (NSString *)actionStringForAction:(Actions)_action;
 
 +(int) deleteItemsInClass:(NSString *)className WithFilter:(LiFilters *)filter;
+-(void) updateDBGetLastUpdate;
+-(void) isRealMoneyPurchase:(BOOL)isReal;
+
 
 @end

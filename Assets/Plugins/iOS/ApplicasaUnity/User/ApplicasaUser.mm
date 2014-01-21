@@ -1,7 +1,7 @@
 //
 // User.mm
 // Created by Applicasa 
-// 10/30/2013
+// 1/21/2014
 //
 
 
@@ -22,11 +22,11 @@
 #endif
 
 - (BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    return [[LiKitFacebook getActiveSession] handleOpenURL:url];
+    return [LiKitFacebook handleOpenURL:url];
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    return [[LiKitFacebook getActiveSession] handleOpenURL:url];
+    return [LiKitFacebook handleOpenURL:url];
 }
 
 @end
@@ -225,7 +225,8 @@ ApplicasaUserArray ApplicasaUserGetArrayWithQuerySync(LiQuery* query, QueryKind 
     return userStruct;
 }
  
-struct FBFriend ApplicasaUserGetFacebookFriend(LiObjFBFriend * fbFriend) {
+ 
+ struct FBFriend ApplicasaUserGetFacebookFriend(LiObjFBFriend * fbFriend) {
     struct FBFriend fbFriendStruct;
     fbFriendStruct.Id = NSStringToCharPointer(fbFriend.facebookID);
     fbFriendStruct.Name = NSStringToCharPointer(fbFriend.facebookName);
@@ -234,8 +235,17 @@ struct FBFriend ApplicasaUserGetFacebookFriend(LiObjFBFriend * fbFriend) {
         fbFriendStruct.UserPtr = fbFriend.user;
     else
         fbFriendStruct.UserPtr = nil;
-
+   
     return fbFriendStruct;
+}
+    
+struct FBFriend  ApplicasaUserGetFacebookFriendByIndex(int i)
+{
+	LiObjFBFriend * fbFriend = GetfbFriend(i);
+	if (i == GetfbFriendArraySize())
+		ReleaseFriendsArray();
+		
+	return ApplicasaUserGetFacebookFriend(fbFriend);
 }
     
     LiSpendingProfile ApplicasaUserGetCurrentSpendingProfile() {

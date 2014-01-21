@@ -58,6 +58,9 @@
 
 +(void) dismissAllPromotions;
 +(void) raiseCustomEventByName:(NSString *)value;
++(Promotion *) raiseCustomEventByNameAndReturn:(NSString *)value;
++(void) raiseCustomEventByName:(NSString *)value AndShowWithBlock:(PromotionResultBlock) block;
++(void) raiseCustomEventByName:(NSString *)value AndShowWithView:(UIView *)view WithBlock:(PromotionResultBlock) block;
 
 +(NSString *)getUserProfileDataCountry;
 +(int)getUserProfileDataAge;
@@ -68,5 +71,6 @@
 
 + (void) getThirdPartyActions:(LiThirdPartyResponse)block;
 
++(BOOL)isOnline;
 
 @end

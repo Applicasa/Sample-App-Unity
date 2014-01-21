@@ -65,7 +65,8 @@ typedef enum {
     LiPromotionTypeMMedia,//10
     LiPromotionTypeSponsorPay,//11
     LiPromotionTypeSupersonicAds,//12
-    LiPromotionTypeAppnext//13
+    LiPromotionTypeAppnext,//13
+    LiPromotionTypeAarki
 } LiPromotionActionKind;
 
 typedef void (^PromotionResultBlock)(LiPromotionAction promoAction,LiPromotionResult result,id info);
@@ -73,7 +74,7 @@ typedef void (^PromotionResultBlock)(LiPromotionAction promoAction,LiPromotionRe
 #define kPromotionNotificationString @"PromotionConflictFound"
 #define kShouldPromotionWorkOffline TRUE
 @interface Promotion : LiObject <LiCoreRequestDelegate> {
-    PromotionResultBlock promoBlock;
+    void * promoBlock;
 }
 
 @property (nonatomic, strong) NSString *promotionID;
